@@ -1,0 +1,33 @@
+﻿<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:url" content="@Request.Url.ToString()" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Sklative" />
+@if (ViewBag.OgImage != null)
+{
+    <meta property="og:image" content="@ViewBag.OgImage" />
+}
+else
+{
+    <meta property="og:image" content="https://www.sklative.com/Content/assets/images/ind-connection.png" />
+}
+@if (!((ViewContext.RouteData.Values["action"] != null && ViewContext.RouteData.Values["action"].ToString().ToLower() == "propertydetails") && (ViewContext.RouteData.Values["Controller"] != null && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "property")))
+{
+    <meta name="robots" content="index, follow" />
+}
+<meta name="Owner" content="sklative.com" />
+<meta name="Copyright" content="sklative.com" />
+<meta name="classification" content="Social network" />
+<meta name="rating" content="General" />
+<meta name="subject" content="Social network, professional social network" />
+<meta name="audience" content="All" />
+@if (!string.IsNullOrEmpty(Request.QueryString.Get("pageNumber")))
+{
+    string pageNumber = Request.QueryString.Get("pageNumber");
+    string url = Request.Url.ToString().ToLower().Replace("?pagenumber=" + pageNumber, string.Empty);
+    <link rel="canonical" href="@url" />
+}
+else
+{
+    <link rel="canonical" href="@Request.Url.ToString().ToLower()" />
+}

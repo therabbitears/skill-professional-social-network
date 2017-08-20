@@ -1,0 +1,139 @@
+﻿<!doctype html>
+<!--[if IE 8]><html class="ie8 lt-ie10"><![endif]-->
+<!--[if IE 9]><html class="ie9 lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    @if (ViewBag.Title == null)
+    {
+        <title>Help & support center</title>
+        <meta property="og:title" content="Help &amp; support center" />
+    }
+    else
+    {
+        <title>@ViewBag.Title</title>
+        <meta property="og:title" content="@ViewBag.Title" />
+    }
+    @{Html.RenderPartial("_StaticMetas");}
+    @if (ViewBag.Description != null)
+    {
+        <meta property="og:description" content="@ViewBag.Description" />
+        <meta name="description" content="@ViewBag.Description" />
+    }
+    @if (ViewBag.Keywords != null)
+    {
+        <meta name="keywords" content="@ViewBag.Keywords" />
+    }
+    @if (ViewBag.AddNoFollow == true)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    @Scripts.Render("~/cdn/_AuthLayoutScripts")
+    @Styles.Render("~/cdn/_LayoutStyles")
+    @Styles.Render("~/cdn/_AuthLayoutStyles")
+    @RenderSection("_HeadStyles", false)
+
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJN2QN9"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="floated-container new-message">
+        <button class="remove" data-val-entity="floated-container" data-val-quick-action="dismiss">X</button>
+        <div class="container">
+
+        </div>
+    </div>
+    <main id="panel" class="panel">
+        <header class="panel-header">
+            <div class="container">
+                <div class="header-control-container">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="statistics-container">
+                            <div class="left" id="profile-statistics">
+
+                                <div class="statistic-launcher header-face">
+                                    <div class="btn-group">
+                                        <div data-ajax="true" data-ajax-url="/account/usermenu" data-container="parent" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="header-face-head">
+                                                <img src="@Html.UserNamePhoto()" />
+                                            </div>
+                                        </div>
+                                        <ul class="dropdown-menu quick-view-wrapper action-list"></ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <span class="statistic-launcher notifications float-none back mar-left-20">
+                            <span data-action-request class="float-none">
+                                <span>
+                                    <a href="/" class="btn btn-primary btn-sm btn-header-action">Home</a>
+                                </span>
+                            </span>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="statistic-launcher notifications float-none back">
+                            <span data-action-request class="float-none">
+                                <span>
+                                    <a href="/" class="btn btn-primary btn-sm btn-header-action">Home</a>
+                                </span>
+                            </span>
+                        </span>
+                    }
+
+                    <div class="right">
+                        @using (Html.BeginForm("Index", "Knowledge", FormMethod.Get))
+                        {
+                            var keyWord = ViewContext.RouteData.Values["Action"] == "Index" && ViewContext.RouteData.Values["Controller"] == "Groups" ? Request.QueryString.Get("keyword") : string.Empty;
+                            <div class="search-container">
+                                <input value="@keyWord" type="text" class="header-input materialzed" name="Keyword" placeholder="enter topic, error or support keywork" />
+                            </div>
+                        }
+                        <a href="/help-and-knowledge" class="title"><img src="~/Logos/help.png" class="title-brand extended" alt="sklative help and support - logo" /></a>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        @RenderSection("_HeaderOfProfile", false)
+        <section class="box-container">
+            <section class="box">
+                @RenderBody()
+                <div class="alert-success-popabble">
+                </div>
+                <div class="alert-error-popabble">
+                </div>
+            </section>
+        </section>
+    </main>
+    <footer class="panel-footer">
+        @{Html.RenderPartial("_Footer");}
+        @{Html.RenderPartial("_Analytics");}
+    </footer>
+    @RenderSection("_FooterScripts", false)
+    <div class="progress-bar color0" id="gloablWaiting">
+        <span></span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+﻿@model Wrly.Models.Listing.IntelligenceCareerHistoryViewModel
+<div class="profile-intelligence">
+    <span class="int-title">Having a certification? Add it to your profile.</span>
+    @using (Html.BeginForm("ManageCertification", "CareerHistory", FormMethod.Post, new { @id = "frmIntelligenceEducation", @onsubmit = "return managIntCertificationHistory($(this));" }))
+    {
+        @Html.HiddenFor(c => c.OrganizationID)
+        <div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(c => c.JobTitleName, new { @placeholder = "type the certification name", @class = "form-control", @id = "txtIntelligenceCertiName" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Issuer:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.OrganizationName, new { @class = "form-control", @id = "txtIntUniversityName", @placeholder = "type the certificate issuer" })
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBox("SkillListTextCertification", null, new { @id = "SkillListTextCertification", @placeholder = "what expertise you are certified for", @class = "form-control" })
+                    <div id="SkillsInterlligent"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button class="btn btn-primary" type="submit">Add certification</button>
+                    <button class="link-alike link-alike-default" type="button" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.RequireEducation)" onclick="skillIntelligence($(this))">Skip for now</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            function managIntCertificationHistory($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            fetchIntelligence();
+                        }
+                    });
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+                var data = [];
+                $("#txtIntelligenceCertiName").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/CareerHistory/SearchCourse",
+                            data: { key: $("#txtIntelligenceCertiName").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#txtIntelligenceCertiName").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    }
+                });
+
+                $("#SkillListTextCertification").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/SkillHistory/SearchSkill",
+                            data: { key: $("#SkillListTextCertification").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#SkillListTextCertification").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Key.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    select: function (event, ui) {
+                        if ($('input[data-val-name="' + ui.item.label + '"]').length == 0) {
+                            var element = '<span class="skill-tag-editable"> ' + ui.item.label + ' <input type="hidden" name="Skills" value="' + ui.item.value.toString() + '" data-val-name="' + ui.item.label + '" /><span class="remove" onclick="removeTempSkillFromAward($(this))">X</span></span>';
+                            $('#SkillsInterlligent').append(element.toString());
+                        }
+                        this.value = "";
+                        return false;
+                    }
+                });
+                $("#txtIntUniversityName").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/Business/Search/University",
+                            data: { key: $("#txtIntUniversityName").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    data.push({
+                                        Key: -1,
+                                        Value: $("#txtIntUniversityName").val()
+                                    });
+                                    $("#txtIntUniversityName").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim(),
+                                        id: obj.Key.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    select: function (event, ui) {
+                        $('#Organization').val(ui.item.id);
+                    }
+                });
+            });
+
+            function fetchStep($obj) {
+                $('.int-step').hide();
+                $obj.show();
+            }
+        </script>
+    }
+</div>

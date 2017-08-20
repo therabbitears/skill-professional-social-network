@@ -1,0 +1,67 @@
+﻿@model Wrly.Models.AboutViewModel
+
+
+@using (Html.BeginForm("About", "Account", FormMethod.Post, new { @class = "form-horizontal", @id = "frmManageAbout", role = "form", @onsubmit = "return manageAbout($(this))" }))
+{
+    if (ViewBag.IsPopup != null && ViewBag.IsPopup == true)
+    {
+        <input type="hidden" id="hdnPopup" value="True" />
+    }
+    else
+    {
+        <input type="hidden" id="hdnPopup" value="False" />
+    }
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.UserHash)
+    <div class="form-group">
+        <label class="control-label">About yourself:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.ProfileSummary, new { @class = "form-control", @maxlength = "500" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary btn-sm" value="Save" />
+            <a class="link-alike" onclick="return removeFormAndShowSource($('#frmManageAbout'), $('.about-summary'))" href="#">Back</a><div class="waiting-bg"></div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+        });
+
+
+        function manageAbout($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        if ($('#hdnPopup').val() == 'True') {
+                            ____callbackFromPopup(response, 'about');
+                        } else {
+                            if (response != null) {
+                                $('.about-summary .career-history-details').remove();
+                                $('.about-summary').show();
+                                $('#aboutSummary').html('');
+                                $('#aboutSummary').html(response);
+                                postEditAction();
+                                $obj.remove();
+                            }
+                        }
+                        postEditAction();
+                    }
+                });
+            }
+            return false;
+        }
+    </script>
+}

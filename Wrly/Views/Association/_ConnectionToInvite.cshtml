@@ -1,0 +1,34 @@
+﻿@model List<Wrly.Models.Listing.InviteAssociateProfileViewModel>
+<ul class="table-row-container">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="people-you-may-know-item">
+                <div class="thumbnail-notification-con">
+                    <img alt="no image @item.AuthorName" src="@item.ProfilePhotoIconUrl" class="thumbnail-notification">
+                </div>
+                <div class="side-thumbnail">
+                    <a href="/@item.ProfileUrl" title="@item.AuthorName" data-hover-card="true" data-entity-id="@item.EntityID2"><h3 class="page-title">@item.AuthorName</h3></a>
+                    @if (item.ProfileHeadline != null)
+                    {
+                        <span class="child-headings">@item.ProfileHeadline</span>
+                    }
+                    <span>
+                        @if (!item.Invited)
+                        {
+                            <form action="/association/invitetogroup" method="post" onsubmit="return invite($(this))">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" value="@item.Hash" name="Hash">
+                                <button class="btn link-alike" data-hash="@item.Hash">Invite</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <button class="btn link-alike" type="button" data-hash="@item.Hash">Invited</button>
+                        }
+                    </span>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

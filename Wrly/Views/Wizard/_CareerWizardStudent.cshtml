@@ -1,0 +1,204 @@
+﻿@model Wrly.Models.CareerHistoryWizardViewModel
+@using (Html.BeginForm("SetCareerOption", "Wizard", FormMethod.Post, new { @onsubmit = "return setCareerOption($(this))" }))
+{
+    @Html.HiddenFor(c => c.Hash)
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.OrganizationID)
+    @Html.HiddenFor(c => c.UniversityID)
+    @Html.Hidden("CareerStage", "2")
+    @Html.HiddenFor(c => c.CourseID)
+    <div class="content-section" id="divStudent">
+        <div class="form-group">
+            <label class="control-label">Course/Degree Name:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.CourseName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">University/College name:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.UniversityName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="divDurationStudent">
+            Duration
+            <div class="form-group inline-control">
+                <label class="control-label">When did you started:</label>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.EducationStartFromMonth, Model.MonthList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.EducationStartFromMonth)
+                </div>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.EducationStartFromYear, Model.YearList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.EducationStartFromYear)
+                </div>
+            </div>
+            <div class="form-group inline-control">
+                <label class="control-label">Completion(or expected):</label>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.EducationEndFromMonth, Model.MonthList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.EducationEndFromMonth)
+                </div>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.EducationEndFromYear, Model.YearList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.EducationEndFromYear)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#UniversityName").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/Business/Search/University",
+                        data: { key: $("#UniversityName").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                data.push({
+                                    Key: -1,
+                                    Value: $("#UniversityName").val()
+                                });
+                                $("#UniversityName").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.Value.toString().trim(),
+                                    value: obj.Value.toString().trim(),
+                                    id: obj.Key.toString().trim()
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                },
+                select: function (event, ui) {
+                    $('#UniversityID').val(ui.item.id);
+                }
+            });
+
+            $("#CourseName").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/CareerHistory/SearchCourse",
+                        data: { key: $("#CourseName").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                data.push({
+                                    Key: -1,
+                                    Value: $("#CourseName").val()
+                                });
+                                $("#CourseName").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.Value.toString().trim(),
+                                    value: obj.Value.toString().trim(),
+                                    id: obj.Key.toString().trim()
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                },
+                select: function (event, ui) {
+                    $('#CourseID').val(ui.item.id);
+                }
+            });
+
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+
+        });
+
+        (function ($) {
+            // Required another if selected one.
+            $.validator.addMethod('requeiredifselected', function (value, element, params) {
+                var otherPropValue = $('#' + params.otherproperty).val();
+                var stageSelected = $('input[name="CareerStage"]:checked').val();
+                if (params.mode == stageSelected && otherPropValue > 0 && (value == '' || value == -1)) {
+                    return false;
+                }
+                return true;
+            });
+
+            $.validator.unobtrusive.adapters.add("requeiredifselected", ["otherproperty", "mode"], function (options) {
+                options.rules["requeiredifselected"] = options.params;
+                options.messages["requeiredifselected"] = options.message;
+            });
+            //=======================   End ================================//
+
+            // Date validation
+            $.validator.addMethod('cannotgreatermonthandyear', function (value, element, params) {
+                var isStart = params.isstart;
+                var isMonth = params.ismonth;
+                var isYear = params.isyear;
+                var otherPropertyYear = $('#' + params.otherpropertyyear).val();
+                var otherPropertyMonth = $('#' + params.otherpropertymonth).val();
+                var friendProperty = $('#' + params.friendproperty).val();
+                var startDate = new Date();
+                var endDate = new Date();
+                //alert(otherPropertyMonth);
+                //alert(otherPropertyYear);
+                //alert(friendProperty);
+                //alert(isStart);
+                if (otherPropertyMonth > 0 && otherPropertyYear > 0 && friendProperty > 0) {
+                    if (isStart == true) {
+                        if (isMonth == true) {
+                            startDate = new Date(friendProperty, value, 1);
+                        } else {
+                            startDate = new Date(value, friendProperty, 1);
+                        }
+                        endDate = new Date(otherPropertyYear, otherPropertyMonth, 1);
+                    } else {
+                        if (isMonth == true && friendProperty > 0) {
+                            endDate = new Date(friendProperty, value, 1);
+                        } else {
+                            endDate = new Date(value, friendProperty, 1);
+                        }
+                        startDate = new Date(otherPropertyYear, otherPropertyMonth, 1);
+                    }
+                    //alert(startDate);
+                    //alert(endDate);
+                    return (endDate >= startDate);
+                }
+                return true;
+            });
+
+            $.validator.unobtrusive.adapters.add("cannotgreatermonthandyear", ["friendproperty", "otherpropertymonth", "otherpropertyyear", "isstart", "ismonth", "isyear"], function (options) {
+                options.rules["cannotgreatermonthandyear"] = options.params;
+                options.messages["cannotgreatermonthandyear"] = options.message;
+            });
+            //=======================   End ================================//
+
+            // Reuired if checked
+            $.validator.addMethod("ifcheckedneedtoselect", function (value, element, params) {
+                var isSelected = $('#' + params).is(':checked');
+                if (isSelected == false && (value == '' || value == -1)) {
+                    return false;
+                }
+                return true;
+            });
+            $.validator.unobtrusive.adapters.addSingleVal("ifcheckedneedtoselect", "otherproperty");
+            //=======================   End ================================//
+        }(jQuery));
+
+    </script>
+    <div class="form-group">
+        <button class="btn btn-primary btn-sm">Next</button> <div data-val-required="true">Bordered fields are required</div>
+    </div>
+}

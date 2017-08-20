@@ -1,0 +1,357 @@
+﻿<!doctype html>
+<!--[if IE 8]><html class="ie8 lt-ie10"><![endif]-->
+<!--[if IE 9]><html class="ie9 lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    @if (ViewBag.Title == null)
+    {
+       <title>Help & support center</title>
+        <meta property="og:title" content="sklative - the skill's network" />
+    }
+    else
+    {
+        <title>@ViewBag.Title</title>
+        <meta property="og:title" content="@ViewBag.Title" />
+    }
+    @{Html.RenderPartial("_StaticMetas");}
+    @if (ViewBag.Description != null)
+    {
+        <meta property="og:description" content="@ViewBag.Description" />
+        <meta name="description" content="@ViewBag.Description" />
+    }
+    @if (ViewBag.Keywords != null)
+    {
+        <meta name="keywords" content="@ViewBag.Keywords" />
+    }
+    @if (ViewBag.AddNoFollow == true)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    @Scripts.Render("~/cdn/_AuthLayoutScripts")
+    @Styles.Render("~/cdn/_LayoutStyles")
+    @RenderSection("_HeadStyles", false)
+    @Styles.Render("~/cdn/_MobileAuthLayoutStyles")
+
+    @*<style>
+            .request-empty-row {
+                border: none !important;
+            }
+
+            .message-item.pending {
+                background: #efefef;
+                font-weight: bold;
+            }
+
+            .message-item h3 {
+                color: #1e68b9;
+                font-size: 14px !important;
+            }
+
+            .initial-loading {
+                color: #333;
+                text-align: center;
+            }
+
+                /*.search-content {
+                display: block;
+                position: relative;
+            }
+
+                .search-content .ui-autocomplete {
+                    position: absolute;
+                }*/
+
+                .initial-loading a {
+                    font-size: 16px;
+                }
+
+            #main-search {
+                display: none;
+            }
+
+            .statistics-container {
+                width: 100%;
+                line-height: 1.1em;
+            }
+
+            .search-result-item {
+                border: 1px solid #e6e6e6;
+                padding: 5px;
+            }
+
+            .statistics-container .statistic-launcher {
+                cursor: pointer;
+                display: inline-block;
+                float: left;
+                font-size: 20px;
+                font-weight: bold;
+                height: 24px;
+                margin-right: 10px;
+                padding: 8px;
+                position: relative;
+                margin: 5px 0 6px 0;
+            }
+
+                .statistics-container .statistic-launcher, .statistics-container .statistic-launcher a {
+                    color: #fff;
+                }
+
+                 .statistics-container .statistic-launcher.active {
+                    background: #fff;
+                    color: #333;
+                }
+
+            .search-container {
+                display: inline;
+                position: relative;
+            }
+
+                .search-container .big-search {
+                    height: 25px;
+                    width: 100%;
+                    color: #333333;
+                    margin-top: 4px;
+                }
+
+            .count {
+                background: #ff0000 none repeat scroll 0 0;
+                border-radius: 3px;
+                font-size: 10px;
+                font-weight: bold;
+                height: 18px;
+                max-width: 16px;
+                overflow: hidden;
+                padding: 0 7px;
+                position: absolute;
+                right: -13px;
+                text-overflow: ellipsis;
+                top: -4px;
+                white-space: nowrap;
+                display: none;
+            }
+
+            .max-container.dropdown-menu {
+                min-width: 280px;
+            }
+
+            .quick-view-wrapper {
+                border-radius: 0px;
+                padding: 0px;
+            }
+
+                .quick-view-wrapper .container {
+                    padding: 5px;
+                }
+
+                .quick-view-wrapper .header {
+                    display: block;
+                    font-size: 12px;
+                    font-weight: normal;
+                    padding: 5px 0;
+                    text-align: center;
+                    width: 100%;
+                }
+
+                .quick-view-wrapper .footer {
+                    display: block;
+                    font-size: 12px;
+                    font-weight: normal;
+                    padding: 5px 0;
+                    text-align: left;
+                    float: left;
+                    width: 100%;
+                }
+
+                    .quick-view-wrapper .footer button {
+                        margin-right: 5px;
+                    }
+
+
+                .quick-view-wrapper .container ul {
+                    float: left;
+                    font-weight: normal;
+                    height: 100%;
+                    list-style: outside none none;
+                    margin: 0;
+                    padding: 0;
+                    text-align: left;
+                    width: 100%;
+                }
+
+            .floated-container {
+                left: 50px;
+                position: absolute;
+                top: 49%;
+                z-index: 9;
+                display: none;
+            }
+
+                .floated-container .container {
+                    border-radius: 10px;
+                    padding: 10px;
+                    width: 317px;
+                }
+
+                .floated-container .remove {
+                    background: #e0e0e0 none repeat scroll 0 0;
+                    border-radius: 510%;
+                    padding: 5px 9px;
+                    position: absolute;
+                    right: -5px;
+                    top: -10px;
+                    border: none;
+                }
+
+            .chat-face-image {
+                background: #fff none repeat scroll 0 0;
+                border-radius: 50%;
+                float: left;
+                height: 50px;
+                padding: 5px;
+                width: 50px;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+            }
+
+                .chat-face-image > img {
+                    border-radius: 50%;
+                    height: 50px;
+                    width: 50px;
+                }
+
+            .chat-face-content {
+                background: #fff none repeat scroll 0 0;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+                border-radius: 20px;
+                float: left;
+                padding: 10px;
+                width: 233px;
+            }
+
+                .chat-face-content input {
+                    border: none !important;
+                }
+
+
+
+            .ui-menu-item .thumbnail-notification {
+                max-height: 40px;
+                max-width: 40px;
+            }
+
+            .ui-menu-item .thumbnail-notification-con {
+                width: 40px;
+            }
+
+            .ui-menu-item span {
+                font-size: 11px;
+            }
+
+
+            .search-content {
+                left: 0px;
+                padding: 0px;
+                position: absolute;
+                top: 23px;
+                width: 99%;
+                background: #fff;
+            }
+
+                .search-content.active {
+                    display: block !important;
+                }
+
+
+
+        </style>*@
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJN2QN9"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="mobile-menu-cotainer" style="display:none">
+        @*<a class="icon icon-remove-g" id="closeMenu"></a>*@
+        <div class="menu-wrapper"></div>
+    </div>
+    <div class="floated-container new-message">
+        <button class="remove" data-val-entity="floated-container" data-val-quick-action="dismiss">X</button>
+        <div class="container">
+
+        </div>
+    </div>
+    <main id="panel" class="panel">
+        <header class="panel-header">
+            <div class="container">
+                <div class="header-control-container">
+                    <a href="/help-and-knowledge" class="title"><img src="~/Logos/help.png" class="title-brand extended" alt="sklative help and support - logo" /></a>
+                    <div class="statistics-container">
+                        @using (Html.BeginForm("Index", "Groups", FormMethod.Get))
+                        {
+                            var keyWord = ViewContext.RouteData.Values["Action"] == "Index" && ViewContext.RouteData.Values["Controller"] == "Groups" ? Request.QueryString.Get("keyword") : string.Empty;
+                            <div class="search-container">
+                                <input value="@keyWord" type="text" class="header-input materialzed" name="Keyword" placeholder="enter topic, error or support keywork" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <button class="btn-hamburger js-slideout-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </header>
+        <div id="main-search">
+            @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @id = "____frmMainSearch" }))
+            {
+                <input type="hidden" name="Url" id="____hdnUrl" />
+                <input type="hidden" name="EntityID" id="____hdnEntityID" />
+                <input type="hidden" name="EntityType" id="____hdnEntityType" />
+                <div class="search-container">
+                    @Html.AntiForgeryToken()
+                    <input type="text" class="big-search" name="Keyword" placeholder="skill, person, organization or group name" />
+                    <div class="search-content">
+
+                    </div>
+                </div>
+            }
+        </div>
+
+        @RenderSection("_HeaderOfProfile", false)
+        <section class="box-container">
+            <section class="box">
+                @RenderBody()
+                <div class="alert-success-popabble">
+                </div>
+                <div class="alert-error-popabble">
+                </div>
+            </section>
+        </section>
+    </main>
+    <footer class="panel-footer">
+        @{Html.RenderPartial("_Footer");}
+        @{Html.RenderPartial("_Analytics");}
+    </footer>
+    @RenderSection("_FooterScripts", false)
+    <div class="progress-bar color0" id="gloablWaiting">
+        <span></span>
+    </div>
+</body>
+</html>

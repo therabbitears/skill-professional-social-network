@@ -1,0 +1,23 @@
+﻿@model Wrly.Models.LoginViewModel
+<div class="pop-up-header">
+
+    <h1 class="model-title">Authentication</h1>
+</div>
+<div class="pop-up-main">
+    <div class="tabs" id="authTabs">
+        <div class="tab" id="tabLogon"><a data-action="logon" class="active action">Login</a> </div>
+        <div class="tab" id="tabRegister"><a data-action="register" class="action">Sign up</a> </div>
+    </div>
+    <div id="tabContents">
+        @Html.Partial("_AuthenticationLogin", Model)
+    </div>
+</div>
+<div class="mate-progress">
+    <div class="indeterminate"></div>
+</div>
+<script>
+    function ____callbackFromPopup(response, type) {
+        location.reload();
+    }
+
+</script>

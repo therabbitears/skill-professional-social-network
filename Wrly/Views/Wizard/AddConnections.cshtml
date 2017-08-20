@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Add initial connections | Sklative";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+    var requests = ViewBag.Requests as List<Wrly.Models.Listing.ActionAssociateProfileViewModel>;
+    //var suggestions = ViewBag.Suggestions as List<Wrly.Models.Listing.AssociateProfileViewModel>;
+}
+@section FooterScripts{
+    @Scripts.Render("~/cdn/_NetworkSharedScripts");
+}
+
+<div class="string join-container full-width">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-button-wrapper text-right">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-outlined skill-button" id="btnNext">Skip</button>
+                        }
+                    </div>
+                    <div class="wizard-form-wrapper">
+                        <h1>Grow your intial network</h1>
+                        <h2>Here are people we thought you might know</h2>
+                        <div>
+                            @if (requests != null && requests.Count > 0)
+                            {
+                                ViewBag.IsSent = false;
+                                Html.RenderPartial("_ConnectionRequestsTiles", requests);
+                            }
+                        </div>
+                    </div>
+                    <div class="wizard-button-wrapper text-right">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-outlined skill-button" id="btnNext">Skip</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<style>
+    .reuqest-item {
+        border-bottom: 1px solid #e6e6e6;
+        padding: 8px 0px;
+    }
+
+        .reuqest-item .buttons {
+            margin: 2px 0px;
+        }
+
+        .reuqest-item h3.page-title, .people-you-may-know-item h3.page-title {
+            padding: 0px;
+            margin: 2px 0px;
+            font-weight: normal;
+            font-size: 16px !important;
+        }
+
+    .people-you-may-know-item .buttons {
+        margin: 2px 0px;
+        width: 100%;
+        display: inline-block;
+    }
+
+    .wizard-button-wrapper {
+        padding: 12px;
+    }
+</style>*@

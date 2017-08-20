@@ -1,0 +1,60 @@
+﻿@model Wrly.Models.ExternalLoginConfirmationViewModel
+<h1>@ViewBag.Title</h1>
+<hr />
+<h3>Associate your @ViewBag.LoginProvider account.</h3>
+@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <p class="text-info">
+        You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
+        In order to complete the registration, please fill below information which are not provided by @ViewBag.LoginProvider.
+    </p>
+    if (string.IsNullOrEmpty(Model.EmailAddress))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.EmailAddress, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmailAddress)
+            </div>
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(c => c.EmailAddress)
+    }
+    if (string.IsNullOrEmpty(Model.FirstName))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+        </div>
+    } 
+    else
+    {
+        @Html.HiddenFor(c => c.FirstName)
+    }
+    if (string.IsNullOrEmpty(Model.LastName))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(c => c.LastName)
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Complete registration" />
+        </div>
+    </div>
+}

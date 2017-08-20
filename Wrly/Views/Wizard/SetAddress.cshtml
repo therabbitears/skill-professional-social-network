@@ -1,0 +1,83 @@
+﻿@model Wrly.Models.AddressViewModel
+@{
+    ViewBag.Title = "Feeback";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+<div class="string join-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper">
+                        <div class=" text-center">
+                            <h1>Set address</h1>
+                            <h2>Having address is required and also increases your visitors and potential customer engagements.</h2>
+                        </div>
+                        <div class="wizard-content-section">
+                            @using (Html.BeginForm("SetAddress", "Wizard", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(c => c.Hash)
+                                <div class="row ">
+                                    <div class="col-sm-6">
+                                        <span class="control-label">Line 1:</span>
+                                        @Html.TextBoxFor(c => c.AddressLine1, new { @id = "txtAddressLine1", maxlength = "500", @class = "form-control", @placeholder="enter business address line 1" })
+                                        @Html.ValidationMessageFor(c => c.AddressLine1)
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <span class="control-label">Line 2:</span>
+                                        @Html.TextBoxFor(c => c.AddressLine2, new { @id = "txtAddressLine1", maxlength = "500", @class = "form-control"})
+                                        @Html.ValidationMessageFor(c => c.AddressLine2)
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span class="control-label">Line 3:</span>
+                                        @Html.TextBoxFor(c => c.AddressLine3, new { @id = "txtAddressLine1", maxlength = "500", @class = "form-control" })
+                                        @Html.ValidationMessageFor(c => c.AddressLine3)
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <span class="control-label">Line 4:</span>
+                                        @Html.TextBoxFor(c => c.AddressLine4, new { @id = "txtAddressLine1", maxlength = "500", @class = "form-control" })
+                                        @Html.ValidationMessageFor(c => c.AddressLine4)
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-sm-6">
+                                        <span class="control-label">Country:</span>
+                                        @Html.DropDownListFor(c => c.Country, Model.Countries, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(c => c.AddressLine3)
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <span class="control-label">State:</span>
+                                        @Html.TextBoxFor(c => c.State, new { @data_val_allow_number = "true", @class = "form-control", @placeholder = "enter organization state" })
+                                        @Html.ValidationMessageFor(c => c.State)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span class="control-label">City:</span>
+                                        @Html.TextBoxFor(c => c.City, new { @data_val_allow_number = "true", @class = "form-control", @placeholder = "enter city organization situated in" })
+                                        @Html.ValidationMessageFor(c => c.City)
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <span class="control-label">Zipcode:</span>
+                                        @Html.TextBoxFor(c => c.ZipCode, new { @id = "txtPincode", @data_val_allow_number = "true", @class = "form-control", @placeholder = "enter zipcode, ideally 5-6 digits long" })
+                                        @Html.ValidationMessageFor(c => c.ZipCode)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" class="btn btn-primary btn-sm" value="Save" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

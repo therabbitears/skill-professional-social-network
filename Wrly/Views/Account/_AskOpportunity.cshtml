@@ -1,0 +1,86 @@
+﻿@model Wrly.Models.AskOpportunityViewModel
+<div class="pop-up-header">
+    <h1 class="model-title">Ask for an opportunity<small>Beta</small></h1>
+</div>
+@using (Html.BeginForm("AskOpportunity", "Press", FormMethod.Post, new { @id = "frmAskOpportunity", @onsubmit = "return askOpportunity($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="groupHash" value="@ViewBag.GroupHash" />
+    @Html.HiddenFor(c => c.ConnectionID, new { @id = "hdnOpportunityForConnection" })
+    <div class="pop-up-main">
+        <div class="form-group">
+            <label>I am looking for an opportunity <span></span></label>
+            <input type="radio" checked="checked" class="custom-radio" onclick="____findOpportunityOptions(1)" value="1" id="rdoForMe" name="OpportunitySource" /><label for="rdoForMe"> For me<span></span></label>
+            <input type="radio" class="custom-radio" onclick="____findOpportunityOptions(2)" value="2" id="rdoForConnection" name="OpportunitySource" /><label for="rdoForConnection"> For one of my connection<span></span></label>
+        </div>
+        <div class="form-group" style="display:none;" id="forConnection">
+            <label class="control-label">Type connection name:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.ConnectionName, new { @class = "form-control", @placeholder = "start typing your connection name", @id = "conenctionNameOpp" })
+                <div id="ParticipentsOpp"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Detail:<small>(Use enter for new line)</small></label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(c => c.Text, new { @class = "form-control", @placeholder = "tell your network about this opportunity, like city, experience etc.", @rows = "4" })
+            </div>
+        </div>
+        <div id="opportunityData">
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label class="control-label">Available immediately <span class="help action label" title="Indicates how many day it would take to join new opportunity.">?</span></label>
+            <div class="col-md-10">
+                <label class="switch">
+                    <input type="checkbox" data-val-tags="True" data-val-action="enable" value="true" checked="checked" class="search-engine-visibility" id="AllowPublic" name="AllowPublic" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    @*<div class="form-group" style="display:none;" id="Days">
+        <label class="control-label">No. of days:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.AvailableInDays, new { @class = "form-control", @placeholder = "enter availability in days", @id = "txtDays" })
+        </div>
+    </div>*@
+    <div class="pop-up-footer">
+        <div class="waiting-bg"></div>
+        <input type="submit" value="Share" class="btn btn-primary btn-sm" />
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+            //$('#AllowPublic').change(function () {
+            //    //if (!$(this).is(':checked')) {
+            //    //    $('#Days').show();
+            //    //} else {
+            //    //    $('#txtDays').val('');
+            //    //    $('#Days').hide();
+            //    //}
+            //})
+            ____findOpportunityOptions(1);
+        });
+        function askOpportunity($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        ____clearPopup();
+                    }
+                });
+            }
+            return false;
+        }
+
+    </script>
+}

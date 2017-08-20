@@ -1,0 +1,128 @@
+﻿@model Wrly.Models.Feeds.FeedDetailViewModel
+@using Types;
+<div class="pop-up-header">
+    <h1 class="model-title">Share post</h1>
+</div>
+<div class="main-content">
+    @using (Html.BeginForm("Reshare", "Press", FormMethod.Post, new { @onsubmit = "return reshareNews($(this))" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Hash)
+        <div class="section-floated-container">
+            <textarea class="form-control" rows="4" name="Text" placeholder="Share on your timeline"></textarea>
+        </div>
+        @*<div class="section-floated-container"><select name="DistributionLevel"><option value="1">Public</option><option value="2">Only network</option></select>  </div>*@
+        <div class="section-floated-container">
+            <div class="text-right">
+                <div class="waiting-bg"></div> <button class="btn btn-primary">Share</button>
+            </div>
+        </div>
+        <script>
+            function reshareNews($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        $('#feeds').prepend(response);
+                        ____bindMenu($('#feeds'));
+                        ____clearPopup();
+                    }
+                });
+                return false;
+            }
+
+        </script>
+    }
+</div>
+@{var container = Guid.NewGuid().ToString();}
+@if (Model.PostType == (int)Enums.PostTypes.PressRelease)
+{
+    <div class="feed" data-container-id="news-item-@container">
+        @if (Model.SharingType == (int)Enums.SharingType.Share)
+        {
+            <div class="media-body">
+                <div class="____au">
+                    <span class="thumbnail-notification-con ____m8r">
+                        <a href="/@Model.ProfileUrl">
+                            <img class="thumbnail-notification" src="@Html.ImagePath(Model.AuthorPhoto, 100)" alt="@Model.AuthorName">
+                        </a>
+                    </span>
+                    <div class="no-margin author-name">
+                        <div>
+                            <a href="/@Model.ProfileUrl" title="@Model.FormatedName" data-hover-card="true" data-entity-id="@Model.EntityID">
+                                @Model.AuthorName
+                            </a>
+                            <small class="share-type">Shared a news publically</small>
+                            @if (Model.PublishOn != null)
+                            {
+                                <small class="child-headings right timestamp">@Model.PublishOn.Value.ToChatTime()</small>
+                            }
+                        </div>
+                        <div style="font-size:10px;" class="child-headings">@Model.Heading</div>
+                    </div>
+                </div>
+                <div class="answer-small user-content">
+                    @Model.ShortDescription
+                </div>
+                @if (!string.IsNullOrEmpty(Model.FilePath))
+                {
+
+                    <div class="feed-media-image">
+                        <img src="@Html.ImagePath(Model.AuthorPhoto, 500)" alt="@Model.AuthorName - Shared news image" />
+                    </div>
+                }
+            </div>
+
+        }
+    </div>
+
+}
+else if (Model.PostType == (int)Enums.PostTypes.Blog)
+{
+    <div class="feed article" data-container-id="news-item-@container">
+        @if (Model.SharingType == (int)Enums.SharingType.Share)
+        {
+            <div class="media-body">
+                @if (!string.IsNullOrEmpty(Model.FilePath))
+                {
+                    <div class="feed-media-image cover" style="background-image: url('@Html.ImagePath(Model.AuthorPhoto, 500)');">
+                    </div>
+                }
+                <div class="content">
+                    <div class="____au">
+                        <span class="thumbnail-notification-con ____m8r">
+                            <a href="/@Model.ProfileUrl">
+                                <img class="thumbnail-notification" src="@Html.ImagePath(Model.AuthorPhoto, 100)" alt="@Model.AuthorName">
+                            </a>
+                        </span>
+                        <div class="no-margin author-name">
+                            <div>
+                                <a href="/@Model.ProfileUrl" title="@Model.FormatedName" data-hover-card="true" data-entity-id="@Model.EntityID">
+                                    @Model.AuthorName
+                                </a>
+                                <small class="share-type">Share a news publically</small>
+                                @if (Model.PublishOn != null)
+                                {
+                                    <small class="child-headings right timestamp">@Model.PublishOn.Value.ToChatTime()</small>
+                                }
+                            </div>
+                            <div style="font-size:10px;" class="child-headings">@Model.Heading</div>
+                        </div>
+                    </div>
+
+                    <div class="feed-title">
+                        <h6> @Model.Title</h6>
+                    </div>
+                    <div class="feed-body">
+                        @Html.Raw(Model.Description)
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

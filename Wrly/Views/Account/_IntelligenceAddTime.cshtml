@@ -1,0 +1,50 @@
+﻿@model Wrly.Models.Listing.IntelligenceCareerHistoryViewModel
+
+<div class="profile-intelligence">
+    <span class="int-title">@Model.DisplayText</span>
+    @using (Html.BeginForm("ManageIntelligence", "CareerHistory", FormMethod.Post, new { @id = "frmIntelligenceCareerHistory", onsubmit = "return manageCareerHistoryTime($(this))" }))
+    {
+        @Html.HiddenFor(c => c.Hash)
+        <div class="int-step">
+            <div class="form-group inline-control">
+                <div class="col-md-5">
+                    From: @Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button class="btn btn-primary btn-sm" type="submit">Add time</button>
+                    <button class="link-alike link-alike-default" type="button" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.RequireAddingTimeToCareerLine)" onclick="skillIntelligence($(this))">Skip for now</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            function manageCareerHistoryTime($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        type: 'POST',
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            fetchIntelligence();
+                        }
+                    });
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+            });
+        </script>
+    }
+</div>
+

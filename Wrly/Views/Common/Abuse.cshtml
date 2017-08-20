@@ -1,0 +1,49 @@
+﻿@model Wrly.Models.AbuseViewModel
+@{
+    ViewBag.Title = "Report abuse";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+<div class="string join-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper">
+                        @if (ViewBag.ShowMessage == null)
+                        {
+                            <div>
+                                <h1>Report abuse</h1>
+                                <h2>Report an abuse in order to bring the concern to us.</h2>
+                            </div>
+                            <div class="wizard-content-section">
+                                @{Html.RenderPartial("_Abuse", Model);}
+                            </div>
+                        }
+                        else
+                        {
+                            Html.RenderPartial("_ActioNResultMessage", (Wrly.Models.Result)ViewBag.ModelResult);
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section FooterScripts{
+    <script>
+        $(document).ready(function () {
+            $('#Type').change(function () {
+                var type = $(this).val();
+                if (type == 'company') {
+                    $('#lable-particular').html('Enter profile url:');
+                }
+                if (type == 'email') {
+                    $('#lable-particular').html('Enter abused email address:');
+                }
+                if (type == 'trademark') {
+                    $('#lable-particular').html('Enter registration/trademark no:');
+                }
+            })
+        })
+    </script>
+}

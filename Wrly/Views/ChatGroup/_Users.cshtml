@@ -1,0 +1,25 @@
+﻿@model List<BabyGomzV._2.viewmodels.ChatMemberViewModel>
+@foreach (var item in Model)
+{
+    <div class="loginUser" data-val-name="@item.UserName">
+        <div class="thumbnail-notification-con">
+            @if (!string.IsNullOrEmpty(item.ProfilePic))
+            {
+                <img src="/images/cdn/user/60/@item.Id/@item.ProfilePic.GetExtension()" alt="@item.Name Online" title="@item.Name is Online" />
+            }
+            else
+            {
+                <img src="/content/images/no-image-sm.png" alt="@item.Name Online" title="@item.Name is Online" />
+            }
+            @if (item.IsOnline)
+            {
+            <span class="online" title="@item.Name is online"></span>    
+            }else{
+            <span class="away" title="@item.Name is away    "></span>
+            }
+            
+        </div>
+        <span class="user-name"> @item.Name </span>
+    </div>
+    <div class="divider"></div>
+}

@@ -1,0 +1,278 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+@{
+    ViewBag.Title = string.Format("Sklative | {0} ", Model.Name);
+    ViewBag.Description = string.Format("Sklative Business Profile");
+    ViewBag.Keywords = "build professional network, network for business, Business profiles";
+    
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    bool isDefaultMode = Model.ProfileMode == Types.Enums.ProfileMode.Default;
+}
+<link href="~/Content/Views/profile/_mobile.css" rel="stylesheet" />
+<div class="mobile-container">
+
+    @{ViewBag.DefaultTab = isDefaultMode; Html.RenderPartial("_ManageBusinessProfileFace", Model);}
+    <div class="section-floated no-shadow">
+        <div class="section-floated-container">
+            <div class="text-right"><a href="/fou/@Model.ProfileName">View public</a> <span class="verticle-divider">|</span><a href="/configurations/#company">Manage</a></div>
+            <div class="tabs">
+                @if (isDefaultMode)
+                {
+                <div class="tab">
+                    <a data-val-for="career-contents" class="active" href="/profile">Career</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/connections">Connections</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/followers">Followers</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/timeline">Updates</a>
+                </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Connections)
+                {
+                <div class="tab">
+                    <a data-val-for="career-contents" href="/profile">Career</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" class="active" href="/profile/connections">Connections</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/followers">Followers</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/timeline">Updates</a>
+                </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+                {
+                <div class="tab">
+                    <a data-val-for="career-contents" href="/profile">Career</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/connections">Connections</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/followers">Followers</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" class="active" href="/profile/timeline">Updates</a>
+                </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Followers || Model.ProfileMode == Types.Enums.ProfileMode.Following)
+                {
+                <div class="tab">
+                    <a data-val-for="career-contents" href="/profile">Career</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/connections">Connections</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" class="active" href="/profile/followers">Followers</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/profile/timeline">Updates</a>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    @if (isDefaultMode)
+    {
+    @section _HeadStyles
+    {
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    @Styles.Render("~/cdn/_ProfileManageStyles")
+    }
+
+    @section _FooterScripts{
+    @Scripts.Render("~/cdn/_BusinessProfileManage")
+    }
+    <div class="career-history-list section-floated">
+        <div class="section-floated-container">
+            <h1>About @Model.Name</h1>
+            <div class="profile-about" id="skiller-summary">
+                <div class="about-summary">
+                    <p class="about">
+                        @Model.Description
+                    </p>
+                    <button class="btn link-alike hover-edits" data-business-about-edit="true" data-hash="@Model.UserHash">Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    if (Model.TotalConnections <= 50)
+    {
+    <div class="section-floated">
+        <div class="section-floated-container" id="contact-import-container" style="display:none;">
+        </div>
+    </div>
+    }
+    <div class="services-list section-floated">
+        <div class="section-floated-container editable">
+            <h1>Services</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style" data-hash="" data-add-services="true">+</button>
+            </div>
+            <div id="services-list"></div>
+        </div>
+    </div>
+
+    <div class="product-list section-floated">
+        <div class="section-floated-container">
+            <h1>Products</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style" data-hash="" data-add-products="true">+</button>
+            </div>
+            <div id="product-list"></div>
+        </div>
+    </div>
+
+    <div class="affiliation-list section-floated">
+        <div class="section-floated-container">
+            <h1>Affiliation</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style" data-hash="" data-add-affiliation="true">+</button>
+            </div>
+            <div id="affiliation-history"></div>
+        </div>
+    </div>
+    <div class="award-list section-floated">
+        <div class="section-floated-container">
+            <h1>Awards &amp; Achievements</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style" data-hash="" data-add-baward="true">+</button>
+            </div>
+            <div id="baward-history"></div>
+        </div>
+    </div>
+    <div class="recommendation-list section-floated">
+        <div class="section-floated-container">
+            <h1>Recommendation</h1>
+            <div id="recommendation-list"></div>
+        </div>
+    </div>
+    <div class="recommendation-list section-floated">
+        <div class="section-floated-container">
+            <h1>Testimonials</h1>
+            <div id="testimonials-list"></div>
+        </div>
+    </div>
+    }
+    else if (Model.ProfileMode == Types.Enums.ProfileMode.Connections)
+    {
+    @section _HeadStyles
+    {
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    }
+    @section _FooterScripts{
+
+    <script type="text/javascript">
+        totalConnections = @(Model.TotalConnections)
+        profileHash = '@Model.ProfileHash';
+        $("#people-you-may-know").setTemplateURL("/Templates/suggestions.txt");
+        $("#people-you-may-know").processTemplateURL("/association/suggestions", null, { ___callback: tooltip($("#people-you-may-know")) });
+    </script>
+
+    }
+    <div class="career-history-list section-floated">
+        <div class="section-floated-container">
+            <h1>Your connections</h1>
+            @{Html.RenderPartial("_ConnectionExistingTiles", Model.Connections);}
+        </div>
+    </div>
+    }
+    else if (Model.ProfileMode == Types.Enums.ProfileMode.Followers || Model.ProfileMode == Types.Enums.ProfileMode.Following)
+    {
+    @section _HeadStyles
+    {
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    }
+    @section _FooterScripts{
+
+    <script type="text/javascript">
+        totalConnections = @(Model.TotalConnections)
+        profileHash = '@Model.ProfileHash';
+        $("#people-you-may-know").setTemplateURL("/Templates/suggestions.txt");
+        $("#people-you-may-know").processTemplateURL("/association/suggestions", null, { ___callback: tooltip($("#people-you-may-know")) });
+        @Scripts.Render("~/cdn/_NetworkSharedScripts")
+    </script>
+    }
+    <div class="career-history-list section-floated">
+        <div class="section-floated-container">
+            @if (Model.ProfileMode == Types.Enums.ProfileMode.Followers)
+            {
+            <h1>Your followers</h1>
+            <div class="text-right"><a href="/profile/following">Follow list</a></div>
+            Html.RenderPartial("_ConnectionFollowerTiles", Model.Followers);
+            }
+            else
+            {
+            <h1>Your follow list</h1>
+            <div class="text-right"><a href="/profile/followers">Followers</a></div>
+            Html.RenderPartial("_ConnectionFollowingTiles", Model.Followers);
+            }
+        </div>
+    </div>
+    }
+    else if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+    {
+    @section _HeadStyles
+    {
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    @Styles.Render("~/cdn/_NewsFeedStyles")
+    }
+    @section _FooterScripts{
+
+    <script type="text/javascript">
+        totalConnections = @(Model.TotalConnections)
+        profileHash = '@Model.ProfileHash';
+        $("#people-you-may-know").setTemplateURL("/Templates/suggestions.txt");
+        $("#people-you-may-know").processTemplateURL("/association/suggestions", null, { ___callback: tooltip($("#people-you-may-know")) });
+    </script>
+    @Scripts.Render("~/cdn/_NewsFeeds")
+    }
+    <div class="feeds">
+        @{Html.RenderPartial("_Feeds", Model.Feed.Feeds);}
+    </div>
+    }
+</div>
+<style>
+    .profile-item h3 {
+        font-weight: normal !important;
+    }
+
+    .profile-item {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+        .profile-item h3 small {
+            font-size: 12px;
+        }
+
+    .profile-items .child-profile-item-heading {
+        color: #555 !important;
+    }
+
+    .profile-item p {
+        font-size: 14px;
+    }
+
+    .section-floated h1 {
+        font-size: 22px;
+        color: #1e68b9;
+        padding: 10px 13px 0px 10px;
+    }
+
+    .plus-add-profile-item button.working {
+        cursor: wait;
+    }
+
+    span.working {
+        color: #fff !important;
+        cursor: wait;
+    }
+</style>

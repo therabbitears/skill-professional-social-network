@@ -1,0 +1,56 @@
+﻿@model List<Wrly.Models.WidgetSettingViewModel>
+
+<div class="row">
+    <h1 class="page-title">Widget configuration</h1>
+    <h2 class="page-sub-title">Configure what to show on your profile choose from widgets and then add elated information on your profile, choose what suits to your profession and academics.</h2>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="@(item.IsSubscribed ? "widget-to-choose active" : "widget-to-choose")">
+        @if (!item.ReadOnly)
+        {
+            @Html.CheckBoxFor(c => item.IsSubscribed, new { @data_val_hash = item.Hash, @data_val_tags = true, id = "item_IsSubscribed_" + item.WidgetID.ToString(), @class = "wrly-check-source" })
+            if (item.IsSubscribed)
+            {
+                <label class="wrly-check checked" for="@("item_IsSubscribed_" + item.WidgetID.ToString())"></label>
+            }
+            else
+            {
+                <label class="wrly-check" for="@("item_IsSubscribed_" + item.WidgetID.ToString())"></label>
+            }
+        }
+        <div class="widget-image @item.Icon"></div>
+        <div class="widget-name">@item.WidgetName @if(!string.IsNullOrEmpty(item.Help)){<span class="help action" title="@item.Help">?</span>}</div>
+        <div class="widget-description">@item.Description</div>
+    </div>
+}
+<script>
+
+    $(document).ready(function () {
+        $('input[data-val-tags="True"]').click(function () {
+            var value = $(this).attr('data-val-hash');
+            var toPost = { Hash: value, Value: $(this).is(':checked') }
+            var id = $(this).attr('id');
+            if ($(this).is(':checked')) {
+                $('label[for="' + id.toString() + '"]').addClass('checked');
+                $(this).parent('.widget-to-choose').addClass('active');
+            } else {
+                $('label[for="' + id.toString() + '"]').removeClass('checked');
+                $(this).parent('.widget-to-choose').removeClass('active');
+            }
+
+            $.ajax({
+                url: '/account/updatewidget',
+                data: toPost,
+                type: 'POST',
+                success: function (res) {
+
+                }
+            });
+        });
+
+        $('.help').tooltip();
+    });
+
+</script>

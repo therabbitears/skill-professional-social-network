@@ -1,0 +1,125 @@
+﻿@model Wrly.Models.Listing.AssociateProfileActionViewModel
+@if (Model.AllowToNewRequest)
+{
+    using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="actn" value="connect" />
+        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+        <button class="btn btn-outlined">Connect</button>
+    }
+}
+else
+{
+    <button class="btn btn-outlined">Network</button>
+}
+<button type="button" class="btn btn-outlined dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+</button>
+<ul class="dropdown-menu profile action-list">
+    @if (!Model.Blocked || Model.AllowUnblock)
+    {
+        if (!Model.Blocked)
+        {
+            if (Model.AllowApproveRequest)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="approve" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Approve request</button>
+                    }
+                </li>
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="Decline" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Cancel request</button>
+                    }
+                </li>
+            }
+            if (Model.AllowCancelRequest)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="cancel" />
+                        <input type="hidden" name="mode" value="out" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Cancel request</button>
+                    }
+                </li>
+            }
+            if (Model.BlockStatus == 0)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="block" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Block</button>
+                    }
+                </li>
+            }
+            if (Model.AllowUnblock)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="unblock" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Unblock</button>
+                    }
+                </li>
+            }
+            if (Model.AllowUnFollow)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="unfollow" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Unfollow</button>
+                    }
+                </li>
+            }
+            if (!Model.AllowUnFollow)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="follow" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Follow</button>
+                    }
+                </li>
+            }
+
+        }
+        else
+        {
+            if (Model.AllowUnblock)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "')" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="unblock" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Unblock</button>
+                    }
+                </li>
+            }
+        }
+    }
+
+</ul>

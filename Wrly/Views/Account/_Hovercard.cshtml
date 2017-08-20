@@ -1,0 +1,73 @@
+﻿@model Wrly.Models.EntityProfileViewModel
+<section class="group-item viduara-bCard card-sm hovercard">
+    <div class="container text-center">
+        @if (Model.EntityType == (int)Types.Enums.EntityTypes.Person)
+        {
+            <div class="image text-center">
+                @if (!string.IsNullOrEmpty(Model.ProfilePath))
+                {
+                    <img class="thumbnail-notification" src="@Html.ImagePath(Model.ProfilePath, 100)" alt="User Image - @Model.FormatedName">
+                }
+                else
+                {
+                    <img class="thumbnail-notification" src="/content/images/no-image.png" alt="User Image - @Model.FormatedName">
+                }
+            </div>
+            <div class="hover-cardcontent text-center">
+                <div class="heading text-center">
+                    <a href="/@Model.ProfileName"><h3 class="page-title">@Model.FormatedName</h3></a>
+                    <div>@Model.ProfileHeading</div>
+                    @if (!string.IsNullOrEmpty(Model.PreviousJobTitle))
+                    {
+                        <div> @Model.PreviousJobTitle </div>
+                    }
+                </div>
+                <div class="buttons text-center">
+                    <div id="connectionStatus">
+                    </div>
+                </div>
+                <div class="text-center">
+                    @if (Model.CommonPeopleCount > 0)
+                    {
+                        <small class="child-headings">@Model.CommonPeopleCount common connections</small>
+                    }
+                    @if (Model.CommonSkillCount > 0)
+                    {
+                        <small class="child-headings">@Model.CommonSkillCount common skills</small>
+                    }
+                </div>
+            </div>
+        }
+        @if (Model.EntityType == (int)Types.Enums.EntityTypes.Organization)
+        {
+            <div class="image text-center">
+                @if (!string.IsNullOrEmpty(Model.LogoPath))
+                {
+                    <img class="thumbnail-notification" src="@Html.ImagePath(@Model.LogoPath, 100)" alt="User Image - @Model.Name">
+                }
+                else
+                {
+                    <img class="thumbnail-notification" src="/content/images/o/no-image.png" alt="User Image - @Model.FormatedName">
+                }
+            </div>
+            <div class="hover-cardcontent text-center">
+                <div class="heading text-center">
+                    <a href="/fou/@Model.Url"><h3 class="page-title">@Model.Name</h3></a>
+                    @Model.Category
+                </div>
+                <div class="buttons text-center">
+                    <div id="connectionStatus">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+@if (Html.EntityID() != Model.EntityID)
+{
+    <script>
+        $(document).ready(function () {
+            $("#connectionStatus").load('/association/hovercardactionable?q=@Model.Hash');
+        })
+    </script>
+}

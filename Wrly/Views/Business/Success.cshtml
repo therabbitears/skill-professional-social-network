@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+
+<div class="alert-info">
+    <p><strong>Congratulations</strong></p><p>The organization has been successfully linked to milions of similar services, an email is send to given email address in order to get the email address varified, a varified email improves the profile score.</p><p>
+        In between please register your account in order to manage your service and product network <a href="/account/connectaccount?hash=@Request.QueryString.Get("hash")">here</a>. Or you can link your account using the email we sent on given email address.
+    </p>
+</div>
+

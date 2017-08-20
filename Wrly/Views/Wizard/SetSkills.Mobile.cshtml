@@ -1,0 +1,115 @@
+﻿@model Wrly.Models.SkillSnapShotViewModel
+@using Types
+@{
+    ViewBag.Title = "Add your skills | Sklative";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+
+@{
+    string h1 = string.Empty, h2 = string.Empty, placeholder = string.Empty, skipButtonText = "Skip for now";
+    if (Model.Stats.ProfileLevel == (int)Enums.CareerStage.Employement || Model.Stats.ProfileLevel == (int)Enums.CareerStage.PostEmployement)
+    {
+        h1 = "What are you working on";
+        if (Model.Skills != null && Model.Skills.Count > 0)
+        {
+            h2 = "Let's add more skills to your profile, your skills helps you to discover more people";
+            skipButtonText = "Looks great";
+            placeholder = "start typing to add more skills";
+        }
+        else
+        {
+            h2 = "Let's add skills to your profile, your skills helps you to discover more people";
+            placeholder = "start typing to get the skill list";
+        }
+    }
+    else if (Model.Stats.ProfileLevel == (int)Enums.CareerStage.Retired)
+    {
+        h1 = "What have been you worked upon";
+        if (Model.Skills != null && Model.Skills.Count > 0)
+        {
+            h2 = "Let's add more skills to your profile, your skills helps people to find you";
+            skipButtonText = "Looks great";
+            placeholder = "start typing to add more skills";
+        }
+        else
+        {
+            h2 = "Let's add skills to your profile, skills helps people to find people like you";
+            placeholder = "start typing to get the skill list";
+        }
+    }
+    else if (Model.Stats.ProfileLevel == (int)Enums.CareerStage.Student)
+    {
+        if (Model.Stats.IsEndDefined)
+        {
+            h1 = "What you have been learned";
+            if (Model.Skills != null && Model.Skills.Count > 0)
+            {
+                h2 = "Let's add more skills to your profile, having your all skills discovers more offers to you";
+                skipButtonText = "Looks great";
+                placeholder = "start typing to add more skills";
+            }
+            else
+            {
+                h2 = "Let's add skills to your profile, having your all skills discovers more offers to you";
+                placeholder = "start typing to get the skill list";
+
+            }
+        }
+        else
+        {
+            h1 = "What set of skills are you learning";
+            if (Model.Skills != null && Model.Skills.Count > 0)
+            {
+                h2 = "Let's add more skills to your profile, having your all skills discovers more offers to you";
+                skipButtonText = "Looks great";
+                placeholder = "start typing to add more skills";
+
+            }
+            else
+            {
+                h2 = "Let's add skills to your profile, having your all skills discovers more offers to you";
+                placeholder = "start typing to get the skill list";
+            }
+        }
+    }
+}
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_WizardMobileStyles");
+}
+@section FooterScripts{
+    @Scripts.Render("~/cdn/_WizardAddSkillsScripts");
+}
+<div class="string join-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper">
+                        <h1>@h1</h1>
+                        <h2>@h2</h2>
+                        @using (Html.BeginForm("SetSkills", "Wizard", FormMethod.Post, new { @onsubmit = "return ___saveSkills($(this))" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(c => c.Hash)
+                            <div class="wizard-content-wrapper">
+
+                                <div id="Skills">
+                                    <input class="form-control wizard-control" id="Skill" placeholder="@placeholder" />
+                                </div>
+                                <div class="skill-selected">
+                                    @foreach (var item in Model.Skills)
+                                    {
+                                        <span class="skill-tags"> @item.Name <input name="Skills" value="@item.Name" type="hidden"></span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="wizard-button-wrapper text-right">
+                                <button class="btn btn-outlined" id="btnAction">@skipButtonText</button><div class="waiting-bg"></div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

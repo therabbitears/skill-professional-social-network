@@ -1,0 +1,34 @@
+﻿<div class="pop-up-header">
+    <h1 class="model-title">Share the link</h1>
+</div>
+<div class="pop-up-main opportunity-data" id="opportunityData">
+    @if (ViewBag.Shared != null && ViewBag.Shared)
+    {
+        <div class="alert alert-success">The opportunity has been posted successfully, please share it on other social platforms to get more applications.</div>
+    }
+    <div class="text-center">
+        <div class="icon-text-cont">
+            <a class="icon lg fb" title="share on facebook" href="https://www.facebook.com/sharer/sharer.php?u=@Url.Encode(ViewBag.Url)&title=@Url.Encode(ViewBag.Title)"
+               target="_blank">
+            </a>
+            <span>Facebook</span>
+        </div>
+        <div class="icon-text-cont">
+            <a class="icon lg ln" href="https://www.linkedin.com/cws/share?url=@Url.Encode(ViewBag.Url)&t=@Url.Encode(ViewBag.Title)" target="_blank" title="share on linkedin">
+            </a>
+            <span>Linkedin</span>
+        </div>
+        <div class="icon-text-cont">
+            <a class="icon lg tw" href="https://twitter.com/intent/tweet?url=@Url.Encode(ViewBag.Url)&text=@Url.Encode(ViewBag.Title)"
+               target="_blank" title="share on twitter">
+            </a>
+            <span>Twitter</span>
+        </div>
+        <div class="icon-text-cont">
+            <a class="icon lg gp" title="share on google+" href="https://plus.google.com/share?url=@Url.Encode(ViewBag.Url)"
+               target="_blank">
+            </a>
+            <span>Google+</span>
+        </div>
+    </div>
+</div>

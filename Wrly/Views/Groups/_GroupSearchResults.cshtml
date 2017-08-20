@@ -1,0 +1,70 @@
+﻿@model List<Wrly.Models.Business.GroupViewModel>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table">
+        <ul class="table-row-container">
+            @foreach (var item in Model)
+            {
+                <li>
+                    @if (item.EntityID > 0)
+                    {
+                        <div class="search-result-item" data-val-type="entity" data-val-entity="@item.EntityID">
+                            <a href="/groups/@item.ProfileName">
+                                <div class="thumbnail-notification-con">
+                                    @if (!string.IsNullOrEmpty(item.ProfileImagePath))
+                                    {
+                                        <img src="@Html.ImagePath(item.ProfileImagePath, 50)" alt="user image - @item.Name">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/no-image-sm.png" alt="organization image - @item.Name" />
+                                    }
+                                </div>
+                                <div class="side-thumbnail">
+                                    <h3>@item.Name</h3><span class="child-headings">@(((Types.Enums.GroupType)item.SubType).GetDescription())</span>
+                                    <p>@item.TotalFollowers.FormatedNumber() Members</p>
+
+                                </div>
+                            </a>
+                            @if (item.FollowStatus == 0)
+                            {
+                                if (Request.IsAuthenticated)
+                                {
+                                    <div class="buttons-container right">
+                                        @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + item.NetworkHash + "',false,false,true)" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="actn" value="follow" />
+                                            @Html.HiddenFor(c => item.RequirePermission, new { id = "permissionLevel" })
+                                            <input type="hidden" name="group" value="true" />
+                                            <input type="hidden" name="hash" value="@item.NetworkHash" />
+                                            <button class="materialzed btn-sm btn-sm btn-primary">Join</button>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="buttons-container right">
+                                        <button class="btn btn-primary btn-sm" onclick="____authentication()">Join</button>
+                                    </div>
+                                }
+                            }
+                            else if (item.FollowStatus == 1)
+                            {
+                                <div class="buttons-container right">
+                                    <button class="btn btn-primary btn-sm">Approval pending</button>
+                                </div>
+                            }
+                            else if (item.FollowStatus == 2)
+                            {
+                                <div class="buttons-container right">
+                                    <button class="btn btn-primary btn-sm">Joined</button>
+                                </div>
+                            }
+                        </div>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+}

@@ -1,0 +1,36 @@
+﻿@using (Html.BeginForm("ShareNews", "Press", FormMethod.Post, new { @onsubmit = "return shareNews($(this))", @enctype = "multipart/form-data", id = "frmShareNews" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="sharer section-floated-container">
+        <h1>Share with your network</h1>
+        <div class="text-right">
+            <input type="file" id="postPhoto" name="PostImage" style="visibility:hidden;display:none;" onchange="return ____previewImage(this,event)" />
+            <label for="postPhoto" class="link-alike">+ Add photo</label>
+        </div>
+        <div class="post-preview">
+            <textarea class="form-control" data-val="true" data-val-required="The text cannot be left blank." rows="4" name="Text" placeholder="Share photos, awards, certifications or workplace"></textarea>
+        </div>
+        <div class="buttons">
+            <div>
+                <div class="waiting-bg"></div>
+                <button class="btn btn-primary btn-sm">Share</button>
+            </div>
+            <div class="text-left pad-top-15">
+                @if (ViewBag.IsOrganization != null && ViewBag.IsOrganization == true)
+                {
+                    <button id="shareOpportunity" type="button" class="custom-button"><span> Share an opportunity</span> <i class="icon icon-loud-speaker"></i></button>
+                }
+                else
+                {
+                    <button id="askOpportunity" type="button" class="custom-button"><span> Ask an opportunity</span> <i class="icon icon-loud-speaker"></i></button>
+                }
+                <button type="button" onclick="location.href = '/publishing/write';" class="custom-button"><span> Share an article</span> <i class="icon icon-article"></i></button>
+            </div>
+        </div>
+        <progress style="display:none;" value="0" max="100"></progress>
+        <div class="preview">
+            <span class="preview-remove no-style icon-remove-g icon-md icon action icon-s" onclick="____removePreviewAndMedia($(this))"></span>
+            <img id="preview" />
+        </div>
+    </div>
+}

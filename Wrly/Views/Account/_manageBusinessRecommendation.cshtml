@@ -1,0 +1,75 @@
+﻿@model Wrly.Models.AppreciationAndRecommendationViewModel
+
+@using (Html.BeginForm("manageBusinessRecommendation", "Reference", FormMethod.Post, new { @class = "form-horizontal", role = "form", @onsubmit = "return manageRecommendation($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.UserHash)
+    <div class="form-group">
+        <label class="control-label">Your recommendation:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">How do you belongs to them:</label>
+        <input type="radio" name="RecomedationRelation" checked value="Customer" /><label class="control-label">Customer(client)<small>(Will have less engagement)</small></label>
+        <input type="radio" name="RecomedationRelation" value="Vendor" /><label class="control-label">Vendor</label>
+        <input type="radio" name="RecomedationRelation" value="Partner" /><label class="control-label">Partner</label>
+    </div>
+    <div class="form-group" data-val-for="servicesAndProducts">
+        <label class="control-label">Product &amp; Service</label>
+        <select name="AwardID" class="form-control">
+            @if (Model.ServicesAndProducts.Any(c => c.Type == (int)Types.Enums.AwardAndAssignmentMode.Services))
+            {
+                <optgroup label="Services"></optgroup>
+                foreach (var item in Model.ServicesAndProducts.Where(c => c.Type == (int)Types.Enums.AwardAndAssignmentMode.Services))
+                {
+                    <option value="@item.AwardID">@item.Name</option>
+                }
+            }
+            @if (Model.ServicesAndProducts.Any(c => c.Type == (int)Types.Enums.AwardAndAssignmentMode.Services))
+            {
+                <optgroup label="Products"></optgroup>
+                foreach (var item in Model.ServicesAndProducts.Where(c => c.Type == (int)Types.Enums.AwardAndAssignmentMode.Products))
+                {
+                    <option value="@item.AwardID">@item.Name</option>
+                }
+            }
+
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary btn-sm" value="Add to card" /><div class="waiting-bg"></div>
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+        });
+        function manageRecommendation($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        $('#recommendation-list').prepend(response);
+                        $obj.remove();
+                    }
+                });
+            }
+            return false;
+        }
+
+
+    </script>
+}

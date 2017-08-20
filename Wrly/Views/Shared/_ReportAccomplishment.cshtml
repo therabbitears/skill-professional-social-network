@@ -1,0 +1,44 @@
+﻿@model Wrly.Models.AccomplishmentReportViewModel
+
+@using (Html.BeginForm("report", "award", FormMethod.Post, new { @class = "form-horizontal", role = "form", @onsubmit = "return reportAccomplishment($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.UserHash)
+        @Html.HiddenFor(c => c.Accomplishment.Name)
+    <div>Report @Model.Accomplishment.Name</div>
+    <div class="form-group">
+        <label class="control-label">Tell what's wrong with @Model.Accomplishment.Name</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
+            <small class="child-headings">Please note that report is being sent to our team to review @Model.Accomplishment.Name, you can only report it if it looks religiosly wrong or abusive and wrong declaration, if you want to request some correctness in @Model.Accomplishment.Name send a correct request using messaging.</small>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary btn-sm" value="Send for review" />
+        </div>
+    </div>
+    <script>
+        function reportAccomplishment($obj)
+        {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: ser,
+                dataType: 'html',
+                success: function (response) {
+                    $obj.parent().prepend(response);
+                    $obj.remove();
+                }
+            });
+            return false;
+        }
+
+    </script>
+}
+
+
+

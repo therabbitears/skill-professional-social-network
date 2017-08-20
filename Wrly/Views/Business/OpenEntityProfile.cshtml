@@ -1,0 +1,71 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+@using Types
+@{
+    ViewBag.Title = Model.Name;
+    string wrapperClass = string.Empty;
+}
+@if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+{
+    wrapperClass = "has-cover";
+    <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+
+    </div>
+}
+<div id="grand-wrapper">
+    
+    <div id="profile-wrapper" class="@wrapperClass">
+        <div class="two-three">
+            <div id="face">
+                <div class="section-floated">
+                    <div class="section-floated-container">
+                        @{Html.RenderPartial("_BusinessProfileFace", Model);}
+                    </div>
+                </div>
+            </div>
+            <div class="profile-contents">
+                <div class="section-floated">
+                    <div class="profile-item empty-data">
+                        <a class="btn btn-primary btn-sm v-middle" href="/account/login">Login</a> to connect or <a class="link-alike" href="/account/register">Sign up</a> or explore your network
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="one-three">
+            <div class="more-info section-floated">
+                <div class="section-floated-container">
+                    <h1>@Model.Name information</h1>
+                    <div class="table-row">
+                        <span class="key">Number of Employees</span><span class="value">@Model.EmployeeStrength</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="key">Website</span><span class="value">@Model.Website</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="key">Establilshed year</span><span class="value">@Model.EstablishedYear</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="key">Industry</span><span class="value">@Model.Category</span>
+                    </div>
+                </div>
+            </div>
+            <div class="career-history-list section-floated">
+                <div class="section-floated-container">
+                    <h1>Similar companies</h1>
+                    <div id="similar-companies">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section _FooterScripts{
+    @Scripts.Render("~/cdn/_JTemplates");
+    <script>
+        $("#similar-companies").setTemplateURL("/Templates/similar-company-list.txt");
+        $("#similar-companies").processTemplateURL("/business/similar?q=@Model.ProfileHash");
+    </script>
+}
+@section _HeadStyles
+{
+    @Styles.Render("~/cdn/_ProfileSharedStyles");
+}

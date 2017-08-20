@@ -1,0 +1,55 @@
+﻿@model Wrly.Models.Listing.AssociateProfileActionViewModel
+@if (!Model.AllowUnFollow)
+{
+    if (Model.FollowStatus == 1)
+    {
+        <button class="materialzed btn-sm">Pending approval</button>
+    }
+    else
+    {
+        using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "',false,true)" }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="actn" value="follow" />
+            <input type="hidden" name="hash" value="@Model.NetworkHash" />
+            <button class="materialzed btn-sm">Join</button>
+        }
+    }
+}
+else
+{
+    <button class="materialzed btn-sm">Joined</button>
+    <button type="button" class="materialzed btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu profile action-list">
+        @if (!Model.Blocked)
+        {
+            if (Model.AllowCancelRequest)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "',false,true)" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="cancel" />
+                        <input type="hidden" name="mode" value="out" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Cancel request</button>
+                    }
+                </li>
+            }
+            if (Model.AllowUnFollow)
+            {
+                <li>
+                    @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "',false,true)" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="actn" value="unfollow" />
+                        <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                        <button class="link-alike">Leave</button>
+                    }
+                </li>
+            }
+        }
+    </ul>
+}

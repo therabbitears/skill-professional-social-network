@@ -1,0 +1,68 @@
+﻿@model List<Wrly.Models.SkillViewModel>
+@using Wrly
+<div class="profile-intelligence">
+    <span class="int-title">@Html.UserName() add at least 2 skills to your profile</span>
+    @using (Html.BeginForm("Manage", "SkillHistory", FormMethod.Post, new { @id = "frmIntelligenceSkill" }))
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.TextBox("Name", null, new { @class = "form-control", @id = "txtIntelligenceSkillName" })
+            </div>
+        </div>
+        if (Model != null && Model.Count > 0)
+        {
+            <div class="skills">
+                @foreach (var item in Model)
+                {
+                    <div class="skill-tag-editable">@item.Name</div>
+                }
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-10">
+                @if (Model != null && Model.Count > 0)
+                {
+                    <button class="link-alike link-alike-default" type="button" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.RequireAddingSkills)" onclick="skillIntelligence($(this))">Add later</button>
+                }
+                else
+                {
+                    <button class="link-alike link-alike-default" type="button" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.RequireAddingSkills)" onclick="skillIntelligence($(this))">Skip for now</button>
+                }
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                var data = [];
+                $("#txtIntelligenceSkillName").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/SkillHistory/SearchAllSkill",
+                            data: { keyword: $("#txtIntelligenceSkillName").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#txtIntelligenceSkillName").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    select: function (event, ui) {
+                        $.post('/SkillHistory/Manage', { Name: ui.item.label }, function () { fetchIntelligence(); })
+                    }
+                });
+            });
+        </script>
+    }
+</div>

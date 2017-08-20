@@ -1,0 +1,48 @@
+﻿@model List<Wrly.Models.Chat.ChatGroupMessageModel>
+@foreach (var item in Model)
+{
+    if (item.IsFromCurrentUser)
+    {
+        <div class="message-current-user">
+            <div class="message-header">
+                <h5 class="userName">@item.Name</h5> <small class="child-headings right"> @item.RecordedDate.ToChatTime()</small>
+            </div>
+            <div>
+                @if (item.MessageType == (int)Types.Enums.MessageType.Text)
+                {
+                    <span class="mesage-content">
+                        @item.Message
+                    </span>
+                }
+                else
+                {
+                    <span class="mesage-content">
+                        @Html.Raw(item.Message)
+                    </span>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="message">
+            <div class="message-header">
+                <h5 class="userName">@item.Name</h5> <small class="child-headings right"> @item.RecordedDate.ToChatTime()</small>
+            </div>
+            <div>
+                @if (item.MessageType == (int)Types.Enums.MessageType.Text)
+                {
+                    <span class="mesage-content">
+                        @item.Message
+                    </span>
+                }
+                else
+                {
+                    <span class="mesage-content">
+                        @Html.Raw(item.Message)
+                    </span>
+                }
+            </div>
+        </div>
+    }
+}

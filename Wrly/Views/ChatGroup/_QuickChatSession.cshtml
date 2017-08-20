@@ -1,0 +1,20 @@
+﻿@model Wrly.Models.Chat.GroupChatViewModel
+<div class="chat-face-image">
+    @if (!string.IsNullOrEmpty(Model.MemberInfo.ProfilePhotoIconUrl))
+    {
+        <img src="@Model.MemberInfo.ProfilePhotoIconUrl" alt="Online @Model.MemberInfo.AuthorName" title="is Online" />
+    }
+    else
+    {
+        <img src="/content/images/no-image-sm.png" alt="Online @Model.MemberInfo.AuthorName" title="is Online">
+    }
+</div>
+<div class="chat-face-content">
+    @using (Html.BeginForm("Send", "ChatGroup", FormMethod.Post, new { @onsubmit = "return sendMessage($(this))" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.GroupInfo.ID)
+        @Html.HiddenFor(c=>c.UserHash)
+        <input type="text" class="form-control" placeholder="type the message and press enter" name="message" />
+    }
+</div>

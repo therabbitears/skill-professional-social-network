@@ -1,0 +1,33 @@
+﻿@model Wrly.Models.SkillSnapShotViewModel
+@using (Html.BeginForm("SetSkills", "Wizard", FormMethod.Post, new { @onsubmit = "return ___saveSkills($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    if (ViewBag.IsPopup != null && ViewBag.IsPopup == true)
+    {
+        @Scripts.Render("~/cdn/_WizardAddSkillsScript");
+        <input type="hidden" id="hdnPopup" name="ispopup" value="True" />
+    }
+    else
+    {
+        <input type="hidden" id="hdnPopup" value="False" name="ispopup" />
+    }
+    <div class="wizard-content-wrapper">
+        <div class="form-group">
+            <div id="Skills">
+                <input class="form-control wizard-control" id="Skill" placeholder="type the skill name for suggestions" />
+            </div>
+            <div class="skill-selected">
+                @foreach (var item in Model.Skills)
+                {
+                    <span class="skill-tag-editable"> @item.Name <input name="Skills" value="@item.Name" type="hidden" data-val-name="@item.Name"></span>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="wizard-button-wrapper text-right">
+            <button class="btn btn-outlined" id="btnAction">@ViewBag.SkipButtonText</button><div class="waiting-bg"></div>
+        </div>
+    </div>
+}

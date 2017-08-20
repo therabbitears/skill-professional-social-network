@@ -1,0 +1,98 @@
+﻿@model List<Wrly.Data.Models.Extended.LuceneObject>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string q = Request.QueryString.Get("searchTerm");
+}
+
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            @if (!string.IsNullOrEmpty(q))
+            {
+                <h1 class="page-title">"@q" Search results</h1>
+                if (Model != null && Model.Count > 0)
+                {
+                    <div class="table">
+                        <ul class="table-row-container">
+                            @foreach (var item in Model)
+                            {
+                                <li>
+                                    @if (item.EntityID > 0)
+                                    {
+
+                                        if (item.EntityType == (int)Types.Enums.EntityTypes.Person)
+                                        {
+                                            <a href="/@item.Url">
+                                                <div class="search-result-item" data-val-url="@item.Url" data-val-type="entity" data-val-entity="@item.EntityID" data-val-etype="@item.EntityType" data-val-keyword="@item.DisplayName">
+                                                    <div class="thumbnail-notification-con">
+                                                        @if (!string.IsNullOrEmpty(item.ProfilePicUrl))
+                                                        {
+                                                            <img src="@Html.ImagePath(item.ProfilePicUrl,50)" alt="user image - @item.DisplayName">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/Content/images/no-image-sm.png" alt="user image - @item.DisplayName" />
+                                                        }
+
+                                                    </div>
+                                                    <div class="side-thumbnail"><h3>@item.DisplayName</h3><span class="child-headings">@item.Headiing</span></div>
+                                                </div>
+                                            </a>
+                                        }
+                                        else if (item.EntityType == (int)Types.Enums.EntityTypes.Organization)
+                                        {
+                                            <a href="/fou/@item.Url">
+                                                <div class="search-result-item" data-val-url="@item.Url" data-val-type="entity" data-val-entity="@item.EntityID" data-val-etype="@item.EntityType" data-val-keyword="@item.DisplayName">
+                                                    <div class="thumbnail-notification-con">
+                                                        @if (!string.IsNullOrEmpty(item.ProfilePicUrl))
+                                                        {
+                                                            <img src="@Html.ImagePath(item.ProfilePicUrl,40)" alt="user image - @item.DisplayName">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/Content/images/no-image-sm.png" alt="organization image - @item.DisplayName" />
+                                                        }
+
+                                                    </div>
+                                                    <div class="side-thumbnail"><h3>@item.DisplayName</h3><span class="child-headings">@item.Headiing</span></div>
+                                                </div>
+                                            </a>
+                                        }
+                                         else 
+                                        {
+                                            <a href="/groups/@item.Url">
+                                                <div class="search-result-item" data-val-url="@item.Url" data-val-type="entity" data-val-entity="@item.EntityID" data-val-etype="@item.EntityType" data-val-keyword="@item.DisplayName">
+                                                    <div class="thumbnail-notification-con">
+                                                        @if (!string.IsNullOrEmpty(item.ProfilePicUrl))
+                                                        {
+                                                            <img src="@Html.ImagePath(item.ProfilePicUrl,50)" alt="user image - @item.DisplayName">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/Content/images/no-image-sm.png" alt="organization image - @item.DisplayName" />
+                                                        }
+
+                                                    </div>
+                                                    <div class="side-thumbnail"><h3>@item.DisplayName</h3><span class="child-headings">@(((Types.Enums.GroupType)item.SubType).GetDescription())</span></div>
+                                                </div>
+                                            </a>
+                                        }
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            }
+            else
+            {
+                <h1 class="page-title">Search results</h1>
+                <h1 class="page-sub-title">Search by a individual or organization name.</h1>
+            }
+        </div>
+    </div>
+</div>
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_NetworkSharedStyles")
+}

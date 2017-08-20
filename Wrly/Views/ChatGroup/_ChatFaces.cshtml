@@ -1,0 +1,39 @@
+﻿@model List<Wrly.Models.Chat.ChatFaceViewModel>
+@foreach (var item in Model)
+{
+    string className = "face feed-comment";
+    if (ViewBag.ConnectionID != null && item.UserID.Equals(ViewBag.ConnectionID, StringComparison.InvariantCultureIgnoreCase))
+    {
+        className = "face feed-comment active";
+    }
+    if (!item.HasRead)
+    {
+        className += " pending";
+    }
+    <div class="@className" data-val-name="chat-face-@item.UserID">
+        <span class="pending-indicator"></span>
+        <a href="/conversations/@item.UserID">
+            <div class="clearfix" direction="left">
+                <div class="left">
+                    <div class="comment-thumb-con">
+                        <img src="@item.ProfilePhotoIconUrl" class="comment-thumb-img" alt="@item.AuthorName Online" title="@item.AuthorName is Online" />
+                    </div>
+                </div>
+                <div class="">
+                    <div class="comment-action-con ofh">
+                        <div class="comment-input-con">
+                            <div>
+                                <div>
+                                    <span class="user-name">
+                                        @item.AuthorName
+                                    </span>
+                                </div>
+                                <small class="child-headings message">@item.Message</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}

@@ -1,0 +1,96 @@
+﻿@model List<Wrly.Models.EmailConfigurationViewModel>
+@{
+    var AskingAnOpportunity = Model.Where(c => c.EmailType == (int)Types.Enums.EmailTypes.AskingAnOpportunity).FirstOrDefault();
+    var AppliedAnOpportunity = Model.Where(c => c.EmailType == (int)Types.Enums.EmailTypes.AppliedAnOpportunity).FirstOrDefault();
+    var ReferedOnThierOpportunity = Model.Where(c => c.EmailType == (int)Types.Enums.EmailTypes.ReferedOnThierOpportunity).FirstOrDefault();
+    var InviteEmail = Model.Where(c => c.EmailType == (int)Types.Enums.EmailTypes.InviteEmail).FirstOrDefault();
+}
+<div class="tabs child-tabs">
+    <div class="tab"><a data-action="profile" href="#profile">Profile</a> </div>
+    <div class="tab"><a data-action="email" class="active" href="#email">Email preferences</a> </div>
+</div>
+<div class="row">
+    <h1 class="page-title">Email preferences</h1>
+    <h2 class="page-sub-title">Set what all email types you want to receive</h2>
+    <div class="alert alert-error" style="display:none;" id="error-settings"></div>
+</div>
+<div class="row">
+    <label class="control-label">People refer you for an opportunity</label>
+    <div class="col-md-10">
+        <label class="switch">
+            @if (AskingAnOpportunity.Subscribed == true || AskingAnOpportunity.Subscribed == null)
+            {
+                <input type="checkbox" data-val-tags="True" data-val="@AskingAnOpportunity.EmailType" checked data-val-action="enable" class="search-engine-visibility" />
+            }
+            else
+            {
+                <input type="checkbox" data-val-tags="True" data-val="@AskingAnOpportunity.EmailType" data-val-action="enable" class="search-engine-visibility" />
+            }
+            <div class="slider round"></div>
+        </label>
+        <p class="explanation"><div class="child-headings">(If their connection is looking for an opportunity and they find if you have a suitable opportunity.)</div> </p>
+    </div>
+</div>
+
+<div class="row">
+    <label class="control-label">People invite you</label>
+    <div class="col-md-10">
+        <label class="switch">
+            @if (InviteEmail.Subscribed == true || InviteEmail.Subscribed == null)
+            {
+                <input type="checkbox" data-val-tags="True" data-val="@InviteEmail.EmailType" checked data-val-action="enable" class="search-engine-visibility" />
+            }
+            else
+            {
+                <input type="checkbox" data-val-tags="True" data-val="@InviteEmail.EmailType" data-val-action="enable" class="search-engine-visibility" />
+            }
+            <div class="slider round"></div>
+        </label>
+        <p class="explanation"><div class="child-headings">(Set if you want to receive an email when people invites you, application for all invitations.)</div> </p>
+    </div>
+</div>
+
+<div class="row">
+    <label class="control-label">People refers their connections to you</label>
+    <div class="col-md-10">
+        <label class="switch">
+            @if (ReferedOnThierOpportunity.Subscribed == true || ReferedOnThierOpportunity.Subscribed == null)
+            {
+                <input type="checkbox" data-val="@ReferedOnThierOpportunity.EmailType" data-val-tags="True" checked data-val-action="enable" class="search-engine-visibility" />
+            }
+            else
+            {
+                <input type="checkbox" data-val="@ReferedOnThierOpportunity.EmailType" data-val-tags="True" data-val-action="enable" class="search-engine-visibility" />
+            }
+            <div class="slider round"></div>
+        </label>
+        <p class="explanation"><div class="child-headings">(Set if you want to receive an email when your connections refer someone out from their connection for an opportunity you shared.)</div> </p>
+    </div>
+</div>
+
+<div class="row">
+    <label class="control-label">People apply for an opportunity you shared</label>
+    <div class="col-md-10">
+        <label class="switch">
+            @if (AppliedAnOpportunity.Subscribed == true || AppliedAnOpportunity.Subscribed == null)
+            {
+                <input type="checkbox" data-val-tags="True" data-val="@AppliedAnOpportunity.EmailType" checked data-val-action="enable" class="search-engine-visibility" />
+            }
+            else
+            {
+                <input type="checkbox" data-val-tags="True" data-val="@AppliedAnOpportunity.EmailType" data-val-action="enable" class="search-engine-visibility" />
+            }
+            <div class="slider round"></div>
+        </label>
+        <p class="explanation"><div class="child-headings">(Set if you want to receive emails when people applies on an opportunity you shared.)</div> </p>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('input[data-val-action="enable"]').change(function () {                        
+            $.post('/account/EmailPreferences?type=' + $(this).attr('data-val') + '&subscribed=' + $(this).is(':checked'));
+        });
+    })
+</script>

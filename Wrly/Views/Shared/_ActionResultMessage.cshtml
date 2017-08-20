@@ -1,0 +1,47 @@
+﻿@model Wrly.Models.Result
+
+@if (Model.Type == Types.Enums.ResultType.Success)
+{
+    <div class="alert alert-success">
+        <span class="erase" data-erase="alert-success" onclick="____erase($(this))">X</span>
+        <p>@Model.Description</p>
+        <script>$('.alert.alert-success').fadeOut(15000);</script>
+    </div>
+}
+
+@if (Model.Type == Types.Enums.ResultType.Error)
+{
+    <div class="alert alert-error">
+        <span class="erase" data-erase="alert-error" onclick="____erase($(this))">X</span>
+        <p>
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <span>
+                    @Model.Description
+                </span>
+            }
+            else 
+            {
+                <ul>
+                    @foreach (var modelState in ViewData.ModelState.Values)
+                    {
+                        foreach (var error in modelState.Errors)
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    }
+                </ul>
+            }
+        </p>
+        <script>$('.alert.alert-error').fadeOut(15000);</script>
+    </div>
+}
+
+@if (Model.Type == Types.Enums.ResultType.Warning)
+{
+    <div class="alert alert-warning">
+        <span class="erase" data-erase="alert-warning" onclick="____erase($(this))">X</span>
+        <p>@Model.Description</p>
+        <script>$('.alert.alert-warning').fadeOut(15000);</script>
+    </div>
+}

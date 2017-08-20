@@ -1,0 +1,151 @@
+﻿@model Wrly.Models.PostViewModel
+@{
+    ViewBag.Title = "Sklative | Post your Article";
+    ViewBag.Description = "business post, article post";
+    Layout = null;
+    string coverPath = string.IsNullOrEmpty(Model.FilePath) ? "/Content/assets/ContentTools/files/empty-image.png" : Model.FilePath;
+    var classCover = string.IsNullOrEmpty(Model.FilePath) ? "hero-image pending" : "hero-image";
+    var fileID = string.IsNullOrEmpty(Model.FilePath) ? Guid.NewGuid().ToString() : Model.FilePath.GetFileName();
+    var draftID = Request.QueryString.Get("id");
+}
+<div class="page__container">
+    @Html.HiddenFor(c => c.FilePath)
+    @Html.HiddenFor(c => c.DraftID)
+    <link href="~/Content/assets/ContentTools/files/sandbox.css" rel="stylesheet" />
+    <link href="~/Content/assets/ContentTools/build/content-tools.min.css" rel="stylesheet" />
+    <header class="panel-header">
+        <div class="container">
+            <button class="btn btn-outlined" id="btnPublish" onclick="publish();">Publish</button>
+            @if (Model.ID > 0)
+            {
+                <button class="btn btn-outlined">Remove</button>
+            }
+            else
+            {
+                <button class="btn btn-outlined">Discard</button>
+            }
+        </div>
+    </header>
+    <article class="article">
+        <section class="article__content">
+            <label data-name="hero-image" class="@classCover non-editable" for="cover-photo" id="edit-cover" onclick="return allowEdit($(this));">
+                <div class="uploaded">Click anywhere to upload another image. <button class="btn btn-outlined">Remove</button> </div>
+                <input type="file" id="cover-photo" onchange="handleFileUpload(this);" />
+                <script>
+                    function handleFileUpload(input) {
+                        var fd = new FormData();
+                        fd.append('file', input.files[0]);
+                        fd.append('existingFileName', existingFileName);
+                        fd.append('width', width);
+                        sendFileToServer(fd);
+                    }
+
+                    var existingFileName = "@Guid.NewGuid().ToString()" + ".png";
+                    var width = 1000;
+                    function sendFileToServer(formData, status) {
+                        var uploadURL = "/upload/UploadBlob/@(draftID)"; //Upload URL
+                        var extraData = {}; //Extra Data.
+                        $.ajax({
+                            url: uploadURL,
+                            type: "POST",
+                            contentType: false,
+                            processData: false,
+                            cache: false,
+                            data: formData,
+                            success: function (data) {
+                                $('.hero-image').removeClass('pending');
+                                $('.hero-image').css('background', "url('" + data.Location.replace("{0}", 800) + "')")
+                                $('#FilePath').val(data.Location);
+                            }
+                        });
+
+                        //status.setAbort(jqXHR);
+                    }
+
+                </script>
+                <style>
+                    .hero-image {
+                            background: url('@coverPath');
+                    }
+
+                </style>
+                <style>
+                    .hero-image {
+                        width: 100%;
+                        min-height: 300px;
+                        background-repeat: no-repeat !important;
+                        background-position: center !important;
+                        cursor: pointer;
+                        display: inline-block;
+                    }
+
+                    .non-editable {
+                        cursor: default;
+                    }
+
+                        .non-editable .uploaded {
+                            display: none;
+                        }
+
+                    .hero-image.pending {
+                        opacity: .3;
+                    }
+
+                    #cover-photo {
+                        display: none;
+                    }
+
+                    .hero-image:hover {
+                        opacity: 1;
+                    }
+                </style>
+
+            </label>
+            <h1 data-fixture data-name="article-title">@Model.Title</h1>
+            <div data-editable data-name="article">
+                @Html.Raw(Model.Description)
+            </div>
+        </section>
+    </article>
+    <script src="~/Content/assets/ContentTools/build/content-tools.min.js"></script>
+    <script src="~/Content/assets/ContentTools/files/sandbox.js"></script>
+</div>
+<style>
+    .panel-header {
+        background: #1e68b9 none repeat scroll 0 0;
+        color: #fff;
+        height: 40px;
+        margin: 0;
+        padding: 0 2px;
+        top: 0;
+        width: 100%;
+        z-index: 999999;
+    }
+
+    .btn {
+        border: 0px;
+        padding: 10px 12px;
+        font-size: 14px;
+        color: #fff;
+        display: inline-block;
+    }
+
+    .btn-outlined {
+        border: 1px solid #1e68b9;
+        padding: 10px 12px;
+        font-size: 14px;
+        color: #1e68b9;
+        display: inline-block;
+    }
+
+    .box-container, .container {
+        max-width: 921px;
+    }
+
+    .box-container, .container {
+        max-width: 980px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+</style>

@@ -1,0 +1,58 @@
+﻿@model Wrly.Models.Import.ContactImportViewModel
+<h1 class="model-title">Invite by email</h1>
+<div class="main-content">
+    @using (Html.BeginForm("InviteManual", "Import", FormMethod.Post, new { @onsubmit = "return inviteManual($(this))" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label class="control-label">Name:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Email address:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.EmailAddress, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Message:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.Message, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Send invite" /><div class="waiting-bg"></div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+            });
+
+
+            function inviteManual($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            $(".pop-up-background").fadeOut(300, function () { $(".pop-up-background").remove(); });
+                            $(".pop-up").fadeOut(300, function () { $(".pop-up").remove(); });
+                            showPopableSuccessAlert('Your invitation has been sent.');
+                        }
+                    });
+                }
+                return false;
+            }
+        </script>
+    }
+</div>

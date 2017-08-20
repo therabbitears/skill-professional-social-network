@@ -1,0 +1,87 @@
+﻿@model Wrly.Models.Knowledge.HelpViewModel
+
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_LayoutKnowledge.cshtml";
+    Model.ActiveTopic = new Wrly.Models.Knowledge.TopicViewModel();
+}
+
+<div class="page__container">
+    <link href="~/Content/assets/ContentTools/files/sandbox.css" rel="stylesheet" />
+    <link href="~/Content/assets/ContentTools/build/content-tools.min.css" rel="stylesheet" />
+
+    <article class="article" id="article">
+        @using (Html.BeginForm("New", "Knowledge", FormMethod.Post, htmlAttributes: new { @id = "new-knoeledge" }))
+        {
+            <section class="article__content">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Category</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.ActiveTopic.CategoryID, Model.CategoriesSelect, new { 
+                       @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Parent topic</label>
+                    <div class="col-md-10" id="topics">
+                        <select disabled class="form-control" id="parenttopic" name="ActiveTopic.ParentTopicID">
+                            <option>Select</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Name</label>
+                    <div class="col-md-10" id="topics">
+                        @Html.TextBoxFor(m => m.ActiveTopic.TopicName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Label</label>
+                    <div class="col-md-10" id="topics">
+                        @Html.TextBoxFor(m => m.ActiveTopic.Lable, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Desciption</label>
+                    <div class="col-md-10" id="topics">
+                        @Html.TextBoxFor(m => m.ActiveTopic.Description, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Url</label>
+                    <div class="col-md-10" id="topics">
+                        @Html.TextBoxFor(m => m.ActiveTopic.Url, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Meta title</label>
+                    <div class="col-md-10" id="topics">
+                        @Html.TextBoxFor(m => m.ActiveTopic.Title, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Meta description</label>
+                    <div class="col-md-10" id="topics">
+                        @Html.TextBoxFor(m => m.ActiveTopic.MetaDescription, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Meta keywords</label>
+                    <div class="col-md-10" id="topics">
+                        @Html.TextBoxFor(m => m.ActiveTopic.Keywords, new { @class = "form-control" })
+                    </div>
+                </div>
+                <label class="col-md-2 control-label">Html Content</label>
+                <div data-editable data-name="article">
+                    @Html.Raw(Model.ActiveTopic.Html)
+                </div>
+            </section>
+        }
+    </article>
+    <script src="~/Content/assets/ContentTools/build/content-tools.min.js"></script>
+    <script src="~/Content/assets/ContentTools/files/sandbox-knowledge.js"></script>
+</div>

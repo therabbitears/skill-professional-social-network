@@ -1,0 +1,151 @@
+﻿@model Wrly.Models.ProfileViewModel
+@{
+    var projectEnabled = Model.Statistics.ProjectsCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Projects"));
+    var publicationEnabled = Model.Statistics.PublicationsCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Publishings"));
+    var compositionEnabled = Model.Statistics.CompositionsCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Compositions"));
+    var researchEnabled = Model.Statistics.ResearchCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Research"));
+    var findingEnabled = Model.Statistics.FindingsCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Establishments"));
+    var awardEnabled = Model.Statistics.AwardCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Awards"));
+}
+<div id="career-contents">
+    @if (ViewBag.Mobile == null)
+    {
+        <div class="career-summary section-floated career-summary">
+            <div class="section-floated-container">
+                <h1>About</h1>
+                <div class="profile-about" id="skiller-summary">
+                    <div class="about-summary">
+                        <p class="about">
+                            @Html.Raw(Model.FormatedProfileSummary)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.Statistics.CareerHistoryCount > 0)
+    {
+        <div class="career-history-list section-floated" id="career-history-section">
+            <div class="section-floated-container">
+                <h1>Career line</h1>
+                <div id="career-history"></div>
+            </div>
+        </div>}
+    @if (Model.Statistics.EducationCount > 0)
+    {
+        <div class="education-list section-floated" id="education-section">
+            <div class="section-floated-container">
+                <h1>Education</h1>
+                <div id="education-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>}
+    @if (Model.Statistics.CertificationCount > 0)
+    {
+        <div class="certification-list section-floated" id="certification-section">
+            <div class="section-floated-container">
+                <h1>Certifications</h1>
+                <div id="certification-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>
+    }
+    @if (projectEnabled)
+    {
+        <div class="project-list section-floated" id="project-section">
+            <div class="section-floated-container">
+                <h1>Project and Assignments</h1>
+                <div id="project-history" class="data-container">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>
+    }
+    @if (findingEnabled)
+    {
+        <div class="finding-list section-floated" id="findings-section">
+            <div class="section-floated-container editable">
+                <h1>Establishments &amp; foundations</h1>
+                <div id="findings-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>
+    }
+    @if (researchEnabled)
+    {
+        <div class="research-list section-floated" id="researches-section">
+            <div class="section-floated-container">
+                <h1>Researches</h1>
+                <div id="researches-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>
+    }
+    @if (publicationEnabled)
+    {
+        <div class="publication-list section-floated" id="publication-section">
+            <div class="section-floated-container">
+                <h1>Publications</h1>
+                <div id="publication-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>
+    }
+    @if (compositionEnabled)
+    {
+        <div class="composition-list section-floated" id="composition-section">
+            <div class="section-floated-container">
+                <h1>Compositions</h1>
+                <div id="composition-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>
+    }
+    @if (awardEnabled)
+    {
+        <div class="award-list section-floated" id="award-section">
+            <div class="section-floated-container">
+                <h1>Awards &amp; Achievements</h1>
+                <div id="award-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>
+    }
+    @if (Model.Statistics.SkillCount > 0)
+    {
+        <div class="skill-history-list section-floated" id="skill-section">
+            <div class="section-floated-container">
+                <h1>Skill</h1>
+                <div id="skill-history"></div>
+            </div>
+        </div>
+    }
+
+    <div id="references">
+        @if (Model.EntityID != Html.EntityID() && Model.IsConnected)
+        {
+            <div class="recommendation-list section-floated">
+                <div class="section-floated-container">
+                    <h1>Recommendations</h1>
+                    <div class="text-right">
+                        <button class="btn btn-primary btn-sm" data-hash="@Model.ProfileHash" data-add-recommedation="true"><span class="waiting-bg">Recommend</span></button>
+                    </div>
+                    <div id="recommendation-list">
+                        @if (Model.Statistics.RecommendationCount > 0)
+                        {
+                            Html.RenderPartial("_ItemPlaceholder");
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.EntityID != Html.EntityID() && Model.IsConnected)
+        {
+            <div class="apprciation-list section-floated">
+                <div class="section-floated-container">
+                    <h1>Appreciation</h1>
+                    <div class="text-right">
+                        <button class="btn btn-primary btn-sm" data-hash="@Model.ProfileHash" data-add-appriciation="true">Appreciate <div class="waiting-bg"></div></button>
+                    </div>
+                    <div id="appriciation-list">
+                        @if (Model.Statistics.AppriciationCount > 0)
+                        {
+                            Html.RenderPartial("_ItemPlaceholder");
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

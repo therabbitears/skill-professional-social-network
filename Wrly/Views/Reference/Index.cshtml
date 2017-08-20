@@ -1,0 +1,208 @@
+﻿@model List<Wrly.Models.ReferenceRequestViewModel>
+@{
+    ViewBag.Title = "Connections";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    string pageTitle = "References";
+}
+
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <div class="tabs">
+                @if (Request.QueryString.Get("dir") == "out")
+                {
+                    pageTitle = "Given";
+                    <div class="tab"><a href="/reference/requests">Requests</a></div>
+                    <div class="tab"><a href="/reference/requests?dir=out">Sent requests</a></div>
+                    <div class="tab"><a href="/reference/index">Received</a></div>
+                    <div class="tab"><a class="active" href="reference/index?dir=out">Given</a></div>
+                }
+                else
+                {
+                    <div class="tab"><a href="/reference/requests">Requests</a></div>
+                    <div class="tab"><a href="/reference/requests?dir=out">Sent requests</a></div>
+                    <div class="tab"><a href="/reference/index" class="active">Received</a></div>
+                    <div class="tab"><a href="/reference/index?dir=out">Given</a></div>
+                }
+            </div>
+            <div class="content-container">
+                <div class="wizard-form-wrapper">
+                    <h1>@pageTitle</h1>
+                    <div class="messages"></div>
+                    @if (string.IsNullOrEmpty(Request.QueryString.Get("dir")))
+                    {
+                        <div class="wizard-content-wrapper reference-requests">
+                            @foreach (var item in Model)
+                            {
+                                using (Html.BeginForm("Action", "Reference", FormMethod.Post, new { onsubmit = "return ____referenceAction($(this))" }))
+                                {
+                                    <section class="group-item viduara-bCard card-sm">
+                                        <div class="container">
+                                            @if (!string.IsNullOrEmpty(item.AuthorPhoto))
+                                            {
+                                                <img class="thumbnail-notification left" src="@Html.ImagePath(item.AuthorPhoto, 100)" alt="User Image - @item.AuthorName" />
+                                            }
+                                            else
+                                            {
+                                                <img class="thumbnail-notification left" src="/content/images/no-image.png" alt="user default image" />
+                                            }
+                                            <div>
+                                                <div class="heading">
+                                                    <a href="/@item.ProfileUrl"><h3 class="page-title">@item.AuthorName<small>(@(item.Heading))</small></h3></a>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                @if (item.SkillID > 0)
+                                                {
+                                                    <label>For skill @item.SkillName</label>
+                                                }
+                                                else if (item.CareerHistoryID > 0)
+                                                {
+                                                    <label>For role @item.JobTitleName</label>
+                                                }
+                                            </div>
+                                            <div class="render-area">
+                                                <blockquote>@item.Description</blockquote>
+                                            </div>
+
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("Mode", "Tile")
+                                            @Html.Hidden("Hash", item.Hash)
+                                            @if (item.Status == (int)Types.Enums.AppriciationAndRecommedationStatus.Approved)
+                                            {
+                                                @Html.Hidden("actn", "remove", new { @actn = "actn" })
+                                                <div class="buttons">
+                                                    <button class="btn btn-primary btn-sm" name="action" data-for="role" value="remove">Remove</button>
+                                                </div>
+                                            }
+                                            else if (item.Status == null)
+                                            {
+                                                @Html.Hidden("actn", "approve", new { @actn = "actn" })
+                                                <div class="buttons">
+                                                    <button class="btn btn-primary btn-sm" name="action" data-for="role" value="approve">Approve</button>
+                                                    <button type="button" class="btn btn-outlined btn-sm" data-for="role" onclick="return ____secondaryReferenceAction($(this))" name="action" value="remove">Remove</button>
+                                                </div>
+                                            }
+
+                                            <div class="text-right">
+                                                <small class="child-headings">@item.CommonSkillCount common skills</small>
+                                            </div>
+                                        </div>
+
+                                    </section>
+                                }
+                            }
+                        </div>
+                    }
+                    else if (!string.IsNullOrEmpty(Request.QueryString.Get("dir")) && Request.QueryString.Get("dir").Equals("out", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        <div class="wizard-content-wrapper reference-requests">
+                            @foreach (var item in Model)
+                            {
+                                <section class="group-item viduara-bCard card-sm">
+                                    <div class="container">
+                                        @if (!string.IsNullOrEmpty(item.AuthorPhoto))
+                                        {
+                                            <img class="thumbnail-notification left" src="@Html.ImagePath(item.AuthorPhoto, 100)" alt="User Image - @item.AuthorName" />
+                                        }
+                                        else
+                                        {
+                                            <img class="thumbnail-notification left" src="/content/images/no-image.png" alt="user default image" />
+                                        }
+                                        <div>
+                                            <div class="heading">
+                                                <a href="/@item.ProfileUrl"><h3 class="page-title">@item.AuthorName<small>(@(item.Heading))</small></h3></a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            @if (item.SkillID > 0)
+                                            {
+                                                <label>For skill @item.SkillName</label>
+                                            }
+                                            else if (item.CareerHistoryID > 0)
+                                            {
+                                                <label>For role @item.JobTitleName</label>
+                                            }
+                                        </div>
+                                        <div class="render-area">
+                                            <blockquote>@item.Description</blockquote>
+                                        </div>
+                                        <div class="text-right">
+                                            <small class="child-headings">@item.CommonSkillCount common skills</small>
+                                        </div>
+                                    </div>
+                                </section>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .reference-requests .viduara-bCard {
+        border-bottom: 1px solid #ccc;
+        box-shadow: none !important;
+        float: left;
+        width: 100%;
+    }
+
+    .page-title > small {
+        color: #ccc;
+        font-size: 11px;
+        font-weight: normal;
+        margin-left: 5px;
+    }
+
+    .render-area {
+        display: inline-block;
+        width: 100%;
+    }
+
+    blockquote {
+        border-left: 5px solid #666;
+        color: #666;
+        display: inline-block;
+        font-size: 14px;
+        margin-top: 10px;
+        padding: 10px 20px;
+    }
+  
+</style>
+
+<script>
+
+    function ____secondaryReferenceAction($obj) {
+        var form = $obj.parents('form:first');
+        form.find('#actn').val($obj.val());
+        form.submit();
+        return true;
+    }
+
+    function ____referenceAction($obj) {
+        var ser = $obj.serialize();
+        var action = $obj.attr('action');
+        $.ajax({
+            url: action,
+            type: 'POST',
+            data: ser,
+            dataType: 'html',
+            success: function (response) {
+                if ($obj.find('#actn').val() == 'approve') {
+                    location.href = location.href;
+                } else {
+                    $obj.parent().prepend(response)
+                    $obj.remove();
+                }
+            }
+        });
+        return false;
+    }
+
+</script>
+
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_NetworkSharedStyles")
+}

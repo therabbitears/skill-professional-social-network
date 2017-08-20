@@ -1,0 +1,85 @@
+﻿@model Wrly.Models.NetworkSettingViewModel
+@using (Html.BeginForm("ConfigurationNetworkCoverage", "Account", FormMethod.Post, new { @onsubmit = "return configurationNetworkCoverage($(this))", @class = "config-form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="inline-form">
+        @Html.DropDownListFor(c => c.NetworkCoverageLevel, Model.NetworkCoverageOptions, new { @class = "inline" })
+        @if (!string.IsNullOrEmpty(Model.IndustryName))
+        {
+            @Html.TextBoxFor(c => c.IndustryName, new { @id = "txtNetworkIndustryName" })
+        }
+        else
+        {
+            @Html.TextBoxFor(c => c.IndustryName, new { @style = "display:none;", @id = "txtNetworkIndustryName" })
+        }
+
+        @Html.HiddenFor(c => c.IndustryID)
+        <button type="submit" class="link-alike">Save</button>
+        <button type="button" class="btn link-alike link-alike-default" onclick="___cancelNetwork($(this))">Cancel</button>
+    </div>
+}
+<script>
+    function configurationNetworkCoverage($obj) {
+        var ser = $obj.serialize();
+        var action = $obj.attr('action');
+        if ($obj.valid()) {
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: ser,
+                dataType: 'json',
+                success: function (response) {
+
+                    if (response.Type == 2) {
+                        ____executeNetwork();
+                        $obj.remove();
+                        $('#error-settings').hide();
+                    } else {
+                        $('#error-settings').show().html(response.Description);
+                    }
+
+                }
+            });
+        }
+        return false;
+    }
+
+
+    function ___cancelNetwork($obj) {
+        $obj.parents('.config-form:first').remove();
+        $('button[data-profile-change="true"]').show()
+        $('#name-edit-container span').show();
+        $('#error-settings').hide();
+    }
+    $(document).ready(function () {
+        $('#NetworkCoverageLevel').change(function () {
+            if ($(this).val() == 3) {
+                $('#txtNetworkIndustryName').show();
+            } else {
+                $('#txtNetworkIndustryName').hide();
+            }
+        });
+
+
+        $.getJSON("/lookup/IndustryList", function (data) {
+            var array = $.map(data, function (item) {
+                return {
+                    label: item.Value,
+                    value: item.Value,
+                    id: item.Key
+                }
+            });
+
+            $("#txtNetworkIndustryName").autocomplete(
+            {
+                source: array,
+                search: function () { $('#IndustryID').val(0); },
+                select: function (event, ui) { $('#IndustryID').val(ui.item.id); }
+            })
+        });
+    });
+
+    $("form").data("validator", null);
+    $.validator.unobtrusive.parse($("form"));
+
+</script>

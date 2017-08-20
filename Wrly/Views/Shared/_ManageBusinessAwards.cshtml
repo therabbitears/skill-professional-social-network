@@ -1,0 +1,61 @@
+﻿@model Wrly.Models.AwardViewModel
+
+@using (Html.BeginForm("ManageBusinessAward", "Award", FormMethod.Post, new { @class = "form-horizontal", @id = "frmBusinessAward", role = "form", @onsubmit = "return manageAwardHistory($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.UserHash)
+    <div class="form-group">
+        <label class="control-label">Title:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Your role/profile:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    if (!string.IsNullOrEmpty(Model.Hash))
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                <a class="link-alike" onclick="return removeFormAndShowSource($('#frmAward'), $('.award-list .plus-add-profile-item'))" href="#">Back</a><div class="waiting-bg"></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Add to profile" />
+                <a class="link-alike" onclick="return removeFormAndShowSource($('#frmBusinessAward'), $('button[data-add-baward]'))" href="#">Back</a><div class="waiting-bg"></div>
+            </div>
+        </div>
+    }
+    <script>
+        function manageAwardHistory($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        $("#baward-history").processTemplateURL("/award/Index", null, { attachGlobalWait: true });
+                        $obj.remove();
+                        $('button[data-add-baward]').show();
+                    }
+                });
+            }
+            return false;
+        }
+        $("form").data("validator", null);
+        $.validator.unobtrusive.parse($("form"));
+    </script>
+}

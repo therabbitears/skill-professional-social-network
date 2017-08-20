@@ -1,0 +1,79 @@
+﻿@model Wrly.Models.ProfileViewModel
+<aside class="profile-card">
+    @if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+    {
+        <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+            @if (ViewBag.DefaultTab)
+            {
+                <button class="link-alike change-cover">Change cover</button>
+            }
+        </div>
+    }
+    else
+    {
+        <div id="grand-cover">
+            @if (ViewBag.DefaultTab)
+            {
+                <button class="link-alike change-cover">Add cover</button>
+            }
+        </div>
+    }
+    <header class="face">
+        @if (ViewBag.DefaultTab)
+        {
+            <a class="change-profile-pic relative" onclick="____changeProfilePicture($(this))">
+                @if (!string.IsNullOrEmpty(Model.ProfilePic))
+                {
+                    <img src="@Html.ImagePath(Model.ProfilePic, 100)" alt="User Image - @Model.FullName" />
+                    <span class="change-profile-pic action">Change</span>
+                }
+                else
+                {
+                    <img src="/content/images/no-image.png" alt="user default image" />
+                    <span class="change-profile-pic action">Add</span>
+                }
+            </a>
+        }
+        else
+        {
+            <a class="change-profile-pic">
+                @if (!string.IsNullOrEmpty(Model.ProfilePic))
+                {
+                    <img src="@Html.ImagePath(Model.ProfilePic,100)" alt="User Image - @Model.FullName" />
+                }
+                else
+                {
+                    <img src="/content/images/no-image.png" alt="user default image" />
+                }
+            </a>
+        }
+        <h1 id="h1Name">@Model.FormatedName <span class="icon icon-edit-g"></span></h1>
+        <div id="h1NameEdit" class="inline-control" style="display:none;"></div>
+        @if (!string.IsNullOrEmpty(Model.FormatedJobTitle))
+        {
+            <h2 id="h2Heading">
+                <span>@Model.FormatedJobTitle</span> <span class="icon icon-edit-g"></span>
+            </h2>
+            <div id="h2HeadingEdit" style="display:none;"></div>
+        }
+        else
+        {
+            <h2 id="h2Heading">
+                <span>Add heading</span> <span class="icon icon-edit-g"></span>
+            </h2>
+            <div id="h2HeadingEdit" style="display:none;"></div>
+        }
+    </header>
+    <div class="profile-info manage">
+        <ul>
+            <li>
+                <span>@Model.TotalConnections</span>
+                Connections
+            </li>
+            <li>
+                <span>@Model.TotalFollowers</span>
+                Followers
+            </li>
+        </ul>
+    </div>
+</aside>

@@ -1,0 +1,132 @@
+﻿@model Wrly.Models.CareerHistoryWizardViewModel
+<div class="wizard-form-wrapper">
+    @if (ViewBag.IsPopup == null)
+    {
+        <h1>Add your work history</h1>
+        <h2>Adding your work history increases your profile visibility in network</h2>
+    }
+    @using (Html.BeginForm("SetCareerOption", "Wizard", FormMethod.Post, new { @onsubmit = "return setCareerOption($(this))" }))
+    {
+        @Html.HiddenFor(c => c.Hash)
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.OrganizationID)
+        @Html.HiddenFor(c => c.UniversityID)
+        @Html.HiddenFor(c => c.CourseID)
+        <div class="wizard-content-wrapper">
+            <div class="form-group">
+                <label class="control-label">What describe your profile better</label>
+                <div>
+                    @Html.RadioButtonFor(c => c.CareerStage, 1, new { @id = "rdoYes", @class = "custom-radio" })
+                    <label for="rdoYes">An employee <span></span></label>
+                    @Html.RadioButtonFor(c => c.CareerStage, 2, new { @id = "rdoNo", @class = "custom-radio" })
+                    <label for="rdoNo">A student <span></span></label>
+                </div>
+            </div>
+            <div class="content-section" id="divEmployement">
+                <div class="form-group">
+                    <label class="control-label">Your job title:</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(c => c.JobTitleName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Where do you work(Company):</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(c => c.OrganizationName, new { @class = "form-control" })
+                    </div>
+                </div>
+                @*<div class="form-group" id="divIndustry" style="display:none;">
+                        <label class="control-label">Relevant career industry:</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(c => c.IndustryName, new { @class = "form-control", @placeholder = "type the most suitable industry name you are working into" })
+                            <small class="child-headings">(i.e Information technology, staffing and recruitment, publishing etc.)</small>
+                        </div>
+                    </div>*@
+                <div class="divDurationEmplyee" style="display:none;">
+                    Duration
+                    <div class="form-group inline-control">
+                        <label class="control-label">When did you start:</label>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-5">
+                            @Html.CheckBoxFor(c => c.Working, new { @id = "chkWorking" })
+                            <label for="chkWorking">I am Working here</label>
+                        </div>
+                    </div>
+                    <div class="form-group inline-control" id="employeementEndDuration" style="display:none;">
+                        <label class="control-label">When did you end here:</label>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(c => c.EndFromMonth, Model.MonthList, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(c => c.EndFromYear, Model.YearList, new { @class = "form-control" })
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(c => c.EmployementEndedStage, 1, new { @id = "rdoBreak", @class = "custom-radio" })
+                            <label for="rdoBreak">I am on break <span></span></label>
+                            @Html.RadioButtonFor(c => c.EmployementEndedStage, 2, new { @id = "rdoRetired", @class = "custom-radio" })
+                            <label for="rdoRetired">I am retired <span></span></label>
+                            @Html.RadioButtonFor(c => c.EmployementEndedStage, 3, new { @id = "rdoOppurtunity", @class = "custom-radio" })
+                            <label for="rdoOppurtunity">Looking for opportunity<span></span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-section" id="divStudent" style="display:none;">
+                <div class="form-group">
+                    <label class="control-label">Course/Degree Name:</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(c => c.CourseName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">University/College name:</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(c => c.UniversityName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="divDurationStudent">
+                    Duration
+                    <div class="form-group inline-control">
+                        <label class="control-label">When did you start:</label>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(c => c.EducationStartFromMonth, Model.MonthList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.EducationStartFromMonth)
+                        </div>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(c => c.EducationStartFromYear, Model.YearList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.EducationStartFromYear)
+                        </div>
+                    </div>
+                    <div class="form-group inline-control">
+                        <label class="control-label">Completion(or expected):</label>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(c => c.EducationEndFromMonth, Model.MonthList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.EducationEndFromMonth)
+                        </div>
+                        <div class="col-md-5">
+                            @Html.DropDownListFor(c => c.EducationEndFromYear, Model.YearList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.EducationEndFromYear)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm">Next</button> <div class="waiting-bg"></div>
+            </div>
+        </div>
+        if (ViewBag.IsPopup != null && ViewBag.IsPopup == true)
+        {
+            <script src="~/Content/Views/wizard/careerHistory.js" type="text/javascript"></script>
+            <input type="hidden" id="hdnPopup" value="True" name="ispopup" />
+        }
+        else
+        {
+            <input type="hidden" id="hdnPopup" value="False" name="ispopup" />
+        }
+    }
+</div>

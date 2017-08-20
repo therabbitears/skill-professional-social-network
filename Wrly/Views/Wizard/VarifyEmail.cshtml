@@ -1,0 +1,63 @@
+﻿@model Wrly.Models.SkillSnapShotViewModel
+@{
+    ViewBag.Title = "Varify your email address | Sklative";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+<div class="string join-container email-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper text-center">
+                        <div id="message"></div>
+                        <div class="center-box">
+                            <div class="entity-thumbnail relative">
+                                <img src="/content/images/no-image.png" class="group-image radius-per-50" />
+                            </div>
+                        </div>
+                        <div>
+                            <h1>@Model.ProfileSnap.FullName</h1>
+                            <h2>@Model.ProfileSnap.FormatedJobTitle</h2>
+                            <h3>@Model.ProfileSnap.SkillHeadWithTwoSkills</h3>
+                        </div>
+                        <div class="wizard-content-section">
+                            @Model.ProfileSnap.FullName, We have sent and verification email to @Model.ProfileSnap.EmailAddress, please find the email and verify to explore the great skill world.
+                        </div>
+                        <div class="wizard-content-section pad-10">
+                            @using (Html.BeginForm("sendvarificationEmail", "Account", FormMethod.Post, new { @onsubmit = "return ___resendVarificationEmail($(this))" }))
+                            {
+                                @Html.HiddenFor(c => c.Hash)
+                                @Html.AntiForgeryToken()
+                                <div class="waiting-bg"></div><button class="btn btn-outlined">Resend</button>
+                            }
+                            <a class="btn btn-outlined" href="/wizard/addconnections">Do it later</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section FooterScripts{
+    <script>
+        function ___resendVarificationEmail($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            $obj.find('button').attr('disabled', 'disabled');
+            $('.waiting-bg').addClass('working');
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: ser,
+                dataType: 'html',
+                success: function (response) {
+                    $('#message').html(response);
+                    $obj.find('button').removeAttr('disabled');
+                    $('.waiting-bg').removeClass('working');
+                }
+            });
+            return false;
+        }
+    </script>
+}

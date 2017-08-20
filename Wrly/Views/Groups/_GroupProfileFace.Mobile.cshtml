@@ -1,0 +1,107 @@
+﻿@model Wrly.Models.Business.GroupViewModel
+<aside class="profile-card">
+    @if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+    {
+        <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+        </div>
+    }
+    else
+    {
+        <div id="grand-cover" style="background: #CAE0F6">
+        </div>
+    }
+    <header class="face">
+        @if (ViewBag.DefaultTab)
+        {
+            <a class="change-profile-pic" onclick="____changeProfilePicture($(this))">
+                @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+                {
+                    <img src="@Html.ImagePath(Model.ProfileImagePath, 100)" alt="User Image - @Model.Name" />
+                }
+                else
+                {
+                    <img src="/content/images/no-image.png" alt="user default image" />
+                }
+            </a>
+        }
+        else
+        {
+            <a class="change-profile-pic">
+                @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+                {
+                    <img src="@Html.ImagePath(Model.ProfileImagePath, 100)" alt="User Image - @Model.Name" />
+                }
+                else
+                {
+                    <img src="/content/images/no-image.png" alt="user default image" />
+                }
+            </a>
+        }
+        <h1 id="h1Name">@Model.Name</h1>
+        <div id="h1NameEdit" class="inline-control" style="display:none;"></div>
+        <h2>
+            <span>@(((Types.Enums.GroupType)Model.SubType).GetDescription())</span>
+        </h2>
+    </header>
+</aside>
+<div class="text-center">
+    @if (Request.IsAuthenticated)
+    {
+        <div class="btn-group margin-up-down-10" id="connectionStatus">
+            @if (Model.Member == null)
+            {
+                using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "',false,true)" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="actn" value="follow" />
+                    <input type="hidden" name="group" value="true" />
+                    <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                    <button class="materialzed btn-sm">Join</button>
+                }
+            }
+            else
+            {
+                if (Model.Member.ObjectStatus == (int)Types.Enums.AssociationRequestStatus.Approve)
+                {
+                    <button class="materialzed btn-sm">Joined</button>
+                    <button type="button" class="materialzed btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu profile action-list">
+                        @if (Model.Member != null)
+                        {
+                            <li>
+                                @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "',false,true)" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="actn" value="unfollow" />
+                                    <input type="hidden" name="group" value="true" />
+                                    <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                                    <button class="link-alike">Leave</button>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <button class="materialzed btn-sm">Pending approval</button>
+                }
+            }
+        </div>
+    }
+    else
+    {
+        <div class="btn-group margin-up-down-10">
+            <button class="materialzed btn-sm" onclick="____authentication()">Join</button>
+        </div>
+    }
+</div>
+<div class="profile-info manage">
+    <ul>
+        <li class="no-border">
+            <span>@Model.TotalFollowers.FormatedNumber()</span>
+            Followers
+        </li>
+    </ul>
+</div>

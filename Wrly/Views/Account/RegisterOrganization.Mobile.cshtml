@@ -1,0 +1,69 @@
+﻿@model Wrly.Models.OrganizationSignupViewModel
+@{
+    ViewBag.Title = "Sklative for organizations";
+    ViewBag.Description = "Manage your brand on the professional network, build and engage with your employees, customers, vendors. Share opportunities and updates.";
+}
+<div>
+    <div class="home-form-wrapper">
+        <div class="tabs">
+            <div class="tab">
+                <a data-val-for="timeline-contents" class="active"><i class="flaticon-columns-building"></i></a>
+            </div>
+            <div class="tab">
+                <a data-val-for="career-contents" href="/"><i class="flaticon-manager"></i> </a>
+            </div>
+        </div>
+        <div class="home-form-container">
+            @using (Html.BeginForm("RegisterOrganization", "Account", FormMethod.Post, new { @id = "frmStepSaveBusinessFull", @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationMessage("Error")
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.IndustryID, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(c => c.IndustryID, Model.Industries, new { @maxlength = "30", @placeholder = "enter website here", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Website, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Website, new { @class = "form-control" })
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EmailAddress, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-primary btn-sm" value="Join!" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_HomeMobileSharedStyles")
+}

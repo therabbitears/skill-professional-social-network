@@ -1,0 +1,51 @@
+﻿@model List<Wrly.Models.InsightDetailsViewModel>
+@if (Model != null && Model.Count > 0)
+{
+    var insightType = Model[0].InteractionType;
+    foreach (var item in Model)
+    {
+        <section class="reuqest-item">
+            <div class="container">
+                <img class="thumbnail-notification left" src="@Html.ImagePath(item.AuthorPhoto,100)" alt="User Image - @item.AuthorName" />
+                <div>
+                    <div class="heading">
+                        @if (insightType == (int)Types.Enums.PostInteractionType.Apply)
+                        {
+                            <a href="/@item.ProfileUrl"><h3 class="page-title">@item.AuthorName</h3></a>
+                            <div style="font-size:10px;" class="child-headings">@(item.Heading) </div>
+                            <div class="render-area">
+                                <blockquote>@item.Description</blockquote>
+                            </div>
+                            <div><small class="child-headings">Applied: <strong>@item.CreatedOn.ToChatTime()</strong></small></div>
+                        }
+                        else if (insightType == (int)Types.Enums.PostInteractionType.Refer)
+                        {
+                            <a href="/@item.ProfileUrl">@item.AuthorName</a> <span>Referred</span> <a href="/@item.SecondProfileUrl">@item.SecondAuthorName</a>
+                            <div style="font-size:10px;" class="child-headings">@(item.Heading) </div>
+                            <div class="render-area">
+                                <blockquote>@item.Description</blockquote>
+                            </div>
+                            <div><small class="child-headings">Referred: <strong>@item.CreatedOn.ToChatTime()</strong></small></div>
+                        }
+                        else if (insightType == (int)Types.Enums.PostInteractionType.ReferForOpportunity)
+                        {
+                            if (Html.EntityID()==item.EntityID2)
+                            {
+                                <a href="/@item.ProfileUrl">@item.AuthorName</a> <span>Referred this opportunity to you</span>
+                            }
+                            else 
+                            {
+                                <a href="/@item.ProfileUrl">@item.AuthorName</a> <span>Referred your opportunity to</span> <a href="/@item.SecondProfileUrl">@item.SecondAuthorName</a>
+                            }
+                            <div style="font-size:10px;" class="child-headings">@(item.Heading) </div>
+                            <div class="render-area">
+                                <blockquote>@item.Description</blockquote>
+                            </div>
+                            <div><small class="child-headings">Referred: <strong>@item.CreatedOn.ToChatTime()</strong></small></div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}

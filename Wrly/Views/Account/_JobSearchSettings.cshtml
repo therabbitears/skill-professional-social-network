@@ -1,0 +1,128 @@
+﻿@model Wrly.Models.JobSearchViewModel
+<div class="row">
+    <h1 class="page-title">Opportunities configuration</h1>
+    <h2 class="page-sub-title">Configure your opportunity and visibility in job searches</h2>
+</div>
+<div class="row">
+
+    <div>
+        <label class="control-label">Explore opportunities</label>
+        <div class="col-md-10">
+            <label class="switch">
+                @if (Model.AllowOppurtunities)
+                {
+                    <input type="checkbox" data-val-tags="True" checked data-val-action="enable" class="search-engine-visibility" id="chkExploreOppurtunities" />
+                }
+                else
+                {
+                    <input type="checkbox" data-val-tags="True" data-val-action="enable" class="search-engine-visibility" id="chkExploreOppurtunities" />
+                }
+                <div class="slider round"></div>
+            </label>
+            <p class="explanation"><div class="child-headings">(Setting this option explores good Opportunities for your career.)</div> </p>
+            @if (Model.AllowOppurtunities)
+            {
+                <div id="allowOppurtunities">
+                    <label class="control-label">Your job search interest level</label>
+                    <div class="col-md-10">
+                        <label class="setting-value" id="job-search-level-con"><span> @(((Types.Enums.OppurtunityLevel)Model.JobInterestLevel).GetDescription())</span></label><button class="link-alike" data-container="job-search-level-con" data-profile-change="true" hash="">Edit</button>
+                        <p class="explanation"><div class="child-headings">(Setting your job search level shows your profile only based on your interest.)</div> </p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div id="allowOppurtunities" style="display:none;">
+                    <label class="control-label">Your job search interest level</label>
+                    <div class="col-md-10">
+                        <label class="setting-value" id="job-search-level-con"><span> @(((Types.Enums.OppurtunityLevel)Model.JobInterestLevel).GetDescription())</span></label><button class="link-alike" data-container="job-search-level-con" data-profile-change="true" hash="">Edit</button>
+                        <p class="explanation"><div class="child-headings">(Setting your job search level shows your profile only based on your interest.)</div> </p>
+                    </div>
+                </div>
+                
+            }
+            
+        </div>
+    </div>
+    <div>
+        <label class="control-label">Allow people to refer me</label>
+        <div class="col-md-10">
+            <label class="switch">
+                @if (Model.AllowToRefer)
+                {
+                    <input type="checkbox" checked data-val-tags="True" data-val-action="refer" class="search-engine-visibility" id="chkAllowToRefer" />
+                }
+                else
+                {
+                    <input type="checkbox" data-val-tags="True" data-val-action="refer" class="search-engine-visibility" id="chkAllowToRefer" />
+                }
+                <div class="slider round"></div>
+            </label>
+            <p class="explanation"><div class="child-headings">(Setting this option enables people to refer you for jobs.)</div> </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setAllowApurtunities($obj) {
+        $.post('/account/SetJobAppurtunities', { enabled: $obj.is(':checked') }, function (res) {
+            ____executeJobSearch();
+
+        });
+    }
+
+    function ____cancelJobSearchLevel($obj) {
+        $obj.parents('.config-form:first').remove();
+        $('button[data-profile-change="true"]').show()
+        $('#job-search-level-con span').show();
+        $('#error-settings').hide();
+    }
+
+    function setReferForJobs($obj) {
+        $.post('/account/SetAllowReference', { enabled: $obj.is(':checked') }, function (res) {
+            ____executeJobSearch();
+        });
+    }
+
+    $(document).ready(function () {
+        $('button[data-profile-change="true"]').click(function () {
+            var hash = $(this).attr('hash');
+            var container = $(this).attr('data-container');
+            $(this).hide();
+            $.get('/account/OppurtunityLevel', { hash: hash }, function (res) {
+                $('#' + container).find('span').hide();
+                if ($('#' + container).find('.config-form').length == 0) {
+                    $('#' + container).append(res);
+                }
+            });
+        });
+
+
+        $('input[data-val-tags="True"]').click(function () {
+            var value = $(this).attr('data-val-hash');
+            var isCheck = $(this).is(':checked');
+            var id = $(this).attr('id');
+            var action = $(this).attr('data-val-action');
+            if (isCheck) {
+                $('label[for="' + id.toString() + '"]').removeClass('off');
+                $('label[for="' + id.toString() + '"]').addClass('on');
+            } else {
+                $('label[for="' + id.toString() + '"]').removeClass('on');
+                $('label[for="' + id.toString() + '"]').addClass('off');
+            }
+
+            if (action == 'refer') {
+                $.post('/account/SetAllowReference', { enabled: isCheck }, function (res) { });
+            }
+            if (action == 'enable') {
+                if (isCheck) {
+                    $('#allowOppurtunities').show();
+                } else {
+                    $('#allowOppurtunities').hide();
+                }
+                $.post('/account/SetJobAppurtunities', { enabled: isCheck }, function (res) { });
+            }
+        });
+    });
+
+</script>

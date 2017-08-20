@@ -1,0 +1,20 @@
+﻿@model List<Wrly.Models.Listing.AssociateProfileViewModel>
+@{
+    ViewBag.Title = "Suggestions";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <h1>Suggestions</h1>
+            <div class="wizard-content-wrapper">
+                @{Html.RenderPartial("_ConnectionsTiles", Model);}
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _FooterScripts
+{
+    @Scripts.Render("~/cdn/_NetworkSharedScripts");
+}

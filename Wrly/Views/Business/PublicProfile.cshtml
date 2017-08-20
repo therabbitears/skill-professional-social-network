@@ -1,0 +1,340 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    string wrapperClass = string.Empty;
+}
+
+@section _HeadStyles
+{
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    @Styles.Render("~/cdn/_ProfilePublicStyles")
+    @if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+    {
+        Styles.Render("~/cdn/_NewsFeedStyles");
+    }
+}
+@if (Model.ProfileMode == Types.Enums.ProfileMode.Default)
+{
+    <div id="nav">
+        <div class="nav-wrapper">
+            <div id="nav-icons">
+                <ul>
+                    <li data-val-action="action" class="fact visible"><a href="#" class="card active" data-val-pointing="face"> <i class="icon icon-career-g"></i><label>Face</label> </a> <span class="line"></span> </li>
+                    @if (Model.Statistics.ServicesCount > 0)
+                    {
+                        <li data-val-action="action" class="fact visible"><a href="#" class="card" data-val-pointing="services-section"> <i class="icon icon-service-g"></i><label>Services</label></a>  </li>
+                    }
+                    @if (Model.Statistics.ProductsCount > 0)
+                    {
+                        <li data-val-action="action" class="fact visible"><a href="#" class="card" data-val-pointing="products-section"> <i class="icon icon-product-g"></i><label>Products</label></a>  </li>
+                    }
+                    @if (Model.Statistics.AffiliationCount > 0)
+                    {
+                        <li data-val-action="action" class="fact visible"><a href="#" class="card" data-val-pointing="affiliations-section"> <i class="icon icon-affiliate-g"></i><label>Affiliations</label></a> </li>
+                    }
+                    @if (Model.Statistics.AwardCount > 0)
+                    {
+                        <li data-val-action="action" class="fact visible"><a href="#" data-val-pointing="award-section" class="card"> <i class="icon icon-award-g"></i><label>Awards</label> </a> </li>
+                    }
+                    @if (Model.Statistics.RecommendationCount > 0 || Model.Statistics.AppriciationCount > 0)
+                    {
+                        <li data-val-action="action" class="fact visible"><a href="#" class="card" data-val-pointing="references-section"> <i class="icon icon-l icon-testimonial-g"></i><label>References</label></a> </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+@if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+{
+    wrapperClass = "has-cover";
+    <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+
+    </div>
+}
+<div id="grand-wrapper">
+
+    <div id="profile-wrapper" class="@wrapperClass">
+        <div class="two-three">
+            <div id="face">
+                <div class="section-floated">
+                    <div class="section-floated-container">
+                        @{Html.RenderPartial("_BusinessProfileFace", Model);}
+                    </div>
+                </div>
+            </div>
+            <div class="tabs">
+                @if (Model.ProfileMode == Types.Enums.ProfileMode.Default)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" class="active" href="/fou/@Model.ProfileName">Profile</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Connections)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/fou/@Model.ProfileName">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/fou/@Model.ProfileName/profile-items/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Followers || Model.ProfileMode == Types.Enums.ProfileMode.Following)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/fou/@Model.ProfileName">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/fou/@Model.ProfileName/profile-items/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/fou/@Model.ProfileName">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/fou/@Model.ProfileName/profile-items/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/fou/@Model.ProfileName/profile-items/timeline">Updates</a>
+                    </div>
+                }
+            </div>
+            @if (Model.ProfileMode == Types.Enums.ProfileMode.Default)
+            {
+                Html.RenderPartial("_BusinessProfileItems", Model);
+                @section _FooterScripts{
+                    <script type="text/javascript">
+                        function ____awardAction($obj) {
+                            var hash = $obj.attr('data-hash');
+                            var action = $obj.attr('data-action');
+
+                            if (action == 'congratulate') {
+                                ____awardActionCongratulate($obj, hash);
+                            }
+                        }
+
+                        function ____awardActionCongratulate($obj, hash) {
+                            $.post('/award/congratulate?q=' + hash, function (res) { $obj.parent('div').prepend(res) });
+                        }
+
+                        $(document).ready(function () {
+                            $("#nav li a").click(function (e) {
+                                var $parent = $(this).parent('li');
+                                if ($parent.attr('data-val-action') == 'action') {
+                                    e.preventDefault();
+                                    $(document).off("scroll");
+
+                                    $("#nav li a").removeClass('active');
+                                    $(this).addClass('active');
+                                    var target = '#' + $(this).attr('data-val-pointing');
+                                    menu = target;
+                                    $target = $(target);
+                                    $('html, body').stop().animate({
+                                        'scrollTop': $target.offset().top + 2
+                                    }, 500, 'swing', function () {
+                                        //      window.location.hash = target;
+                                        $(document).on("scroll", onScroll);
+                                    });
+
+                                }
+                            });
+                        });
+
+                        function getBusinessRecommedation($obj) {
+                            var hash = $obj.attr('data-hash');
+                            $.ajax({
+                                url: '/reference/manageBusinessRecommendation',
+                                data: { hash: hash },
+                                type: 'GET',
+                                dataType: 'html',
+                                success: function (response) { $('#recommendation-list').prepend(response); }
+                            });
+                        }
+
+                        function getBusinessAppriciation($obj) {
+                            var hash = $obj.attr('data-hash');
+                            $.ajax({
+                                url: '/reference/manageBusinessAppriciation',
+                                data: { hash: hash },
+                                type: 'GET',
+                                dataType: 'html',
+                                success: function (response) { $('#testimonials-list').prepend(response); }
+                            });
+                        }
+
+
+
+                        var profileHash = '@Model.ProfileHash';
+                        $(document).ready(function () {
+
+                            $('button[data-add-brecommedation]').click(function () {
+                                getBusinessRecommedation($(this));
+                            });
+
+                            $('button[data-add-business-appriciation]').click(function () {
+                                getBusinessAppriciation($(this));
+                            });
+
+
+
+                            $("#recommendation-list").setTemplateURL("/Templates/public/recommendation-list.txt");
+                            $("#testimonials-list").setTemplateURL("/Templates/public/testimonials-list.txt");
+                            $("#services-list").setTemplateURL("/Templates/public/services-list.txt");
+                            $("#product-list").setTemplateURL("/Templates/public/product-list.txt");
+                            $("#affiliation-history").setTemplateURL("/Templates/public/affiliation-list.txt");
+                            $("#award-history").setTemplateURL("/Templates/public/business-award-list.txt");
+                            $("#similar-companies").setTemplateURL("/Templates/similar-company-list.txt");
+                            $("#similar-companies").processTemplateURL("/business/similar?q=@Model.ProfileHash");
+                            $("#recommendation-list").processTemplateURL("/profileitems/businessRecommendations?q=@Model.ProfileHash");
+                            $("#testimonials-list").processTemplateURL("/profileitems/businesstestimonials?q=@Model.ProfileHash");
+
+                            $("#services-list").processTemplateURL("/profileitems/services?q=@Model.ProfileHash");
+                            $("#product-list").processTemplateURL("/profileitems/products?q=@Model.ProfileHash");
+                            $("#affiliation-history").processTemplateURL("/profileitems/affiliations?q=@Model.ProfileHash");
+                            $("#award-history").processTemplateURL("/profileitems/businessawards?q=@Model.ProfileHash");
+                            $("#connectionStatus").load('/association/actionable?q=' + profileHash, function () { ____bindMenu(); });
+
+                        });
+
+                    </script>
+                }
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Connections)
+            {
+                @section _FooterScripts{
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+                        $("#similar-companies").setTemplateURL("/Templates/similar-company-list.txt");
+                        $("#similar-companies").processTemplateURL("/business/similar?q=@Model.ProfileHash");
+                        $(document).ready(function () {
+                            $("#connectionStatus").load('/association/actionable?q=' + profileHash, function () { ____bindMenu(); });
+                        });
+                    </script>
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                }
+                <div class="career-history-list section-floated">
+                    <div class="section-floated-container">
+                        <h1>@Model.Name's connections</h1>
+                        @{Html.RenderPartial("_EntityConnectionsTiles", Model.Connections);}
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Followers)
+            {
+                @section _FooterScripts{
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+                        $("#similar-companies").setTemplateURL("/Templates/similar-company-list.txt");
+                        $("#similar-companies").processTemplateURL("/business/similar?q=@Model.ProfileHash");
+                        $(document).ready(function () {
+                            $("#connectionStatus").load('/association/actionable?q=' + profileHash, function () { ____bindMenu(); });
+                        });
+                    </script>
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                }
+
+                <div class="career-history-list section-floated">
+                    <div class="section-floated-container">
+                        <h1>@Model.Name's followers</h1>
+                        @{Html.RenderPartial("_EntityConnectionFollowerTiles", Model.Followers);}
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+            {
+                @section _FooterScripts{
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+
+                        var profileHash = '@Model.ProfileHash';
+                        var pageNumber = 0;
+                        function loadTimeLineFeeds() {
+                            $(this).attr('disabled', 'disabled');
+                            pageNumber = pageNumber + 1;
+                            $.get('/account/timeline?q=' + profileHash + '&pageNumber=' + pageNumber.toString(), function (res) {
+                                if (res.toString().trim() == '') {
+                                    $('.load-more').remove();
+                                } else {
+                                    $('.load-more').removeAttr('disabled');
+                                    $('.load-more').hide();
+                                    $('.feeds').append(res);
+                                    tooltip($('.feeds'));
+                                }
+                            });
+                        }
+                        $("#similar-companies").setTemplateURL("/Templates/similar-company-list.txt");
+                        $("#similar-companies").processTemplateURL("/business/similar?q=@Model.ProfileHash");
+                        $(document).ready(function () {
+                            $("#connectionStatus").load('/association/actionable?q=' + profileHash, function () { ____bindMenu(); });
+                        });
+                    </script>
+                    @Scripts.Render("~/cdn/_NewsFeeds")
+                }
+
+                <div class="career-history-list section-floated">
+                    <div class="profile-item">
+                        @{Html.RenderPartial("_Feeds", Model.Feed.Feeds);}
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="one-three">
+            <div class="more-info section-floated">
+                <div class="section-floated-container">
+                    <h1>@Model.Name information</h1>
+                    <div class="information-table-row">
+                        <div class="key">Number of Employees</div><div class="value">@Model.EmployeeStrength</div>
+                    </div>
+                    <div class="information-table-row">
+                        <div class="key">Website</div><div class="value">@Model.Website</div>
+                    </div>
+                    <div class="information-table-row">
+                        <div class="key">Establilshed year</div><div class="value">@Model.EstablishedYear</div>
+                    </div>
+                    <div class="information-table-row">
+                        <div class="key">Industry</div><div class="value">@Model.Category</div>
+                    </div>
+                </div>
+            </div>
+            <div class="career-history-list section-floated">
+                <div class="section-floated-container">
+                    <h1>Similar companies</h1>
+                    <div id="similar-companies">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

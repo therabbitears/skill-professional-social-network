@@ -1,0 +1,87 @@
+﻿@model Wrly.Models.AddressViewModel
+
+@using (Html.BeginForm("editAddress", "business", FormMethod.Post, new { @id = "frmEditBasic", @class = "form-horizontal", role = "form", @onsubmit = "return manageAddress($(this))" }))
+{
+    <div class="wizard-content-section">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Hash)
+        <div class="row ">
+            <div class="col-sm-6">
+                <span>Line 1:</span>
+                @Html.TextBoxFor(c => c.AddressLine1, new { @id = "txtAddressLine1", maxlength = "500", @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.AddressLine1)
+            </div>-
+            <div class="col-sm-6">
+                <span>Line 2:</span>
+                @Html.TextBoxFor(c => c.AddressLine2, new { @id = "txtAddressLine1", maxlength = "500", @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.AddressLine2)
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <span>Line 3:</span>
+                @Html.TextBoxFor(c => c.AddressLine3, new { @id = "txtAddressLine1", maxlength = "500", @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.AddressLine3)
+            </div>
+
+            <div class="col-sm-6">
+                <span>Line 4:</span>
+                @Html.TextBoxFor(c => c.AddressLine4, new { @id = "txtAddressLine1", maxlength = "500", @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.AddressLine4)
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-6">
+                <span>Country:</span>
+                @Html.DropDownListFor(c => c.Country, Model.Countries, new { @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.AddressLine3)
+            </div>
+            <div class="col-sm-6">
+                <span>State:</span>
+                @Html.TextBoxFor(c => c.State, new { @data_val_allow_number = "true", @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.State)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <span>City:</span>
+                @Html.TextBoxFor(c => c.City, new { @data_val_allow_number = "true", @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.City)
+            </div>
+            <div class="col-sm-6">
+                <span>Zipcode:</span>
+                @Html.TextBoxFor(c => c.ZipCode, new { @id = "txtPincode", @data_val_allow_number = "true", @class = "form-control" })
+                @Html.ValidationMessageFor(c => c.ZipCode)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Save" />
+            </div>
+        </div>
+        <script>
+            function manageAddress($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            ____executeCompanyProfile(response);
+                        }
+                    });
+                }
+                return false;
+            }
+
+            function cancel($obj) {
+                $obj.parent('.people-selected').remove();
+            }
+        </script>
+    </div>
+}

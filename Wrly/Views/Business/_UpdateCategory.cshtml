@@ -1,0 +1,40 @@
+﻿
+@model Wrly.Models.OrgCategoryViewModel
+
+@using (Html.BeginForm("UpdateCategory", "Business", FormMethod.Post, new { @onsubmit = "return ____updateCategory($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-5">
+        @Html.DropDownListFor(c => c.CategoryID,Model.CategoryList, new { @class = "form-control" })
+    </div>
+    <div class="col-md-5">
+        <button class="link-alike">Save</button>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+        });
+        function ____updateCategory($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.Type == 2) {
+                            $('#h2Heading').html(response.Description);
+                            $('#h2Heading').show();
+                            $('#h2HeadingEdit').hide();
+                            $obj.remove();
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+    </script>
+}

@@ -1,0 +1,23 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+@using Types
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}@section _HeadStyles
+{
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    @Styles.Render("~/cdn/_ProfilePublicStyles")
+<link href="~/Content/Views/profile/_mobile.css" rel="stylesheet" />
+}
+
+
+<div class="mobile-container">
+    @{Html.RenderPartial("_BusinessProfileFace", Model);}
+    <div class="profile-contents">
+        <div class="section-floated">
+            <div class="profile-item empty-data">
+                <a class="btn btn-primary btn-sm v-middle" href="/account/login">Login</a> to connect or <a class="link-alike" href="/account/register">Sign up</a> or explore your network
+            </div>
+        </div>
+    </div>
+</div>

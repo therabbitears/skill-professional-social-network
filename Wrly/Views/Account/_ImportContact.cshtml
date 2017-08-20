@@ -1,0 +1,39 @@
+﻿<div class="import-wizard">
+    <span class="int-title">
+        @Html.UserName() import your existing connections and know whom you already know, or invite them to join you.
+    </span>
+    <div class="row">
+        <div class="google left import-tab action">
+            <img src="/fonts/ico/google-xl.png" />
+            <h3 class="page-sub-title">Google</h3>
+            <span class="child-headings">Use your google account to invite and explore your contact</span>
+        </div>
+        <div class="mail import-tab action">
+            <img src="/fonts/ico/mail-1-xl.png" />
+            <h3 class="page-sub-title">Use email</h3>
+            <span class="child-headings">Use manual email address to find or explore people in network.</span>
+        </div>
+    </div>
+    <div class="row text-right">
+        <button class="link-alike" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.ContactImport)" onclick="skillIntelligence($(this),true)">Dismiss</button>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.google').click(function () {
+            window.location = '/google/getcontacts';
+        });
+
+        $('.mail').click(function () {
+            ____attachGlobalWait();
+            $.get('/import/invitemanual?src=home-feed', function (res) {
+                $('<div id="invite-cotainer" class="modal-content">').popUpWindow({
+                    action: "open",
+                    size: "medium"
+                });
+                ____removeGlobalWait();
+                $('#invite-cotainer').html(res);
+            });
+        });
+    })
+</script>

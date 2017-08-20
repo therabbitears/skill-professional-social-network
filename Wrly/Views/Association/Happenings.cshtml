@@ -1,0 +1,69 @@
+﻿@model List<Wrly.Models.HappeningsViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    ViewBag.Title = "Network activities";
+}
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <h1>Network activities</h1>
+            <div class="additional-link text-right"><a href="/network/my-happenings">My happenings</a></div>
+            <ul class="table-row-container">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <div class="home-general-list-item">
+                            <div class="thumbnail-notification-con">
+                                <img alt="no image @item.AuthorName" src="@Html.ImagePath(item.ProfilePhotoUrl,50)" class="thumbnail-notification" alt="User Image - @item.AuthorName">
+                            </div>
+                            <div class="side-thumbnail">
+                                <span class="activity-text">
+                                    <a href="/@item.ProfileUrl">@item.AuthorName</a>
+                                    <span class="inline">@item.Text</span>
+                                </span>
+                                <div class="buttons">
+                                    <form action="/association/activityaction" method="post" onsubmit="return false">
+                                        <input type="hidden" value="@item.Token" name="__RequestVerificationToken">
+                                        <input type="hidden" value="@item.Hash" name="hash">
+                                        @if (item.Type == 1)
+                                        {
+                                            <button onclick="____executeActivityAction($(this))" data-action="welcome" class="btn btn-outlined btn-sm" data-hash="@item.Hash">Welcome</button>
+                                            <button onclick="____executeActivityAction($(this))" data-action="like" class="btn btn-outlined btn-sm" data-hash="@item.Hash">Like</button>
+                                            <button onclick="____executeActivityAction($(this))" data-action="next" class=" btn-sm btn btn-outlined default" data-hash="@item.Hash">Skip</button>
+                                        }
+                                        @if (item.Type == 2)
+                                        {
+                                            <button onclick="____executeActivityAction($(this))" data-action="goodluck" class="btn btn-outlined  btn-sm" data-hash="@item.Hash">Good luck</button>
+                                            <button onclick="____executeActivityAction($(this))" data-action="like" class="btn btn-outlined  btn-sm" data-hash="@item.Hash">Like</button>
+                                            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default  btn-sm" data-hash="@item.Hash">Skip</button>
+                                        }
+                                        @if (item.Type == 3 || item.Type == 4)
+                                        {
+                                            <button onclick="____executeActivityAction($(this))" data-action="congratulateonaward" class="btn btn-outlined  btn-sm" data-hash="@item.Hash">Congratulate</button>
+                                            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default  btn-sm" data-hash="@item.Hash">Skip</button>
+                                        }
+                                        @if (item.Type == 5)
+                                        {
+                                            <button onclick="____executeActivityAction($(this))" data-action="congratulateonanniversary" class="btn btn-outlined  btn-sm" data-hash="@item.Hash">Congratulate</button>
+                                            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default  btn-sm" data-hash="@item.Hash">Skip</button>
+                                        }
+                                        @if (item.Type == 6)
+                                        {
+                                            <button onclick="____executeActivityAction($(this))" data-action="endorse" class="btn btn-outlined  btn-sm" data-hash="@item.Hash">Endors</button>
+                                            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default  btn-sm" data-hash="@item.Hash">Skip</button>
+                                        }
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+@section _FooterScripts
+{
+   @Scripts.Render("~/cdn/_ActivitiesScripts");
+}

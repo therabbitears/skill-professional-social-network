@@ -1,0 +1,91 @@
+﻿@model List<Wrly.Models.Feeds.FeedDetailViewModel>
+@using Types
+<div>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            var container = Guid.NewGuid().ToString();
+            <div class="feed blog" data-container-id="news-item-@container" data-val-id="@item.ID" itemscope itemtype="http://schema.org/NewsArticle">
+                <div class="media-body">
+                    <div class="image">
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <img alt="@item.Title" src="@Html.ImagePath(@item.FilePath, 500)" style="max-width:100%;" />
+                            @*<div class="feed-media-image cover" itemprop="image" itemscope itemtype="https://schema.org/ImageObject" style="background-image: url('@Html.ImagePath(@item.FilePath, 500)');">*@
+                            <meta itemprop="url" content="@Html.ImagePath(@item.FilePath, 500)">
+                            <meta itemprop="width" content="500">
+                            <meta itemprop="height" content="500">
+                            @*</div>*@
+                        }
+                        else
+                        {
+                            <img alt="@item.Title" src="https://www.sklative.com/Content/assets/images/ind-connection.png" style="max-width:100%;" />
+                            @*<div class="feed-media-image cover" itemprop="image" itemscope itemtype="https://schema.org/ImageObject" style="background-image: url('https://www.sklative.com/Content/assets/images/ind-connection.png');">*@
+                            <meta itemprop="url" content="https://www.sklative.com/Content/assets/images/ind-connection.png">
+                            <meta itemprop="width" content="500">
+                            <meta itemprop="height" content="500">
+                            @*</div>*@
+                        }
+                    </div>
+                    <div class="content">
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(item.AuthorPhoto, 100)" alt="@item.AuthorName" />
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                                    <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID" itemprop="name">
+                                        @item.AuthorName
+                                    </a>
+                                    <small class="share-type">Share a news publically</small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+
+                        <div class="feed-title">
+                            <h6 itemprop="headline"><a href="/press/posts/@item.ID"> @item.Title</a></h6>
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.Description) && item.Description.Length > 500)
+                        {
+                            <div class="feed-body max-height" itemprop="description">
+                                @Html.Raw(item.Description)
+                                <div class="action"><a href="/press/posts/@item.ID" data-val-id="@item.ID" data-val-type="@item.PostType" class="link-alike">Continue</a> </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="feed-body" itemprop="description">
+                                @Html.Raw(item.Description)
+                            </div>
+                        }
+
+
+                        @if (item.CreatedOn != null)
+                        {
+                            <meta itemprop="datePublished" content="@item.CreatedOn.ToString("yyyy/MM/dd")" />
+                            <meta itemprop="dateModified" content="@item.CreatedOn.ToString("yyyy/MM/dd")" />
+                        }
+                        <meta itemscope itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://www.sklative.com/press/posts/@(item.ID)" />
+                        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                                <img src="https://www.sklative.com/logos/Logo_1_Inv.jpg" style="display:none;" />
+                                <meta itemprop="url" content="https://www.sklative.com/logos/Logo_1_Inv.jpg">
+                                <meta itemprop="width" content="440">
+                                <meta itemprop="height" content="112">
+                            </div>
+                            <meta itemprop="name" content="Sklative">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

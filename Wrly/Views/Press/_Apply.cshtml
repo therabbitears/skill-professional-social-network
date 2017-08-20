@@ -1,0 +1,109 @@
+﻿@model Wrly.Models.Feeds.FeedDetailViewModel
+@using Types;
+<div class="pop-up-header">
+    <h1 class="model-title">Apply an opportunity</h1>
+</div>
+<div class="main-content">
+    @using (Html.BeginForm("Apply", "Press", FormMethod.Post, new { @onsubmit = "return applyOpportunity($(this))" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Hash)
+    <div class="form-group">
+        <div class="col-md-10">
+            <textarea class="form-control" rows="4" name="Text" placeholder="Type an optional(Private) message to pubblisher"></textarea>
+        </div>
+    </div>
+        <div class="form-group">
+            <label class="control-label">Notify network</label>
+            <div class="col-md-10">
+                <label class="switch">
+                    <input type="checkbox" data-val-tags="True" data-val-action="enable" value="true" checked="checked" class="search-engine-visibility" name="NotifyNetwork" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </div>
+        <div class="section-floated-container">
+            <div class="text-right">
+                <div class="waiting-bg"></div> <button class="btn btn-primary btn-sm">Apply</button>
+            </div>
+        </div>
+        <script>
+            function applyOpportunity($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        showPopableSuccessAlert('You applied for this opportunity.');
+                        ____clearPopup();
+                    }
+                });
+                return false;
+            }
+
+        </script>
+    }
+</div>
+@{var container = Guid.NewGuid().ToString();}
+<div class="feed job" data-container-id="news-item-@container" style="max-height:250px;overflow-x:hidden;overflow-y:auto;">
+    @if (Model.SharingType == (int)Enums.SharingType.Share)
+    {
+        <div class="media-body">
+            <div class="____au">
+                <span class="thumbnail-notification-con ____m8r">
+                    <a href="/@Model.ProfileUrl">
+                        <img class="thumbnail-notification" src="@Html.ImagePath(@Model.AuthorPhoto, 100)" alt="@Model.AuthorName">
+                    </a>
+                </span>
+                <div class="no-margin author-name">
+                    <div>
+                        <a href="/@Model.ProfileUrl" title="@Model.FormatedName" data-hover-card="true" data-entity-id="@Model.EntityID">
+                            @Model.AuthorName <small class="share-type">Shared an opportunity</small>
+                        </a>
+                        @if (Model.PublishOn != null)
+                        {
+                            <small class="child-headings right timestamp">@Model.PublishOn.Value.ToChatTime()</small>
+                        }
+                    </div>
+                    <div style="font-size:10px;" class="child-headings">@Model.Heading</div>
+                </div>
+            </div>
+            <div class="answer-small user-content">
+                @Model.Title
+            </div>
+            <div class="answer-small user-content">
+                @Model.ShortDescription.ToFormattedTabAndNewLine()
+            </div>
+            @if (!string.IsNullOrEmpty(Model.FilePath))
+            {
+                <div class="feed-media-image">
+                    <img src="@Html.ImagePath(@Model.FilePath, 500)" alt="@Model.AuthorName - Shared news image" />
+                </div>
+            }
+           @if (Model.Skills != null && Model.Skills.Count > 0)
+            {
+                <h3>For skills</h3>
+                <ul>
+                    @foreach (var itemSkill in Model.Skills)
+                    {
+                        <li>@itemSkill.Name</li>
+                    }
+                </ul>
+            }
+            @if (Model.JobTitles != null && Model.JobTitles.Count > 0)
+            {
+                <h3>For job titles</h3>
+                <ul>
+                    @foreach (var itemJobTitle in Model.JobTitles)
+                    {
+                        <li>@itemJobTitle.JobTitleName</li>
+                    }
+                </ul>
+            }
+        </div>
+    }
+</div>

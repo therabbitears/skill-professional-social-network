@@ -1,0 +1,44 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.Mobile.cshtml";
+}
+
+@section _HeadStyles
+            {
+    @Styles.Render("~/cdn/_AuthHomeMobileStyles")
+    @Styles.Render("~/cdn/_NewsFeedStyles")
+}
+
+@section _FooterScripts
+{
+    @Scripts.Render("~/cdn/_AuthHomeScripts")
+}
+<div class="full-width" data-val-time-loaded="@DateTime.UtcNow.Ticks">
+    <div class="feed-container" id="main-section">
+        <div class="section-floated">
+            <div class="lean-container">
+                @{Html.RenderPartial("_LeanBusinessProfileFace", Model);}
+            </div>
+        </div>
+        <div class="career-history-list section-floated" data-hash-share="update" id="share-feed-update-profile">
+            @{ViewBag.IsOrganization = true; Html.RenderPartial("_ShareUpdate");}
+        </div>
+        <div class="section-floated">
+            <div class="section-floated-container">
+                <div id="suggestions-container" class="contents">
+                    <h1>Suggestions</h1>
+                    <div class="content" id="people-you-may-know" data-max-load="2">
+
+                    </div>
+                    <div class="show-all"><a href="/suggestions?dir=wr">See all</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="feeds" id="feeds">
+            @{Html.RenderPartial("_Feeds", Model.Feed.Feeds);}
+        </div>
+        <div class="load-more"><button onclick="loadFeeds($(this))" class="link-alike">Load more <div class="waiting-bg"></div></button></div>
+    </div>
+</div>
+

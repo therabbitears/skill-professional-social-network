@@ -1,0 +1,308 @@
+﻿@model List<Wrly.Models.Feeds.FeedDetailViewModel>
+@using Types
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        var container = Guid.NewGuid().ToString();
+        if (item.PostType == (int)Enums.PostTypes.PressRelease)
+        {
+            <div class="feed" data-container-id="news-item-@container">
+                @if (item.SharingType == (int)Enums.SharingType.Reshare)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="@item.ProfileName">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(item.ProfilePath, 100)" alt="@item.FormatedName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                    <small class="share-type">
+                                        Shared a news via <a href="/@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalWritterID">
+                                            @item.SecondFormatedName
+                                        </a>
+                                    </small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.ProfileHeading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content">
+                            @item.ShortDescription
+                        </div>
+                        <div>
+                            <button type="button" data-val-show-o="true" class="link-alike" data-val-original-post="@container-original">Show original post</button>
+                        </div>
+                        <div class="original-user-content" style="display:none;" id="@container-original">
+                            <div class="____au">
+                                <span class="thumbnail-notification-con ____m8r">
+                                    <a href="@item.SecondProfileName">
+                                        <img class="thumbnail-notification" src="@Html.ImagePath(item.SecondProfilePath, 100)" alt="@item.SecondFormatedName">
+                                    </a>
+                                </span>
+                                <div class="no-margin author-name">
+                                    <div>
+                                        <a href="/@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalWritterID">
+                                            @item.SecondFormatedName
+                                        </a>
+                                        <small class="share-type">Share a news publically</small>
+                                        @if (item.OriginalPublishOn != null)
+                                        {
+                                            <small class="child-headings right timestamp">@item.OriginalPublishOn.Value.ToChatTime()</small>
+                                        }
+                                    </div>
+                                    <div style="font-size:10px;" class="child-headings">@item.SecondProfileHeading</div>
+                                </div>
+                            </div>
+                            <div class="answer-small user-content">
+                                @item.OriginalShortDescription
+                            </div>
+                            @if (!string.IsNullOrEmpty(item.OriginalFilePath))
+                            {
+                                <div class="feed-media-image">
+                                    <img src="@Html.ImagePath(item.OriginalFilePath, 500)" alt="@item.SecondFormatedName - Shared news image" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                <div class="media-reactions">
+                    @if (item.Liked)
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="unlike" class="link-alike added">Like</button>
+                    }
+                    else
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="like" class="link-alike">Like</button>
+                    }
+                    <button data-val-container="news-item-@container" onclick="    return focusReaction($(this))" class="link-alike">Comment</button>
+                    <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="reshare" class="link-alike">Share with network</button>
+                </div>
+                @if (item.TotalLikes > 0)
+                {
+                    <div class="media-states">
+                        @item.TotalLikes Likes
+                    </div>
+                }
+                <div class="feed-comments">
+                    <div id="comment-render-area">
+                        @if (item.Replies != null && item.Replies.Count > 0)
+                        {
+                            if (item.TotalReplies > 2)
+                            {
+                                <div class="comment-load-more"><button data-val-total="@item.TotalReplies" data-level="first" data-val-stock="2" data-val-next="0" data-action="more-comments" data-hash="@item.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@item.TotalReplies" onclick="____executeFeedReplyAction($(this))">View more comments</button> <span class="right">Displaying 2 of @item.TotalReplies</span> </div>
+                            }
+                            ViewBag.IsLevelOne = true;
+                            Html.RenderPartial("_FeedReplies", item.Replies);
+                        }
+                    </div>
+                    <div class="clearfix" direction="left">
+                        <div class="left">
+                            <div class="comment-thumb-con">
+                                <img alt="@Html.UserName()" class="comment-thumb-img" src="@Html.UserNamePhoto(w: 50)">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="comment-action-con ofh">
+                                <div class="comment-input-con">
+                                    <div>
+                                        @using (Html.BeginForm("comment", "press", FormMethod.Post, new { data_val_container = "news-item-" + container, @onsubmit = "return addReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                                        {
+                                            @Html.Hidden("Hash", item.Hash)
+                                            @Html.AntiForgeryToken()
+                                            <input class="form-control" type="text" placeholder="Write your comment" name="Comment" tabindex="-1">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        else if (item.PostType == (int)Enums.PostTypes.Blog)
+        {
+            <div class="feed article" data-container-id="news-item-@container">
+                @if (item.SharingType == (int)Enums.SharingType.Reshare)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="@item.ProfileName">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(item.ProfilePath, 100)" alt="@item.FormatedName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                    <small class="share-type">
+                                        Shared a news via <a href="/@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalWritterID">
+                                            @item.SecondFormatedName
+                                        </a>
+                                    </small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.ProfileHeading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content">
+                            @item.ShortDescription
+                        </div>
+                        <div>
+                            <button type="button" data-val-show-o="true" class="link-alike" data-val-original-post="@container-original">Show original post</button>
+                        </div>
+                        <div class="original-user-content" style="display:none;" id="@container-original">
+                            @if (!string.IsNullOrEmpty(item.OriginalFilePath))
+                            {
+                                <div class="feed-media-image cover" style="background-image: url('@Html.ImagePath(item.OriginalFilePath,900)');">
+                                </div>
+                            }
+
+                            <div class="____au">
+                                <span class="thumbnail-notification-con ____m8r">
+                                    <a href="@item.SecondProfileName">
+                                        <img class="thumbnail-notification" src="@Html.ImagePath(item.SecondProfilePath,100)" alt="@item.SecondFormatedName">
+                                    </a>
+                                </span>
+                                <div class="no-margin author-name">
+                                    <div>
+                                        <a href="/@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalWritterID">
+                                            @item.SecondFormatedName
+                                        </a>
+                                        <small class="share-type">Share a news publically</small>
+                                        @if (item.OriginalPublishOn != null)
+                                        {
+                                            <small class="child-headings right timestamp">@item.OriginalPublishOn.Value.ToChatTime()</small>
+                                        }
+                                    </div>
+                                    <div style="font-size:10px;" class="child-headings">@item.SecondProfileHeading</div>
+                                </div>
+                            </div>
+                            <div class="feed-title">
+                                <h6> @item.OriginalTitle</h6>
+                            </div>
+                            @if (!string.IsNullOrEmpty(item.OriginalDescription) && item.OriginalDescription.Length > 500)
+                            {
+                                <div class="feed-body max-height">
+                                    @Html.Raw(item.OriginalDescription)
+                                    <div class="action"><button data-val-feed-action="detail" data-val-id="@item.ID" data-val-type="@item.OriginalPostType" class="link-alike">More</button> </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="feed-body">
+                                    @Html.Raw(item.OriginalDescription)
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                <div class="media-reactions">
+                    @if (item.Liked)
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="unlike" class="link-alike added">Like</button>
+                    }
+                    else
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="like" class="link-alike">Like</button>
+                    }
+                    <button data-val-container="news-item-@container" onclick="    return focusReaction($(this))" class="link-alike">Comment</button>
+                    <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="reshare" class="link-alike">Share with network</button>
+                </div>
+                @if (item.TotalLikes > 0)
+                {
+                    <div class="media-states">
+                        @item.TotalLikes Likes
+                    </div>
+                }
+                <div class="feed-comments">
+                    <div id="comment-render-area">
+                        @if (item.Replies != null && item.Replies.Count > 0)
+                        {
+                            if (item.TotalReplies > 2)
+                            {
+                                <div class="comment-load-more"><button data-val-total="@item.TotalReplies" data-level="first" data-val-stock="2" data-val-next="0" data-action="more-comments" data-hash="@item.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@item.TotalReplies" onclick="____executeFeedReplyAction($(this))">View more comments</button> <span class="right">Displaying 2 of @item.TotalReplies</span> </div>
+                            }
+                            ViewBag.IsLevelOne = true;
+                            Html.RenderPartial("_FeedReplies", item.Replies);
+                        }
+                    </div>
+                    <div class="clearfix" direction="left">
+                        <div class="left">
+                            <div class="comment-thumb-con">
+                                <img alt="@Html.UserName()" class="comment-thumb-img" src="@Html.UserNamePhoto(w: 50)">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="comment-action-con ofh">
+                                <div class="comment-input-con">
+                                    <div>
+                                        @using (Html.BeginForm("comment", "press", FormMethod.Post, new { data_val_container = "news-item-" + container, @onsubmit = "return addReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                                        {
+                                            @Html.Hidden("Hash", item.Hash)
+                                            @Html.AntiForgeryToken()
+                                            <input class="form-control" type="text" placeholder="Write your comment" name="Comment" tabindex="-1">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+<script>
+    $(document).ready(function () {
+        $('button[data-val-feed-action], a[data-val-feed-action]').click(function () {
+            var id = $(this).attr('data-val-id');
+            var type = $(this).attr('data-val-type');
+            $('<div id="popup-cotainer">').popUpWindow({
+                action: "open",
+                size: 'cover'
+            });
+            $('#popup-cotainer').load('/press/load/' + id.toString() + '?type=' + type.toString());
+        });
+
+        $('button[data-val-show-o="true"]').click(function () {
+            if ($('#' + $(this).attr('data-val-original-post')).is(':visible')) {
+                $('#' + $(this).attr('data-val-original-post')).hide();
+                $(this).html('Show original post');
+                return;
+            }
+            $(this).html('Hide original post');
+            $('#' + $(this).attr('data-val-original-post')).show();
+        });
+
+    });
+
+
+</script>

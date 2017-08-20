@@ -1,0 +1,307 @@
+﻿@model Wrly.Models.Listing.CareerHistoryViewModel
+
+@using (Html.BeginForm("ManageEducation", "CareerHistory", FormMethod.Post, new { @id = "frmEducation", @onsubmit = "return manageEducationHistory($(this))" }))
+{
+    <div class="profile-item">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Hash)
+        @Html.HiddenFor(c => c.CareerHistoryID)
+        @Html.HiddenFor(c => c.UserHash)
+        @Html.HiddenFor(c => c.JobTitleID)
+        @Html.HiddenFor(c => c.Type)
+        @Html.HiddenFor(c => c.OrganizationID)
+        @if (Model.SkillIncluded != null && Model.SkillIncluded.Count > 0)
+        {
+            foreach (var item in Model.SkillIncluded)
+            {
+                <input type="hidden" name="Skills" value="@item.EntitySkillID" />
+            }
+        }
+        <div class="form-group">
+            <label class="control-label">University/College name:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.OrganizationName, new { @class = "form-control", @id = "UniversityName", @placeholder = "type the college/university name" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Course/Degree Name:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.JobTitleName, new { @class = "form-control", @id = "CourseName", @placeholder = "type the name of your degree/course/diploma" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Key modules:</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(c => c.About, new { @class = "form-control", @placeholder = "write key modules you have accomplished during this degree/course/diploma" })
+            </div>
+        </div>
+        @{var display = Model.SkillIncluded == null || Model.SkillIncluded.Count == 0 ? "none" : "block";
+        if (display == "none")
+        {
+            <div class="text-right"><button type="button" class="link-alike" onclick="showSkillAttach($(this))">Add what you learned</button> </div>
+        }
+        }
+        <div class="form-group" style="display:@display" id="skills-attached">
+            <label class="control-label">Add what you have been studied:</label>
+            <div class="col-md-10" id="Skills">
+                @Html.TextBox("SkillListText", null, new { @id = "SkillListText", @placeholder = "what you studied here", @class = "form-control" })
+                @if (Model.SkillIncluded != null && Model.SkillIncluded.Count > 0)
+                {
+                    foreach (var itemSkill in Model.SkillIncluded)
+                    {
+                        <span class="skill-tag-editable">
+                            @itemSkill.Name
+                        </span>
+                    }
+                }
+            </div>
+        </div>
+        @if (!Model.HasEducationStartSpecified)
+        {
+            <div class="text-right"><button type="button" data-source-button="educationMoreDetails" class="link-alike" onclick="showFindingMoreOption($(this))">Add duration</button> </div>
+        }
+        <fieldset id="educationMoreDetails" style="display:@(Model.HasEducationStartSpecified ? "block" : "none")">
+            <legend class="control-label">Course duration</legend>
+            <div>
+                <div class="form-group inline-control">
+                    <div class="col-md-5">
+                        From:@Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-group inline-control">
+                    <div class="col-md-5">
+                        To:@Html.DropDownListFor(c => c.EndFromMonth, Model.MonthList, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(c => c.EndFromYear, Model.YearList, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        @if (!string.IsNullOrEmpty(Model.Hash))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmEducation'), $('button[data-add-edu]'))" href="#">Back</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Add to your education" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmEducation'), $('button[data-add-edu]'))" href="#">Back</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+
+        <script>
+            function showSkillAttach($obj) {
+                $('#skills-attached').show();
+                $obj.remove();
+            }
+
+            // Required another if selected one.
+            $.validator.addMethod('requeiredifselected', function (value, element, params) {
+                var otherPropValue = $('#' + params.otherproperty).val();
+                //                console.log({ otherproperty: params.otherproperty, value: value, otherPropValue: otherPropValue });
+
+                if (otherPropValue > 0 && (value == '' || value == -1)) {
+                    return false;
+                }
+                return true;
+            });
+
+            $.validator.unobtrusive.adapters.add("requeiredifselected", ["otherproperty", "mode"], function (options) {
+                options.rules["requeiredifselected"] = options.params;
+                options.messages["requeiredifselected"] = options.message;
+            });
+            //=======================   End ================================//
+
+            // Date validation
+            $.validator.addMethod('cannotgreatermonthandyear', function (value, element, params) {
+                var isStart = params.isstart;
+                var isMonth = params.ismonth;
+                var isYear = params.isyear;
+                var otherPropertyYear = $('#' + params.otherpropertyyear).val();
+                var otherPropertyMonth = $('#' + params.otherpropertymonth).val();
+                var friendProperty = $('#' + params.friendproperty).val();
+
+
+                //console.log({ isStart: isStart, isMonth: isMonth, isYear: isYear, otherPropertyYear: otherPropertyYear, otherPropertyMonth: otherPropertyMonth, friendProperty: friendProperty, value:value });
+                var startDate = new Date();
+                var endDate = new Date();
+                if (otherPropertyMonth > 0 && otherPropertyYear > 0 && friendProperty > 0) {
+                    if (isStart == 'True') {
+                        if (isMonth == 'True') {
+                            startDate = new Date(friendProperty, value, 1);
+                        } else {
+                            startDate = new Date(value, friendProperty, 1);
+                        }
+                        endDate = new Date(otherPropertyYear, otherPropertyMonth, 1);
+                    } else {
+                        if (isMonth.toString() == 'True' && friendProperty > 0) {
+                            endDate = new Date(friendProperty, value, 1);
+                        } else {
+                            endDate = new Date(value, friendProperty, 1);
+                        }
+                        startDate = new Date(otherPropertyYear, otherPropertyMonth, 1);
+                    }
+                    console.log({ endDate: endDate, startDate: startDate });
+                    return (endDate >= startDate);
+                }
+                return true;
+            });
+
+            $.validator.unobtrusive.adapters.add("cannotgreatermonthandyear", ["friendproperty", "otherpropertymonth", "otherpropertyyear", "isstart", "ismonth", "isyear"], function (options) {
+                options.rules["cannotgreatermonthandyear"] = options.params;
+                options.messages["cannotgreatermonthandyear"] = options.message;
+            });
+            //=======================   End ================================//
+
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+            var data = [];
+
+            $("#UniversityName").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/Business/Search/University",
+                        data: { key: $("#UniversityName").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                data.push({
+                                    Key: -1,
+                                    Value: $("#UniversityName").val()
+                                });
+                                $("#UniversityName").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.Value.toString().trim(),
+                                    value: obj.Value.toString().trim(),
+                                    id: obj.Key.toString().trim()
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                },
+                select: function (event, ui) {
+                    $('#Organization').val(ui.item.id);
+                }
+            });
+
+            $("#CourseName").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/CareerHistory/SearchCourse",
+                        data: { key: $("#CourseName").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                data.push({
+                                    Key: -1,
+                                    Value: $("#CourseName").val()
+                                });
+                                $("#CourseName").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.Value.toString().trim(),
+                                    value: obj.Value.toString().trim(),
+                                    id: obj.Key.toString().trim()
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                },
+                select: function (event, ui) {
+                    $('#JobTitleID').val(ui.item.id);
+                }
+            });
+
+            $("#SkillListText").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/CareerHistory/SkillList",
+                        data: { keyword: $("#SkillListText").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                $("#SkillListText").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.Value.toString().trim(),
+                                    value: obj.Key.toString().trim()
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                },
+                select: function (event, ui) {
+                    $("#SkillListText").val('');
+                    var element = '<span class="skill-tag-editable"> ' + ui.item.label + ' <input type="hidden" name="Skills" value="' + ui.item.value.toString() + '" /><span class="remove" onclick="removeTempSkillFromEducationHistory($(this))">X</span></div>';
+                    $('#Skills').append(element.toString());
+                    this.value = "";
+                    return false;
+                }
+
+
+
+            });
+
+            function removeTempSkillFromEducationHistory($obj) {
+                $obj.parent('.skill-tag-editable').remove();
+            }
+
+            function manageEducationHistory($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        type: 'POST',
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            $("#education-history").processTemplateURL("/careerhistory/education", null, { attachGlobalWait: true });
+                            $obj.remove();
+                            $('button[data-add-edu]').show();
+                            postEditAction();
+                        }
+                    });
+                }
+                return false;
+            }
+
+        </script>
+    </div>
+}

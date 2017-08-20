@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Reshares";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+@model List<Wrly.Models.Feeds.FeedDetailViewModel>
+<div class="feeds" id="feeds">
+    @{Html.RenderPartial("_Reshares", Model);}
+</div>
+
+@section _FooterScripts
+{
+    @Scripts.Render("~/cdn/_NewsFeeds");
+}
+
+@section HeadStyles{
+    @Styles.Render("~/cdn/_NewsFeedStyles");
+}

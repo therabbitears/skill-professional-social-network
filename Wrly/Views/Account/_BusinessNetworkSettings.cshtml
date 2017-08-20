@@ -1,0 +1,66 @@
+﻿@model Wrly.Models.NetworkSettingViewModel
+<div class="row">
+    <h1 class="page-title">Network configuration</h1>
+    <h2 class="page-sub-title">Configure your network preferences</h2>
+    <div class="alert alert-error" style="display:none;" id="error-settings"></div>
+</div>
+<div class="row">
+    <div>
+        <label class="control-label">Your network coverage</label>
+        <div class="col-md-10" id="network-scope-con">
+            <label class="setting-value" id="name-edit-container">
+                <span>
+                    @(((Types.Enums.NetworkCoverageLevel)Model.NetworkCoverageLevel).GetDescription())@if (!string.IsNullOrEmpty(Model.IndustryName))
+                    {
+                        <span>(@Model.IndustryName)</span>
+                    }
+                </span>
+            </label><button class="link-alike" data-container="name-edit-container" data-profile-change="true" hash="">Edit</button>
+            <p class="explanation"><div class="child-headings">(Network coverage helps you to connect more relevant people and display contents.)</div> </p>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div>
+        <label class="control-label">Individual connection</label>
+        <div class="col-md-10" id="network-scope-con">
+            <label class="switch">
+                @if (Model.AllowIndividualToConnect)
+                {
+                    <input type="checkbox" data-val-tags="True" checked class="search-engine-visibility" id="chkAllowIndividualConnection">
+                }
+                else
+                {
+                    <input type="checkbox" data-val-tags="True" class="search-engine-visibility" id="chkAllowIndividualConnection">
+                }
+                <div class="slider round"></div>
+            </label>
+            <p class="explanation"><div class="child-headings">(allowing individual to connect will show your profile as suggestion and anyone can send a connection request.)</div> </p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('button[data-profile-change="true"]').click(function () {
+            var hash = $(this).attr('hash');
+            var container = $(this).attr('data-container');
+            $(this).hide();
+            $.get('/account/ConfigurationNetworkCoverage', { hash: hash }, function (res) {
+                $('#' + container).find('span').hide();
+                if ($('#' + container).find('.config-form').length == 0) {
+                    $('#' + container).append(res);
+                }
+            });
+        });
+
+        $('input[data-val-tags="True"]').click(function () {
+            var isCheck = $(this).is(':checked');
+            $.post('/account/setIndividualConnectionStatus', { enabled: isCheck }, function (res) { });
+        });
+    });
+
+</script>

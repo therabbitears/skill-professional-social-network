@@ -1,0 +1,50 @@
+﻿@model Wrly.Models.BusinessAboutViewModel
+
+
+@using (Html.BeginForm("About", "Business", FormMethod.Post, new { @class = "form-horizontal", @id = "frmManageAbout", role = "form", @onsubmit = "return manageAbout($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.UserHash)
+    <div class="form-group">
+        <label class="control-label">About yourself:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control", @maxlength = "500" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary btn-sm" value="Save" />
+            <a class="link-alike" onclick="return removeFormAndShowSource($('#frmManageAbout'), $('.about-summary'))" href="#">Back</a><div class="waiting-bg"></div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+        });
+
+
+        function manageAbout($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        $('.about-summary').show();
+                        $('.profile-about').find('.about').html($obj.find('#Description').val());
+                        $obj.remove();
+                        postEditAction();
+                    }
+                });
+            }
+            return false;
+        }
+    </script>
+}

@@ -1,0 +1,66 @@
+﻿@model Wrly.Models.ReplyViewModel
+@{var container = Guid.NewGuid().ToString();}
+<div class="feed-comment feed-reply">
+    <div class="clearfix" direction="left">
+        <div class="left">
+            <div class="comment-thumb-con">
+                <a href="/@Model.ProfileUrl">
+                    <img class="comment-thumb-img" src="@Html.ImagePath(Model.AuthorPhoto, 50)" alt="@Model.AuthorName" />
+                </a>
+            </div>
+        </div>
+        <div class="" data-container-id="reply-item-@container">
+            <div class="comment-action-con ofh">
+                <div class="comment-input-con">
+                    @if (!string.IsNullOrEmpty(Model.ProfileHeading))
+                    {
+                        <div>
+                            <div>
+                                <a class=" UFICommentActorName" href="/@Model.ProfileName" data-hover-card="true" data-entity-id="@Model.EntityID" title="@Model.FormatedName">@Model.AuthorName</a>
+                            </div>
+                            <small class="child-headings">Software deloper at google</small>
+                        </div>
+                        @Model.Reply
+                    }
+                    else
+                    {
+                        <div>
+                            <a class=" UFICommentActorName" href="/@Model.ProfileName" data-hover-card="true" data-entity-id="@Model.EntityID" title="@Model.FormatedName">@Model.AuthorName</a>
+                            @Model.Reply
+                        </div>
+                    }
+                    <div class="comment-action-buttons">
+                        @if (Model.Liked)
+                        {
+                            <button onclick="return ____executeFeedReplyAction($(this))" data-hash="@Model.Hash" data-action="unlike" class="link-alike added">Like (<span>@Model.TotalLikes</span>)</button>
+                        }
+                        else
+                        {
+                            if (Model.TotalLikes>0)
+                            {
+                            <button onclick="return ____executeFeedReplyAction($(this))" data-hash="@Model.Hash" data-action="like" class="link-alike">Like (<span>@Model.TotalLikes</span>)</button>    
+                            }
+                            else 
+                            { 
+                                <button onclick="return ____executeFeedReplyAction($(this))" data-hash="@Model.Hash" data-action="like" class="link-alike">Like</button>
+                            }
+                            
+                        }
+                        <button data-val-container="reply-item-@container" data-hash="@Model.Hash" data-action="reply" onclick="return ____executeFeedReplyAction($(this))" class="link-alike">Reply</button>
+                        @if (Model.AllowDelete)
+                        {
+                            <button data-val-container="reply-item-@container" data-hash="@Model.Hash" data-action="remove" onclick="return ____executeFeedReplyAction($(this))" class="link-alike">Delete</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div id="child-render-area">
+                @if (Model.TotalChildReplies > 0)
+                {
+                    <button data-level="nth" data-val-container="reply-item-@container" data-hash="@Model.Hash" data-action="child-replies" onclick="return ____executeFeedReplyAction($(this))" class="link-alike">View @Model.TotalChildReplies replies</button>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

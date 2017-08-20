@@ -1,0 +1,40 @@
+﻿@model Wrly.Models.GeneralSettingViewModel
+@using (Html.BeginForm("ConfigurationProfileName", "Account", FormMethod.Post, new { @onsubmit = "return saveProfileName($(this))", @class = "config-form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="inline-form">
+        @Html.TextBoxFor(c => c.ProfileName, new { @class = "inline" })
+        <button type="submit" class="link-alike">Save</button>
+        <button type="button" class="btn link-alike link-alike-default" onclick="___cancelProfileName($(this))">Cancel</button>
+    </div>
+}
+
+<script>
+    function saveProfileName($obj) {
+        var ser = $obj.serialize();
+        var action = $obj.attr('action');
+        if ($obj.valid()) {
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: ser,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.Type==2) {
+                        ____executeGeneral();
+                        $obj.remove();
+                        $('#error-settings').hide();
+                    } else {
+                        $('#error-settings').show().html(response.Description);
+                    }
+                    
+                }
+            });
+        }
+        return false;
+    }
+
+    $("form").data("validator", null);
+    $.validator.unobtrusive.parse($("form"));
+
+</script>

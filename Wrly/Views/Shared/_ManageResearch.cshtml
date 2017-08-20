@@ -1,0 +1,147 @@
+﻿@model Wrly.Models.PublilcationViewModel
+
+@using (Html.BeginForm("ManageResearch", "Award", FormMethod.Post, new { @id = "frmResearch", @class = "form-horizontal", role = "form", @onsubmit = "return manageResearch($(this))" }))
+{
+    <div class="profile-item">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Hash)
+        @Html.HiddenFor(c => c.UserHash)
+        <div class="form-group">
+            <label class="control-label">What your research is about:</label>
+            <div class="col-md-5 inline-control">
+                @Html.DropDownListFor(c => c.SubType, Model.PublicationType, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Short about your research:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.Name, new { @class = "form-control", @placeholder = "name or title of your research" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">What's your role:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.Role, new { @class = "form-control", @placeholder = "what is your role in this research" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">More about this research:</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(c => c.Description, new { @class = "form-control", @placeholder = "describe what this research is all about(facts, origin and result)" })
+            </div>
+        </div>
+        @if (!Model.ShowExtendeResearchOptions)
+        {
+            <div class="text-right"><button type="button" class="link-alike" data-source-button="researchMoreDetails" onclick="showFindingMoreOption($(this))">Adde team members</button> </div>
+        }
+        <div class="form-group " id="researchMoreDetails" style="display:@(Model.ShowExtendeResearchOptions?"block":"none")">
+            <div class="col-md-10" id="Participents">
+                <label class="control-label">Add your team:</label>
+                @Html.TextBox("ParticipentText", null, new { @id = "ParticipentText", @placeholder = "type your connection name to add as team", @class = "form-control" })
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Hash))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmResearch'), $('.research-list .plus-add-profile-item'))" href="#">Back</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Add research" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmResearch'), $('.research-list .plus-add-profile-item'))" href="#">Back</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+            var data = [];
+            $("#ParticipentText").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/Association/ConnectionHeads",
+                        data: { keyword: $("#ParticipentText").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                $("#ParticipentText").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.FormatedName,
+                                    value: obj.FormatedName,
+                                    entityID: obj.EntityID.toString().trim(),
+                                    jobTitle: obj.ProfileHeading == null ? '' : obj.ProfileHeading,
+                                    profilePath: obj.ProfileIconPath == null ? '/content/images/no-image-sm.png' : obj.ProfileIconPath
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                },
+                create: function () {
+                    $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                        return $('<li>').append('<div class="search-result-item"><div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + item.profilePath + '" alt="no image ' + item.label + ' "></div><div class="side-thumbnail"><h3>' + item.label + '</h3><span class="child-headings">' + item.jobTitle + '</span></div>     </div>').appendTo(ul);
+                    }
+                },
+                open: function () { $(this).autocomplete("widget").appendTo("#Participents").css('position', 'static'); },
+                select: function (event, ui) {
+                    var element = '<div class="people-selected search-result-item"><span onclick="____removeTempMember($(this))" class="remove">X</span><input type="hidden" name="Participants" value="' + ui.item.entityID.toString() + '" /> <div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + ui.item.profilePath + '" alt="no image ' + ui.item.label + ' "></div><div class="side-thumbnail"><h3>' + ui.item.label + '</h3><span class="child-headings">' + ui.item.jobTitle + '</span></div>     </div>';
+                    $('#Participents').parent().find('.selected').append(element.toString());
+                    $('#Participents').append(element.toString());
+                    this.value = "";
+                    return false;
+                }
+            });
+        });
+
+        function manageResearch($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        if ($('#hdnImprovement').length == 1) {
+                            ____callbackFromPopup(response, 'project');
+                            return;
+                        }
+                        $("#researches-list").processTemplateURL("/award/Researches", null, { attachGlobalWait: true });
+                        $obj.remove();
+                        postEditAction();
+                    }
+                });
+            }
+            return false;
+        }
+
+        function ____removeTempMember($obj) {
+            $obj.parent('.people-selected').remove();
+        }
+
+
+    </script>
+
+}
+
+
+
+

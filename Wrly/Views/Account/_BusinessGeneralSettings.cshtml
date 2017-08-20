@@ -1,0 +1,41 @@
+﻿@model Wrly.Models.GeneralSettingViewModel
+<div class="row">
+    <h1 class="page-title">General configuration</h1>
+    <h2 class="page-sub-title">Set your profile genral configuration</h2>
+    <div class="alert alert-error" style="display:none;" id="error-settings"></div>
+</div>
+<div class="row">
+    <div>
+        <label class="control-label">Your profile name</label>
+        <div class="col-md-10">
+            <div id="profile-name">
+                <label class="setting-value">https://www.sklative.com/fou/<span id="name-edit-container"><span>@Model.ProfileName</span></span></label><button data-container="name-edit-container" data-profile-change="true" hash="@Model.ProfileNameHash" class="link-alike">Edit</button>
+            </div>
+            <p class="explanation"><div class="child-headings">(your profile name allows people to connect to you, keep your profile name friendly and relavent to your name.)</div> </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('button[data-profile-change="true"]').click(function () {
+            var hash = $(this).attr('hash');
+            var container = $(this).attr('data-container');
+            $(this).hide();
+            $.get('/account/ConfigurationProfileName', { hash: hash }, function (res) {
+                $('#' + container).find('span').hide();
+                if ($('#' + container).find('.config-form').length == 0) {
+                    $('#' + container).append(res);
+                }
+            });
+        });
+        //
+    });
+
+    function ___cancelProfileName($obj) {
+        $obj.parents('.config-form:first').remove();
+        $('button[data-profile-change="true"]').show()
+        $('#name-edit-container span').show();
+        $('#error-settings').hide();
+    }
+</script>

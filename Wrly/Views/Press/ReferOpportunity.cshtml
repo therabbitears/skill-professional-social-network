@@ -1,0 +1,156 @@
+﻿@model Wrly.Models.RerefOpportunityViewModel
+@using Types;
+<div class="pop-up-header">
+    <h1 class="model-title">Refer an opportunity<small>Beta</small></h1>
+</div>
+<div class="main-content">
+    @using (Html.BeginForm("ReferOpportunity", "Press", FormMethod.Post, new { @onsubmit = "return referOpportunity($(this))" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Opportunity.Hash)
+        <div class="form-group">
+            <label class="control-label">Type connection name:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.ConnectionName, new { @class = "form-control", @placeholder = "start typing your connection name", @id = "conenctionNameOpp" })
+                @Html.HiddenFor(c => c.ConnectionID, new { @id = "hdnOpportunityForConnection" })
+                <div id="ParticipentsOpp"></div>
+            </div>
+        </div>
+        <div class="form-group" style="display:none;" id="divText">
+            <label class="control-label">Write an optional note:</label>
+            <div class="col-md-10">
+                <textarea class="form-control" rows="4" name="Text" placeholder="Type an optional(Private) message to pubblisher"></textarea>
+            </div>
+        </div>
+        <div class="section-floated-container">
+            <div class="text-right">
+                <div class="waiting-bg"></div> <button class="btn btn-primary btn-sm">Refer</button>
+            </div>
+        </div>
+        <script>
+            function referOpportunity($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            showPopableSuccessAlert('Your reference has been sent for this opportunity.');
+                            ____clearPopup();
+                        }
+                    });
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+                var data = [];
+                $("#conenctionNameOpp").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/Association/ConnectionHeads",
+                            data: { keyword: $("#conenctionNameOpp").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#conenctionNameOpp").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.FormatedName,
+                                        value: obj.FormatedName,
+                                        entityID: obj.EntityID.toString().trim(),
+                                        jobTitle: obj.ProfileHeading == null ? '' : obj.ProfileHeading,
+                                        profilePath: obj.ProfileIconPath == null ? '/content/images/no-image-sm.png' : obj.ProfileIconPath
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    create: function () {
+                        $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                            return $('<li>').append('<div class="search-result-item"><div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + item.profilePath + '" alt="no image ' + item.label + ' "></div><div class="side-thumbnail"><h3>' + item.label + '</h3><span class="child-headings">' + item.jobTitle + '</span></div>     </div>').appendTo(ul);
+                        }
+                    },
+                    open: function () { $(this).autocomplete("widget").appendTo("#ParticipentsOpp").css('position', 'static'); },
+                    select: function (event, ui) {
+                        $('#hdnOpportunityForConnection').val(ui.item.entityID);
+                        $('#divText').show();
+                    }
+                });
+            });
+
+        </script>
+    }
+</div>
+@{var container = Guid.NewGuid().ToString();}
+<div class="feed job" data-container-id="news-item-@container" style="max-height:250px;overflow-x:hidden;overflow-y:auto;">
+    @if (Model.Opportunity.SharingType == (int)Enums.SharingType.Share)
+    {
+        <div class="media-body">
+            <div class="____au">
+                <span class="thumbnail-notification-con ____m8r">
+                    <a href="/@Model.Opportunity.ProfileUrl">
+                        <img class="thumbnail-notification" src="@Html.ImagePath(@Model.Opportunity.AuthorPhoto, 100)" alt="@Model.Opportunity.AuthorName">
+                    </a>
+                </span>
+                <div class="no-margin author-name">
+                    <div>
+                        <a href="/@Model.Opportunity.ProfileUrl" title="@Model.Opportunity.FormatedName" data-hover-card="true" data-entity-id="@Model.Opportunity.EntityID">
+                            @Model.Opportunity.AuthorName <small class="share-type">Shared an opportunity</small>
+                        </a>
+                        @if (Model.Opportunity.PublishOn != null)
+                        {
+                            <small class="child-headings right timestamp">@Model.Opportunity.PublishOn.Value.ToChatTime()</small>
+                        }
+                    </div>
+                    <div style="font-size:10px;" class="child-headings">@Model.Opportunity.Heading</div>
+                </div>
+            </div>
+            <div class="answer-small user-content">
+                @Model.Opportunity.Title
+            </div>
+            <div class="answer-small user-content">
+                @Model.Opportunity.ShortDescription.ToFormattedTabAndNewLine()
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Opportunity.FilePath))
+            {
+                <div class="feed-media-image">
+                    <img src="@Html.ImagePath(@Model.Opportunity.FilePath, 500)" alt="@Model.Opportunity.AuthorName - Shared news image" />
+                </div>
+            }
+                @if (Model.Opportunity.Skills != null && Model.Opportunity.Skills.Count > 0)
+            {
+                <h3>For skills</h3>
+                <ul>
+                    @foreach (var itemSkill in Model.Opportunity.Skills)
+                    {
+                        <li>@itemSkill.Name</li>
+                    }
+                </ul>
+            }
+            @if (Model.Opportunity.JobTitles != null && Model.Opportunity.JobTitles.Count > 0)
+            {
+                <h3>For job titles</h3>
+                <ul>
+                    @foreach (var itemJobTitle in Model.Opportunity.JobTitles)
+                    {
+                        <li>@itemJobTitle.JobTitleName</li>
+                    }
+                </ul>
+            }
+        </div>
+    }
+</div>

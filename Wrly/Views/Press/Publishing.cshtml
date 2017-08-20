@@ -1,0 +1,25 @@
+﻿@model Wrly.Models.Feeds.HomeFeedViewModel
+@{
+    ViewBag.Title = "Sklative | Blogs and publishing";
+    ViewBag.Description = "Sklative allows people to share their creative articles about their businesses, brands, and products to accomplish their digital marketing";
+    var layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    Layout = Request.IsAuthenticated ? layout : "~/Views/Shared/_Layout.cshtml";
+}
+
+@section _HeadStyles
+            {
+    @Styles.Render("~/cdn/_NewsFeedStyles")
+}
+
+<div>
+    <div>
+        <div class="page-container-wrapper feeds">
+            @{Html.RenderPartial("_Blogs", Model.Feeds);}
+        </div>
+    </div>
+</div>
+
+@section _FooterScripts
+{
+    @Scripts.Render("~/cdn/_NewsFeeds");
+}

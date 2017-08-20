@@ -1,0 +1,177 @@
+﻿@model Wrly.Models.PublilcationViewModel
+
+@using (Html.BeginForm("ManagePublication", "Award", FormMethod.Post, new { @id = "frmPublication", @class = "form-horizontal", role = "form", @onsubmit = "return managePublicationHistory($(this))" }))
+{
+        <div class="profile-item">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.UserHash)
+    <div class="form-group">
+        <label class="control-label">Type:</label>
+        <div class="col-md-5 inline-control">
+            @Html.DropDownListFor(c => c.SubType, Model.PublicationType, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Publication name/title:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control", @placeholder = "name of your publishing" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Your role:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Role, new { @class = "form-control", @placeholder = "your role in this publishing" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Describe about the publication:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control", @placeholder = "details about this publishing or summary/short introduction" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Add url:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Url, new { @class = "form-control", @placeholder = "including http/https" })
+        </div>
+    </div>
+    @if (!Model.ShowExtendedPublicationOptions)
+    {
+        <div class="text-right"><button type="button" class="link-alike" data-source-button="publicationMoreOptions" onclick="showFindingMoreOption($(this))">Add dates &amp; your team members</button> </div>
+    }
+    <div id="publicationMoreOptions" style="display:@(Model.ShowExtendedPublicationOptions?"block":"none")">
+        <div class="form-group"><span class="control-label">When:</span></div>
+        <div class="form-group  inline-control">
+            <div class="col-md-5">
+                @Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control" })
+            </div>
+            <div class="col-md-5">
+                @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10" id="PublicationParticipents">
+                <label class="control-label">To whom you are with:</label>
+                @Html.TextBox("ParticipentText", null, new { @id = "ParticipentText", @placeholder = "type your connection name to add as team", @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+        @if (!string.IsNullOrEmpty(Model.Hash))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmPublication'), $('.finding-list .plus-add-profile-item'))" href="#">Back</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Add publication" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmPublication'), $('.publication-list .plus-add-profile-item'))" href="#">Back</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+            </div>
+}
+
+
+<script>
+    $(document).ready(function () {
+        // Required another if selected one.
+        $.validator.addMethod('requeiredifselected', function (value, element, params) {
+            var otherPropValue = $('#' + params.otherproperty).val();
+            //                console.log({ otherproperty: params.otherproperty, value: value, otherPropValue: otherPropValue });
+
+            if (otherPropValue > 0 && (value == '' || value == -1)) {
+                return false;
+            }
+            return true;
+        });
+
+        $.validator.unobtrusive.adapters.add("requeiredifselected", ["otherproperty", "mode"], function (options) {
+            options.rules["requeiredifselected"] = options.params;
+            options.messages["requeiredifselected"] = options.message;
+        });
+
+        $("form").data("validator", null);
+        $.validator.unobtrusive.parse($("form"));
+        var data = [];
+        $("#ParticipentText").autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+                isAutomComplete = true;
+                $.ajax({
+                    url: "/Association/ConnectionHeads",
+                    data: { keyword: $("#ParticipentText").val() },
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        isAutomComplete = false;
+                        if (data.length == 0) {
+                            $("#ParticipentText").removeClass('working');
+                        }
+                        response($.map
+                        (data, function (obj) {
+                            return {
+                                label: obj.FormatedName,
+                                value: obj.FormatedName,
+                                entityID: obj.EntityID.toString().trim(),
+                                jobTitle: obj.ProfileHeading == null ? '' : obj.ProfileHeading,
+                                profilePath: obj.ProfileIconPath == null ? '/content/images/no-image-sm.png' : obj.ProfileIconPath
+                            };
+                        }));
+                    },
+                    error: function () { isAutomComplete = false; }
+                });
+            },
+            create: function () {
+                $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                    return $('<li>').append('<div class="search-result-item"><div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + item.profilePath + '" alt="no image ' + item.label + ' "></div><div class="side-thumbnail"><h3>' + item.label + '</h3><span class="child-headings">' + item.jobTitle + '</span></div>     </div>').appendTo(ul);
+                }
+            },
+            open: function () { $(this).autocomplete("widget").appendTo("#PublicationParticipents").css('position', 'static'); },
+            select: function (event, ui) {
+                var element = '<div class="people-selected"><span onclick="____removeTempMember($(this))" class="remove">X</span><input type="hidden" name="Participants" value="' + ui.item.entityID.toString() + '" /> <div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + ui.item.profilePath + '" alt="no image ' + ui.item.label + ' "></div><div class="side-thumbnail"><h3>' + ui.item.label + '</h3><span class="child-headings">' + ui.item.jobTitle + '</span></div>     </div>';
+                $('#PublicationParticipents').parent().find('.selected').append(element.toString());
+                $('#PublicationParticipents').append(element.toString());
+                this.value = "";
+                return false;
+            }
+        });
+    })
+
+    function managePublicationHistory($obj) {
+        var ser = $obj.serialize();
+        var action = $obj.attr('action');
+        if ($obj.valid()) {
+            $.ajax({
+                url: action,
+                type: 'POST',
+                waitingSelector: $obj.find('.waiting-bg'),
+                data: ser,
+                dataType: 'html',
+                success: function (response) {
+                    postEditAction();
+                    if ($('#hdnImprovement').length == 1) {
+                        ____callbackFromPopup(response, 'project');
+                        return;
+                    }
+                    $("#publication-history").processTemplateURL("/award/publications", null, { attachGlobalWait: true });
+                    $obj.remove();
+                }
+            });
+        }
+        return false;
+    }
+
+    function ____removeTempMember($obj) {
+        $obj.parent('.people-selected').remove();
+    }
+
+
+</script>

@@ -1,0 +1,169 @@
+﻿@model Wrly.Models.ProfileCompletetionSuggestionViewModel
+@if (Model.TotalCareerHistories == 0)
+{
+    <h2>Add your work or education</h2>
+    <div id="tab-content-history"></div>
+    <script>
+        $(document).ready(function () {
+            setPecentage(@Model.Percentage);
+            $('#tab-content-history').load('/wizard/SetCareerOptionPartial', function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+            })
+        });
+
+        function ____callbackFromPopup(response, type) {
+            $('#tabContents').load('/account/ImproveContent');
+        }
+    </script>
+}
+else if (Model.TotalSkills < 3)
+{
+    <h2>Add 3 skills</h2>
+    <div id="tab-content-skills"></div>
+    <script>
+        $(document).ready(function () {
+            setPecentage(@Model.Percentage);
+            $('#tab-content-skills').load('/wizard/SetSkiilsPartial', function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+            })
+        });
+
+        function ____callbackFromPopup(response, type) {
+            $('#tabContents').load('/account/ImproveContent');
+        }
+    </script>
+}
+else if (Model.TotalConnections < 10)
+{
+    <input type="hidden" id="hdnImprovement" value="1" />
+    <input type="hidden" id="hdnTotalConnections" value="@Model.TotalConnections" />
+    <h1>Add 10 conenctions</h1>
+    <h2>Currently you are connected with <span class="total-coonnections">@Model.TotalConnections</span> people</h2>
+    <div id="tab-content-people"></div>
+    <script>
+        $(document).ready(function () {
+            $("#tab-content-people").setTemplateURL("/Templates/suggestions.txt");
+            $("#tab-content-people").processTemplateURL("/association/suggestions?pageSize=20");
+            setPecentage(@Model.Percentage);
+        });
+    </script>
+}
+else if (string.IsNullOrEmpty(Model.IsSummaryAdded))
+{
+    <h2>Write about youself</h2>
+    <div id="tab-content-summary"></div>
+    <script>
+        $(document).ready(function () {
+            setPecentage(@Model.Percentage);
+            $('#tab-content-summary').load('/account/About?ispopup=true', function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+            })
+        });
+
+        function ____callbackFromPopup(response, type) {
+            $('#tabContents').load('/account/ImproveContent');
+        }
+    </script>
+}
+else if (string.IsNullOrEmpty(Model.ProfilePicExist))
+{
+    <h2>Upload profile picture</h2>
+    <div id="tab-content-summary">
+        @{ViewBag.CallbackDefined = true;}
+        @Html.Partial("_ChangeProfilePicturePartial")
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            setPecentage(@Model.Percentage);
+        });
+        function ____callbackFromPopup(response, type) {
+            $('#tabContents').load('/account/ImproveContent');
+        }
+    </script>
+}
+else if (string.IsNullOrEmpty(Model.ProfileCoverExist))
+{
+    <h2>Upload cover picture</h2>
+    <div id="tab-content-summary">
+        @{ViewBag.CallbackDefined = true;}
+        @Html.Partial("_ChangeCoverPicturePartial")
+    </div>
+    <script>
+        $(document).ready(function () {
+            setPecentage(@Model.Percentage);
+        });
+        function ____callbackFromPopup(response, type) {
+            $('#tabContents').load('/account/ImproveContent');
+        }
+    </script>
+}
+else if (Model.TotalProjects == 0)
+{
+     <h2>Add accomplishment</h2>
+    <div id="tab-content-summary">
+        <div class="form-group">
+            <input type="hidden" id="hdnImprovement" value="1" />
+            <label class="control-label">Select type of accomplishment:</label>
+            <div class="col-md-10">
+                <select name="type" id="selectAccomplishmentType" class="form-control">
+                    <option value="-1">Select</option>
+                    <option value="1">Project</option>
+                    <option value="2">Compositions</option>
+                    <option value="3">Establishments</option>
+                    <option value="4">Researches</option>
+                    <option value="5">Publishings</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            setPecentage(@Model.Percentage);
+            $('#selectAccomplishmentType').change(function () {
+                var value = $(this).val();
+                if (value == -1) {
+                    $('#accomplishmentArea').html('');
+                }
+                if (value == 1) {
+                    getProjectHistory($('#accomplishmentArea'), $('#accomplishmentArea'));
+                }
+                else if (value == 2) {
+                    getCompositions($('#accomplishmentArea'), $('#accomplishmentArea'));
+                }
+                else if (value == 3) {
+                    getFindings($('#accomplishmentArea'), $('#accomplishmentArea'));
+                }
+                else if (value == 4) {
+                    getResearches($('#accomplishmentArea'), $('#accomplishmentArea'));
+                }
+                else if (value == 5) {
+                    getPublications($('#accomplishmentArea'), $('#accomplishmentArea'));
+                }
+            });
+        });
+        function ____callbackFromPopup(response, type) {
+            $('#tabContents').load('/account/ImproveContent');
+        }
+    </script>
+    <div id="accomplishmentArea">
+    </div>
+}
+else
+{
+    <div class="text-center margin-up-down-10">
+        <label class="wrly-check checked fadeInDown"></label>
+        <label class="wrly-success fadeInDown margin-up-down-10">Done</label>
+        <label class="wrly-success-descripion margin-up-down-10">You have added the data required for your profile.</label>
+    </div>
+    <script>
+        $(document).ready(function () {
+            setPecentage(@Model.Percentage);
+            $('.pop-up-header').remove();
+        });
+
+    </script>
+}

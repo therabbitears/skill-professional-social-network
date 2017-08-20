@@ -1,0 +1,51 @@
+﻿@model Wrly.Models.ProfileViewModel
+<div class="profile-face">
+    <div class="table-row">
+        <div class="relative profile-image cover">
+            @if (!string.IsNullOrEmpty(Model.ProfilePic))
+            {
+                <img src="@Html.ImagePath(Model.ProfilePic, 200)" alt="User Image - @Model.FullName" />
+                if (ViewBag.DefaultTab)
+                {
+                    <a class="change-profile-pic action" onclick="____changeProfilePicture($(this))">Change photo</a>
+                }
+            }
+            else
+            {
+                <img src="/content/images/no-image.png" alt="user default image" />
+                if (ViewBag.DefaultTab)
+                {
+                    <a class="change-profile-pic action" onclick="____changeProfilePicture($(this))">Add photo</a>
+                }
+            }
+
+        </div>
+        <div class="profile-detail-face">
+            <h1 id="h1Name">@Model.FormatedName</h1>
+            <div id="h1NameEdit" style="display:none;"></div>
+            @if (!string.IsNullOrEmpty(Model.FormatedJobTitle))
+            {
+                <h2 id="h2Heading">
+                    <span>@Model.FormatedJobTitle</span>
+                </h2>
+                <div id="h2HeadingEdit" style="display:none;"></div>
+            }
+            else
+            {
+                <h2>
+                    <span class="empty-heading">A short about your skills, makes your skilline better</span>
+                </h2>
+            }
+            <h3>
+                <span class="empty-heading">@Model.PreviousJobTitle</span>
+            </h3>
+            <h3>
+                @Model.FormatedStudyTitle
+            </h3>
+            <div class="connection-figures">
+                <span class="connection-figures"><span class="figure">@Model.TotalFollowers</span> followers</span><span> | </span>
+                <span class="connection-figures"><span class="figure">@Model.TotalConnections</span> connections</span>
+            </div>
+        </div>
+    </div>
+</div>

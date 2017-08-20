@@ -1,0 +1,105 @@
+﻿<div class="conversation-new selected">
+    <div class="connection-search " id="ConversationParticipents">
+        <input type="text" class="form-control" id="connectionNameNewConversation" placeholder="type connection name to start conversation" />
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $('.conversation-new .remove').click(function () {
+            $('.conversation-new').hide();
+        });
+    });
+
+    var data = [];
+    $("#connectionNameNewConversation").autocomplete({
+        minLength: 1,
+        source: function (request, response) {
+            isAutomComplete = true;
+            $.ajax({
+                url: "/Association/ConnectionHeads",
+                data: { keyword: $("#connectionNameNewConversation").val() },
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    isAutomComplete = false;
+                    if (data.length == 0) {
+                        $("#connectionNameNewConversation").removeClass('working');
+                    }
+                    response($.map
+                    (data, function (obj) {
+                        //console.log(obj);
+                        return {
+                            label: obj.FormatedName,
+                            value: obj.FormatedName.toString().trim(),
+                            entityID: obj.EntityID.toString().trim(),
+                            jobTitle: obj.ProfileHeading == null ? '' : obj.ProfileHeading,
+                            profilePath: obj.ProfileIconPath == null ? '/content/images/no-image-sm.png' : obj.ProfileIconPath
+                        };
+                    }));
+                },
+                error: function () { isAutomComplete = false; }
+            });
+        },
+        create: function () {
+            $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                return $('<li>').append('<div class="search-result-item"><div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + item.profilePath + '" alt="no image ' + item.label + ' "></div><div class="side-thumbnail"><h3>' + item.label + '</h3><span class="child-headings">' + item.jobTitle + '</span></div>     </div>').appendTo(ul);
+            }
+        },
+        open: function () {
+            // $(this).autocomplete("widget").appendTo("#ConversationParticipents");
+        },
+        select: function (event, ui) {
+            $.getJSON('/chatGroup/ChatSession?eid=' + ui.item.entityID, function (response) {
+                var currentUserIndex = 0;
+                var anotherUserIndex = 0;
+                for (var i = 0; i < response.GroupInfo.Participants.length; i++) {
+                    if (response.GroupInfo.Participants[i].UserName == '@User.Identity.Name') {
+                        currentUserIndex = i;
+                        break;
+                    }
+                }
+                if (currentUserIndex==0) {
+                    anotherUserIndex = 1;
+                } else {
+                    anotherUserIndex = 0;
+                }
+                groupName = response.GroupInfo.Name;
+                groupID = response.GroupInfo.ID;
+                thisMemberID = response.GroupInfo.Participants[currentUserIndex].EntityID;
+                currentUserName = response.GroupInfo.Participants[currentUserIndex].FormatedName;
+                currentUserID = response.GroupInfo.Participants[currentUserIndex].UserID;
+                receiverUserID = response.GroupInfo.Participants[anotherUserIndex].UserID
+                toUser = response.MemberInfo.UserName;
+                $('h1').find('a').html(response.MemberInfo.AuthorName);
+                $('h1').find('a').attr('href', '/' + response.MemberInfo.ProfileUrl);
+                var object = {  };
+                history.pushState(object, null, "/conversations/"+ response.MemberInfo.UserID);
+                loadHistory(0, 100, true);
+                var faceName = '.feed-comment[data-val-name="chat-face-' + response.MemberInfo.UserID + '"]';
+                if ($(faceName).html() != undefined) {
+                    var tempHtml = $('.feed-comment[data-val-name="chat-face-' + response.MemberInfo.UserID + '"]').html();
+                    $('.feed-comment[data-val-name="chat-face-' + response.MemberInfo.UserID + '"]').remove();
+                    tempHtml = '<div class="feed-comment active" data-val-name="chat-face-' + response.MemberInfo.UserID + '">' + tempHtml + '<\div>';
+                    $('.feed-comment').removeClass('active');
+                    $('#divusers').prepend(tempHtml);
+                } else {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/chatgroup/chatusers?gid=' + groupID.toString() + '&connectionID=' + response.MemberInfo.UserID,
+                        dataType: 'HTML',
+                        success: function (tempHtml) {
+                            $('.feed-comment').removeClass('active');
+                            $('#divusers').prepend(tempHtml);
+                        }
+                    });
+                }
+            });
+            $('.conversation-new').remove();
+            $('button[data-val-new-conversation="true"]').removeAttr('disabled');
+            this.value = "";
+            return false;
+        }
+    });
+
+</script>

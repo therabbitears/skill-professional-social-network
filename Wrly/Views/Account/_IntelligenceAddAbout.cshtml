@@ -1,0 +1,46 @@
+﻿@model Wrly.Models.AboutViewModel
+
+<div class="profile-intelligence">
+    <span class="int-title">@Html.UserName() add your profile summary</span>
+    @using (Html.BeginForm("About", "Account", FormMethod.Post, new { @class = "form-horizontal", @id = "frmManageAbout", role = "form", @onsubmit = "return manageIntAbout($(this))" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.UserHash)
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.TextAreaFor(c => c.ProfileSummary, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-outlined btn-sm" value="Add summary" />
+                <button class="link-alike link-alike-default" type="button" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.RequireAbout)" onclick="skillIntelligence($(this))">Skip for now</button>
+            </div>
+        </div>
+        <script>
+            function manageIntAbout($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        type: 'POST',
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            fetchIntelligence();
+                        }
+                    });
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+            });
+        </script>
+    }
+
+</div>

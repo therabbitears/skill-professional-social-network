@@ -1,0 +1,137 @@
+﻿@using (Html.BeginForm("UploadCoverImage", "Account", FormMethod.Post, new { @onsubmit = "return updateProfileCover($(this))", @id = "frmChangeCover", enctype = "multipart/form-data" }))
+{
+
+    if (ViewBag.CallbackDefined != null && ViewBag.CallbackDefined == true)
+    {
+        <input type="hidden" id="hdnCallbackDefined" value="True" />
+    }
+    else
+    {
+        <input type="hidden" id="hdnCallbackDefined" value="False" />
+    }
+    <link href="~/Content/extensions/rcrop/jquery.Jcrop.min.css" rel="stylesheet" />
+    <script src="~/Content/extensions/rcrop/jquery.Jcrop.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#FileUpload1').change(function () {
+                $('#Image1').hide();
+                $('.hint').hide();
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#Image1').show();
+                    $('#Image1').attr("src", e.target.result);
+                    $('#Image1').Jcrop({
+                        onChange: SetCoordinates,
+                        onSelect: SetCoordinates,
+                        //aspectRatio: 1,  //If you want to keep aspectRatio
+                        aspectRatio: 150 / 60, //keep aspect ratio
+                        setSelect: [0, 0, 150, 100],
+                        boxWidth: 770,   //Maximum width you want for your bigger images
+                        boxHeight: 300,  //Maximum Height for your bigger images
+                    });
+                }
+                reader.readAsDataURL($(this)[0].files[0]);
+                $('#btnChangeImage').show();
+            });
+
+            $('#btnChangeImage').click(function () { $('#share-cotainer').load('/account/changecoverpicture'); });
+
+            $('#btnBack').click(function () {
+                $('#btnCrop').show();
+                $('#btnSubmit').hide();
+                $('#btnBack').hide();
+                $('#imgPreview').hide();
+                $('.jcrop-holder').show();
+            });
+
+            $('#btnCrop').click(function () {
+                var x1 = $('#imgX1').val();
+                var y1 = $('#imgY1').val();
+                var width = $('#imgWidth').val();
+                var height = $('#imgHeight').val();
+                var canvas = $("#canvas")[0];
+                var context = canvas.getContext('2d');
+                var img = new Image();
+                img.onload = function () {
+                    canvas.height = height;
+                    canvas.width = width;
+                    context.drawImage(img, x1, y1, width, height, 0, 0, width, height);
+                    $('#imgPreview').show();
+                    $('#imgPreview').attr('src', canvas.toDataURL());
+                    $('#<img id="Image1" src="" alt="" style="display: none;" />').attr('src', canvas.toDataURL());
+
+                };
+                img.src = $('#Image1').attr("src");
+                $('.jcrop-holder').hide();
+                $('#btnCrop').hide();
+                $('#btnSubmit').show();
+                $('#btnBack').show();
+            });
+        });
+        function SetCoordinates(c) {
+            if (c.w >= 500 && c.h >= 220) {
+                $('#imgX1').val(c.x);
+                $('#imgY1').val(c.y);
+                $('#imgWidth').val(c.w);
+                $('#imgHeight').val(c.h);
+                $('#btnCrop').show();
+            } else {
+                $('#btnCrop').hide();
+            }
+        };
+
+
+        function updateProfileCover($obj) {
+            var form = document.getElementById('frmChangeCover');
+            var ser = new FormData(form);
+            var action = $obj.attr('action');
+
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: ser,
+                waitingSelector: $obj.find('.waiting-bg'),
+                dataType: 'json',
+                cache: false,
+                enctype: "multipart/form-data",
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if ($('#hdnCallbackDefined').val() == 'True') {
+                        $('#grand-cover').css('background-image', 'url(' + response.Description + ')');
+                        ____callbackFromPopup(response, 'uploadPicture');
+                    } else {
+                        if (response.Type == 2) {
+                            $('#grand-cover').css('background-image', 'url(' + response.Description + ')');
+                            ____clearPopup();
+                        }
+                    }
+                }
+            });
+            return false;
+        }
+
+    </script>
+
+    <div class="pop-up-main">
+        <img id="Image1" src="" alt="" style="display: none;" />
+        <img id="imgPreview" src="" style="max-height:300px;max-width:100%;display: none;" />
+        <canvas id="canvas" style="display:none;" height="5" width="5"></canvas>
+        <div class="hint">
+            <input type="file" id="FileUpload1" name="image" accept="image/*" class="form-control" />
+            <h2>Select an image</h2>
+        </div>
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="imgX1" id="imgX1" />
+        <input type="hidden" name="imgY1" id="imgY1" />
+        <input type="hidden" name="imgWidth" id="imgWidth" />
+        <input type="hidden" name="imgHeight" id="imgHeight" />
+    </div>
+    <div class="pop-up-footer">
+        <div class="waiting-bg"></div>
+        <input type="button" id="btnCrop" value="Preview" style="display: none" class="btn btn-outlined" />
+        <input type="submit" id="btnSubmit" value="Update" style="display: none" class="btn btn-outlined" />
+        <input type="button" id="btnBack" value="Back to edit" style="display: none" class="btn btn-outlined" />
+        <input type="button" id="btnChangeImage" value="Change image" style="display: none" class="btn btn-outlined" />
+    </div>
+}

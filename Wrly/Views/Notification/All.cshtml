@@ -1,0 +1,54 @@
+﻿@model List<Wrly.Models.NotificationViewModel>
+@{
+    ViewBag.Title = "Sklative | Notifications";
+    ViewBag.Title = "Notifications for you";
+    ViewBag.Keywords = "Business profiles";
+
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <h1>Notifications</h1>
+            <div class="content notifications">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="feed-comment">
+                            <a href="@item.Url">
+                                <div class="clearfix" direction="left">
+                                    <div class="left">
+                                        <div class="comment-thumb-con">
+                                            <img src="@item.ProfileIcon" class="comment-thumb-img" alt="Online" title="is Online">
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <div class="comment-action-con ofh">
+                                            <div class="comment-input-con">
+                                                <div>
+                                                    <div>
+                                                        @item.Text
+                                                    </div>
+                                                    <div>
+                                                        <small class="child-headings">@item.CreatedOnText</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="blank-contents">
+                <i class="icon icon-notifications-g xl"></i><p>No notification right now</p></div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

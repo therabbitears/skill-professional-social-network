@@ -1,0 +1,118 @@
+﻿@model Wrly.Models.Listing.CareerHistoryViewModel
+
+<div class="profile-intelligence">
+    <span class="int-title">@Html.UserName() add your education</span>
+    @using (Html.BeginForm("ManageEducation", "CareerHistory", FormMethod.Post, new { @id = "frmIntelligenceEducation", @onsubmit = "return manageIntEducationHistory($(this))" }))
+    {
+        @Html.HiddenFor(c => c.OrganizationID)
+        <div id="intelligenceEducationHistoryStep1" class="int-step">
+            <label class="control-label">Course/Degree Name:</label>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(c => c.JobTitleName, new { @placeholder = "type the course or degree name", @class = "form-control", @id = "txtIntelligenceCourseName" })
+                </div>
+            </div>
+        </div>
+        <div id="intelligenceEducationHistoryStep2">
+            <label class="control-label">University/College name:</label>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(c => c.OrganizationName, new { @placeholder = "type to search university or board name", @class = "form-control", @id = "txtIntelligenceUniversityName" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button class="btn btn-primary btn-sm" type="submit">Add education</button>
+                    <button class="link-alike link-alike-default" type="button" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.RequireEducation)" onclick="skillIntelligence($(this))">Skip for now</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            function manageIntEducationHistory($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        type: 'POST',
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            fetchIntelligence();
+                        }
+                    });
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+                var data = [];
+                $("#txtIntelligenceCourseName").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/CareerHistory/SearchCourse",
+                            data: { key: $("#txtIntelligenceCourseName").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#txtIntelligenceCourseName").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    }
+                });
+
+                $("#txtIntelligenceUniversityName").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/Business/Search",
+                            data: { key: $("#txtIntelligenceUniversityName").val(), id: 'University' },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#txtIntelligenceUniversityName").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim(),
+                                        id: obj.Key.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    select: function (event, ui) {
+                        $('#OrganizationID').val(ui.item.id)
+                    }
+                });
+            });
+
+            function fetchStep($obj) {
+                $('.int-step').hide();
+                $obj.show();
+            }
+        </script>
+    }
+</div>

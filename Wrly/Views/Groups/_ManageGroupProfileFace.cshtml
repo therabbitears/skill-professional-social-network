@@ -1,0 +1,24 @@
+﻿@model Wrly.Models.Business.GroupViewModel
+<div class="profile-face">
+    <div class="table-row">
+        <div class="relative profile-image">
+            @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+            {
+                <img src="@Html.ImagePath(Model.ProfileImagePath,200)" alt="User Image - @Model.Name" />
+            }
+            else
+            {
+                <img src="/content/images/o/no-image.png" alt="user default image" />
+            }
+        </div>
+        <div class="profile-detail-face">
+            <h1>@Model.Name</h1>
+            <h2>
+                <span>@(((Types.Enums.GroupType)Model.SubType).GetDescription())</span>
+            </h2>
+            <div class="connection-figures table-row">
+                <span class="connection-figures"><span class="figure">@Model.TotalFollowers</span> members</span>
+            </div>
+        </div>
+    </div>
+</div>

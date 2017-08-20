@@ -1,0 +1,37 @@
+﻿@model Wrly.Models.OpportunityDataViewModel
+<div class="opportunity-data">
+
+    <div class="text-right">
+        <button class="link-alike" type="button" onclick="fetchOpportunityData()">Reset</button>
+    </div>
+    @if (Model.Careers != null && Model.Careers.Count > 0)
+    {
+        <div>
+            <label class="control-label">Find opportunity for job title: <span class="help action label" title="The more job titles you include the more this post is visible">?</span></label>
+            <div class="skill-container col-md-10">
+                @foreach (var item in Model.Careers)
+                {
+                    <span class="skill-tag-editable career-history">
+                        <input type="hidden" value="@item.JobTitleID" name="JobTitles" />
+                        @item.JobTitleName<span class="remove" hash="{$T.Hash}" onclick="removeTag($(this))">X</span>
+                    </span>
+                }
+            </div>
+        </div>
+    }
+    @if (Model.Skills != null && Model.Skills.Count > 0)
+    {
+        <div>
+            <label class="control-label">Find opportunity for skill <span class="help action label" title="Including skills will find opportunity relavent to selected skills.">?</span></label>
+            <div class="skill-container col-md-10">
+                @foreach (var item in Model.Skills)
+                {
+                    <span class="skill-tag-editable">
+                        <input type="hidden" value="@item.SkillID" name="Skills" />
+                        @item.Name<span class="remove" hash="{$T.Hash}" onclick="removeTag($(this))">X</span>
+                    </span>
+                }
+            </div>
+        </div>
+    }
+</div>

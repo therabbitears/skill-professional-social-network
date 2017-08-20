@@ -1,0 +1,37 @@
+﻿@model Wrly.Models.SnapShotViewModel
+@{
+    ViewBag.Title = "Feeback";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+
+<div class="string join-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper">
+                        <div>
+                            <h1>Feedback</h1>
+                            <h2>Please provide your valuebale feedback to improve the setup process.</h2>
+                        </div>
+                        <div class="wizard-content-section">
+                            @using (Html.BeginForm("Feedback", "Wizard", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <textarea class="form-control" rows="3" name="feedback" placeholder="tell us what you feel good and what else we can improve"></textarea>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary" name="action" value="send">Send</button>
+                                    <button class="btn btn-outlined" name="action" value="skip">Skip</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_WizardMobileStyles");
+}

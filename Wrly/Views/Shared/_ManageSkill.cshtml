@@ -1,0 +1,79 @@
+﻿@model Wrly.Models.SkillViewModel
+
+@using (Html.BeginForm("Manage", "SkillHistory", FormMethod.Post, new { @id="frmSkill", @onsubmit = "return manageSkill($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.EntitySkillID)
+    @Html.HiddenFor(c => c.UserHash)
+    @Html.HiddenFor(c => c.SkillID)
+    <div class="form-group">
+        <label class="control-label">Skill:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Expertise Level:</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(c => c.ExpertiseLevel, Model.ExpetiseLevels, new { @class = "form-control" })
+        </div>
+    </div>
+    <input type="submit" value="save" class="btn btn-primary btn-sm" /> <a class="link-alike" onclick="return removeFormAndShowSource($('#frmSkill'), $('button[data-add-skill]'))" href="#">Cancel</a><div class="waiting-bg"></div>
+    <script>
+        function manageSkill($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            $.ajax({
+                url: action,
+                type: 'POST',
+                waitingSelector: $obj.find('.waiting-bg'),
+                data: ser,
+                dataType: 'html',
+                success: function (response) {
+                    $('button[data-add-skill]').show();
+                    $("#skill-history").processTemplateURL("/skillhistory/skill", null, { attachGlobalWait: true });
+                    $obj.remove();
+                    postEditAction();
+                }
+            });
+            return false;
+        }
+
+        $(document).ready(function () {
+            var data = [];
+            $("#Name").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/SkillHistory/SearchAllSkill",
+                        data: { key: $("#Name").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                data.push({
+                                    Key: -1,
+                                    Value: $("#Name").val(),
+                                    Total: 0
+                                });
+                                $("#Name").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.Value.toString().trim(),
+                                    value: obj.Value.toString().trim()
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                }
+            });
+        });
+    </script>
+}
+

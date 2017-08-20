@@ -1,0 +1,20 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+<div class="profile-face lean">
+    <div class="profile-image">
+        @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+        {
+            <img src="@Html.ImagePath(Model.ProfileImagePath,100)" alt="User Image - @Model.Name" />
+        }
+        else
+        {
+            <img src="/content/images/no-image.png" alt="user default image" />
+        }
+    </div>
+    <div class="profile-detail-face">
+        <h1><a href="/profile"> @Model.Name</a></h1>
+        <div class="connection-figures table-row">
+            <span class="connection-figures"><a href="/profile/followers"><span class="figure">@Model.TotalFollowers</span></a> followers</span><span> | </span>
+            <span class="connection-figures"><a href="/profile/connections"><span class="figure">@Model.TotalConnections</span></a> connections</span>
+        </div>
+    </div>
+</div>

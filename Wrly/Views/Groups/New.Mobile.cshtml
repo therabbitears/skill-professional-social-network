@@ -1,0 +1,97 @@
+﻿@model Wrly.Models.Business.GroupViewModel
+@{
+    ViewBag.Title = "Sklative: Groups - Create new";
+    ViewBag.Description = "Create new group to connect people having similar interests, create 'Startups', 'Jobs & Opportunities' and 'Discussions' groups.";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+<div>
+    <div class="home-form-wrapper">
+        <div class="home-form-container">
+            <div class="wizard-form-container form-container materilized">
+                <h1 class="page-title">Create new group</h1>
+                <h2 class="page-sub-title">Create group to connect professional of similar interests</h2>
+                @using (Html.BeginForm("New", "Groups", FormMethod.Post, new { @id = "frmNewGroup", @enctype = "multipart/form-data", @onsubmit = "return createGroup($(this))" }))
+                    {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+                @Html.ValidationMessage("Error")
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Group type</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.SubType, Model.Types, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "group name(public)" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "group description(public)" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Discoverable</label>
+                    <div class="col-md-10">
+                        <label class="switch">
+                            <input type="checkbox" value="true" checked="checked" data-val-action="refer" class="search-engine-visibility" name="Discoverable" />
+                            <div class="slider round"></div>
+                        </label>
+                        <p class="explanation"><div class="child-headings">(Set if you want to list this group in searches, if you set it off, only member can invite other people to join.)</div> </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Permission required to join</label>
+                    <div class="col-md-10">
+                        <label class="switch">
+                            <input type="checkbox" value="true" class="search-engine-visibility" name="RequirePermission" />
+                            <div class="slider round"></div>
+                        </label>
+                        <p class="explanation"><div class="child-headings">(Set if you new member requires owner's approval for joining the group.)</div> </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Group icon</label>
+                    <div class="col-md-10" id="uploadAndCrop">
+                        <button type="button" class="btn btn-outlined btn-sm" onclick="____loadCropAndUpload($(this), $('#uploadAndCrop'))">Select group icon</button>
+                        <p class="explanation"><div class="child-headings">(Upload a group icon, make sure to upload an icon having good quality graphics.)</div> </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-sm materialzed">Create &amp; continue</button> <a href="/groups">Cancel and return</a>
+                </div>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function createGroup($obj) {
+        var form = document.getElementById('frmNewGroup');
+        var ser = new FormData(form);
+        var action = $obj.attr('action');
+
+        $.ajax({
+            url: action,
+            type: 'POST',
+            data: ser,
+            waitingSelector: $obj.find('.waiting-bg'),
+            dataType: 'json',
+            cache: false,
+            enctype: "multipart/form-data",
+            contentType: false,
+            processData: false,
+            success: function (response) {
+            }
+        });
+        return false;
+    }
+</script>
+
+
+
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_AccountSharedStyles")
+    @Styles.Render("~/cdn/_HomeMobileSharedStyles")
+}

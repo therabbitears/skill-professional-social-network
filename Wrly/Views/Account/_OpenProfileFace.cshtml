@@ -1,0 +1,35 @@
+﻿@model Wrly.Models.ProfileViewModel
+<div class="profile-face">
+    <div class="relative profile-image">
+        @if (!string.IsNullOrEmpty(Model.ProfilePic))
+{
+    <img src="@Html.ImagePath(Model.ProfilePic, 200)" alt="User Image - @Model.FullName" />
+}
+else
+{
+            <img src="/content/images/no-image.png" alt="user default image" />
+        }
+    </div>
+    <div class="profile-detail-face">
+        <h1>@Model.FormatedName</h1>
+        @if (!string.IsNullOrEmpty(Model.FormatedJobTitle))
+        {
+            <h2>
+                <span>@Model.FormatedJobTitle</span>
+            </h2>
+        }
+        <h3>
+            <span class="empty-heading">@Model.PreviousJobTitle</span>
+        </h3>
+        <h3>
+            <span class="empty-heading">@Model.SkillHeadWithTwoSkills</span>
+        </h3>
+        <h3>
+            @Model.FormatedStudyTitle
+        </h3>
+    </div>
+    <div class="connection-figures">
+        <span class="connection-figures"><span class="figure">@Model.TotalFollowers</span> followers</span><span> | </span>
+        <span class="connection-figures"><span class="figure">@Model.TotalConnections</span> connections</span>
+    </div>
+</div>

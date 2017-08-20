@@ -1,0 +1,39 @@
+﻿@model Wrly.Models.LoginViewModel
+@{Html.RenderPartial("_Login", Model);}
+<script>
+    $(document).ready(function () {
+        $("form").data("validator", null);
+        $.validator.unobtrusive.parse($("form"));
+        $('#loginForm').submit(function () {
+            var $obj = $(this);
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    waitingSelector: $('.mate-progress'),
+                    data: ser,
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.Type == 2) {
+                            $('.validation-summary-valid').removeClass('validation-summary-errors')
+                            location.reload();
+                        } else {
+                            $('.validation-summary-valid').addClass('validation-summary-errors')
+                            $('.validation-summary-errors').html(response.Description);
+                        }
+                    }
+                });
+            }
+            return false;
+        })
+
+        $('#tabRegister').click(function () {
+            $('#tabContents').load('/account/Authentication?load=register');
+            $('#tabLogon').find('a').removeClass('active');
+            $('#tabRegister').find('a').addClass('active');
+        })
+    })
+</script>
+

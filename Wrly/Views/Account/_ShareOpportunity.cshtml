@@ -1,0 +1,84 @@
+﻿@model Wrly.Models.ShareOpportunityViewModel
+<div class="pop-up-header">
+    <h1 class="model-title">Share an opportunity<small>Beta</small></h1>
+</div>
+@using (Html.BeginForm("ShareOpportunity", "Press", FormMethod.Post, new { @id = "frmAskOpportunity", @onsubmit = "return shareOpportunity($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="groupHash" value="@ViewBag.GroupHash" />
+    <div class="pop-up-main opportunity-data" id="opportunityData">
+        <div class="form-group">
+            <label class="control-label">Title:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.Title, new { @class = "form-control", @placeholder = "enter a short headline of this opportunity", @id = "conenctionNameOpp" })
+                <div id="ParticipentsOpp"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Detail:<small>(Use enter for new line)</small></label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(c => c.Text, new { @class = "form-control", @placeholder = "write detail of this opportunity", @rows = "4" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                Skills: <span class="help action label" title="Include all the related skills so that the opportunity could be share with more connections">?</span>
+            </label>
+            <div class="col-md-10">
+                <input type="text" id="txtSkillsName" class="form-control" placeholder="type the skill [Like Recruitement, Payroll management] for this opportunity" />
+            </div>
+            <div class="col-md-10 skill-container" id="Skills">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">
+                Job titles: <span class="help action label" title="Job titles descibes your opportunity visibility among diffrent job titles">?</span>
+            </label>
+            <div class="col-md-10">
+                <input type="text" id="txtJobTitleName" class="form-control" placeholder="type the job title for this opportunity" />
+            </div>
+            <div class="col-md-10 skill-container" id="JobTitles">
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label class="control-label">Allow referrals</label>
+                <div class="col-md-10">
+                    <label class="switch">
+                        <input type="checkbox" data-val-tags="True" data-val-action="enable" value="true" checked="checked" class="search-engine-visibility" name="AllowPublic" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pop-up-footer">
+        <div class="waiting-bg"></div>
+        <input type="submit" value="Share" class="btn btn-primary btn-sm" />
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+        });
+        function shareOpportunity($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'JSON',
+                    success: function (response) {
+                        ____clearPopup();
+                        getShareOpportunity(response.Description, true,1);
+                    }
+                });
+            }
+            return false;
+        }
+
+    </script>
+}

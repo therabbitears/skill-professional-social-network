@@ -1,0 +1,56 @@
+﻿@model List<Wrly.Models.EntitySearchViewModel>
+
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        if (item.EntityID > 0)
+        {
+
+            if (item.EntityType == (int)Types.Enums.EntityTypes.Person)
+            {
+                <div class="search-result-item" data-val-url="@item.ProfileName" data-val-type="entity" data-val-entity="@item.EntityID" data-val-etype="@item.EntityType" data-val-keyword="@item.FormatedName" onclick="____executeSearchAction($(this))">
+                    <div class="thumbnail-notification-con">
+                        @if (!string.IsNullOrEmpty(item.ProfilePath))
+                        {
+                            <img src="@Html.ImagePath(item.ProfilePath,5)" alt="user image - @item.FormatedName">
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/no-image-sm.png" alt="user image - @item.FormatedName" />
+                        }
+
+                    </div>
+                    <div class="side-thumbnail"><h3>@item.FormatedName</h3><span class="child-headings">@item.ProfileHeading</span></div>
+                </div>
+            }
+            else
+            {
+                <div class="search-result-item" data-val-url="@item.Url" data-val-type="entity" data-val-entity="@item.EntityID" data-val-etype="@item.EntityType" data-val-keyword="@item.FormatedName" onclick="____executeSearchAction($(this))">
+                    <div class="thumbnail-notification-con">
+                        @if (!string.IsNullOrEmpty(item.LogoPath))
+                        {
+                            <img src="@Html.ImagePath(item.LogoPath,50)" alt="user image - @item.Name">
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/no-image-sm.png" alt="organization image - @item.Name" />
+                        }
+
+                    </div>
+                    <div class="side-thumbnail"><h3>@item.Name</h3><span class="child-headings">@item.Category</span></div>
+                </div>
+            }
+
+        }
+        else
+        {
+            <div class="search-result-item" data-val-type="keyword" data-val-keyword="@item.Keyword" onclick="____executeSearchAction($(this))">
+                <div class="thumbnail-notification-con">
+                    <img src="~/Content/images/history-ico.png" alt="Content search - @item.Keyword" />
+                </div>
+                <div class="side-thumbnail"><h3>@item.Keyword</h3></div>
+            </div>
+        }
+    }
+}

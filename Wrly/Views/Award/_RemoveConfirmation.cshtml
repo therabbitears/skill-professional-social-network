@@ -1,0 +1,161 @@
+﻿@{string mode = ViewBag.Mode; string hash = ViewBag.Hash;}
+@using (Html.BeginForm("Remove", "Award", FormMethod.Post, new { @onsubmit = "return ____confirmRemoveAssignmentHistory($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="hash" value="@hash" />
+    <input type="hidden" name="mode" value="@mode" />
+    if (mode == "finding")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure to remove this finding from your profile, you won't be able to undone it, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+    else if (mode == "research")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure to remove this research from your profile, you won't be able to undone it, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+    else if (mode == "publication")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure to remove this publication from your profile, you won't be able to undone it, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+    else if (mode == "composition")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure to remove this composition from your profile, you won't be able to undone it, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+
+    else if (mode == "project")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure to remove this project from your profile, you won't be able to undone it, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+    else if (mode == "award")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure to remove this award from your profile, you won't be able to undone it, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+    else if (mode == "baward")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure to remove this award from your profile, you won't be able to undone it, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+    else if (mode == "services")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure you want to remove this service from organization profile, please not once deleting this you won't be able to undone it, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+    else if (mode == "products")
+    {
+        <div class="undone-box">
+            <p>
+                Are you sure to remove this product from organization profile? Please note you won't be able to undone once deleted, would you like to continue?
+                <div>
+                    <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                    <button type="button" class="link-alike" onclick="____cancelRemoveAssignmentHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                </div>
+            </p>
+        </div>
+    }
+    <script>
+        var dataMode = '@mode';
+        function ____confirmRemoveAssignmentHistory($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            $.ajax({
+                url: action,
+                type: 'POST',
+                waitingSelector: $obj.find('.waiting-bg'),
+                data: ser,
+                dataType: 'html',
+                success: function (response) {
+                    if (dataMode == 'finding') {
+                        $("#findings-list").processTemplateURL("/award/findings");
+                    } else if (dataMode == 'research') {
+                        $("#researches-list").processTemplateURL("/award/researches");
+                    }
+                    else if (dataMode == 'publication') {
+                        $("#publication-history").processTemplateURL("/award/publications");
+                    }
+                    else if (dataMode == 'composition') {
+                        $("#composition-history").processTemplateURL("/award/compositions");
+                    }
+                    else if (dataMode == 'project') {
+                        $("#project-history").processTemplateURL("/award/assignments");
+                    }
+                    else if (dataMode == 'award') {
+                        $("#award-history").processTemplateURL("/award/index");
+                    }
+                    else if (dataMode == 'baward') {
+                        $("#baward-history").processTemplateURL("/award/index");
+                    }
+                    else if (dataMode == 'services') {
+                        $("#services-list").processTemplateURL("/award/services");
+                    }
+                    else if (dataMode == 'products') {
+                        $("#product-list").processTemplateURL("/award/products");
+                    }
+
+                }
+            });
+            return false;
+        }
+
+    </script>
+}

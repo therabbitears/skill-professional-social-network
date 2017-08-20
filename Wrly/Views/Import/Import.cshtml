@@ -1,0 +1,65 @@
+﻿@model List<Wrly.Models.Import.ContactViewModel>
+@{
+    ViewBag.Title = "Import";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <h1>Invite people</h1>
+            <div class="wizard-content-wrapper">
+                
+                <div class="result"></div>
+                @using (Html.BeginForm("Invite", "Import", FormMethod.Post, new { @onsubmit = "return ____invite($(this))" }))
+                {
+                    int count = 0;
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("inviteID", Model[0].EntityImportID)
+                    <div class="text-right"><div class="waiting-bg"></div><button class="btn btn-outlined">Invite</button></div>
+                    <div class="import-table">
+                        <div class="table-header">
+                            <div class="header-row">
+                                <input type="checkbox" class="active" id="chkAll" checked /><label for="chkAll">Select all</label>
+                            </div>
+                        </div>
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="row">
+                                <div class="check-container">
+                                    @Html.CheckBoxFor(c => c[count].Send, new { @id = "chk_import_" + item.ID.ToString() })
+                                    @Html.HiddenFor(c => c[count].ID)
+                                </div>
+                                <div class="table-data">
+                                    @if (!string.IsNullOrEmpty(item.Name))
+                                    {
+                                        @Html.HiddenFor(c => c[count].Name)
+                                        <div class="import-name">@item.Name</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="import-name">
+                                            @Html.TextBoxFor(c => c[count].Name, new { @class = "form-control", @data_val_name = true, @data_val_id = item.ID })
+                                        </div>
+                                    }
+                                    <div class="import-email">@item.EmailAddresses @Html.HiddenFor(c => c[count].EmailAddresses)</div>
+                                </div>
+                            </div>
+                                    count++;
+                        }
+                    </div>
+                    <div class="text-right"><div class="waiting-bg"></div><button class="btn btn-outlined">Invite</button></div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section _FooterScripts
+{
+    @Scripts.Render("~/cdn/_ImportScripts");
+}
+
+@section _HeadStyles
+    {
+    @Styles.Render("~/cdn/_ImportStyles");
+}

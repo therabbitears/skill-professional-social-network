@@ -1,0 +1,73 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+<div class="career-history-list section-floated">
+    <div class="section-floated-container">
+        <h1>About</h1>
+        <div class="profile-about" id="skiller-summary">
+            <div class="about-summary">
+                <p class="about">
+                    @Model.Description
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+@if (Model.Statistics.ServicesCount > 0)
+{
+    <div class="services-list section-floated" id="services-section">
+        <div class="section-floated-container editable">
+            <h1>Services</h1>
+            <div id="services-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+@if (Model.Statistics.ProductsCount > 0)
+{
+    <div class="product-list section-floated" id="products-section">
+        <div class="section-floated-container">
+            <h1>Products</h1>
+            <div id="product-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+@if (Model.Statistics.AffiliationCount > 0)
+{
+    <div class="affiliation-list section-floated" id="affiliations-section">
+        <div class="section-floated-container">
+            <h1>Affiliation</h1>
+            <div id="affiliation-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+@if (Model.Statistics.AwardCount > 0)
+{
+    <div class="award-list section-floated" id="award-section">
+        <div class="section-floated-container">
+            <h1>Awards &amp; Achievements</h1>
+            <div id="award-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+<div id="references-section">
+    <div class="recommendation-list section-floated">
+        <div class="section-floated-container">
+            <h1>Recommendation</h1>
+            <div class="text-right">
+                <button class="btn btn-primary btn-sm" data-hash="@Model.ProfileHash" data-add-brecommedation="true">Recommend</button>
+            </div>
+            <div id="recommendation-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+</div>
+
+<div id="references-section">
+    <div class="recommendation-list section-floated">
+        <div class="section-floated-container">
+            <h1>Testimonials</h1>
+            <div class="text-right">
+                <button class="btn btn-primary btn-sm" data-hash="@Model.ProfileHash" data-add-business-appriciation="true">Write</button>
+            </div>
+            <div id="testimonials-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+</div>
+

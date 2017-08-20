@@ -1,0 +1,158 @@
+﻿@model Wrly.Models.ProfileViewModel
+@{
+    var projectEnabled = true;// Model.Widgets.Any(c => c.WidgetName.Equals("Projects"));
+    var publicationEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Publishings"));
+    var compositionEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Compositions"));
+    var researchEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Researches"));
+    var findingEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Establishments"));
+    var awardEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Awards"));
+}
+
+<div class="career-history-list section-floated career-summary">
+    <div class="section-floated-container">
+        <h1>About You</h1>
+        <div class="profile-about profile-item" id="skiller-summary">
+            <div class="about-summary">
+                <p class="about" id="aboutSummary">
+                    @Html.Raw(Model.FormatedProfileSummary)
+                </p>
+                <button class="btn link-alike hover-edits" data-skiller-edit="true" data-hash="@Model.UserHash">Change <div class="waiting-bg"></div></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="career-history-list section-floated">
+    <div class="section-floated-container">
+        <h1><i class="glyph-icon flaticon-clinic-history"></i>Work history</h1>
+        <div class="plus-add-profile-item">
+            <button class="no-style icon icon-add-b" data-hash="" data-add-exp="true"><span class="waiting-bg">+</span></button>
+        </div>
+        <div id="career-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+    </div>
+</div>
+<div class="education-list section-floated">
+    <div class="section-floated-container">
+        <h1><i class="glyph-icon flaticon-diploma"></i>Education</h1>
+        <div class="plus-add-profile-item">
+            <button class="no-style icon icon-add-b" data-hash="" data-add-edu="true"><span class="waiting-bg">+</span></button>
+        </div>
+        <div id="education-history">
+            @{Html.RenderPartial("_ItemPlaceholder");}
+        </div>
+    </div>
+</div>
+<div class="certification-list section-floated">
+    <div class="section-floated-container">
+        <h1><i class="glyph-icon flaticon-graduate-cap"></i>Certifications</h1>
+        <div class="plus-add-profile-item">
+            <button class="no-style icon icon-add-b" data-hash="" data-add-certi="true"><span class="waiting-bg">+</span></button>
+        </div>
+        <div id="certification-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+    </div>
+</div>
+<div class="skill-history-list section-floated">
+    <div class="section-floated-container">
+        <h1><i class="glyph-icon flaticon-skills"></i>Skills</h1>
+        <div class="plus-add-profile-item">
+            <button class="no-style icon icon-add-b" data-hash="" data-add-skill="true"><span class="waiting-bg">+</span></button>
+        </div>
+        <div class="profile-item">
+            <div id="skill-history"></div>
+        </div>
+    </div>
+</div>
+@if (findingEnabled)
+{
+    <div class="finding-list section-floated">
+        <div class="section-floated-container">
+            <div class="editable">
+                <h1><i class="glyph-icon flaticon-employee"></i>Establishments &amp; foundations</h1>
+                <div class="plus-add-profile-item">
+                    <button class="no-style icon icon-add-b" data-hash="" data-add-finding="true"><span class="waiting-bg">+</span></button>
+                </div>
+
+                <div id="findings-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+            </div>
+        </div>
+    </div>
+}
+@if (researchEnabled)
+{
+    <div class="research-list section-floated">
+        <div class="section-floated-container">
+            <h1><i class="glyph-icon flaticon-eye-on-magnifying-glass"></i>Researches</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style icon icon-add-b" data-hash="" data-add-research="true"><span class="waiting-bg">+</span></button>
+            </div>
+            <div id="researches-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+@if (publicationEnabled)
+{
+    <div class="publication-list section-floated">
+        <div class="section-floated-container">
+            <h1><i class="glyph-icon flaticon-open-book"></i>Publications</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style icon icon-add-b" data-hash="" data-add-publication="true"><span class="waiting-bg">+</span></button>
+            </div>
+            <div id="publication-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+@if (compositionEnabled)
+{
+    <div class="composition-list section-floated">
+        <div class="section-floated-container">
+            <h1><i class="glyph-icon flaticon-treble-clef"></i>Compositions</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style icon icon-add-b" data-hash="" data-add-compositions="true"><span class="waiting-bg">+</span></button>
+            </div>
+            <div id="composition-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+
+@if (projectEnabled)
+{
+    <div class="project-list section-floated">
+        <div class="section-floated-container">
+            <h1><i class="glyph-icon flaticon-management"></i>Projects and Assignments</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style icon icon-add-b" data-hash="" data-add-assignment="true"><span class="waiting-bg">+</span></button>
+            </div>
+            <div id="project-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+
+@if (awardEnabled)
+{
+    <div class="award-list section-floated">
+        <div class="section-floated-container">
+            <h1><i class="glyph-icon flaticon-badge"></i>Awards &amp; Achievements</h1>
+            <div class="plus-add-profile-item">
+                <button class="no-style icon icon-add-b" data-hash="" data-add-award="true"><span class="waiting-bg">+</span></button>
+            </div>
+            <div id="award-history">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+        </div>
+    </div>
+}
+
+
+<div class="recommendation-list section-floated">
+    <div class="section-floated-container">
+        <h1><i class="flaticon-thumb-up-with-star"></i> Recommendations</h1>
+        <div class="text-right">
+            <button class="btn btn-primary btn-sm" data-hash="" data-ask-recommedation="true"><span class="waiting-bg">Request to recommend</span></button>
+        </div>
+        <div id="recommendation-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+    </div>
+</div>
+
+<div class="recommendation-list section-floated">
+    <div class="section-floated-container">
+        <h1><i class="flaticon-applause"></i> Appreciations</h1>
+        <div id="appriciation-list">@{Html.RenderPartial("_ItemPlaceholder");}</div>
+    </div>
+</div>

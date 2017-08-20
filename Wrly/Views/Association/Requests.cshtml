@@ -1,0 +1,42 @@
+﻿@model List<Wrly.Models.Listing.ActionAssociateProfileViewModel>
+@{
+    ViewBag.Title = "Connections";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    var isSent = !string.IsNullOrEmpty(Request.QueryString.Get("dir")) && Request.QueryString.Get("dir").Equals("out");
+}
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            @if (!isSent)
+            {
+                <h1>Requests</h1>
+                <div class="additional-link text-right"><a href="/requests?dir=out">View sent</a></div>
+            }
+            else
+            {
+                <h1>Sent requests</h1>
+                <div class="additional-link text-right"><a href="/requests">Requests</a></div>
+            }
+            @if (Model != null && Model.Any())
+            {
+                ViewBag.IsSent = isSent;
+                Html.RenderPartial("_ConnectionRequestsTiles", Model);
+            }
+            else
+            {
+                <div class="blank-contents">
+                    <i class="icon icon-requests-g xl"></i><p>No request right now</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section _FooterScripts
+{
+    @Scripts.Render("~/cdn/_NetworkSharedScripts")
+}
+
+@section _HeadStyles
+    {
+    @Styles.Render("~/cdn/_NetworkSharedStyles")
+}

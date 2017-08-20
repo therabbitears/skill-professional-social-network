@@ -1,0 +1,12 @@
+﻿@model List<Wrly.Models.ReplyViewModel>
+@foreach (var itemReply in Model.OrderBy(c => c.ID))
+{
+    if (ViewBag.IsLevelOne != null)
+    {
+        Html.RenderPartial("_FeedComment", itemReply);
+    }
+    else
+    {
+        Html.RenderPartial("_FeedCommentReply", itemReply);
+    }
+}

@@ -1,0 +1,1133 @@
+﻿@model List<Wrly.Models.Feeds.FeedDetailViewModel>
+@using Types
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        var container = Guid.NewGuid().ToString();
+        if (item.PostType == (int)Enums.PostTypes.PressRelease)
+        {
+            <div class="feed" data-container-id="news-item-@container" data-val-id="@item.ID">
+                @if (item.SharingType == (int)Enums.SharingType.Share)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(@item.AuthorPhoto, 100)" alt="@item.AuthorName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName
+                                    </a>
+                                    <small class="share-type">Shared a news publically</small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content">
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <div class="feed-media-image">
+                                <img src="@Html.ImagePath(@item.FilePath, 500)" alt="@item.AuthorName - Shared news image" />
+                            </div>
+                        }
+                    </div>
+                }
+                else if (item.SharingType == (int)Enums.SharingType.Reshare)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="@item.ProfileName">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(@item.AuthorPhoto, 100)" alt="@item.FormatedName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                    <small class="share-type">
+                                        Shared a news via <a href="/@item.SecondProfileName" title="@item.SecondAuthorName" data-hover-card="true" data-entity-id="@item.OriginalEntityID">
+                                            @item.SecondAuthorName
+                                        </a>
+                                    </small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.ProfileHeading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content">
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        <div class="original-user-content">
+                            <div class="____au">
+                                <span class="thumbnail-notification-con ____m8r">
+                                    <a href="@item.SecondProfileName">
+                                        @if (!string.IsNullOrEmpty(item.SecondAuthorPhoto))
+                                        {
+                                            <img class="thumbnail-notification" src="@Html.ImagePath(@item.SecondAuthorPhoto, 100)" alt="@item.SecondAuthorName">
+                                        }
+                                        else
+                                        {
+                                            <img class="thumbnail-notification" src="/content/images/no-image.png" alt="@item.SecondAuthorName">
+                                        }
+
+                                    </a>
+                                </span>
+                                <div class="no-margin author-name">
+                                    <div>
+                                        <a href="/@item.SecondProfileUrl" title="@item.SecondAuthorName" data-hover-card="true" data-entity-id="@item.OriginalWritterID">
+                                            @item.SecondAuthorName
+                                        </a>
+                                        <small class="share-type">Share a news publically</small>
+                                        @if (item.OriginalPublishOn != null)
+                                        {
+                                            <small class="child-headings right timestamp">@item.OriginalPublishOn.Value.ToChatTime()</small>
+                                        }
+                                    </div>
+                                    <div style="font-size:10px;" class="child-headings">@item.SecondHeading</div>
+                                </div>
+                            </div>
+                            <div class="answer-small user-content">
+                                @item.OriginalShortDescription.ToFormattedTabAndNewLine()
+                            </div>
+                            @if (!string.IsNullOrEmpty(item.OriginalFilePath))
+                            {
+                                <div class="feed-media-image">
+                                    <img src="@Html.ImagePath(@item.OriginalFilePath, 500)" alt="@item.SecondFormatedName - Shared news image" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____actor">
+                            <a href="@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalEntityID">
+                                @item.SecondFormatedName
+                            </a>
+                            @if (item.SharingType == (int)Enums.SharingType.Liked)
+                            {
+                                <small class="share-type">
+                                    Liked a post via <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                </small>
+                            }
+                            else if (item.SharingType == (int)Enums.SharingType.Commented)
+                            {
+                                <small class="share-type">
+                                    Commented a post via <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                </small>
+                            }
+                            else if (item.SharingType == (int)Enums.SharingType.Trended)
+                            {
+                                <small class="share-type">
+                                    Trending in <a href="/topics/@item.TopicName" title="@item.TopicName">
+                                        @item.TopicName
+                                    </a>
+                                </small>
+                            }
+                        </div>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(@item.AuthorPhoto, 100)" alt="@item.AuthorName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName
+                                    </a>
+                                    <small class="share-type">Share a news publically</small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content">
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <div class="feed-media-image">
+                                <img src="@Html.ImagePath(@item.FilePath, 500)" alt="@item.AuthorName - Shared news image" />
+                            </div>
+                        }
+                    </div>
+                }
+                <div class="media-reactions">
+                    @if (item.Liked)
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="unlike" class="link-alike added">Like</button>
+                    }
+                    else
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="like" class="link-alike">Like</button>
+                    }
+                    <button data-val-container="news-item-@container" onclick="    return focusReaction($(this))" class="link-alike">Comment</button>
+                    <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="reshare" class="link-alike">Share with network</button>
+                </div>
+                @if (item.TotalLikes > 0)
+                {
+                    if (item.Liked)
+                    {
+                        if (item.TotalLikes > 1)
+                        {
+                            <div class="media-states">
+                                You and @(item.TotalLikes - 1) other likes
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="media-states">
+                                You liked
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="media-states">
+                            @item.TotalLikes likes
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="media-states"></div>
+                }
+                <div class="feed-comments">
+                    <div id="comment-render-area">
+                        @if (item.Replies != null && item.Replies.Count > 0)
+                        {
+                            if (item.TotalReplies > 2)
+                            {
+                                <div class="comment-load-more"><button data-val-total="@item.TotalReplies" data-level="first" data-val-stock="2" data-val-next="0" data-action="more-comments" data-hash="@item.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@item.TotalReplies" onclick="____executeFeedReplyAction($(this))">View more comments</button> <span class="right">Displaying 2 of @item.TotalReplies</span> </div>
+                            }
+                            ViewBag.IsLevelOne = true;
+                            Html.RenderPartial("_FeedReplies", item.Replies);
+                        }
+                    </div>
+                    <div class="clearfix" direction="left">
+                        <div class="left">
+                            <div class="comment-thumb-con">
+                                <img alt="@Html.UserName()" class="comment-thumb-img" src="@Html.UserNamePhoto(w: 50)">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="comment-action-con ofh">
+                                <div class="comment-input-con">
+                                    <div>
+                                        @using (Html.BeginForm("comment", "press", FormMethod.Post, new { data_val_container = "news-item-" + container, @onsubmit = "return addReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                                        {
+                                            @Html.Hidden("Hash", item.Hash)
+                                            @Html.AntiForgeryToken()
+                                            <input class="form-control" placeholder="Write your comment" type="text" name="Comment" tabindex="-1">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (item.PostType == (int)Enums.PostTypes.Blog)
+        {
+            <div class="feed article" data-container-id="news-item-@container" data-val-id="@item.ID">
+                @if (item.SharingType == (int)Enums.SharingType.Share)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <div class="feed-media-image cover" style="background-image: url('@Html.ImagePath(@item.FilePath, 500)');">
+                            </div>
+                        }
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(item.AuthorPhoto,100)" alt="@item.AuthorName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName
+                                    </a>
+                                    <small class="share-type">Share a news publically</small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+
+                        <div class="feed-title">
+                            <h6> @item.Title</h6>
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.Description) && item.Description.Length > 500)
+                        {
+                            <div class="feed-body max-height">
+                                @Html.Raw(item.Description)
+                                <div class="action"><button data-val-feed-action="detail" data-val-id="@item.ID" data-val-type="@item.PostType" class="link-alike">More</button> </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="feed-body">
+                                @Html.Raw(item.Description)
+                            </div>
+                        }
+
+                    </div>
+                }
+                else if (item.SharingType == (int)Enums.SharingType.Reshare)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="@item.ProfileName">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(item.ProfilePath,100)" alt="@item.FormatedName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                    <small class="share-type">
+                                        Shared a news via <a href="/@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalWritterID">
+                                            @item.SecondFormatedName
+                                        </a>
+                                    </small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.ProfileHeading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content">
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        <div class="original-user-content">
+                            @if (!string.IsNullOrEmpty(item.OriginalFilePath))
+                            {
+                                <div class="feed-media-image cover" style="background-image: url('@Html.ImagePath(item.OriginalFilePath,800)');">
+                                </div>
+                            }
+
+                            <div class="____au">
+                                <span class="thumbnail-notification-con ____m8r">
+                                    <a href="@item.SecondProfileName">
+                                        @if (!string.IsNullOrEmpty(item.SecondProfilePath))
+                                        {
+                                            <img class="thumbnail-notification" src="@Html.ImagePath(@item.SecondProfilePath, 100)" alt="@item.SecondFormatedName">
+                                        }
+                                        else
+                                        {
+                                            <img class="thumbnail-notification" src="/content/images/no-image.png" alt="@item.SecondFormatedName">
+                                        }
+                                    </a>
+                                </span>
+                                <div class="no-margin author-name">
+                                    <div>
+                                        <a href="/@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalWritterID">
+                                            @item.SecondFormatedName
+                                        </a>
+                                        <small class="share-type">Share a news publically</small>
+                                        @if (item.OriginalPublishOn != null)
+                                        {
+                                            <small class="child-headings right timestamp">@item.OriginalPublishOn.Value.ToChatTime()</small>
+                                        }
+                                    </div>
+                                    <div style="font-size:10px;" class="child-headings">@item.SecondProfileHeading</div>
+                                </div>
+                            </div>
+                            <div class="feed-title">
+                                <h6> @item.OriginalTitle</h6>
+                            </div>
+                            @if (!string.IsNullOrEmpty(item.OriginalDescription) && item.OriginalDescription.Length > 500)
+                            {
+                                <div class="feed-body max-height">
+                                    @Html.Raw(item.OriginalDescription)
+                                    <div class="action"><button data-val-feed-action="detail" data-val-id="@item.ParentPostID" data-val-type="@item.OriginalPostType" class="link-alike">More</button> </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="feed-body">
+                                    @Html.Raw(item.OriginalDescription)
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____actor">
+                            <a href="@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalEntityID">
+                                @item.SecondFormatedName
+                            </a>
+                            @if (item.SharingType == (int)Enums.SharingType.Liked)
+                            {
+                                <small class="share-type">
+                                    Liked an article via <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName
+                                    </a>
+                                </small>
+                            }
+                            else if (item.SharingType == (int)Enums.SharingType.Commented)
+                            {
+                                <small class="share-type">
+                                    Commented on an article via <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName
+                                    </a>
+                                </small>
+                            }
+                            else if (item.SharingType == (int)Enums.SharingType.Trended)
+                            {
+                                <small class="share-type">
+                                    @*Popular in <a href="/topic/@item.OriginalEntityID" title="@item.TopicName">
+                                            @item.TopicName
+                                        </a>*@
+                                    Popular in <a href="#" title="@item.TopicName">
+                                        @item.TopicName
+                                    </a>
+                                </small>
+                            }
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <div class="feed-media-image cover" style="background-image: url('@Html.ImagePath(@item.FilePath, 500)');">
+                            </div>
+                        }
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(item.AuthorPhoto,100)" alt="@item.AuthorName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName
+                                    </a>
+                                    <small class="share-type">Share a news publically</small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+
+                        <div class="feed-title">
+                            <h6> @item.Title</h6>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(item.Description) && item.Description.Length > 500)
+                        {
+                            <div class="feed-body max-height">
+                                @Html.Raw(item.Description)
+                                <div class="action"><button data-val-feed-action="detail" data-val-id="@item.ID" data-val-type="@item.PostType" class="link-alike">More</button> </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="feed-body">
+                                @Html.Raw(item.Description)
+                            </div>
+                        }
+
+                    </div>
+                }
+                <div class="media-reactions">
+                    @if (item.Liked)
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="unlike" class="link-alike added">Like</button>
+                    }
+                    else
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="like" class="link-alike">Like</button>
+                    }
+                    <button data-val-container="news-item-@container" onclick="    return focusReaction($(this))" class="link-alike">Comment</button>
+                    <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="reshare" class="link-alike">Share with network</button>
+                </div>
+                @if (item.TotalLikes > 0)
+                {
+                    <div class="media-states">
+                        @item.TotalLikes Likes
+                    </div>
+                }
+                <div class="feed-comments">
+                    <div id="comment-render-area">
+                        @if (item.Replies != null && item.Replies.Count > 0)
+                        {
+                            if (item.TotalReplies > 2)
+                            {
+                                <div class="comment-load-more"><button data-val-total="@item.TotalReplies" data-level="first" data-val-stock="2" data-val-next="0" data-action="more-comments" data-hash="@item.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@item.TotalReplies" onclick="____executeFeedReplyAction($(this))">View more comments</button> <span class="right">Displaying 2 of @item.TotalReplies</span> </div>
+                            }
+                            ViewBag.IsLevelOne = true;
+                            Html.RenderPartial("_FeedReplies", item.Replies);
+                        }
+                    </div>
+                    <div class="clearfix" direction="left">
+                        <div class="left">
+                            <div class="comment-thumb-con">
+                                <img alt="Banshi Gurjar" class="comment-thumb-img" src="/content/images/no-image.png">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="comment-action-con ofh">
+                                <div class="comment-input-con">
+                                    <div>
+                                        @using (Html.BeginForm("comment", "press", FormMethod.Post, new { data_val_container = "news-item-" + container, @onsubmit = "return addReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                                        {
+                                            @Html.Hidden("Hash", item.Hash)
+                                            @Html.AntiForgeryToken()
+                                            <input class="form-control" placeholder="Write your comment" type="text" name="Comment" tabindex="-1">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (item.PostType == (int)Enums.PostTypes.AskOpportunity)
+        {
+            <div class="feed job" data-container-id="news-item-@container" data-val-id="@item.ID">
+                @if (item.SharingType == (int)Enums.SharingType.Share)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(@item.AuthorPhoto, 100)" alt="@item.AuthorName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    @if (item.OriginalEntityID != item.WritterID)
+                                    {
+                                        <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.WritterID">
+                                            @item.AuthorName <small class="share-type">Looking for a job via</small>
+                                        </a>
+                                        <a href="/@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalEntityID">
+                                            @item.SecondFormatedName
+                                        </a>
+                                    }
+                                    else
+                                    {
+
+                                        <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                            @item.AuthorName <small class="share-type">Looking for a job</small>
+                                        </a>
+                                    }
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content">
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <div class="feed-media-image">
+                                <img src="@Html.ImagePath(@item.FilePath, 500)" alt="@item.AuthorName - Shared news image" />
+                            </div>
+                        }
+                        @if (item.Skills != null && item.Skills.Count > 0)
+                        {
+                            <h3>For skills</h3>
+                            <ul>
+                                @foreach (var itemSkill in item.Skills)
+                                {
+                                    <li>@itemSkill.Name</li>
+                                }
+                            </ul>
+                        }
+                        @if (item.JobTitles != null && item.JobTitles.Count > 0)
+                        {
+                            <h3>For job titles</h3>
+                            <ul>
+                                @foreach (var itemSkill in item.JobTitles)
+                                {
+                                    <li>@itemSkill.JobTitleName</li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                }
+                <div class="media-reactions">
+                    @if (item.Referred)
+                    {
+                        <button data-hash="@item.Hash" data-action="unlike" class="link-alike added">Referred</button>
+                    }
+                    else
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="refer-opportunity" class="link-alike">Refer an opportunity</button>
+                    }
+                    <button data-val-container="news-item-@container" onclick="return focusReaction($(this))" class="link-alike">Response</button>
+                    @if (item.OriginalEntityID == Html.EntityID() || item.WritterID == Html.EntityID())
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="insights-opp" class="link-alike">Insights</button>
+                    }
+                </div>
+                @if (item.TotalReferrals > 0)
+                {
+                    if (item.Referred)
+                    {
+                        if (item.TotalReferrals > 1)
+                        {
+                            <div class="media-states">
+                                You and @(item.TotalReferrals - 1) other referrals
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="media-states">
+                                You referred
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="media-states">
+                            @item.TotalReferrals referrals
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="media-states"></div>
+                }
+                <div class="feed-comments">
+                    <div id="comment-render-area">
+                        @if (item.Replies != null && item.Replies.Count > 0)
+                        {
+                            if (item.TotalReplies > 2)
+                            {
+                                <div class="comment-load-more"><button data-val-total="@item.TotalReplies" data-level="first" data-val-stock="2" data-val-next="0" data-action="more-comments" data-hash="@item.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@item.TotalReplies" onclick="____executeFeedReplyAction($(this))">View more comments</button> <span class="right">Displaying 2 of @item.TotalReplies</span> </div>
+                            }
+                            ViewBag.IsLevelOne = true;
+                            Html.RenderPartial("_FeedReplies", item.Replies);
+                        }
+                    </div>
+                    <div class="clearfix" direction="left">
+                        <div class="left">
+                            <div class="comment-thumb-con">
+                                <img alt="@Html.UserName()" class="comment-thumb-img" src="@Html.UserNamePhoto(w: 50)">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="comment-action-con ofh">
+                                <div class="comment-input-con">
+                                    <div>
+                                        @using (Html.BeginForm("comment", "press", FormMethod.Post, new { data_val_container = "news-item-" + container, @onsubmit = "return addReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                                        {
+                                            @Html.Hidden("Hash", item.Hash)
+                                            @Html.AntiForgeryToken()
+                                            <input class="form-control" placeholder="Write your comment" type="text" name="Comment" tabindex="-1">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (item.PostType == (int)Enums.PostTypes.ShareOpportunity)
+        {
+            <div class="feed job" data-container-id="news-item-@container" data-val-id="@item.ID">
+                @if (item.SharingType == (int)Enums.SharingType.Share)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(@item.AuthorPhoto, 100)" alt="@item.AuthorName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName <small class="share-type">Shared an opportunity</small>
+                                    </a>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content having-title">
+                            <h5>@item.Title</h5>
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <div class="feed-media-image">
+                                <img src="@Html.ImagePath(@item.FilePath, 500)" alt="@item.AuthorName - Shared news image" />
+                            </div>
+                        }
+                        @if (item.Skills != null && item.Skills.Count > 0)
+                        {
+                            <h3>For skills</h3>
+                            <ul>
+                                @foreach (var itemSkill in item.Skills)
+                                {
+                                    <li>@itemSkill.Name</li>
+                                }
+                            </ul>
+                        }
+                        @if (item.JobTitles != null && item.JobTitles.Count > 0)
+                        {
+                            <h3>For job titles</h3>
+                            <ul>
+                                @foreach (var itemSkill in item.JobTitles)
+                                {
+                                    <li>@itemSkill.JobTitleName</li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                }
+                <div class="media-reactions">
+                    @if (item.Applied)
+                    {
+                        <button data-hash="@item.Hash" data-action="unlike" class="link-alike added">Applied</button>
+                    }
+                    else
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="apply" class="link-alike">Apply</button>
+                    }
+                    @if (item.AllowPublic == true)
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="refer" class="link-alike">Refer</button>
+                    }
+                    <button data-val-container="news-item-@container" onclick="return focusReaction($(this))" class="link-alike">Response</button>
+                    @if (item.OriginalEntityID == Html.EntityID() || item.WritterID == Html.EntityID())
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="insights-shared-opp" class="link-alike">Insights</button>
+                    }
+                </div>
+
+                @if (item.TotalReferrals > 0)
+                {
+                    if (item.Referred)
+                    {
+                        if (item.TotalReferrals > 1)
+                        {
+                            <div class="media-states">
+                                You and @(item.TotalReferrals - 1) other referrals
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="media-states">
+                                You referred
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="media-states">
+                            @item.TotalReferrals referrals
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="media-states"></div>
+                }
+                <div class="feed-comments">
+                    <div id="comment-render-area">
+                        @if (item.Replies != null && item.Replies.Count > 0)
+                        {
+                            if (item.TotalReplies > 2)
+                            {
+                                <div class="comment-load-more"><button data-val-total="@item.TotalReplies" data-level="first" data-val-stock="2" data-val-next="0" data-action="more-comments" data-hash="@item.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@item.TotalReplies" onclick="____executeFeedReplyAction($(this))">Load more responses</button> <span class="right">Displaying 2 of @item.TotalReplies</span> </div>
+                            }
+                            ViewBag.IsLevelOne = true;
+                            Html.RenderPartial("_FeedReplies", item.Replies);
+                        }
+                    </div>
+                    <div class="clearfix" direction="left">
+                        <div class="left">
+                            <div class="comment-thumb-con">
+                                <img alt="@Html.UserName()" class="comment-thumb-img" src="@Html.UserNamePhoto(w: 50)">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="comment-action-con ofh">
+                                <div class="comment-input-con">
+                                    <div>
+                                        @using (Html.BeginForm("comment", "press", FormMethod.Post, new { data_val_container = "news-item-" + container, @onsubmit = "return addReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                                        {
+                                            @Html.Hidden("Hash", item.Hash)
+                                            @Html.AntiForgeryToken()
+                                            <input class="form-control" placeholder="Write your comment" type="text" name="Comment" tabindex="-1">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (item.PostType == (int)Enums.PostTypes.Discussion)
+        {
+            <div class="feed" data-container-id="news-item-@container" data-val-id="@item.ID">
+                @if (item.SharingType == (int)Enums.SharingType.Share)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(@item.AuthorPhoto, 100)" alt="@item.AuthorName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName
+                                    </a>
+                                    <small class="share-type">Shared a discussion</small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content having-title">
+                            <h5>@item.Title</h5>
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <div class="feed-media-image">
+                                <img src="@Html.ImagePath(@item.FilePath, 500)" alt="@item.AuthorName - Shared news image" />
+                            </div>
+                        }
+                    </div>
+                }
+                else if (item.SharingType == (int)Enums.SharingType.Reshare)
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="@item.ProfileName">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(@item.AuthorPhoto, 100)" alt="@item.FormatedName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                    <small class="share-type">
+                                        Shared a discussion via <a href="/@item.SecondProfileName" title="@item.SecondAuthorName" data-hover-card="true" data-entity-id="@item.OriginalEntityID">
+                                            @item.SecondAuthorName
+                                        </a>
+                                    </small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                    <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.ProfileHeading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content">
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        <div class="original-user-content">
+                            <div class="____au">
+                                <span class="thumbnail-notification-con ____m8r">
+                                    <a href="@item.SecondProfileName">
+                                        @if (!string.IsNullOrEmpty(item.SecondAuthorPhoto))
+                                        {
+                                        <img class="thumbnail-notification" src="@Html.ImagePath(@item.SecondAuthorPhoto, 100)" alt="@item.SecondAuthorName">
+                                        }
+                                        else
+                                        {
+                                        <img class="thumbnail-notification" src="/content/images/no-image.png" alt="@item.SecondAuthorName">
+                                        }
+
+                                    </a>
+                                </span>
+                                <div class="no-margin author-name">
+                                    <div>
+                                        <a href="/@item.SecondProfileUrl" title="@item.SecondAuthorName" data-hover-card="true" data-entity-id="@item.OriginalWritterID">
+                                            @item.SecondAuthorName
+                                        </a>
+                                        <small class="share-type">Share a news publically</small>
+                                        @if (item.OriginalPublishOn != null)
+                                        {
+                                        <small class="child-headings right timestamp">@item.OriginalPublishOn.Value.ToChatTime()</small>
+                                        }
+                                    </div>
+                                    <div style="font-size:10px;" class="child-headings">@item.SecondHeading</div>
+                                </div>
+                            </div>
+                            <div class="answer-small user-content having-title">
+                                <h5>@item.Title</h5>
+                                @item.ShortDescription.ToFormattedTabAndNewLine()
+                            </div>
+                            @if (!string.IsNullOrEmpty(item.OriginalFilePath))
+                            {
+                            <div class="feed-media-image">
+                                <img src="@Html.ImagePath(@item.OriginalFilePath, 500)" alt="@item.SecondFormatedName - Shared news image" />
+                            </div>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="media-body">
+                        <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@item.Hash">
+                            <span class="dropdown-toggle" data-ajax="true" data-ajax-url="/press/moreoptions?q=@item.Hash" data-container="parent">
+                                <span class=" three-dot">&#x22EE;</span>
+                            </span>
+                            <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                        </span>
+                        <div class="____actor">
+                            <a href="@item.SecondProfileName" title="@item.SecondFormatedName" data-hover-card="true" data-entity-id="@item.OriginalEntityID">
+                                @item.SecondFormatedName
+                            </a>
+                            @if (item.SharingType == (int)Enums.SharingType.Liked)
+                            {
+                                <small class="share-type">
+                                    Liked a discussion via <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                </small>
+                            }
+                            else if (item.SharingType == (int)Enums.SharingType.Commented)
+                            {
+                                <small class="share-type">
+                                    Given openion via <a href="/@item.ProfileName" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.FormatedName
+                                    </a>
+                                </small>
+                            }
+                            else if (item.SharingType == (int)Enums.SharingType.Trended)
+                            {
+                                <small class="share-type">
+                                    Trending in <a href="/topics/@item.TopicName" title="@item.TopicName">
+                                        @item.TopicName
+                                    </a>
+                                </small>
+                            }
+                        </div>
+                        <div class="____au">
+                            <span class="thumbnail-notification-con ____m8r">
+                                <a href="/@item.ProfileUrl">
+                                    <img class="thumbnail-notification" src="@Html.ImagePath(@item.AuthorPhoto, 100)" alt="@item.AuthorName">
+                                </a>
+                            </span>
+                            <div class="no-margin author-name">
+                                <div>
+                                    <a href="/@item.ProfileUrl" title="@item.FormatedName" data-hover-card="true" data-entity-id="@item.EntityID">
+                                        @item.AuthorName
+                                    </a>
+                                    <small class="share-type">Shared a discussion</small>
+                                    @if (item.PublishOn != null)
+                                    {
+                                        <small class="child-headings right timestamp">@item.PublishOn.Value.ToChatTime()</small>
+                                    }
+                                </div>
+                                <div style="font-size:10px;" class="child-headings">@item.Heading</div>
+                            </div>
+                        </div>
+                        <div class="answer-small user-content having-title">
+                             <h5>@item.Title</h5>
+                            @item.ShortDescription.ToFormattedTabAndNewLine()
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FilePath))
+                        {
+                            <div class="feed-media-image">
+                                <img src="@Html.ImagePath(@item.FilePath, 500)" alt="@item.AuthorName - Shared news image" />
+                            </div>
+                        }
+                    </div>
+                }
+                <div class="media-reactions">
+                    @if (item.Liked)
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="unlike" class="link-alike added">Like</button>
+                    }
+                    else
+                    {
+                        <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="like" class="link-alike">Like</button>
+                    }
+                    <button data-val-container="news-item-@container" onclick="    return focusReaction($(this))" class="link-alike">Opinion</button>
+                    <button onclick="return ____executeFeedAction($(this))" data-hash="@item.Hash" data-action="reshare" class="link-alike">Share with network</button>
+                </div>
+                @if (item.TotalLikes > 0)
+                {
+                    if (item.Liked)
+                    {
+                        if (item.TotalLikes > 1)
+                        {
+                            <div class="media-states">
+                                You and @(item.TotalLikes - 1) other liked
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="media-states">
+                                You liked
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="media-states">
+                            @item.TotalLikes likes
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="media-states"></div>
+                }
+                <div class="feed-comments">
+                    <div id="comment-render-area">
+                        @if (item.Replies != null && item.Replies.Count > 0)
+                        {
+                            if (item.TotalReplies > 2)
+                            {
+                                <div class="comment-load-more"><button data-val-total="@item.TotalReplies" data-level="first" data-val-stock="2" data-val-next="0" data-action="more-comments" data-hash="@item.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@item.TotalReplies" onclick="____executeFeedReplyAction($(this))">View more opinion</button> <span class="right">Displaying 2 of @item.TotalReplies</span> </div>
+                            }
+                            ViewBag.IsLevelOne = true;
+                            Html.RenderPartial("_FeedReplies", item.Replies);
+                        }
+                    </div>
+                    <div class="clearfix" direction="left">
+                        <div class="left">
+                            <div class="comment-thumb-con">
+                                <img alt="@Html.UserName()" class="comment-thumb-img" src="@Html.UserNamePhoto(w: 50)">
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="comment-action-con ofh">
+                                <div class="comment-input-con">
+                                    <div>
+                                        @using (Html.BeginForm("comment", "press", FormMethod.Post, new { data_val_container = "news-item-" + container, @onsubmit = "return addReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                                        {
+                                            @Html.Hidden("Hash", item.Hash)
+                                            @Html.AntiForgeryToken()
+                                            <input class="form-control" placeholder="post your opinion" type="text" name="Comment" tabindex="-1">
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+}
+

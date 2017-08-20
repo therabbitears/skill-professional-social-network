@@ -1,0 +1,63 @@
+﻿@model Wrly.Models.Listing.IntelligenceCareerHistoryViewModel
+
+<div class="profile-intelligence">
+    <span>@Model.DisplayText</span>
+    @using (Html.BeginForm("Manage", "CareerHistory", FormMethod.Post, new { @id = "frmIntelligenceCareerHistory" }))
+    {
+        @Html.HiddenFor(c => c.Hash)
+        @Html.HiddenFor(c => c.OrganizationID, new {@id="intel_OrgniazationID" })
+        <div  class="int-step">
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(c => c.OrganizationName, new { @placeholder = "type to select company you working with", @class = "form-control", @id = "txtIntelligenceOrganizationName" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                     <button class="btn btn-primary" onclick="fetchStep($('#intelligenceCareerHistoryStep2'))" type="submit">Add position</button>
+                    <button class="btn btn-outlined" type="button" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.RequireAddingCareerLineCompany)" onclick="skillIntelligence($(this))">Skip for now</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                var data = [];
+                $("#txtIntelligenceOrganizationName").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/Business/Search",
+                            data: { keyword: $("#txtIntelligenceOrganizationName").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#txtIntelligenceOrganizationName").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim(),
+                                        id: obj.Key.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    select: function (event, ui) {
+                        $('#intel_OrgniazationID').val(ui.item.id)
+                    }
+                });
+            });
+
+            function fetchStep($obj) {
+                $('.int-step').hide();
+                $obj.show();
+            }
+        </script>
+    }
+</div>

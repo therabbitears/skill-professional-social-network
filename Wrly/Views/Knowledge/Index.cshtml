@@ -1,0 +1,184 @@
+﻿@model Wrly.Models.Knowledge.HelpViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutKnowledge.cshtml";
+}
+
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <h1 class="page-title">Help &amp; Support</h1>
+            <div>
+                @if (Model.ActiveCategoryID > 0)
+                {
+                    var activeCategory = Model.Categories.FirstOrDefault(a => a.IsActive);
+                    if (Model.ActiveTopicID > 0)
+                    {
+                        if (Model.ActiveTopic.ParentTopicID > 0)
+                        {
+                            var parent = activeCategory.Topics.FirstOrDefault(c => c.TopicID.Equals(Model.ActiveTopic.ParentTopicID));
+                            <div class="breadcrumb-container">
+                                <ul class="breadcrumb">
+                                    <li>
+                                        <a href="/help-and-knowledge/">Help &amp; support</a>
+                                    </li>
+                                    <li>
+                                        <a href="/help-and-knowledge/@activeCategory.Url">@activeCategory.Label</a>
+                                    </li>
+                                    <li>
+                                        <a href="/help-and-knowledge/@activeCategory.Url/@parent.TopicID">@parent.Lable</a>
+                                    </li>
+                                    <li>
+                                        <span class="active">@Model.ActiveTopic.Lable</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="breadcrumb-container">
+                                <ul class="breadcrumb">
+                                    <li>
+                                        <a href="/help-and-knowledge/">Help &amp; support</a>
+                                    </li>
+                                    <li>
+                                        <a href="/help-and-knowledge/@activeCategory.Url">@activeCategory.Label</a>
+                                    </li>
+                                    <li>
+                                        <span class="active">@Model.ActiveTopic.Lable</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        if (!string.IsNullOrEmpty(Model.ActiveTopic.Title))
+                        {
+                            ViewBag.Title = Model.ActiveTopic.Title;
+                        }
+                        else
+                        {
+                            ViewBag.Title = string.Format("{0} sklative help & support centre", Model.ActiveTopic.Lable);
+                        }
+
+                        if (!string.IsNullOrEmpty(Model.ActiveTopic.Keywords))
+                        {
+                            ViewBag.Keywords = Model.ActiveTopic.Keywords;
+                        }
+
+                        if (!string.IsNullOrEmpty(Model.ActiveTopic.MetaDescription))
+                        {
+                            ViewBag.Description = Model.ActiveTopic.MetaDescription;
+                        }
+                        else
+                        {
+                            ViewBag.Description = string.Format("{0}", Model.ActiveTopic.Lable);
+                        }
+                    }
+                    else
+                    {
+
+                        <div class="breadcrumb-container">
+                            <ul class="breadcrumb">
+                                <li>
+                                    <a href="/help-and-knowledge/">Help &amp; support</a>
+                                </li>
+                                <li>
+                                    <a href="/help-and-knowledge/@activeCategory.Url">@activeCategory.Label</a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+
+                    <div class="help-tree">
+                        <div class="shortcuts">
+                            <div class="shortcut-links">
+                                <ul>
+                                    @foreach (var item in Model.Categories)
+                                    {
+                                        string classCurrent = item.CategoryID == Model.ActiveCategoryID ? "active" : string.Empty;
+                                        <li class="@classCurrent">
+                                            <a href="/help-and-knowledge/@item.Url">
+                                                @item.Label
+                                            </a>
+                                            @if (item.IsActive)
+                                            {
+                                                <ul>
+                                                    @foreach (var itemTopic in item.Topics)
+                                                    {
+                                                        <li>
+                                                            <a href="/help-and-knowledge/@item.Url/@itemTopic.TopicID">
+                                                                @itemTopic.Lable
+                                                            </a>
+                                                            @if (itemTopic.Childs != null && itemTopic.Childs.Any())
+                                                            {
+                                                                <ul>
+                                                                    @foreach (var itemChild in itemTopic.Childs)
+                                                                    {
+                                                                        <li>
+                                                                            <a href="/help-and-knowledge/@item.Url/@itemChild.TopicID">
+                                                                                @itemChild.Lable
+                                                                            </a>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            }
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="help-content">
+                        @Html.Raw(Model.ActiveTopic.Html)
+                    </div>
+                }
+                else
+                {
+                    <div class="breadcrumb-container">
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <span class="active">Help &amp; support</span>
+                            </li>
+                        </ul>
+                    </div>
+                    ViewBag.Title = "sklative help & support centre";
+                    ViewBag.Keywords = "sklative support, sklative help center, sklative account support, sklative faq, sklative knowledge base.";
+                    ViewBag.Description = "Find the sklative knowledge base for users, search for faq, find the support and know about sklative and its features";
+                    <div class="help-tree">
+                        <div class="shortcuts">
+                            <div class="shortcut-links">
+                                <ul>
+                                    @foreach (var item in Model.Categories)
+                                    {
+                                        <li>
+                                            <a href="/help-and-knowledge/@item.Url">@item.Label</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="help-content">
+                        <h1>Sklative help &amp; support centre</h1>
+                        <h2>Find the knowledge base for using sklative, search for help, bugs and workarounds</h2>
+                        <p>Sklative help & support center allows you to find help for something on sklative, you can search for the knowledge base or find the way to perform something using the knowledge tree provided.</p>
+                        <p>The help topics are categorized and well classified so that you can find the best way to get your required content easily.</p>
+                        <p>This help center also ensures that you can use sklative smoothly and in a friendly way, our FAQ, reporting a bug and search knowledge feature do the best job for you.</p>
+                        <h3>Commonly asked questions</h3>
+                        <div>
+                            <a href="/help-and-knowledge/account/1">How to create an account?</a>
+                        </div>
+                        <div>
+                            <a href="/help-and-knowledge/account/2">How to create an organization account?</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

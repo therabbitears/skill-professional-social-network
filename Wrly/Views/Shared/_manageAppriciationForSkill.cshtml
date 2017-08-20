@@ -1,0 +1,43 @@
+﻿@model Wrly.Models.SkillReferenceViewModel
+
+@using (Html.BeginForm("RecommendForSkill", "Reference", FormMethod.Post, new { @class = "form-horizontal", role = "form", @onsubmit = "return manageRecommendForSkill($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.UserHash)
+    @Html.HiddenFor(c => c.Skill.EntitySkillID)
+    <div>Recommend for skill @Model.Skill.Name</div>
+    <div class="form-group">
+        <label class="control-label">Tell what's makes them great for skill @Model.Skill.Name:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary btn-sm" value="Add to card" /><div class="waiting-bg"></div>
+        </div>
+    </div>
+    <script>
+        function manageRecommendForSkill($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: ser,
+                dataType: 'html',
+                waitingSelector: $obj.find('.waiting-bg'),
+                success: function (response) {
+                    $obj.parent().prepend(response);
+                    $obj.remove();
+                    postEditAction();
+                }
+            });
+            return false;
+        }
+
+    </script>
+}
+
+

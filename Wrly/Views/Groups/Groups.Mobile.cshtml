@@ -1,0 +1,39 @@
+﻿@model List<Wrly.Models.Business.GroupViewModel>
+@{
+    ViewBag.Title = "Sklative | Featured Business Groups";
+    ViewBag.Description = "Groups for business professionals like you!";
+    ViewBag.Keywords = "social network for business professionals, business groups";
+    
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    string keyWord = Request.QueryString.Get("keyword");
+}
+
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <h1 class="page-title">Groups</h1>
+            <div>
+                <div class="conversation-actions text-right" id="new-conversation">
+                    <a href="/groups/new" class="materialized round botton-quick-action add" data-val-new-group="true"></a>
+                </div>
+            </div>
+            <div>
+                <div>
+                    @if (string.IsNullOrEmpty(keyWord))
+                    {
+                        <h2 class="page-sub-title clear">Featured groups</h2>
+                    }
+                    else
+                    {
+                        <h2 class="page-sub-title clear">Search result for "@keyWord"</h2>
+                    }
+                </div>
+                <div>
+                    @{Html.RenderPartial("_GroupSearchResults", Model);}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,214 @@
+﻿@model Wrly.Models.Chat.GroupChatViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+<script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/Content/Css/ChatStyle.css" />
+<script src="/signalr/hubs"></script>
+<script src="~/Content/Views/scripts/chatgroup/individual.js"></script>
+@if (Model.HasReceiver)
+{
+    var currentUser = Model.GroupInfo.Participants.FirstOrDefault(c => c.EntityID != Model.MemberInfo.EntityID);
+    var anotherUser = Model.GroupInfo.Participants.FirstOrDefault(c => c.EntityID == Model.MemberInfo.EntityID);
+    <script>
+        groupName = '@Model.GroupInfo.Name';
+        groupID = '@Model.GroupInfo.ID';
+        thisMemberID = '@(currentUser.EntityID)';
+        currentUserName = '@currentUser.AuthorName';
+        currentUserID = '@currentUser.UserID';
+        receiverUserID = '@anotherUser.UserID'
+        toUser = '@Model.MemberInfo.UserName'
+        serverTime = '@DateTime.UtcNow.Ticks'
+        var dateTime = new Date();
+        console.log(dateTime);
+        console.log(serverTime);
+    </script>
+}
+else
+{
+    <script>
+        currentUserName = '@User.Identity.Name';
+        serverTime = '@DateTime.UtcNow.Ticks'
+    </script>
+}
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            @if (Model.HasReceiver)
+            {
+                <div class="conversation-actions text-right" id="new-conversation">
+                    <button class="btn btn-outlined" data-val-new-conversation="true">+ Start new conversation</button>
+                </div>
+
+                <div id="divChat" class="chatRoom">
+                    <div class="content">
+                        <div class="users">
+                            <div id="divusers">
+                            </div>
+                        </div>
+                        <div class="chat-content" data-hash-activated-for="@Model.MemberInfo.UserID">
+                            <div id="user-join-container"></div>
+                            <div class="face">
+                                <a href="/@Model.MemberInfo.ProfileUrl">
+                                    <div class="people-you-may-know-item">
+                                        <div class="thumbnail-notification-con">
+                                            <img class="thumbnail-notification" src="@Model.MemberInfo.ProfilePhotoIconUrl" alt="@Model.MemberInfo.AuthorName - Chat face" />
+                                        </div>
+                                        <div class="side-thumbnail"><h3>@Model.MemberInfo.AuthorName</h3><span class="child-headings">@Model.MemberInfo.Heading</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="divChatWindow" class="chatWindow">
+                                <div class="loading text-center pad-top-15">
+                                    <div class="loading-bar"></div>
+                                    <div class="loading-bar"></div>
+                                    <div class="loading-bar"></div>
+                                    <div class="loading-bar"></div>
+                                </div>
+                            </div>
+                            <div class="messageBar">
+                                <div class="message-send-container">
+                                    <div>
+                                        <textarea class="textbox" rows="5" id="txtMessage"></textarea>
+                                    </div>
+                                    <div>
+                                        <input id="btnSendMsg" type="button" value="Send" class="btn-outlined btn" />
+                                    </div>
+                                </div>
+                                <input type="checkbox" id="chkEnterToSend" checked="checked" /><label for="chkEnterToSend">
+                                    Enter is send
+                                </label>
+
+                            </div>
+                        </div>
+                        <progress style="display:none;" value="0" max="100"></progress>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="conversation-actions text-right" id="new-conversation">
+                    <button class="btn btn-outlined" data-val-new-conversation="true">+ Start new conversation</button>
+                </div>
+                <div id="divChat" class="chatRoom">
+                    <div class="content">
+                        <div class="users">
+                            <div id="divusers">
+                            </div>
+                        </div>
+                        <div class="chat-content" style="display:none;">
+                            <div id="user-join-container"></div>
+                            <div id="divChatWindow" class="chatWindow">
+                                <div class="loading">
+                                    <div class="loading-bar"></div>
+                                    <div class="loading-bar"></div>
+                                    <div class="loading-bar"></div>
+                                    <div class="loading-bar"></div>
+                                </div>
+                            </div>
+                            <div class="messageBar">
+                                <div class="message-send-container">
+                                    <textarea class="textbox" rows="5" id="txtMessage"></textarea>
+                                    <input id="btnSendMsg" type="button" value="Send" class="btn-secondary btn" />
+                                </div>
+                                <input type="checkbox" id="chkEnterToSend" checked="checked" /><label for="chkEnterToSend">
+                                    Enter is send
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    $('button[data-val-new-conversation="true"]').click(function () {
+        ____showNewConversationInput();
+    });
+</script>
+
+<style>
+    .conversation-new {
+        position: relative;
+        margin: 0px 0px 10px 0px;
+    }
+
+    .clearfix {
+        zoom: 1;
+    }
+
+    .feed-comment {
+        margin-top: 2px;
+        max-height: 44px;
+        padding-bottom: 0;
+        overflow-y: auto;
+        padding-top: 3px;
+        position: relative;
+    }
+
+        .feed-comment.pending {
+            background: #E6E6FB;
+            margin-right: -4px;
+        }
+
+            .feed-comment.pending .pending-indicator {
+                display: block;
+            }
+
+        .feed-comment.active {
+            background: #1e68b9;
+            margin-right: -4px;
+        }
+
+            .feed-comment.active .user-name, .feed-comment.active .message {
+                color: #fff !important;
+            }
+
+        .feed-comment .message {
+            padding: 5px;
+        }
+
+    .clearfix:after {
+        clear: both;
+        content: ".";
+        display: block;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+        visibility: hidden;
+    }
+
+    .comment-thumb-con {
+        position: relative;
+        border-radius: 50%;
+    }
+
+        .comment-thumb-con:after {
+            border: 1px solid rgba(0, 0, 0, .1);
+            bottom: 0;
+            content: '';
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            border-radius: 50%;
+        }
+
+    .comment-input-con {
+        position: relative;
+    }
+
+    .comment-thumb-img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+
+    .comment-action-con {
+        margin: 0;
+        padding-left: 8px;
+        padding-right: 2px;
+    }
+</style>

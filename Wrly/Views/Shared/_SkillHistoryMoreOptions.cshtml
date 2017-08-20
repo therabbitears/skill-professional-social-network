@@ -1,0 +1,26 @@
+﻿@model List<Wrly.Models.SkillHistoryOption>
+
+@foreach (var item in Model)
+{
+    if (item.DisplayText == "Divider")
+    {
+        <li class="divider"></li>
+    }
+    else if (item.NoAction)
+    {
+        if (item.Strong)
+        {
+            <li><span class="action activated"> @item.DisplayText</span></li>
+        }
+        else
+        {
+            <li><span class="action"> @item.DisplayText</span></li>
+        }
+
+    }
+    else
+    {
+        <li><span data-action="@item.Action" data-type="@item.Type" onclick="____skillHistoryAction($(this))" class="action" data-hash="@item.Hash"> @item.DisplayText</span></li>
+    }
+}
+

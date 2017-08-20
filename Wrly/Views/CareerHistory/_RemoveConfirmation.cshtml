@@ -1,0 +1,86 @@
+﻿@{string mode = ViewBag.Mode; string hash = ViewBag.Hash;}
+<div class="confirm">
+    @using (Html.BeginForm("Remove", "CareerHistory", FormMethod.Post, new { @onsubmit = "return ____confirmRemoveCareerHistory($(this))", @id = "frmCareerHisConfirm" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="hash" value="@hash" />
+        <input type="hidden" name="mode" value="@mode" />
+        if (mode == "career")
+        {
+            <div class="undone-box">
+                <p>
+                    Removing your work history will immediatly remove your work history from all instances including career graph, resume and profile, would you like to continue?
+                    <div>
+                        <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                        <button type="button" class="link-alike" onclick="____cancelRemoveCareerHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                    </div>
+                </p>
+            </div>
+        }
+        else if (mode == "education")
+        {
+            <div class="undone-box">
+                <p>
+                    Removing your education history will immediatly remove your this education record from all instances including resume and profile, would you like to continue?
+                    <div>
+                        <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                        <button type="button" class="link-alike" onclick="____cancelRemoveCareerHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                    </div>
+                </p>
+            </div>
+        }
+        else if (mode == "certification")
+        {
+            <div class="undone-box">
+                <p>
+                    Removing your certification history will immediatly remove your certification record from all instances including resume and profile, would you like to continue?
+                    <div>
+                        <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                        <button type="button" class="link-alike" onclick="____cancelRemoveCareerHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                    </div>
+                </p>
+            </div>
+        }
+        else if (mode == "affiliation")
+        {
+            <div class="undone-box">
+                <p>
+                    Removing your Affiliation/Certification/Acrediation will immediatly remove this record from all instances including profile, would you like to continue?
+                    <div>
+                        <button data-action="remove" class="btn btn-outlined btn-sm">Continue</button>
+                        <button type="button" class="link-alike" onclick="____cancelRemoveCareerHistory($(this))">Cancel</button><div class="waiting-bg"></div>
+                    </div>
+                </p>
+            </div>
+        }
+        <script>
+            var dataMode = '@mode';
+            function ____confirmRemoveCareerHistory($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        if (dataMode == 'career') {
+                            $("#career-history").processTemplateURL("/careerhistory/career");
+                        } else if (dataMode == 'education') {
+                            $("#education-history").processTemplateURL("/careerhistory/education");
+                        }
+                        else if (dataMode == 'certification') {
+                            $("#certification-history").processTemplateURL("/careerhistory/certification");
+                        }
+                        else if (dataMode == 'affiliation') {
+                            $("#affiliation-history").processTemplateURL("/careerhistory/affiliation");
+                        }
+                    }
+                });
+                return false;
+            }
+
+        </script>
+    }
+</div>

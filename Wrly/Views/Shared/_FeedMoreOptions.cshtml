@@ -1,0 +1,13 @@
+﻿@model List<Wrly.Models.FeedOption>
+
+@foreach (var item in Model)
+{
+    if (item.DisplayText == "Divider")
+    {
+        <li class="divider"></li>
+    }
+    else
+    {
+        <li><span data-action="@item.Action" data-type="@item.Type" onclick="____executeFeedAction($(this))" class="action" data-hash="@item.Hash"> @item.DisplayText</span></li>
+    }
+}

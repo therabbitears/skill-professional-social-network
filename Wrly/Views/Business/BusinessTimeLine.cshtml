@@ -1,0 +1,90 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+@{
+    ViewBag.Title = "EntityTimeLine";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+
+<script src="~/Content/ViewResources/Scripts/News/news-feeds.js"></script>
+<link href="~/Content/extensions/featherlight/popupwindow.css" rel="stylesheet" />
+<script src="~/Content/extensions/featherlight/popupwindow.js"></script>
+<link href="~/Content/Views/profile/shared.css" rel="stylesheet" />
+<link href="~/Content/Views/profile/manage.css" rel="stylesheet" />
+<script src="~/Content/ViewResources/Scripts/Profile/general.js"></script>
+<script src="~/Content/ViewResources/Scripts/News/news-feeds.js"></script>
+<div id="grand-wrapper" style="width:1000px;margin-left:auto;margin-right:auto;position:relative;">
+    @if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+    {
+        <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+
+        </div>
+    }
+    <div id="wrapper" style="width: 840px; margin-left: auto; margin-right: auto;  position: absolute;top: 100px;left:80px;">
+        <div style="width: 600px; float:left;border-top:8px solid #196aa7;" id="main-section">
+            <div id="face" class="profile-item">
+                <div class="section-floated">
+                    <div class="section-floated-container">
+                        @{Html.RenderPartial("_BusinessProfileFace", Model);}
+                    </div>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="tab">
+                    <a data-val-for="career-contents"  href="/fou/@Model.ProfileName">About</a>
+                </div>
+                <div class="tab">
+                    <a data-val-for="timeline-contents" class="active" href="/fou/@Model.ProfileName/profile-items/timeline">Timeline</a>
+                </div>
+            </div>
+            <div class="profile-contents" id="timeline-contents">
+                <div class="profile-item ">
+                    <div class="feeds career-history-list section-floated">
+                        <div class="section-floated-container">
+                            @{Html.RenderPartial("_Feeds", Model.Feed.Feeds);}
+                            <div class="load-more"><button onclick="loadTimeLineFeeds()" class="link-alike">Load more</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 230px; background: #fff;float:left;height:600px;margin-left:10px;" id="alter-section">
+            <div class="career-history-list section-floated">
+                <div class="section-floated-container">
+                    <h1>Network suggestions</h1>
+                    <div id="people-you-may-know">
+                    </div>
+                </div>
+
+            </div>
+            <div class="career-history-list section-floated">
+                <div class="section-floated-container">
+                    <h1>Your career line</h1>
+                    <div class="career-line-actions">
+                        <input type="checkbox" id="includeStudy" /><label for="includeStudy">Study</label>
+                        <input type="checkbox" id="includeAward" checked /><label for="includeAward">Award</label>
+                    </div>
+                    <div id="career-line-basic">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var profileHash = '@Model.ProfileHash';
+    var pageNumber = 0;
+    function loadTimeLineFeeds() {
+        $(this).attr('disabled', 'disabled');
+        pageNumber = pageNumber + 1;
+        $.get('/account/timeline?q=' + profileHash + '&pageNumber=' + pageNumber.toString(), function (res) {
+            if (res.toString().trim() == '') {
+                $('.load-more').remove();
+            } else {
+                $('.load-more').removeAttr('disabled');
+                $('.load-more').hide();
+                $('.feeds').append(res);
+            }
+        });
+    }
+
+</script>

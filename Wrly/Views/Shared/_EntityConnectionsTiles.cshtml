@@ -1,0 +1,34 @@
+﻿@model List<Wrly.Models.Listing.AssociateProfileViewModel>
+<div class="groups" id="list-suggestions">
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("Action", "Association", FormMethod.Post, new { onsubmit = "return ____suggestionAction($(this))" }))
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.Hidden("Hash", item.Hash)
+            @Html.Hidden("EntityID", item.EntityID)
+            @Html.Hidden("Mode", "Tile")
+            @Html.Hidden("actn", "Connect", new { @actn = "actn" })
+            <section class="reuqest-item">
+                <div class="container">
+                    <div class="thumbnail-notification-con">
+                        <img class="thumbnail-notification left" src="@Html.ImagePath(item.ProfilePhotoUrl,100)" alt="User Image - @item.AuthorName" />
+                    </div>
+                    <div>
+                        <div class="heading">
+                            <a href="/@item.ProfileUrl"><h3 class="page-title">@item.AuthorName</h3></a>
+                            <div class="max-heading">@(item.ProfileHeadline)</div>
+                        </div>
+                    </div>
+                </div>
+                @if (item.CommonSkillCount > 0)
+                {
+                    <div class="text-right">
+                        <small class="child-headings">@item.CommonSkillCount common skills</small>
+                    </div>
+                }
+            </section>
+        }
+    }
+</div>

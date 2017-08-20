@@ -1,0 +1,57 @@
+﻿<div class="chat-face-image">
+    <img src="/content/images/no-image-sm.png" alt="Face Image " title="is Online">
+</div>
+<div class="chat-face-content">
+    <input type="text" class="form-control" id="connectionNameNewConversation" placeholder="type connection name to start conversation" />
+    <div class="new-chat-content"></div>
+</div>
+<script>
+    var data = [];
+    $("#connectionNameNewConversation").autocomplete({
+        minLength: 1,
+        appendTo: ".new-chat-content",
+        source: function (request, response) {
+            isAutomComplete = true;
+            $.ajax({
+                url: "/Association/ConnectionHeads",
+                data: { keyword: $("#connectionNameNewConversation").val() },
+                dataType: "json",
+                type: "POST",                
+                success: function (data) {
+                    isAutomComplete = false;
+                    if (data.length == 0) {
+                        $("#connectionNameNewConversation").removeClass('working');
+                    }
+                    response($.map
+                    (data, function (obj) {
+                        return {
+                            label: obj.FormatedName,
+                            value: obj.FormatedName,
+                            entityID: obj.EntityID.toString().trim(),
+                            jobTitle: obj.ProfileHeading == null ? '' : obj.ProfileHeading,
+                            profilePath: obj.ProfileIconPath == null ? '/content/images/no-image-sm.png' : obj.ProfileIconPath
+                        };
+                    }));
+                },
+                error: function () { isAutomComplete = false; }
+            });
+        },
+        create: function () {
+            $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                return $('<li>').append('<div class="search-result-item"><div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + item.profilePath + '" alt="no image ' + item.label + ' "></div><div class="side-thumbnail"><h3>' + item.label + '</h3><span class="child-headings">' + item.jobTitle + '</span></div>     </div>').appendTo(ul);
+            }
+        },
+        select: function (event, ui) {
+            $("#connectionNameNewConversation").attr('placeholder', 'Starting conversation with ' + ui.item.label + ' ...')
+            $.get('/chatGroup/QuickChatSession?eid=' + ui.item.entityID, function (response) {
+                $('.floated-container').find('.container').html(response);
+                $('.floated-container').show();
+                $('.floated-container input').focus();
+                $('.floated-container').show();
+            });
+            this.value = "";
+            return false;
+        }
+    });
+
+</script>

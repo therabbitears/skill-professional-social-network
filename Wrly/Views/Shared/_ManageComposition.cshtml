@@ -1,0 +1,171 @@
+﻿@model Wrly.Models.PublilcationViewModel
+
+@using (Html.BeginForm("ManageComposition", "Award", FormMethod.Post, new { @id = "frmComposition", @class = "form-horizontal", role = "form", @onsubmit = "return manageCompositionHistory($(this))" }))
+{
+    <div class="profile-item">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Hash)
+        @Html.HiddenFor(c => c.UserHash)
+        <div class="form-group">
+            <label class="control-label">What you composed:</label>
+            <div class="col-md-5 inline-control">
+                @Html.DropDownListFor(c => c.SubType, Model.PublicationType, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Title:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.Name, new { @class = "form-control",@placeholder="add your composition name" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">What's your role:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.Role, new { @class = "form-control", @placeholder = "add your role in this composition" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Describe about the composition:</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(c => c.Description, new { @class = "form-control", @placeholder = "write more about this composition" })
+            </div>
+        </div>
+        @if (!Model.ShowExtendedCompositionOptions)
+        {
+            <div class="text-right"><button type="button" class="link-alike" data-source-button="compositionMoreOptions" onclick="showFindingMoreOption($(this))">Add Date &amp; your team members</button> </div>
+        }
+        <div id="compositionMoreOptions" style="display:@(Model.ShowExtendedCompositionOptions ? "block" : "none")">
+            <div class="form-group"><span class="control-label">Release/When you composed:</span></div>
+            <div class="form-group  inline-control">
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10" id="CompositionParticipents">
+                    <label class="control-label">To whom you are with:</label>
+                    @Html.TextBox("ParticipentText", null, new { @id = "ParticipentText", @placeholder = "type your connection name to add as team", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Hash))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmComposition'), $('button[data-add-compositions]'))" href="#">Back</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Add composition" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmComposition'), $('button[data-add-compositions]'))" href="#">Back</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+        <script>
+            $(document).ready(function () {
+                // Required another if selected one.
+                $.validator.addMethod('requeiredifselected', function (value, element, params) {
+                    var otherPropValue = $('#' + params.otherproperty).val();
+                    //                console.log({ otherproperty: params.otherproperty, value: value, otherPropValue: otherPropValue });
+
+                    if (otherPropValue > 0 && (value == '' || value == -1)) {
+                        return false;
+                    }
+                    return true;
+                });
+
+                $.validator.unobtrusive.adapters.add("requeiredifselected", ["otherproperty", "mode"], function (options) {
+                    options.rules["requeiredifselected"] = options.params;
+                    options.messages["requeiredifselected"] = options.message;
+                });
+
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+
+                var data = [];
+                $("#ParticipentText").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/Association/ConnectionHeads",
+                            data: { keyword: $("#ParticipentText").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#ParticipentText").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.FormatedName,
+                                        value: obj.FormatedName,
+                                        entityID: obj.EntityID.toString().trim(),
+                                        jobTitle: obj.ProfileHeading == null ? '' : obj.ProfileHeading,
+                                        profilePath: obj.ProfileIconPath == null ? '/content/images/no-image-sm.png' : obj.ProfileIconPath
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    create: function () {
+                        $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                            return $('<li>').append('<div class="search-result-item"><div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + item.profilePath + '" alt="no image ' + item.label + ' "></div><div class="side-thumbnail"><h3>' + item.label + '</h3><span class="child-headings">' + item.jobTitle + '</span></div>     </div>').appendTo(ul);
+                        }
+                    },
+                    open: function () { $(this).autocomplete("widget").appendTo("#CompositionParticipents").css('position', 'static'); },
+                    select: function (event, ui) {
+                        var element = '<div class="people-selected"><span onclick="____removeTempMember($(this))" class="remove">X</span><input type="hidden" name="Participants" value="' + ui.item.entityID.toString() + '" /> <div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + ui.item.profilePath + '" alt="no image ' + ui.item.label + ' "></div><div class="side-thumbnail"><h3>' + ui.item.label + '</h3><span class="child-headings">' + ui.item.jobTitle + '</span></div>     </div>';
+                        $('#CompositionParticipents').parent().find('.selected').append(element.toString());
+                        $('#CompositionParticipents').append(element.toString());
+                        this.value = "";
+                        return false;
+                    }
+                });
+            })
+
+            function manageCompositionHistory($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            if ($('#hdnImprovement').length == 1) {
+                                ____callbackFromPopup(response, 'project');
+                                return;
+                            }
+                            $("#composition-history").processTemplateURL("/award/compositions", null, { attachGlobalWait: true });
+                            $obj.remove();
+                            postEditAction()
+                        }
+                    });
+                }
+                return false;
+            }
+
+            function ____removeTempMember($obj) {
+                $obj.parent('.people-selected').remove();
+            }
+        </script>
+    </div>
+}
+
+
+

@@ -1,0 +1,62 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+
+@using (Html.BeginForm("editbasic", "business", FormMethod.Post, new { @id = "frmEditBasic", @class = "form-horizontal", role = "form", @onsubmit = "return manageEditBasic($(this))" }))
+{
+    <div class="profile-item">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Hash)
+        @Html.HiddenFor(c => c.UserHash)
+        <div class="form-group">
+            <label class="control-label">Industry:</label>
+            <div class="col-md-5 inline-control">
+                @Html.DropDownListFor(c => c.CategoryID, Model.IndustryList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Website:</label>
+            <div class="col-md-5 inline-control">
+                @Html.TextBoxFor(c => c.Website, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Employees:</label>
+            <div class="col-md-5 inline-control">
+                @Html.DropDownListFor(c => c.EmployeeStrength, Model.EmployeeStrengths, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Save" />
+                <a class="link-alike" onclick="return cancel()" href="#">Cancel</a><div class="waiting-bg"></div>
+            </div>
+        </div>
+
+        <script>
+            function manageEditBasic($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            ____executeCompanyProfile(response);
+                        }
+                    });
+                }
+                return false;
+            }
+
+            function cancel($obj) {
+                $obj.parent('.people-selected').remove();
+            }
+        </script>
+    </div>
+}
+
+
+

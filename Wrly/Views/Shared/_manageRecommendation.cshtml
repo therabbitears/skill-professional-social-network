@@ -1,0 +1,79 @@
+﻿@model Wrly.Models.AppreciationAndRecommendationViewModel
+
+@using (Html.BeginForm("manageRecommendation", "Reference", FormMethod.Post, new { @class = "form-horizontal",@id="frmRecomedation", role = "form", @onsubmit = "return manageRecommendation($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.UserHash)
+    <div class="form-group">
+        <label class="control-label">Your recommendation:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Your recommendation for</label>
+        <input type="radio" name="for" checked value="3" /><label class="control-label">General<small>(Will have less engagement)</small></label>
+        <input type="radio" name="for" value="1" /><label class="control-label">Skill</label>
+        <input type="radio" name="for" value="2" /><label class="control-label">Role</label>
+
+
+    </div>
+    <div class="form-group" data-val-for="skills" style="display:none">
+        <label class="control-label">Skill</label>
+        @Html.DropDownListFor(c => c.SkillID, Model.Skills, new { @id = "selectSkill", @class = "form-control" })
+    </div>
+    <div class="form-group" data-val-for="role" style="display:none">
+        <label class="control-label">Role</label>
+        @Html.DropDownListFor(c => c.CareerHistoryID, Model.CareerHistoryList, new { @id = "selectRole", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary btn-sm" value="Recommend" />
+            <a class="link-alike" onclick="return removeFormAndShowSource($('#frmRecomedation'), $('button[data-add-exp]'))" href="#">Cancel</a><div class="waiting-bg"></div>
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+
+            $('input[name="for"]').click(function () {
+                if ($(this).val() == 1) {
+                    $('div[data-val-for="skills"]').show();
+                    $('div[data-val-for="role"]').hide();
+                }
+                else if ($(this).val() == 2) {
+                    $('div[data-val-for="skills"]').hide();
+                    $('div[data-val-for="role"]').show();
+                } else {
+                    $('div[data-val-for="skills"]').hide();
+                    $('div[data-val-for="role"]').hide();
+                }
+            });
+        });
+        function manageRecommendation($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    data: ser,
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    dataType: 'html',
+                    success: function (response) {
+                        $('#recommendation-list').prepend(response);
+                        $obj.remove();
+                        postEditAction();
+                    }
+                });
+            }
+            return false;
+        }
+
+
+    </script>
+}

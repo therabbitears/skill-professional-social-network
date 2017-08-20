@@ -1,0 +1,182 @@
+﻿@model Wrly.Models.Business.GroupViewModel
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Description = Model.Description;
+    Layout = "~/Views/Shared/_GroupLayoutAuthenticated.cshtml";
+    string wrapperClass = string.Empty;
+}
+
+@section _HeadStyles
+{
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    @Styles.Render("~/cdn/_ProfilePublicStyles")
+    @Styles.Render("~/cdn/_NewsFeedStyles")
+}
+<div>
+    <div class="conversation-actions text-right" id="new-conversation">
+        <a href="/groups/new" class="materialized round botton-quick-action add" data-val-new-group="true"></a>
+    </div>
+</div>
+@if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+{
+    wrapperClass = "has-cover";
+    <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+
+    </div>
+}
+<div class="@wrapperClass content-container">
+    <div class="two-three">
+        <div id="face">
+            <div class="section-floated">
+                <div class="section-floated-container">
+                    @{Html.RenderPartial("_GroupProfileFace", Model);}
+                </div>
+            </div>
+        </div>
+        @section _FooterScripts{
+            <script type="text/javascript">               
+
+                totalConnections = @(Model.TotalFollowers)
+                profileHash = '@Model.ProfileHash';
+
+                var profileHash = '@Model.ProfileHash';
+                var pageNumber = -1;
+                function loadTimeLineFeeds(initialLoad) {
+                    $(this).attr('disabled', 'disabled');
+                    if (initialLoad != undefined && initialLoad == true) {
+                        pageNumber = 0
+                    } else {
+                        pageNumber = pageNumber + 1;
+                    }
+                    var pageSize = '@Request.IsAuthenticated' == 'True' ? 10 : 2;
+                    $.get('/account/timeline?group=true&q=' + profileHash + '&pageNumber=' + pageNumber.toString() + '&pageSize=' + pageSize, function (res) {
+                        if (res.toString().trim() == '') {
+                            $('.feed-container').remove();
+                            $('.load-more').remove();
+                        } else {
+                            $('.load-more').removeAttr('disabled');
+                            $('.load-more').hide();
+                            $('.feeds').append(res);
+                            $('.feeds .loading').remove();
+                            tooltip($('.feeds'));
+                            ____bindMenu();
+                            ____bindMoreDetails();
+                        }
+                    });
+                }
+                $(document).ready(function () {
+                    loadTimeLineFeeds(true);
+                    if ('@Request.IsAuthenticated' == 'True') {
+                        $('#inviteConnections').load('/association/ConnectionsToInvite?invite=true&group=true&q=' + profileHash);
+                        var working = false;
+                        $('#filterConnection').keyup(function () {
+                            if (working == false) {
+                                working = true;
+                                $(this).addClass('working');
+                                $('#inviteConnections').load('/association/ConnectionsToInvite?invite=true&group=true&q=' + profileHash + '&keyword=' + $(this).val(), function () { working = false; $('#filterConnection').removeClass('working') });
+                            }
+                        });
+                    } else {
+                        $('#inviteConnections').load('/groups/MemmberList?pageSize=10&invite=true&group=true&q=' + profileHash);
+                    }
+                });
+                function invite($obj) {
+                    var ser = $obj.serialize();
+                    var action = $obj.attr('action');
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        data: ser,
+                        dataType: 'json',
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        success: function (response) {
+                            if (response.Type == 2) {
+                                showPopableSuccessAlert(response.Description);
+                            } else {
+                                showPopableErrorAlert(response.Description);
+                            }
+                        }
+                    });
+                    return false;
+                }
+
+
+            </script>
+            @Scripts.Render("~/cdn/_AuthHomeScripts")
+        }
+
+        @if (Model.Member != null && Model.Member.ObjectStatus == (int)Types.Enums.AssociationRequestStatus.Approve)
+        {
+            <div class="career-history-list section-floated">
+                <div class="section-floated-container">
+                    @{Html.RenderPartial("_ShareUpdateGroup", Model);}
+                </div>
+            </div>
+        }
+        @if (!Request.IsAuthenticated)
+        {
+            <div class="profile-contents">
+                <div class="section-floated">
+                   <div class="profile-item empty-data">
+                        <p class="margin-up-down-10">Below are some features are disabled as you are not logged into the network, or not the member of group.</p>
+<ul class="margin-up-down-10" style="color:#333;line-height:22px;margin:10px 5px">
+  <li>Not all updates are visible, only featured updates are available.</li>
+  <li>Cannot react on any activity.</li>
+  <li>Cannot invite or add people to group.</li>
+  </ul>
+                        <a class="btn btn-primary btn-sm v-middle" href="/account/login">Login</a> to join this group or <a class="link-alike" href="/account/register">Sign up</a> or explore your network and groups.
+                    </div>
+                </div>
+            </div>
+            <div class="feed-container">
+                <h1>Recent updates</h1>
+                <div class="feeds" id="divFeeds">
+                    <div class="loading text-center"><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="feed-container">
+                <div class="feeds" id="divFeeds">
+                    <div class="loading  text-center"><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div></div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="one-three">
+        <div class="more-info section-floated">
+            <div class="section-floated-container">
+                <h1>About</h1>
+                <div class="profile-about">
+                    <div class="about-summary">
+                        <p class="about">
+                            @Model.Description
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="more-info section-floated">
+            <div class="section-floated-container">
+                @if (Request.IsAuthenticated)
+                {
+                    <h1>Invite</h1>
+                    <div class="margin-up-down-10">
+                        <input type="text" class="materialized-input" id="filterConnection" placeholder="type connection name to filter" />
+                    </div>
+                    <div id="inviteConnections">
+
+                    </div>
+                }
+                else
+                {
+                    <h1>Members</h1>
+                    <div id="inviteConnections">
+                        <div class="loading  text-center"><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,199 @@
+﻿@model Wrly.Models.Listing.CareerHistoryViewModel
+
+@using (Html.BeginForm("ManageAffiliation", "CareerHistory", FormMethod.Post, new { @id = "frmAffiliation", @onsubmit = "return manageAffiliationHistory($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.CareerHistoryID)
+    @Html.HiddenFor(c => c.UserHash)
+    @Html.HiddenFor(c => c.JobTitleID)
+    @Html.HiddenFor(c => c.Type)
+    @Html.HiddenFor(c => c.OrganizationID)
+
+    <div class="form-group">
+        <label class="control-label">Affiliation/acrediation name:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.JobTitleName, new { @class = "form-control", @id = "CourseName" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Issuer/institute name:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.OrganizationName, new { @class = "form-control", @id = "UniversityName" })
+        </div>
+    </div>
+    if (!Model.HasEducationStartSpecified)
+    {
+        <div class="text-right"><button type="button" data-source-button="educationMoreDetails" class="link-alike" onclick="showFindingMoreOption($(this))">Add duration</button> </div>
+    }
+    <fieldset id="educationMoreDetails" style="display:@(Model.HasEducationStartSpecified ? "block" : "none")">
+        <legend class="form-group"><span class="control-label">Affiliation period/time</span></legend>
+        <div>
+            @if (!Model.IsPeriodMode)
+            {
+                <div>
+                    <button type="button" onclick="swapeTimeMode(1)" id="btnSingle" class="link-alike">Change to period mode</button>
+                    <button type="button" onclick="swapeTimeMode(2)" id="btnRange" style="display:none" class="link-alike">Change to single time</button>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <button type="button" onclick="swapeTimeMode(1)" id="btnSingle" style="display:none" class="link-alike">Change to period mode</button>
+                    <button type="button" onclick="swapeTimeMode(2)" id="btnRange" class="link-alike">Change to single time</button>
+                </div>
+            }
+            <div class="form-group inline-control">
+                <div class="col-md-5">
+                    From:@Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div id="dateRange" style="display:@(Model.IsPeriodMode?"block":"none")">
+            <div class="form-group inline-control">
+                <div class="col-md-5">
+                    To:@Html.DropDownListFor(c => c.EndFromMonth, Model.MonthList, new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.EndFromYear, Model.YearList, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    if (!string.IsNullOrEmpty(Model.Hash))
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                <a class="link-alike" onclick="return removeFormAndShowSource($('#frmAffiliation'), $('.education-list .plus-add-profile-item'))" href="#">Back</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Add to profile" />
+                <a class="link-alike" onclick="return removeFormAndShowSource($('#frmAffiliation'), $('.education-list .plus-add-profile-item'))" href="#">Back</a>
+            </div>
+        </div>
+    }
+
+    <script>
+        var data = [];
+
+        $("#UniversityName").autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+                isAutomComplete = true;
+                $.ajax({
+                    url: "/Business/Search/University",
+                    data: { key: $("#UniversityName").val() },
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        isAutomComplete = false;
+                        if (data.length == 0) {
+                            data.push({
+                                Key: -1,
+                                Value: $("#UniversityName").val()
+                            });
+                            $("#UniversityName").removeClass('working');
+                        }
+                        response($.map
+                        (data, function (obj) {
+                            return {
+                                label: obj.Value.toString().trim(),
+                                value: obj.Value.toString().trim(),
+                                id: obj.Key.toString().trim()
+                            };
+                        }));
+                    },
+                    error: function () { isAutomComplete = false; }
+                });
+            },
+            select: function (event, ui) {
+                $('#Organization').val(ui.item.id);
+            }
+        });
+
+        $("#CourseName").autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+                isAutomComplete = true;
+                $.ajax({
+                    url: "/CareerHistory/SearchCourse",
+                    data: { key: $("#CourseName").val() },
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        isAutomComplete = false;
+                        if (data.length == 0) {
+                            data.push({
+                                Key: -1,
+                                Value: $("#CourseName").val()
+                            });
+                            $("#CourseName").removeClass('working');
+                        }
+                        response($.map
+                        (data, function (obj) {
+                            return {
+                                label: obj.Value.toString().trim(),
+                                value: obj.Value.toString().trim(),
+                                id: obj.Key.toString().trim()
+                            };
+                        }));
+                    },
+                    error: function () { isAutomComplete = false; }
+                });
+            },
+            select: function (event, ui) {
+                $('#JobTitleID').val(ui.item.id);
+            }
+        });
+
+    
+
+        function manageAffiliationHistory($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        $("#affiliation-history").processTemplateURL("/careerhistory/affiliation", null, { attachGlobalWait: true });
+                        $obj.remove();
+                        postEditAction();
+                    }
+                });
+            }
+            return false;
+        }
+
+        $("form").data("validator", null);
+        $.validator.unobtrusive.parse($("form"));
+
+        function swapeTimeMode(mode) {
+            if (mode == 1) {
+                $('#dateRange').show();
+                $('#fromLabel').show();
+                $('#btnSingle').hide();
+                $('#btnRange').show();
+            } else {
+                $('#dateRange').hide();
+                $('#EndFromMonth').val(-1);
+                $('#fromLabel').hide();
+                $('#EndFromYear').val(-1);
+                $('#btnSingle').show();
+                $('#btnRange').hide();
+            }
+        }
+
+    </script>
+}

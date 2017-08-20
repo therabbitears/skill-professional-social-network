@@ -1,0 +1,126 @@
+﻿@model Wrly.Models.Business.GroupViewModel
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Description = Model.Description;
+    Layout = "~/Views/Shared/_GroupLayoutAuthenticated.cshtml";
+    string wrapperClass = string.Empty;
+}
+<link href="~/Content/Views/profile/_mobile.css" rel="stylesheet" />
+<div class="mobile-container">
+    @{ViewBag.DefaultTab = false; Html.RenderPartial("_GroupProfileFace", Model);}
+
+    @if (Model.Member != null && Model.Member.ObjectStatus == (int)Types.Enums.AssociationRequestStatus.Approve)
+    {
+        <div id="career-contents">
+            <div class="career-summary section-floated">
+                <div class="section-floated-container">
+                    @{Html.RenderPartial("_ShareUpdateGroup", Model);}
+                </div>
+            </div>
+        </div>
+    }
+    @if (!Request.IsAuthenticated)
+    {
+        <div class="profile-contents">
+            <div class="section-floated">
+                <div class="profile-item empty-data">
+                    <p class="margin-up-down-10">Below are some features are disabled as you are not logged into the network, or not the member of group.</p>
+                    <ul class="margin-up-down-10" style="color:#333;line-height:22px;margin:10px 5px">
+                        <li>Not all updates are visible, only featured updates are available.</li>
+                        <li>Cannot react on any activity.</li>
+                        <li>Cannot invite or add people to group.</li>
+                    </ul>
+                    <a class="btn btn-primary btn-sm v-middle" href="/account/login">Login</a> to join this group or <a class="link-alike" href="/account/register">Sign up</a> or explore your network and groups.
+                </div>
+            </div>
+        </div>
+        <div class="feed-container">
+            <h1 class="pad-10">Recent updates</h1>
+            <div class="feeds" id="divFeeds">
+                <div class="loading  text-center pad-10"><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="feed-container">
+            <div class="feeds" id="divFeeds">
+                <div class="loading  text-center"><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div><div class="loading-bar"></div></div>
+            </div>
+        </div>
+    }
+    @section _FooterScripts{
+        <script type="text/javascript">
+            profileHash = '@Model.ProfileHash';
+
+            var profileHash = '@Model.ProfileHash';
+            var pageNumber = -1;
+            function loadTimeLineFeeds(initialLoad) {
+                $(this).attr('disabled', 'disabled');
+                if (initialLoad != undefined && initialLoad == true) {
+                    pageNumber = 0
+                } else {
+                    pageNumber = pageNumber + 1;
+                }
+                var pageSize = '@Request.IsAuthenticated' == 'True' ? 10 : 2;
+                $.get('/account/timeline?group=true&q=' + profileHash + '&pageNumber=' + pageNumber.toString() + '&pageSize=' + pageSize, function (res) {
+                    if (res.toString().trim() == '') {
+                        $('.load-more').remove();
+                        $('.feed-container').remove();
+                    } else {
+                        $('.load-more').removeAttr('disabled');
+                        $('.feeds .loading').remove();
+                        $('.load-more').hide();
+                        $('.feeds').append(res);
+                        tooltip($('.feeds'));
+                    }
+                });
+            }
+            $(document).ready(function () {
+                loadTimeLineFeeds(true);
+            });
+        </script>
+        @Scripts.Render("~/cdn/_AuthHomeScripts")
+    }
+</div>
+<style>
+    .profile-item h3 {
+        font-weight: normal !important;
+    }
+
+    .profile-item {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+        .profile-item h3 small {
+            font-size: 12px;
+        }
+
+    .profile-items .child-profile-item-heading {
+        color: #555 !important;
+    }
+
+    .profile-item p {
+        font-size: 14px;
+    }
+
+    .section-floated h1 {
+        font-size: 22px;
+        color: #1e68b9;
+        padding: 10px 13px 0px 10px;
+    }
+
+    .plus-add-profile-item button.working {
+        cursor: wait;
+    }
+
+    span.working {
+        color: #fff !important;
+        cursor: wait;
+    }
+
+    .right.timestamp {
+        display: none;
+    }
+</style>

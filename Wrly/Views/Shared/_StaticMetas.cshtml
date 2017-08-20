@@ -1,0 +1,72 @@
+﻿<!-- Google Tag Manager -->
+<script>
+    (function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KJN2QN9');</script>
+<!-- End Google Tag Manager -->
+
+
+<script type="application/ld+json">
+    { 
+    "@@context" : "http://schema.org",
+    "@@type" : "Website",
+    "about":"sklative is a professional network and a skill based portfolio of an individual where they can connect with people having common skills. And for businesses, it is a network to connect with their partners, vendors, and customers. Similarly, for recruiters, it is a tool of social recruitment.",
+    "name" : "Sklative Professional Business Network",
+    "author": "Banshi B. Gurjar",
+    "alternateName":"sklative",
+    "description":"sklative is a professional network and a skill based portfolio of an individual where they can connect with people having common skills. And for businesses, it is a network to connect with their partners, vendors, and customers. Similarly, for recruiters, it is a tool of social recruitment.",
+    "producer":"Quartile media pvt. ltd.",
+    "keywords":"Professional network, social websites, business professional website, networking sites, social sites in India, B2B networking website",
+    "creator": "Quartile media pvt. ltd.",
+    "inLanguage":"en-us",
+    "copyrightYear":"2014-2017",
+    "copyrightHolder":"sklative",
+    "contributor":"Banshi Gurjar",
+    "image":"https://www.sklative.com/content/assets/images/Brand.png",
+    "thumbnailUrl":"https://www.sklative.com/favicon.ico",
+    "url" : "https://www.sklative.com",
+    "sameAs" :
+    [
+    "https://www.facebook.com/sklative/",
+    "https://twitter.com/Sklative",
+    "https://www.linkedin.com/company/Sklative",
+    "https://plus.google.com/103867097580794314569"
+    ]
+    }
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:url" content="@Request.Url.ToString()" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Sklative" />
+@if (ViewBag.OgImage != null)
+{
+    <meta property="og:image" content="@ViewBag.OgImage" />
+}
+else
+{
+    <meta property="og:image" content="https://www.sklative.com/Content/assets/images/ind-connection.png" />
+}
+@if (!((ViewContext.RouteData.Values["action"] != null && ViewContext.RouteData.Values["action"].ToString().ToLower() == "propertydetails") && (ViewContext.RouteData.Values["Controller"] != null && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "property")))
+{
+    <meta name="robots" content="index, follow" />
+}
+<meta name="Owner" content="sklative.com" />
+<meta name="Copyright" content="sklative.com" />
+<meta name="classification" content="Social network" />
+<meta name="rating" content="General" />
+<meta name="subject" content="Social network, professional social network" />
+<meta name="audience" content="All" />
+@if (!string.IsNullOrEmpty(Request.QueryString.Get("pageNumber")))
+{
+    string pageNumber = Request.QueryString.Get("pageNumber");
+    string url = Request.Url.ToString().ToLower().Replace("?pagenumber=" + pageNumber, string.Empty);
+    <link rel="canonical" href="@url" />
+}
+else
+{
+    <link rel="canonical" href="@Request.Url.ToString().ToLower()" />
+}

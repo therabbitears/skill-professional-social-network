@@ -1,0 +1,39 @@
+﻿@model Wrly.Models.OrgNameViewModel
+
+@using (Html.BeginForm("UpdateName", "Business", FormMethod.Post, new { @onsubmit = "return ____updateName($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-5">
+        @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+    </div>
+    <div class="col-md-5">
+        <button class="link-alike">Save</button>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+        });
+        function ____updateName($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.Type == 2) {
+                            $('#h1Name').html(response.Description);
+                            $('#h1Name').show();
+                            $('#h1NameEdit').hide();
+                            $obj.remove();
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+    </script>
+}

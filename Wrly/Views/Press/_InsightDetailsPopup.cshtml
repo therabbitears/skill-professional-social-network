@@ -1,0 +1,9 @@
+﻿@model List<Wrly.Models.InsightDetailsViewModel>
+@using Types;
+@{var container = Guid.NewGuid().ToString();}
+<div class="pop-up-header">
+    <h1 class="model-title">Insights<small>Beta</small></h1>
+</div>
+<div class="main-content insight-popup" data-container-id="news-item-@container">
+    @{Html.RenderPartial("_InsightDetails", Model);}
+</div>

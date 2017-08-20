@@ -1,0 +1,120 @@
+﻿@model Wrly.Models.Feeds.FeedDetailViewModel
+@{var container = Guid.NewGuid().ToString();}
+<div class="feed article" data-container-id="news-item-@container">
+    @if (!string.IsNullOrEmpty(Model.FilePath))
+    {
+        <div class="feed-media-image" style="background-image: url('@(Html.ImagePath(Model.FilePath,500))');">
+        </div>
+    }
+    <div class="article-body">
+        <div class="media-body">
+            <div class="action-container">
+                <span class="eclipse right more-option-container more-nav question-more-options righ-on-small" data-hash="@Model.Hash">
+                    <span class="dropdown-toggle">
+                        <span class=" three-dot">&#x22EE;</span>
+                    </span>
+                    <ul class="dropdown-menu profile" data-val-container="news-item-@container"></ul>
+                </span>
+            </div>
+
+
+            <div>
+                <div class="thumbnail-notification-con">
+                    <a href="/@Model.ProfileUrl">
+                        <img class="thumbnail-notification" src="@Html.ImagePath(Model.AuthorPhoto,100)" alt="@Model.AuthorName">
+                    </a>
+                </div>
+                <span class="no-margin inline-title author-name">
+                    <a href="/@Model.ProfileUrl">
+                        @Model.AuthorName
+                    </a>
+                    <div style="font-size:10px;" class="child-headings">@Model.Heading</div>
+                </span>
+            </div>
+            <div class="feed-title">
+                <h6> @Model.Title</h6>
+            </div>
+            <div class="feed-body">
+                @Html.Raw(Model.Description)
+            </div>
+        </div>
+
+        <div class="media-reactions">
+            @if (Model.Liked)
+            {
+                <button onclick="return ____executeFeedAction($(this))" data-hash="@Model.Hash" data-action="unlike" class="link-alike added">Like</button>
+            }
+            else
+            {
+                <button onclick="return ____executeFeedAction($(this))" data-hash="@Model.Hash" data-action="like" class="link-alike">Like</button>
+            }
+            <button data-val-container="news-item-@container" onclick="    return focusReaction($(this))" class="link-alike">Comment</button>
+            <button onclick="return ____executeFeedAction($(this))" data-hash="@Model.Hash" data-action="reshare" class="link-alike">Share with network</button>
+        </div>
+
+        <div class="feed-comments">
+            <div id="comment-render-area">
+                @if (Model.Replies != null && Model.Replies.Count > 0)
+                {
+                    if (Model.TotalReplies > 2)
+                    {
+                        <div class="comment-load-more"><button data-val-total="@Model.TotalReplies" data-level="first" data-val-stock="2" data-val-next="0" data-action="more-comments" data-hash="@Model.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@Model.TotalReplies" onclick="____executeFeedReplyAction($(this))">View more comments</button> <span class="right">Displaying 2 of @Model.TotalReplies</span> </div>
+                    }
+                    ViewBag.IsLevelOne = true;
+                    Html.RenderPartial("_FeedReplies", Model.Replies);
+                }
+            </div>
+            <div class="clearfix" direction="left">
+                <div class="left">
+                    <div class="comment-thumb-con">
+                        <img alt="Banshi Gurjar" class="comment-thumb-img" src="/content/images/no-image.png">
+                    </div>
+                </div>
+                <div class="">
+                    <div class="comment-action-con ofh">
+                        <div class="comment-input-con">
+                            <div>
+                                @using (Html.BeginForm("comment", "press", FormMethod.Post, new { data_val_container = "news-item-" + container, @onsubmit = "return addReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                                {
+                                    @Html.Hidden("Hash", Model.Hash)
+                                    @Html.AntiForgeryToken()
+                                    <input class="form-control" type="text" placeholder="Write your comment" name="Comment" tabindex="-1">
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    html, body {
+        height: 100%;
+    }
+
+    .feed.article .article-body {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .pop-up {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .pop-up-content {
+        height: 100%;
+        overflow: scroll;
+    }
+
+    .box-container {
+        height: 100%;
+        overflow: auto;
+    }
+</style>

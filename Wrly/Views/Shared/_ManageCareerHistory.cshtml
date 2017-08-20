@@ -1,0 +1,490 @@
+﻿@model Wrly.Models.Listing.CareerHistoryViewModel
+@using (Html.BeginForm("Manage", "CareerHistory", FormMethod.Post, new { @id = "frmCareerHistoryList", @onsubmit = "return manageCareerHistory($(this))" }))
+{
+    <div class="profile-item" id="manage_Career_history_form">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(c => c.Hash)
+        @Html.HiddenFor(c => c.Type)
+        @Html.HiddenFor(c => c.CareerHistoryID)
+        @Html.HiddenFor(c => c.UserHash)
+        @Html.HiddenFor(c => c.JobTitleID)
+        @Html.HiddenFor(c => c.OrganizationID)
+        @if (Model.SkillIncluded != null && Model.SkillIncluded.Count > 0)
+        {
+            foreach (var item in Model.SkillIncluded)
+            {
+                <input type="hidden" name="Skills" value="@item.EntitySkillID" />
+            }
+        }
+        <div class="form-group">
+            <label class="control-label">Organization name:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.OrganizationName, new { @class = "form-control", @placeholder = "type the company/organization name" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Your role/profile:</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.JobTitleName, new { @class = "form-control", @placeholder = "type the name of your job title" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Your responsibilities:</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(c => c.About, new { @class = "form-control", @placeholder = "write your responsibilities here in this job title" })
+            </div>
+        </div>
+
+        @{var display = Model.SkillIncluded == null || Model.SkillIncluded.Count == 0 ? "none" : "block";}
+        @if (display == "none")
+        {
+            <div class="text-right"><button type="button" class="link-alike" onclick="showSkillAttach($(this))">Add your skills to this position</button> </div>
+        }
+        <div class="form-group" style="display:@display" id="skills-attached">
+            <label class="control-label">Add what you have been worked upon:</label>
+            <div class="col-md-10 skill-container" id="Skills">
+                @Html.TextBox("SkillListText", null, new { @id = "SkillListText", @placeholder = "type the skill name from what you have added on you profile", @class = "form-control" })
+                @if (Model.SkillIncluded != null && Model.SkillIncluded.Count > 0)
+                {
+                    foreach (var itemSkill in Model.SkillIncluded)
+                    {
+                        <span class="skill-tag-editable">
+                            @itemSkill.Name
+                        </span>
+                    }
+                }
+            </div>
+        </div>
+        @{display = string.IsNullOrEmpty(Model.Hash) || !(Model.StartFromMonth > 0) ? "none" : "block";}
+        @if (display == "none")
+        {
+            <div class="text-right"><button type="button" class="link-alike" onclick="showCareerDuration($(this))">Add duration of your work here</button> </div>
+        }
+        <fieldset id="durations-careerhistory" style="display:@display">
+            <legend class="control-label"> Work duration</legend>
+            <div class="form-group inline-control">
+                <div class="col-md-5">
+                    From: @Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control" })
+                </div>
+
+                @if (Model.StartFromDay > 0)
+                {
+                    <div class="col-md-5" id="divDayPortionStart">
+                        <select id="StartFromDay" name="StartFromDay" class="form-control">
+                            @foreach (var item in Model.DayList)
+                            {
+                                if (item.Value == Model.StartFromDay.ToString())
+                                {
+                                    <option value="@item.Value" selected="selected">@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <button type="button" class="link-alike" id="btnAddDay" data-remove onclick="____switchDayPortion($('#divDayPortionStart'),$(this))">Remove day</button>
+                    </div>
+                }
+                else if (Model.StartFromMonth > 0)
+                {
+                    <div class="col-md-5" id="divDayPortionStart">
+                        <select id="StartFromDay" name="StartFromDay" class="form-control" style="display:none;"></select>
+                    </div>
+                    <div class="col-md-5">
+                        <button type="button" id="btnAddDay" class="link-alike" data-add onclick="____switchDayPortion($('#divDayPortionStart'),$(this))">Add day</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-5" id="divDayPortionStart">
+                        <select id="StartFromDay" name="StartFromDay" class="form-control" style="display:none;"></select>
+                    </div>
+                    <div class="col-md-5">
+                        <button type="button" id="btnAddDay" class="link-alike" style="display:none;" data-add onclick="____switchDayPortion($('#divDayPortionStart'),$(this))">Add day</button>
+                    </div>
+                }
+            </div>
+
+            @{
+                display = !(Model.EndFromMonth > 0) ? "none" : "block";
+                if (display == "none")
+                {
+                    <div class="righ"><button type="button" class="link-alike" onclick="showCareerEndPeriod($(this))">Add when did you end here.</button> </div>
+                }
+            }
+            <div id="durations-end-careerhistory" style="display:@display">
+                <div class="form-group inline-control">
+                    <div class="col-md-5">
+                        To :@Html.DropDownListFor(c => c.EndFromMonth, Model.MonthList, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(c => c.EndFromYear, Model.YearList, new { @class = "form-control" })
+                    </div>
+
+                    @if (Model.EndFromDay > 0)
+                    {
+                        <div class="col-md-5" id="divDayPortionEnd">
+                            <select id="EndFromDay" name="EndFromDay" class="form-control">
+                                @foreach (var item in Model.EndDayList)
+                                {
+                                    if (item.Value == Model.EndFromDay.ToString())
+                                    {
+                                        <option value="@item.Value" selected="selected">@item.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <button type="button" id="btnAddDayEnd" class="link-alike" data-remove onclick="____switchDayPortion($('#divDayPortionEnd'), $(this))">Remove day</button>
+                        </div>
+
+                    }
+                    else if (Model.EndFromMonth > 0)
+                    {
+                        <div class="col-md-5" id="divDayPortionEnd">
+                            <select id="EndFromDay" name="EndFromDay" class="form-control" style="display:none;"></select>
+                        </div>
+                        <div class="col-md-5">
+                            <button type="button" id="btnAddDayEnd" class="link-alike" data-add onclick="____switchDayPortion($('#divDayPortionEnd'), $(this))">Add day</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-5" id="divDayPortionEnd">
+                            <select id="EndFromDay" name="EndFromDay" class="form-control" style="display:none;"></select>
+                        </div>
+                        <div class="col-md-5">
+                            <button type="button" id="btnAddDayEnd" class="link-alike" style="display:none;" data-add onclick="____switchDayPortion($('#divDayPortionEnd'), $(this))">Add day</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </fieldset>
+        @if (!string.IsNullOrEmpty(Model.Hash))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmCareerHistoryList'), $('button[data-add-exp]'))" href="#">Cancel</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Add to profile" />
+                    <a class="link-alike" onclick="return removeFormAndShowSource($('#frmCareerHistoryList'), $('button[data-add-exp]'))" href="#">Cancel</a><div class="waiting-bg"></div>
+                </div>
+            </div>
+        }
+
+
+        <script>
+            $(document).ready(function () {
+                // Required another if selected one.
+                $.validator.addMethod('requeiredifselected', function (value, element, params) {
+                    var otherPropValue = $('#' + params.otherproperty).val();
+                    //                console.log({ otherproperty: params.otherproperty, value: value, otherPropValue: otherPropValue });
+
+                    if (otherPropValue > 0 && (value == '' || value == -1)) {
+                        return false;
+                    }
+                    return true;
+                });
+
+                $.validator.unobtrusive.adapters.add("requeiredifselected", ["otherproperty", "mode"], function (options) {
+                    options.rules["requeiredifselected"] = options.params;
+                    options.messages["requeiredifselected"] = options.message;
+                });
+                //=======================   End ================================//
+
+                // Date validation
+                $.validator.addMethod('cannotgreatermonthandyear', function (value, element, params) {
+                    var isStart = params.isstart;
+                    var isMonth = params.ismonth;
+                    var isYear = params.isyear;
+                    var otherPropertyYear = $('#' + params.otherpropertyyear).val();
+                    var otherPropertyMonth = $('#' + params.otherpropertymonth).val();
+                    var friendProperty = $('#' + params.friendproperty).val();
+
+
+                    //console.log({ isStart: isStart, isMonth: isMonth, isYear: isYear, otherPropertyYear: otherPropertyYear, otherPropertyMonth: otherPropertyMonth, friendProperty: friendProperty, value:value });
+                    var startDate = new Date();
+                    var endDate = new Date();
+                    if (otherPropertyMonth > 0 && otherPropertyYear > 0 && friendProperty > 0) {
+                        if (isStart == 'True') {
+                            if (isMonth == 'True') {
+                                startDate = new Date(friendProperty, value, 1);
+                            } else {
+                                startDate = new Date(value, friendProperty, 1);
+                            }
+                            endDate = new Date(otherPropertyYear, otherPropertyMonth, 1);
+                        } else {
+                            if (isMonth.toString() == 'True' && friendProperty > 0) {
+                                endDate = new Date(friendProperty, value, 1);
+                            } else {
+                                endDate = new Date(value, friendProperty, 1);
+                            }
+                            startDate = new Date(otherPropertyYear, otherPropertyMonth, 1);
+                        }
+                        console.log({ endDate: endDate, startDate: startDate });
+                        return (endDate >= startDate);
+                    }
+                    return true;
+                });
+
+                $.validator.unobtrusive.adapters.add("cannotgreatermonthandyear", ["friendproperty", "otherpropertymonth", "otherpropertyyear", "isstart", "ismonth", "isyear"], function (options) {
+                    options.rules["cannotgreatermonthandyear"] = options.params;
+                    options.messages["cannotgreatermonthandyear"] = options.message;
+                });
+                //=======================   End ================================//
+
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+                var data = [];
+                $("#SkillListText").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/CareerHistory/SkillList",
+                            data: { keyword: $("#SkillListText").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#SkillListText").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim(),
+                                        id: obj.Key.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    select: function (event, ui) {
+                        if ($('input[data-val-name="' + ui.item.label + '"]').length == 0) {
+                            var element = '<span class="skill-tag-editable"> ' + ui.item.label + ' <input type="hidden" name="Skills" value="' + ui.item.id.toString() + '" data-val-name="' + ui.item.label + '" /><span class="remove" onclick="removeTempSkillFromWorkHistory($(this))">X</span></span>';
+                            $('#Skills').append(element.toString());
+                        }
+                        this.value = "";
+                        return false;
+                    }
+                });
+
+                $("#OrganizationName").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/Business/Search",
+                            data: { key: $("#OrganizationName").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#OrganizationName").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim(),
+                                        id: obj.Key.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    select: function (event, ui) {
+                        $('#OrganizationID').val(ui.item.id);
+                    }
+                });
+
+                $("#JobTitleName").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        isAutomComplete = true;
+                        $.ajax({
+                            url: "/CareerHistory/SearchJobTitle",
+                            data: { key: $("#JobTitleName").val() },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                isAutomComplete = false;
+                                if (data.length == 0) {
+                                    $("#JobTitleName").removeClass('working');
+                                }
+                                response($.map
+                                (data, function (obj) {
+                                    return {
+                                        label: obj.Value.toString().trim(),
+                                        value: obj.Value.toString().trim(),
+                                        id: obj.Key.toString().trim()
+                                    };
+                                }));
+                            },
+                            error: function () { isAutomComplete = false; }
+                        });
+                    },
+                    select: function (event, ui) {
+                        $('#JobTitleID').val(ui.item.id);
+                    }
+                });
+            })
+
+            function showCareerDuration($obj) {
+                $('#durations-careerhistory').show();
+                $obj.remove()
+            }
+
+            function showCareerEndPeriod($obj) {
+                if (!$('#durations-end-careerhistory').is(':visible')) {
+                    $('#durations-end-careerhistory').show();
+                    $obj.html('Hide when did you end here.');
+                } else {
+                    $('#durations-end-careerhistory').hide();
+                    $obj.html('Add when did you end here.');
+                    $('#EndFromMonth, #EndFromYear').val(-1);
+                    $('#EndFromDay').hide();
+                    $('#EndFromDay').find('option').remove();
+                    $('#btnAddDayEnd').hide();
+                    $('#btnAddDayEnd').html('Add day');
+                }
+            }
+
+            function showSkillAttach($obj) {
+                $('#skills-attached').show();
+                $obj.remove();
+            }
+
+
+            function manageCareerHistory($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            $("#career-history").processTemplateURL("/careerhistory/career", null, { attachGlobalWait: true });
+                            $obj.remove();
+                            $('button[data-add-exp]').show();
+                            postEditAction()
+                        }
+                    });
+                }
+                return false;
+            }
+
+            function daysInMonth(month, year) {
+                return new Date(year, month, 0).getDate();
+            }
+
+            function removeTempSkillFromWorkHistory($obj) {
+                $obj.parent('.skill-tag-editable').remove();
+            }
+
+            function fillStartDays() {
+                if ($('#StartFromYear').val() > 0 && $('#StartFromMonth').val() > 0) {
+                    $('#StartFromDay').show();
+                    $('#StartFromDay').find('option').remove();
+
+                    var daysInSelectedMonth = daysInMonth($('#StartFromMonth').val(), $('#StartFromYear').val());
+
+                    for (var i = 1; i <= daysInSelectedMonth; i++) {
+                        $('#StartFromDay').append($("<option></option>").attr("value", i).text(i));
+                    }
+
+                } else {
+                    $('#StartFromDay').hide();
+                }
+            }
+
+            $('#StartFromMonth, #StartFromYear').change(function () {
+                if ($('#StartFromMonth').val() > 0 && $('#StartFromYear').val() > 0) {
+                    $('#btnAddDay').show();
+                } else {
+                    $('#btnAddDay').hide();
+                }
+            });
+
+            function daysInMonth(month, year) {
+                return new Date(year, month, 0).getDate();
+            }
+
+            function fillEndDays() {
+                if ($('#EndFromYear').val() > 0 && $('#EndFromMonth').val() > 0) {
+                    $('#EndFromDay').show();
+                    $('#EndFromDay').find('option').remove();
+
+                    var daysInSelectedMonth = daysInMonth($('#EndFromMonth').val(), $('#EndFromYear').val());
+
+                    for (var i = 1; i <= daysInSelectedMonth; i++) {
+                        $('#EndFromDay').append($("<option></option>").attr("value", i).text(i));
+                    }
+
+                } else {
+                    $('#EndFromDay').hide();
+                }
+            }
+
+            $('#EndFromMonth, #EndFromYear').change(function () {
+                if ($('#EndFromYear').val() > 0 && $('#EndFromMonth').val() > 0) {
+                    $('#btnAddDayEnd').show();
+                } else {
+                    $('#btnAddDayEnd').hide();
+                }
+            });
+
+            function ____switchDayPortion($obj, $this) {
+                if ($obj.attr('id') == 'divDayPortionStart') {
+                    if ($('#StartFromDay').is(':visible')) {
+                        $('#StartFromDay').find('option').remove();
+                        $('#StartFromDay').val(null);
+                        $('#StartFromDay').hide();
+                        $this.html('Add day');
+                    } else {
+                        fillStartDays();
+                        $('#StartFromDay').show();
+                        $this.html('Remove day');
+                    }
+                }
+                if ($obj.attr('id') == 'divDayPortionEnd') {
+                    if ($('#EndFromDay').is(':visible')) {
+                        $('#EndFromDay').find('option').remove();
+                        $('#EndFromDay').val(null);
+                        $('#EndFromDay').hide();
+                        $this.html('Add day');
+                    } else {
+                        fillEndDays();
+                        $('#EndFromDay').show();
+                        $this.html('Remove day');
+                    }
+                }
+            }
+        </script>
+    </div>
+}

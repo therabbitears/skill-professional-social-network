@@ -1,0 +1,122 @@
+﻿<!doctype html>
+<!--[if IE 8]><html class="ie8 lt-ie10"><![endif]-->
+<!--[if IE 9]><html class="ie9 lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    @if (ViewBag.Title == null)
+    {
+        <title>sklative - the skill's network</title>
+        <meta property="og:title" content="sklative - the skill's network" />
+    }
+    else
+    {
+        <title>@ViewBag.Title</title>
+        <meta property="og:title" content="@ViewBag.Title" />
+    }
+    @{Html.RenderPartial("_StaticMetas");}
+    @if (ViewBag.Description != null)
+    {
+        <meta property="og:description" content="@ViewBag.Description" />
+        <meta name="description" content="@ViewBag.Description" />
+    }
+    @if (ViewBag.Keywords != null)
+    {
+        <meta name="keywords" content="@ViewBag.Keywords" />
+    }
+    @if (ViewBag.AddNoFollow == true)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    <link rel="shortcut icon" href="/favicon.ico" />
+    @System.Web.Optimization.Styles.Render("~/cdn/_LayoutStyles")
+
+    @RenderSection("_HeadStyles", false)
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJN2QN9"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <main id="panel" class="panel @ViewBag.ExtraPanelClass">
+        @if (ViewBag.AddLayer != null)
+        {
+            <div class="body-placeholder"></div>
+        }
+        <header class="panel-header">
+            <div class="container">
+
+                <div class="header-control-container">
+                    @if (ViewBag.RenderHeaderLogin == null)
+                    {
+                        <div>
+                            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { autocomplete = "off" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="text" name="username" class="form-control header-control" placeholder="email address" />
+                                <input type="password" name="password" placeholder="password" class="form-control header-control" />
+                                @*<span class="eclipse more-option-container more-nav question-more-options righ-on-small">
+                                        <span class="dropdown-toggle"data-container="parent">
+                                            <span class=" three-dot">&#x22EE;</span>
+                                        </span>
+                                        <ul class="dropdown-menu profile"><li>Hi</li></ul>
+                                    </span>*@
+                                <button class="btn btn-primary btn-sm btn-header-action" type="submit">Login</button>
+                                if (ViewBag.IgnoreRegister == null)
+                                {
+                                    <a href="/account/register">Register</a>
+                                }
+                            }
+                            <div class="logo-cont title">
+                                <a href="/">
+                                    <img class="title-brand-full" src="/logos/Logo_1_Inv.jpg" alt="sklative - logo" />
+                                </a>
+                            </div>
+                        </div>
+                        @*<div class="second-header-div">
+                            @Html.ActionLink("Forgotten password?", "Forgot", "Account", null, new { @class = "second-link" })
+                        </div>*@
+                    }
+                    else
+                    {
+                        <div class="logo-cont">
+                            <a href="/">
+                                <img class="title-brand-full" src="/logos/Logo_1_Inv.jpg" alt="sklative - logo" />
+                            </a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </header>
+        <section class="box-container">
+            <section class="box">
+                @RenderBody()
+                <div class="alert-success-popabble">
+                </div>
+                <div class="alert-error-popabble">
+                </div>
+            </section>
+
+        </section>
+    </main>
+    <footer class="panel-footer">
+        @{Html.RenderPartial("_Footer");}
+        @{Html.RenderPartial("_Analytics");}
+    </footer>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("_FooterScripts", false)
+</body>
+</html>

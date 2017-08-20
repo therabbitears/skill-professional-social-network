@@ -1,0 +1,133 @@
+﻿@model List<Wrly.Models.EntitySearchViewModel>
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    string q = Request.QueryString.Get("q");
+    string type = string.IsNullOrEmpty(Request.QueryString.Get("type")) ? string.Empty : Request.QueryString.Get("type");
+}
+
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <div class="tabs">
+                @if (string.IsNullOrEmpty(type) || type.Equals("general"))
+                {
+                    <div class="tab"><a class="active" href="/results?q=@q">All</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=connections">Connections</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=companies">Companies</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=people">People</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=groups">Groups</a></div>
+                }
+                @if (type.Equals("connections"))
+                {
+                    <div class="tab">
+                        <a href="/results?q=@q">All</a>
+                    </div>
+                    <div class="tab">
+                        <a class="active" href="/results?q=@q&type=connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a href="/results?q=@q&type=companies">Companies</a>
+                    </div>
+                    <div class="tab">
+                        <a href="/results?q=@q&type=people">People</a>
+                    </div>
+                    <div class="tab"><a href="/results?q=@q&type=groups">Groups</a></div>
+                }
+                @if (type.Equals("companies"))
+                {
+                    <div class="tab"><a href="/results?q=@q">All</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=connections">Connections</a></div>
+                    <div class="tab"><a class="active" href="/results?q=@q&type=companies">Companies</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=people">People</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=groups">Groups</a></div>
+                }
+                @if (type.Equals("people"))
+                {
+                    <div class="tab"><a href="/results?q=@q">All</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=connections">Connections</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=companies">Companies</a></div>
+                    <div class="tab"><a class="active" href="/results?q=@q&type=people">People</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=groups">Groups</a></div>
+                }
+                @if (type.Equals("groups"))
+                {
+                    <div class="tab"><a href="/results?q=@q">All</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=connections">Connections</a></div>
+                    <div class="tab"><a href="/results?q=@q&type=companies">Companies</a></div>
+                    <div class="tab"><a  href="/results?q=@q&type=people">People</a></div>
+                    <div class="tab"><a class="active" href="/results?q=@q&type=groups" >Groups</a></div>
+                }
+            </div>
+            @if (string.IsNullOrEmpty(type) || type.Equals("general"))
+            {
+                <h1 class="page-title">"@q" Search results</h1>
+                if (Model.Count > 0)
+                {
+                    <h2 class="page-sub-title">@Model.First().TotalRows results matches your search "@q"</h2>
+                    Html.RenderPartial("_SearchResults", Model);
+                }
+                else
+                {
+                    <span>Keyword "@q" cound't found anything on server, either this is misspelled or not matching to any object which include people, companies, associations, topic, tags and jobs. </span>
+                }
+            }
+            @if (type.Equals("connections"))
+            {
+                <h1 class="page-title">"@q" Connections</h1>
+                if (Model.Count > 0)
+                {
+                    <h2 class="page-sub-title">@Model.First().TotalRows your connections matches your search "@q"</h2>
+                    Html.RenderPartial("_SearchResults", Model);
+                }
+                else
+                {
+                    <span>No connection matches "@q", either this is misspelled or not matching to of your connection name. </span>
+                }
+            }
+            @if (type.Equals("companies"))
+            {
+                <h1 class="page-title">"@q" Companies</h1>
+                if (Model.Count > 0)
+                {
+                    <h2 class="page-sub-title">@Model.First().TotalRows companies matches your search "@q"</h2>
+                    Html.RenderPartial("_SearchResults", Model);
+                }
+                else
+                {
+                    <span>No company name matches "@q", either this is misspelled or not matching to any of registered company name. </span>
+                }
+            }
+            @if (type.Equals("people"))
+            {
+                <h1 class="page-title">"@q" People</h1>
+                if (Model.Count > 0)
+                {
+                    <h2 class="page-sub-title">@Model.First().TotalRows people matches your search "@q"</h2>
+                    Html.RenderPartial("_SearchResults", Model);
+                }
+                else
+                {
+                    <span>No individual name matches "@q", either this is misspelled or not matching to any of name. </span>
+                }
+            }
+            @if (type.Equals("groups"))
+            {
+                <h1 class="page-title">"@q" Groups</h1>
+                if (Model.Count > 0)
+                {
+                    <h2 class="page-sub-title">@Model.First().TotalRows groups matches your search "@q"</h2>
+                    Html.RenderPartial("_SearchResults", Model);
+                }
+                else
+                {
+                    <span>No group name matches "@q". </span>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_NetworkSharedStyles")
+}

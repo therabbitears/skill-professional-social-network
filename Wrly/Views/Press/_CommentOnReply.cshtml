@@ -1,0 +1,17 @@
+﻿@model Wrly.Models.ReplyViewModel
+<div class="" data-val-feed-reply-form="true">
+    <div class="comment-action-con ofh">
+        <div class="comment-input-con">
+            <div>
+                @using (Html.BeginForm("Reply", "press", FormMethod.Post, new { data_val_container = ViewBag.Container, @onsubmit = "return addReplyReaction($(this))", data_val_react = "feed", data_val_react_type = "comment" }))
+                {
+                    @Html.Hidden("Hash", Model.Hash)
+                    @Html.AntiForgeryToken()
+                    <input class="form-control" type="text" placeholder="Write your reply" name="Comment" tabindex="-1">
+                    <small class="child-headings">Press enter key to submit the reply.</small>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

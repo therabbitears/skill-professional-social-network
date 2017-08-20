@@ -1,0 +1,76 @@
+﻿@using Wrly
+@model Wrly.Models.Business.GroupViewModel
+<div class="profile-face">
+    <div class="table-row">
+        <div class="relative profile-image">
+            @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+            {
+                <img src="@Html.ImagePath(Model.ProfileImagePath,200)" alt="User Image - @Model.Name" />
+            }
+            else
+            {
+                <img src="/content/images/o/no-image.png" alt="user default image" />
+            }
+        </div>
+        <div class="profile-detail-face">
+            <h1>@Model.Name</h1>
+            <h2>
+                <span>@(((Types.Enums.GroupType)Model.SubType).GetDescription())</span>
+            </h2>
+            <div class="connection-figures table-row">
+                <span class="connection-figures"><span class="figure">@Model.TotalFollowers.FormatedNumber()</span> members</span>
+            </div>
+            <div class="right">
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="btn-group" id="connectionStatus">
+                        @if (Model.Member == null)
+                        {
+                            using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "',false,true)" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="actn" value="follow" />
+                                <input type="hidden" name="group" value="true" />
+                                <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                                <button class="materialzed btn-sm">Join</button>
+                            }
+                        }
+                        else
+                        {
+                            if (Model.Member.ObjectStatus == (int)Types.Enums.AssociationRequestStatus.Approve)
+                            {
+                                <button class="materialzed btn-sm">Joined</button>
+                                <button type="button" class="materialzed btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu profile action-list">
+                                    @if (Model.Member != null)
+                                    {
+                                        <li>
+                                            @using (Html.BeginForm("Action", "association", FormMethod.Post, new { onsubmit = "return newAssociation($(this),'" + Model.NetworkHash + "',false,true)" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="actn" value="unfollow" />
+                                                <input type="hidden" name="group" value="true" />
+                                                <input type="hidden" name="hash" value="@Model.NetworkHash" />
+                                                <button class="link-alike">Leave</button>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <button class="materialzed btn-sm">Pending approval</button>
+                            }
+                        }
+                    </div>
+                }
+                else
+                {
+                    <button class="materialzed btn-sm" onclick="____authentication()">Join</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

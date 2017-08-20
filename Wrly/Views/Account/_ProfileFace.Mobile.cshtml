@@ -1,0 +1,73 @@
+﻿@model Wrly.Models.ProfileViewModel
+<aside class="profile-card">
+    @if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+    {
+        <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+
+        </div>
+    }
+    <header class="face">
+        <a>
+            @if (!string.IsNullOrEmpty(Model.ProfilePic))
+            {
+                <img src="@Html.ImagePath(Model.ProfilePic, 100)" alt="User Image - @Model.FullName" />
+            }
+            else
+            {
+                <img src="/content/images/no-image.png" alt="user default image" />
+            }
+        </a>
+        <h1>@Model.FormatedName</h1>
+        <h2>@Model.FormatedJobTitle</h2>
+       
+    </header>
+    @if (ViewBag.ShowAbout == true)
+    {
+        <div class="profile-bio section-floated-container">
+            <p>
+                @if (!string.IsNullOrEmpty(Model.ProfileSummary) && Model.ProfileSummary.Length > 100)
+                {
+                    <span>
+                        <span class="less" data-full="@(Model.ProfileSummary)">
+                            @Model.ProfileSummary.Substring(0, 100)<span>...</span>
+                        </span>
+                        <button class="link-alike" onclick="____swichAbout($(this))">Read more</button>
+                    </span>
+                }
+                else
+                {
+                    @Model.ProfileSummary
+                }
+            </p>
+        </div>
+    }
+    @if (ViewBag.ShowQuickJump == true)
+    {
+        <ul class="profile-social-links" id="nav">
+            <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="career-history-section"> <i class="glyph-icon flaticon-clinic-history"></i></a> </li>
+            <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="certification-section"> <i class="glyph-icon flaticon-diploma"></i></a></li>
+            <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="education-section"> <i class="glyph-icon flaticon-graduate-cap"></i></a></li>
+            <li data-val-action="action" class="fact visible"><a href="#" data-val-pointing="skill-section" class="card active"> <i class="glyph-icon flaticon-skills"></i></a> </li>
+        </ul>
+    }
+</aside>
+<div class="text-center">
+    <div class="btn-group margin-up-down-10" id="connectionStatus">
+    </div>
+</div>
+<div class="profile-info manage">
+    <ul>
+        <li>
+            <a href="/@Model.ProfileName/profile-items/connections">
+                <span>@Model.TotalConnections</span>
+                Connections
+            </a>
+        </li>
+        <li>
+            <a href="/@Model.ProfileName/profile-items/followers">
+                <span>@Model.TotalFollowers</span>
+                Followers
+            </a>
+        </li>
+    </ul>
+</div>

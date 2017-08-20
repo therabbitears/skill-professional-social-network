@@ -1,0 +1,18 @@
+﻿@model List<Wrly.Models.Listing.ActionAssociateProfileViewModel>
+<div class="groups" id="list-suggestions">
+    @foreach (var item in Model)
+    {
+
+        <section class="reuqest-item">
+            <div class="container">
+                <img class="thumbnail-notification left" src="@Html.ImagePath(item.ProfilePhotoUrl,100)" alt="User Image - @item.AuthorName" />
+                <div>
+                    <div class="heading">
+                        <a href="/@item.ProfileUrl"><h3 class="page-title">@item.AuthorName</h3></a>
+                        <div class="max-heading">@(item.ProfileHeadline)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+</div>

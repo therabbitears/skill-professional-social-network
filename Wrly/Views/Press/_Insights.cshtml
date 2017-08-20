@@ -1,0 +1,31 @@
+﻿@model Wrly.Models.Feeds.FeedDetailViewModel
+@using Types;
+@{var container = Guid.NewGuid().ToString();}
+<div class="pop-up-header">
+    <h1 class="model-title">Insights<small>Beta</small></h1>
+</div>
+<div class="main-content insight-popup" data-container-id="news-item-@container">
+    <div class="connection-figures-container">
+        @if (Model.Insgihts.TotalApplications > 0)
+        {
+            <div class="connection-figures" data-hash="@Model.Hash" onclick="____loadRefarals('applications', $(this));"><span class="figure">@Model.Insgihts.TotalApplications</span> <span class="insight-label">applications</span></div>
+        }
+        @if (Model.Insgihts.TotalReferals > 0)
+        {
+            <div class="connection-figures" data-hash="@Model.Hash" onclick="____loadRefarals('referals', $(this));"><span class="figure">@Model.Insgihts.TotalReferals</span> <span class="insight-label">referrals</span></div>
+        }
+        else if (Model.Insgihts.TotalReferalsForJobLooking > 0)
+        {
+            <div class="connection-figures" data-hash="@Model.Hash" onclick="____loadRefarals('opportunity-referals', $(this));"><span class="figure">@Model.Insgihts.TotalReferalsForJobLooking</span> <span class="insight-label">referrals</span></div>
+        }
+
+        @*<div class="connection-figures"><span class="figure">@Model.Insgihts.TotalViews</span> <span class="insight-label">views</span></div>
+            <div class="connection-figures"><span class="figure">@Model.Insgihts.TotalImpressions</span> <span class="insight-label">impressions</span></div>*@
+        <div class="connection-figures" data-val-total="@Model.Insgihts.TotalReplies" data-level="first" data-val-stock="0" data-val-next="-1" data-action="more-comments" data-hash="@Model.Hash" class="link-alike" data-val-container="news-item-@container" data-val-total="@Model.Insgihts.TotalReplies" onclick="____loadRefarals('responses', $(this))"><span class="figure">@Model.Insgihts.TotalReplies</span> <span class="insight-label">responses</span></div>
+    </div>
+    <div class="feed-comments">
+        <div id="comment-render-area" class="details">
+        </div>
+    </div>
+
+</div>

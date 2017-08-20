@@ -1,0 +1,22 @@
+﻿@model List<BabyGomzV._2.viewmodels.GroupViewModel>
+@{
+    ViewBag.Title = "Chat Rooms | BabyGomz";
+    ViewBag.Description = "BabyGomz chat rooms allowed you to join the room, ask the question, discuss a topic or help upon your doubts.";
+    if (Request.IsMobile())
+    {
+        Layout = "~/Views/Shared/MasterPages/_LayoutNames.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/MasterPages/_LayoutNames_New.cshtml";
+    }
+}
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li class="active">Groups</li>
+    </ol>
+</div>
+<div class="container">
+    @{Html.RenderPartial("_Groups", Model);}
+</div>

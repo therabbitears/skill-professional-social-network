@@ -1,0 +1,103 @@
+﻿@model Wrly.Models.Business.BusinessProfileViewModel
+<div class="row">
+    <h1 class="page-title">Organization profile</h1>
+    <h2 class="page-sub-title">Manage organization profile settings</h2>
+</div>
+<div class="row">
+    <h3 class="page-title">General</h3>
+    <div id="profileBasic">
+        <div class="text-right"><button class="link-alike" onclick="____editBasic($(this))">Edit</button></div>
+        <div>
+            <label class="control-label">Industry:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.Category</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">Website:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.Website</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">Employee strength:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.EmployeeStrength</label>
+            </div>
+        </div>
+    </div>
+    <div id="editProfileBasic">
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    <h3 class="page-title">Address</h3>
+    <div id="profileAddress">
+        <div class="text-right"><button class="link-alike" onclick="____editAddress($(this))">Edit</button></div>
+        <div>
+            <label class="control-label">Address line1:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.AddressLine1</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">Address line2:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.AddressLine2</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">Address line3:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.AddressLine3</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">Address line4:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.AddressLine4</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">City:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.City</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">State:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.State</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">Country:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.Country</label>
+            </div>
+        </div>
+        <div>
+            <label class="control-label">Zipcode:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.ZipCode</label>
+            </div>
+        </div>
+    </div>
+    <div id="editprofileAddress">
+    </div>
+</div>
+
+<div class="row">
+    <h3 class="page-title">Phone</h3>
+    <div>
+        <div id="profilePhone">
+            <label class="control-label">Phone:</label>
+            <div class="col-md-10">
+                <label class="setting-value" id="job-search-level-con">@Model.Phone</label><button class="link-alike" onclick="____editPhone($(this))">Edit</button>
+            </div>
+        </div>
+        <div id="editPhone">
+        </div>
+    </div>
+</div>

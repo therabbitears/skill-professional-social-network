@@ -1,0 +1,247 @@
+﻿@model Wrly.Models.Business.GroupViewModel
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.Description = Model.Description;
+    Layout = "~/Views/Shared/_GroupLayoutAuthenticated.cshtml";
+    string wrapperClass = string.Empty;
+}
+
+@section _HeadStyles
+{
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    @Styles.Render("~/cdn/_ProfilePublicStyles")
+}
+@if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+{
+    wrapperClass = "has-cover";
+    <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+
+    </div>
+}
+<div class="@wrapperClass content-container">
+    
+    <div class="two-three">
+        <div id="face">
+            
+            <div class="section-floated">
+                <div class="section-floated-container">
+                    <div class="margin-up-down-10 text-right"><a href="/groups/@Model.ProfileName?publicView=true">Goto member view</a></div>
+                    @{Html.RenderPartial("_ManageGroupProfileFace", Model);}
+                </div>
+            </div>
+        </div>
+        <div class="tabs">
+            @if (Model.Mode == Types.Enums.GroupMode.General)
+            {
+                <div class="tab">
+                    <a data-val-for="career-contents" class="active" href="/groups/@Model.ProfileName">Group</a>
+                </div>
+                if (Model.MemberRequests > 0)
+                {
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/groups/@Model.ProfileName/member-requests">Member requests <span class="tab-count danger">@Model.MemberRequests</span></a>
+                    </div>
+                }
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/groups/@Model.ProfileName/members">Members</a>
+                </div>
+            }
+            else if (Model.Mode == Types.Enums.GroupMode.Requests)
+            {
+                <div class="tab">
+                    <a data-val-for="career-contents" href="/groups/@Model.ProfileName">Group</a>
+                </div>
+                if (Model.MemberRequests > 0)
+                {
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/groups/@Model.ProfileName/member-requests">Member requests <span class="tab-count danger">@Model.MemberRequests</span></a>
+                    </div>
+                }
+                <div class="tab">
+                    <a data-val-for="timeline-contents" href="/groups/@Model.ProfileName/members">Members</a>
+                </div>
+            }
+            else if (Model.Mode == Types.Enums.GroupMode.Members)
+            {
+                <div class="tab">
+                    <a data-val-for="career-contents" href="/groups/@Model.ProfileName">Group</a>
+                </div>
+                if (Model.MemberRequests > 0)
+                {
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/groups/@Model.ProfileName/member-requests">Member requests <span class="tab-count danger">@Model.MemberRequests</span></a>
+                    </div>
+                }
+                <div class="tab">
+                    <a data-val-for="timeline-contents" class="active" href="/groups/@Model.ProfileName/members">Members</a>
+                </div>
+            }
+        </div>
+
+        @if (Model.Mode == Types.Enums.GroupMode.General)
+        {
+
+            if (Model.Member != null && Model.Member.ObjectStatus == (int)Types.Enums.AssociationRequestStatus.Approve)
+            {
+                <div id="career-contents">
+                    <div class="career-summary section-floated">
+                        <div class="section-floated-container">
+                            @{Html.RenderPartial("_ShareUpdateGroup", Model);}
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="feeds" id="divFeeds">
+
+            </div>
+            @section _FooterScripts{
+                <script type="text/javascript">
+                    profileHash = '@Model.ProfileHash';
+
+                    var profileHash = '@Model.ProfileHash';
+                    var pageNumber = -1;
+                    function loadTimeLineFeeds(initialLoad) {
+                        $(this).attr('disabled', 'disabled');
+                        if (initialLoad != undefined && initialLoad == true) {
+                            pageNumber = 0
+                        } else {
+                            pageNumber = pageNumber + 1;
+                        }
+                        $.get('/account/timeline?group=true&q=' + profileHash + '&pageNumber=' + pageNumber.toString(), function (res) {
+                            if (res.toString().trim() == '') {
+                                $('.load-more').remove();
+                            } else {
+                                $('.load-more').removeAttr('disabled');
+                                $('.load-more').hide();
+                                $('.feeds').append(res);
+                                tooltip($('.feeds'));
+                            }
+                        });
+                    }
+                    $(document).ready(function () {
+                        loadTimeLineFeeds(true);
+                    });
+                </script>
+        @Scripts.Render("~/cdn/_AuthHomeScripts")
+            }
+        }
+        else if (Model.Mode == Types.Enums.GroupMode.Requests)
+        {
+            <div class="career-history-list section-floated">
+                <div class="profile-item">
+                    <div class="text-right">
+                        @using (Html.BeginForm("ApproveAll", "Association", FormMethod.Post, new { @onsubmit = "return approveAll($(this));" }))
+                        {
+                            @Html.HiddenFor(c => c.ProfileHash, new { @id = "hash" })
+                            @Html.AntiForgeryToken()
+                            <button class="link-alike">Approve all</button>
+                        }
+                    </div>
+                    <div id="divMemberRequests">
+                    </div>
+                </div>
+            </div>
+            @section _FooterScripts{
+                <script type="text/javascript">
+                    profileHash = '@Model.ProfileHash';
+                    var pageNumber = -1;
+                    function loadMembersRequests(initialLoad) {
+                        $(this).attr('disabled', 'disabled');
+                        if (initialLoad != undefined && initialLoad == true) {
+                            pageNumber = 0
+                        } else {
+                            pageNumber = pageNumber + 1;
+                        }
+                        $.get('/groups/members?pending=true&group=true&q=' + profileHash + '&pageNumber=' + pageNumber.toString(), function (res) {
+                            if (res.toString().trim() == '') {
+                                $('.load-more').remove();
+                            } else {
+                                $('.load-more').removeAttr('disabled');
+                                $('.load-more').hide();
+                                $('#divMemberRequests').append(res);
+                                tooltip($('#divMemberRequests'));
+                            }
+                        });
+                    }
+                    $(document).ready(function () {
+                        loadMembersRequests(true);
+                    });
+                    function approveAll($obj) {
+                        var ser = $obj.serialize();
+                        var action = $obj.attr('action');
+                        $.ajax({
+                            url: action,
+                            type: 'POST',
+                            data: ser,
+                            dataType: 'json',
+                            waitingSelector: $obj.find('.waiting-bg'),
+                            success: function (response) {
+                                if (response.Type == 2) {
+                                    showPopableSuccessAlert(response.Description);
+                                    $('#divMemberRequests').find('button').remove();
+                                    $('<span />').attr('class', 'btn btn-success btn-sm').appendTo($('#divMemberRequests').find('.buttons')).html('Approved');
+                                } else {
+                                    showPopableErrorAlert(response.Description);
+                                }
+                            }
+                        });
+                        return false;
+                    }
+                </script>
+                @Scripts.Render("~/cdn/_NetworkSharedScripts")
+            }
+        }
+        else if (Model.Mode == Types.Enums.GroupMode.Members)
+        {
+            <div class="career-history-list section-floated">
+                <div class="profile-item">
+                    <div id="divMembers">
+                    </div>
+                </div>
+            </div>
+            @section _FooterScripts{
+                <script type="text/javascript">
+                    profileHash = '@Model.ProfileHash';
+                    var pageNumber = -1;
+                    function loadMembers(initialLoad) {
+                        $(this).attr('disabled', 'disabled');
+                        if (initialLoad != undefined && initialLoad == true) {
+                            pageNumber = 0
+                        } else {
+                            pageNumber = pageNumber + 1;
+                        }
+                        $.get('/groups/members?pending=false&group=true&q=' + profileHash + '&pageNumber=' + pageNumber.toString(), function (res) {
+                            if (res.toString().trim() == '') {
+                                $('.load-more').remove();
+                            } else {
+                                $('.load-more').removeAttr('disabled');
+                                $('.load-more').hide();
+                                $('#divMembers').append(res);
+                                tooltip($('#divMembers'));
+                            }
+                        });
+                    }
+                    $(document).ready(function () {
+                        loadMembers(true);
+                    });
+                </script>
+            }
+        }
+
+    </div>
+    <div class="one-three">
+        <div class="more-info section-floated">
+            <div class="section-floated-container">
+                <h1>About</h1>
+                <div class="profile-about" id="skiller-summary">
+                    <div class="about-summary">
+                        <p class="about">
+                            @Model.Description
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

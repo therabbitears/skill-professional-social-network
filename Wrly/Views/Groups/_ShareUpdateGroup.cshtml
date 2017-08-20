@@ -1,0 +1,85 @@
+﻿@model Wrly.Models.Business.GroupViewModel
+@using (Html.BeginForm("ShareNewsToGroup", "Press", FormMethod.Post, new { @onsubmit = "return shareNews($(this))", @enctype = "multipart/form-data", id = "frmShareNews" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="q" value="@Model.ProfileHash" />
+    <input type="hidden" name="groupHash" id="groupHash" value="@Model.ProfileHash" />
+    <div class="sharer">
+        @if (Model.SubType == (int)Types.Enums.GroupType.Discussions)
+        {
+            <input type="hidden" name="IsDiscussion" value="true" />
+            <h1>Share a discussion</h1>
+            <div class="post-preview">
+                <input class="form-control" data-val="true" data-val-required="The title cannot be left blank." name="Title" placeholder="title of discussion" />
+            </div>
+            <div class="post-preview">
+                <textarea class="form-control" data-val="true" data-val-required="The description or your openion cannot be left blank." rows="4" name="Text" placeholder="write the background or your openion on this discussion"></textarea>
+            </div>
+        }
+        else
+        {
+            <h1>Post to group</h1>
+            <div class="text-right">
+                <input type="file" id="postPhoto" name="PostImage" style="visibility:hidden;display:none;" onchange="return ____previewImage(this,event)" />
+                <label for="postPhoto" class="link-alike">+ Add photo</label>
+            </div>
+            <div class="post-preview">
+                <textarea class="form-control" data-val="true" data-val-required="The text cannot be left blank." rows="4" name="Text" placeholder="Share events, opportunities and discussions"></textarea>
+            </div>
+        }
+        <div class="buttons">
+            <div>
+
+                @if (Model.SubType == (int)Types.Enums.GroupType.Discussions)
+                {
+                    <button class="materialzed btn-sm">Start discussion</button>
+                }
+                else
+                {
+                    <button class="materialzed btn-sm">Share</button>
+                }
+                <div class="waiting-bg"></div>
+            </div>
+            <div class="text-left pad-top-15">
+                @if (Model.SubType == (int)Types.Enums.GroupType.JobAndOpportunities)
+                {
+                    <button id="shareOpportunity" type="button" class="custom-button"><span>Share opportunity</span> <i class="icon icon-loud-speaker"></i></button>
+                    <button id="askOpportunity" type="button" class="custom-button"><span>Ask opportunity</span> <i class="icon icon-loud-speaker"></i></button>
+                }
+            </div>
+        </div>
+        <progress style="display:none;" value="0" max="100"></progress>
+        <div class="preview">
+            <span class="preview-remove no-style icon-remove-g icon-md icon action icon-s" onclick="____removePreviewAndMedia($(this))"></span>
+            <img id="preview" />
+        </div>
+    </div>
+    <style>
+        .active.preview {
+            display: block;
+        }
+
+        .preview {
+            display: none;
+            height: 70px;
+            position: relative;
+            right: 0;
+            top: 1px;
+            vertical-align: top;
+            width: 100px;
+        }
+
+        .preview-remove {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .preview img {
+            display: block;
+            margin: auto;
+            max-height: 100%;
+            max-width: 100%;
+        }
+    </style>
+}

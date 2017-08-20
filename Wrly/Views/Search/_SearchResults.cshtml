@@ -1,0 +1,82 @@
+﻿@model List<Wrly.Models.EntitySearchViewModel>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table">
+        <ul class="table-row-container">
+            @foreach (var item in Model)
+            {
+                <li>
+                    @if (item.EntityID > 0)
+                    {
+                        if (item.EntityType == (int)Types.Enums.EntityTypes.Person)
+                        {
+                            <div class="search-result-item" data-val-url="@item.ProfileName" data-val-type="entity" data-val-entity="@item.EntityID" data-val-etype="@item.EntityType" data-val-keyword="@item.FormatedName">
+                                <a href="/@item.ProfileName">
+                                    <div class="thumbnail-notification-con">
+                                        @if (!string.IsNullOrEmpty(item.ProfilePath))
+                                        {
+                                            <img src="@Html.ImagePath(item.ProfilePath, 50)" alt="user image - @item.FormatedName">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/images/no-image-sm.png" alt="user image - @item.FormatedName" />
+                                        }
+
+                                    </div>
+                                    <div class="side-thumbnail"><h3>@item.FormatedName</h3><span class="child-headings">@item.ProfileHeading</span></div>
+                                </a>
+                            </div>
+                        }
+                        else if (item.EntityType == (int)Types.Enums.EntityTypes.Organization)
+                        {
+                            <div class="search-result-item" data-val-url="@item.Url" data-val-type="entity" data-val-entity="@item.EntityID" data-val-etype="@item.EntityType" data-val-keyword="@item.FormatedName">
+                                <a href="/fou/@item.Url">
+                                    <div class="thumbnail-notification-con">
+                                        @if (!string.IsNullOrEmpty(item.LogoPath))
+                                        {
+                                            <img src="@Html.ImagePath(item.LogoPath,50)" alt="user image - @item.Name">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/images/no-image-sm.png" alt="organization image - @item.Name" />
+                                        }
+                                    </div>
+                                    <div class="side-thumbnail"><h3>@item.Name</h3><span class="child-headings">@item.Category</span></div>
+                                </a>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="search-result-item" data-val-url="@item.Url" data-val-type="entity" data-val-entity="@item.EntityID" data-val-etype="@item.EntityType" data-val-keyword="@item.FormatedName">
+                                <a href="/groups/@item.Url">
+                                    <div class="thumbnail-notification-con">
+                                        @if (!string.IsNullOrEmpty(item.LogoPath))
+                                        {
+                                            <img src="@Html.ImagePath(item.LogoPath,50)" alt="user image - @item.Name">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/images/no-image-sm.png" alt="organization image - @item.Name" />
+                                        }
+                                    </div>
+                                    <div class="side-thumbnail"><h3>@item.Name</h3><span class="child-headings">@(((Types.Enums.GroupType)item.SubType).GetDescription())</span></div>
+                                </a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="search-result-item" data-val-type="keyword" data-val-keyword="@item.Keyword">
+                            <div class="thumbnail-notification-con">
+                                <img src="~/Content/images/history-ico.png" alt="Content search - @item.Keyword" />
+                            </div>
+                            <div class="side-thumbnail"><h3>@item.Keyword</h3></div>
+                        </div>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+}

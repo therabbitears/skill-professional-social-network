@@ -1,0 +1,52 @@
+﻿@model Wrly.Models.IntelligenceAwardViewModel
+
+<div class="profile-intelligence">
+    <span class="int-title">@Model.DisplayText</span>
+    @using (Html.BeginForm("Manage", "Award", FormMethod.Post, new { @id = "frmIntelligenceAward", onsubmit = "return manageAwardInt($(this))" }))
+    {
+        @Html.Hidden("intelligence",true)
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.TextBoxFor(c => c.Name, new { @placeholder = "your award title", @class = "form-control", @id = "intel_txtAwardName" })
+            </div>
+        </div>
+        <div class="form-group inline-control">
+            <div class="col-md-5">
+                <label class="control-label">Time:</label> @Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control", @id = "intel_StartFromMonth" })
+            </div>
+            <div class="col-md-5">
+                @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control", @id = "intel_StartFromYear" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <button class="btn btn-primary btn-sm" type="submit">Add honor</button>
+                <button class="link-alike link-alike-default" type="button" hash="@Html.HashForIntelligence(Types.Enums.InteligenceType.RequireAddingAwardAndAchievement)" onclick="skillIntelligence($(this))">Skip for now</button>
+            </div>
+        </div>
+         <script>
+            function manageAwardInt($obj) {
+                var ser = $obj.serialize();
+                var action = $obj.attr('action');
+                if ($obj.valid()) {
+                    $.ajax({
+                        url: action,
+                        waitingSelector: $obj.find('.waiting-bg'),
+                        type: 'POST',
+                        data: ser,
+                        dataType: 'html',
+                        success: function (response) {
+                            fetchIntelligence();
+                        }
+                    });
+                }
+                return false;
+            }
+
+            $(document).ready(function () {
+                $("form").data("validator", null);
+                $.validator.unobtrusive.parse($("form"));
+            });
+        </script>
+    }
+</div>

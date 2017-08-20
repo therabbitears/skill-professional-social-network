@@ -1,0 +1,193 @@
+﻿<!doctype html>
+<!--[if IE 8]><html class="ie8 lt-ie10"><![endif]-->
+<!--[if IE 9]><html class="ie9 lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    @if (ViewBag.Title == null)
+    {
+        <title>sklative - the skill's network</title>
+        <meta property="og:title" content="sklative - the skill's network" />
+    }
+    else
+    {
+        <title>@ViewBag.Title</title>
+        <meta property="og:title" content="@ViewBag.Title" />
+    }
+    @{Html.RenderPartial("_StaticMetas");}
+    @if (ViewBag.Description != null)
+    {
+        <meta property="og:description" content="@ViewBag.Description" />
+        <meta name="description" content="@ViewBag.Description" />
+    }
+    @if (ViewBag.Keywords != null)
+    {
+        <meta name="keywords" content="@ViewBag.Keywords" />
+    }
+    @if (ViewBag.AddNoFollow == true)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    @Scripts.Render("~/cdn/_AuthLayoutScripts")
+    @Styles.Render("~/cdn/_LayoutStyles")
+    @Styles.Render("~/cdn/_AuthLayoutStyles")
+    @RenderSection("_HeadStyles", false)
+
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJN2QN9"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="floated-container new-message">
+        <button class="remove" data-val-entity="floated-container" data-val-quick-action="dismiss">X</button>
+        <div class="container">
+
+        </div>
+    </div>
+    <main id="panel" class="panel">
+        <header class="panel-header">
+            <div class="container">
+                <div class="header-control-container">
+                    <div class="statistics-container">
+                        <div class="left" id="profile-statistics">
+                            <div class="statistic-launcher header-face">
+                                <div class="btn-group">
+                                    <div data-ajax="true" data-ajax-url="/account/usermenu" data-container="parent" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="header-face-head">
+                                            <img src="@Html.UserNamePhoto()" />
+                                        </div>
+                                    </div>
+                                    <ul class="dropdown-menu quick-view-wrapper action-list"></ul>
+                                </div>
+                            </div>
+                            <span class="statistic-launcher messages">
+                                <span data-action-request class="dropdown-toggle">
+                                    <span>
+                                        <i class="icon icon-messages"></i>
+                                        <span class="count">
+                                        </span>
+                                    </span>
+                                </span>
+                                <div class="dropdown-menu max-container quick-view-wrapper">
+                                    <div class="container">
+                                        <div class="header">
+                                            <div><a href="/conversations">See all</a></div>
+                                        </div>
+                                        <ul id="messages"></ul>
+                                        <div class="footer">
+                                            <button class="link-alike" data-val-quick-action="acknowledged" data-val-entity="conversations">Mark all aknowledged</button> <span class="verticle-divider">|</span> <button data-val-entity="conversations" data-val-quick-action="new" class="link-alike">Start new</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+                            <span class="statistic-launcher notifications">
+                                <span data-action-request class="dropdown-toggle">
+                                    <span>
+                                        <i class="icon icon-notifications"></i>
+                                        <span class="count">
+                                        </span>
+                                    </span>
+                                </span>
+                                <div class="dropdown-menu max-container quick-view-wrapper">
+                                    <div class="container">
+                                        <div class="header">
+                                            <div><a href="/notifications">See all</a></div>
+                                        </div>
+                                        <ul id="notifications"></ul>
+                                        <div class="footer">
+                                            <button class="link-alike" data-val-quick-action="acknowledged" data-val-entity="notifications">Mark all aknowledged</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+                            <span class="statistic-launcher requests">
+                                <span data-action-request class="dropdown-toggle">
+                                    <span>
+                                        <i class="icon icon-requests"></i>
+                                        <span class="count">
+                                        </span>
+                                    </span>
+                                </span>
+                                <div class="dropdown-menu max-container quick-view-wrapper">
+                                    <div class="container">
+                                        <div class="header">
+                                            <div><a href="/requests">See all</a></div>
+                                        </div>
+                                        <ul id="requests"></ul>
+                                        <div class="footer">
+                                            <a class="link-alike" href="/configurations#network">Settings</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+                            <span class="statistic-launcher groups">
+                                <span>
+                                    <span>
+                                        <a href="/groups">
+                                            <i class="icon icon-group"></i>
+                                            <span class="statistics-title">Groups</span>
+                                        </a>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="right">
+                            @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @id = "____frmMainSearch" }))
+                            {
+                                <input type="hidden" name="Url" id="____hdnUrl" />
+                                <input type="hidden" name="EntityID" id="____hdnEntityID" />
+                                <input type="hidden" name="EntityType" id="____hdnEntityType" />
+                                <div class="search-container">
+                                    @Html.AntiForgeryToken()
+                                    <i class="icon icon-search"></i>
+                                    <input type="text" class="big-search" name="Keyword" placeholder="person, organization or group name" />
+                                    <div class="search-content">
+
+                                    </div>
+                                </div>
+                            }
+                            <a href="/feed" class="title"><img src="data:image/png;base64,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" class="title-brand" alt="sklative - logo" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        @RenderSection("_HeaderOfProfile", false)
+        <section class="box-container">
+            <section class="box">
+                <div class="bg-layer"></div>
+                @RenderBody()
+                <div class="alert-success-popabble">
+                </div>
+                <div class="alert-error-popabble">
+                </div>
+            </section>
+        </section>
+    </main>
+    <footer class="panel-footer">
+        @{Html.RenderPartial("_Footer");}
+        @{Html.RenderPartial("_Analytics");}
+    </footer>
+    @RenderSection("_FooterScripts", false)
+    <div class="progress-bar color0" id="gloablWaiting">
+        <span></span>
+    </div>
+</body>
+</html>

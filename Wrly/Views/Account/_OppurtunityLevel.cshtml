@@ -1,0 +1,29 @@
+﻿
+@model Wrly.Models.JobSearchViewModel
+@using (Html.BeginForm("OppurtunityLevel", "Account", FormMethod.Post, new { @onsubmit = "return configurationOppurtunityLevel($(this))",@class="config-form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="inline-form">
+        @Html.DropDownListFor(c => c.JobInterestLevel, Model.OppurtunityLevelOptions)
+        <button type="submit" class="link-alike">Save</button>
+        <button type="button" class="link-alike link-alike-default" onclick="____cancelJobSearchLevel($(this))">Cancel</button>
+    </div>
+}
+
+<script>
+    function configurationOppurtunityLevel($obj) {
+        var ser = $obj.serialize();
+        var action = $obj.attr('action');
+        $.ajax({
+            url: action,
+            type: 'POST',
+            data: ser,
+            dataType: 'html',
+            success: function (response) {
+                ____executeJobSearch();
+            }
+        });
+        return false;
+    }
+
+</script>

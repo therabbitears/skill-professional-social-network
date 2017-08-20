@@ -1,0 +1,51 @@
+﻿@model Wrly.Models.PrivacySettingViewModel
+<div class="row">
+    <h1 class="page-title">Privacy configuration</h1>
+    <h2 class="page-sub-title">Configure your privacy and permissions</h2>
+</div>
+<div class="row">
+    <div>
+        <label class="control-label">Search engine visibility</label>
+        <div class="col-md-10">
+            <label class="switch">
+                @if (Model.SearchEngineVisible)
+                {
+                    <input type="checkbox" data-val-tags="True" checked class="search-engine-visibility" id="chkSearchEngineVisibility">
+                }
+                else
+                {
+                    <input type="checkbox" data-val-tags="True" class="search-engine-visibility" id="chkSearchEngineVisibility">
+                }
+                <div class="slider round"></div>
+            </label>
+            <p class="explanation"><div class="child-headings">(Search engine visibility allows search engines to crowl and show your profile in searches.)</div> </p>
+        </div>
+    </div>
+    <div>
+        <label class="control-label">Password</label>
+        <div class="col-md-10">
+            @if (!Model.HasPassword)
+            {
+                <p class="explanation"><div class="child-headings">You don't have local passwords for this account, create one in order to use your email address and password combination to log into your account, or otherwise you can continue using your social account for authentication.</div> </p>
+                <button class="link-alike" data-var-update="true">Create password</button>
+            }
+            else
+            {
+                <button class="link-alike" data-var-update="true">Change password</button>
+            }
+            <div id="managePassword"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('input[data-val-tags="True"]').click(function () {
+            var isCheck = $(this).is(':checked');
+            $.post('/account/SetSearchEngineVisibility', { enabled: isCheck }, function (res) { });
+        });
+        $('button[data-var-update="true"]').click(function () {
+            var isCheck = $(this).is(':checked');
+            $.get('/account/ManagePartial', function (res) { $('#managePassword').html(res); });
+        });
+    });
+</script>

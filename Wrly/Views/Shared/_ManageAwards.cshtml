@@ -1,0 +1,217 @@
+﻿@model Wrly.Models.AwardViewModel
+
+@using (Html.BeginForm("Manage", "Award", FormMethod.Post, new { @class = "form-horizontal", @id = "frmAward", role = "form", @onsubmit = "return manageAwardHistory($(this))" }))
+{
+            <div class="profile-item">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.UserHash)
+    <div class="form-group">
+        <label class="control-label">Title:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control", @placeholder = "your award title" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Your role/profile:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control", @placeholder = "describe your role in this achievement, like self, team member, or leader etc." })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Position:</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(c => c.CareerHistoryID, Model.CareerHistoryList, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10" id="Participents">
+            <label class="control-label">Add your team:</label>
+            @Html.TextBox("ParticipentText", null, new { @id = "ParticipentText", @placeholder = "type your connection name to add as team member", @class = "form-control" })
+        </div>
+    </div>
+    @if (!Model.HasAwardTimeSpecified)
+    {
+        <div class="text-right"><button type="button" data-source-button="divAwardTime" class="link-alike" onclick="showFindingMoreOption($(this))">Add month &amp; year</button> </div>
+    }
+    <div id="divAwardTime" style="display:@(Model.HasAwardTimeSpecified ? "block" : "none")">
+        <div class="form-group"><span class="control-label">When:</span></div>
+        <div class="form-group  inline-control">
+            <div class="col-md-5">
+                @Html.DropDownListFor(c => c.StartFromMonth, Model.MonthList, new { @class = "form-control" })
+            </div>
+            <div class="col-md-5">
+                @Html.DropDownListFor(c => c.StartFromYear, Model.YearList, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    @if (!Model.AnySkill)
+    {
+        <div class="text-right"><button type="button" data-source-button="divAwardSkills" class="link-alike" onclick="showFindingMoreOption($(this))">Add skills honored for</button> </div>
+    }
+    <div class="form-group" id="divAwardSkills" style="display:@(Model.AnySkill ? "block" : "none")">
+        <div class="col-md-10" id="Skills">
+            @Html.TextBox("SkillListText", null, new { @id = "SkillListText", @placeholder = "what expertise you have been honored for", @class = "form-control" })
+            @if (Model.SkillIncluded != null && Model.SkillIncluded.Count > 0)
+            {
+                foreach (var itemSkill in Model.SkillIncluded)
+                {
+                    <span class="skill-tag-editable">
+                        @itemSkill.Name
+                    </span>
+                }
+            }
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(Model.Hash))
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                <a class="link-alike" onclick="return removeFormAndShowSource($('#frmAward'), $('button[data-add-award]'))" href="#">Back</a><div class="waiting-bg"></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Add to profile" />
+                <a class="link-alike" onclick="return removeFormAndShowSource($('#frmAward'), $('button[data-add-award]'))" href="#">Back</a><div class="waiting-bg"></div>
+            </div>
+        </div>
+    }
+                </div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            // Required another if selected one.
+            $.validator.addMethod('requeiredifselected', function (value, element, params) {
+                var otherPropValue = $('#' + params.otherproperty).val();
+                //                console.log({ otherproperty: params.otherproperty, value: value, otherPropValue: otherPropValue });
+
+                if (otherPropValue > 0 && (value == '' || value == -1)) {
+                    return false;
+                }
+                return true;
+            });
+
+            $.validator.unobtrusive.adapters.add("requeiredifselected", ["otherproperty", "mode"], function (options) {
+                options.rules["requeiredifselected"] = options.params;
+                options.messages["requeiredifselected"] = options.message;
+            });
+
+            $("form").data("validator", null);
+            $.validator.unobtrusive.parse($("form"));
+            var data = [];
+            $("#SkillListText").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/CareerHistory/SkillList",
+                        data: { keyword: $("#SkillListText").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                $("#SkillListText").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.Value.toString().trim(),
+                                    value: obj.Key.toString().trim()
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                },
+                select: function (event, ui) {
+                    if ($('input[data-val-name="' + ui.item.label + '"]').length == 0) {
+                        var element = '<span class="skill-tag-editable"> ' + ui.item.label + ' <input type="hidden" name="Skills" value="' + ui.item.value.toString() + '" data-val-name="' + ui.item.label + '" /><span class="remove" onclick="removeTempSkillFromAward($(this))">X</span></span>';
+                        $('#Skills').append(element.toString());
+                    }
+                    //var element = '<div class="skill-tags"> ' + ui.item.label + ' <input type="hidden" name="Skills" value="' + ui.item.value.toString() + '" /></div>';
+                    //$('#Skills').append(element.toString());
+                    this.value = "";
+                    return false;
+                }
+            });
+
+            var data = [];
+            $("#ParticipentText").autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    isAutomComplete = true;
+                    $.ajax({
+                        url: "/Association/ConnectionHeads",
+                        data: { keyword: $("#ParticipentText").val() },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            isAutomComplete = false;
+                            if (data.length == 0) {
+                                $("#ParticipentText").removeClass('working');
+                            }
+                            response($.map
+                            (data, function (obj) {
+                                return {
+                                    label: obj.FormatedName,
+                                    value: obj.FormatedName,
+                                    entityID: obj.EntityID.toString().trim(),
+                                    jobTitle: obj.ProfileHeading == null ? '' : obj.ProfileHeading,
+                                    profilePath: obj.ProfileIconPath == null ? '/content/images/no-image-sm.png' : obj.ProfileIconPath
+                                };
+                            }));
+                        },
+                        error: function () { isAutomComplete = false; }
+                    });
+                },
+                create: function () {
+                    $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                        return $('<li>').append('<div class="search-result-item"><div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + item.profilePath + '" alt="no image ' + item.label + ' "></div><div class="side-thumbnail"><h3>' + item.label + '</h3><span class="child-headings">' + item.jobTitle + '</span></div>     </div>').appendTo(ul);
+                    }
+                },
+                open: function () { $(this).autocomplete("widget").appendTo("#Participents").css('position', 'static'); },
+                select: function (event, ui) {
+                    var element = '<div class="people-selected"><span onclick="____removeTempMember($(this))" class="remove">X</span><input type="hidden" name="Participants" value="' + ui.item.entityID.toString() + '" /> <div class="thumbnail-notification-con"><img class="thumbnail-notification" src="' + ui.item.profilePath + '" alt="no image ' + ui.item.label + ' "></div><div class="side-thumbnail"><h3>' + ui.item.label + '</h3><span class="child-headings">' + ui.item.jobTitle + '</span></div>     </div>';
+                    $('#Participents').parent().find('.selected').append(element.toString());
+                    $('#Participents').append(element.toString());
+                    this.value = "";
+                    return false;
+                }
+            });
+        })
+
+        function manageAwardHistory($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'html',
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    success: function (response) {
+                        $('button[data-add-award]').show();
+                        $("#award-history").processTemplateURL("/award/index", null, { attachGlobalWait: true });
+                        $obj.remove();
+                        postEditAction();
+                    }
+                });
+            }
+            return false;
+        }
+
+        function removeTempSkillFromAward($obj) {
+            $obj.parent('.skill-tag-editable').remove();
+        }
+
+    </script>
+}

@@ -1,0 +1,89 @@
+﻿@model Wrly.Models.SkillSnapShotViewModel
+@using Types
+@{
+    ViewBag.Title = "Add your skills | Sklative";
+    Layout = "~/Views/Shared/_LayoutWizard.cshtml";
+}
+@{
+    string h1 = "Add your skills", h2 = "Add skills to increase your visibility in network. Your skills helps to find best contents for you.", skipButtonText = "Skip for now", profileBadgeColor = "badge-employed";
+    if (Model.Stats.ProfileLevel == (int)Enums.CareerStage.Employement || Model.Stats.ProfileLevel == (int)Enums.CareerStage.PostEmployement)
+    {
+        h1 = "What are you working on";
+        if (Model.Skills != null && Model.Skills.Count > 0)
+        {
+            h2 = "Let's add more skills to your profile, your skills helps you to discover more people";
+            skipButtonText = "Looks great";
+        }
+        else
+        {
+            h2 = "Let's add skills to your profile, your skills helps you to discover more people";
+        }
+    }
+    else if (Model.Stats.ProfileLevel == (int)Enums.CareerStage.Retired)
+    {
+        h1 = "What have been you worked on";
+        profileBadgeColor = "badge-retired";
+        if (Model.Skills != null && Model.Skills.Count > 0)
+        {
+            h2 = "Let's add more skills to your profile, your skills helps people to find you";
+            skipButtonText = "Looks great";
+        }
+        else
+        {
+            h2 = "Let's add skills to your profile, skills helps people to find people like you";
+        }
+    }
+    else if (Model.Stats.ProfileLevel == (int)Enums.CareerStage.Student)
+    {
+        profileBadgeColor = "badge-student";
+        if (Model.Stats.IsEndDefined)
+        {
+            h1 = "What you have been learned";
+            if (Model.Skills != null && Model.Skills.Count > 0)
+            {
+                h2 = "Let's add more skills to your profile, having your all skills discovers more offers to you";
+                skipButtonText = "Looks great";
+            }
+            else
+            {
+                h2 = "Let's add skills to your profile, having your all skills discovers more offers to you";
+
+            }
+        }
+        else
+        {
+            h1 = "What set of skills are you learning";
+            if (Model.Skills != null && Model.Skills.Count > 0)
+            {
+                h2 = "Let's add more skills to your profile, having your all skills discovers more offers to you";
+                skipButtonText = "Looks great";
+
+            }
+            else
+            {
+                h2 = "Let's add skills to your profile, having your all skills discovers more offers to you";
+            }
+        }
+    }
+    ViewBag.SkipButtonText = skipButtonText;
+}
+
+<div class="string join-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper">
+                        <h1>@h1</h1>
+                        <h2>@h2</h2>
+                        @Html.Partial("_SetSkills",Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section FooterScripts{
+    @Scripts.Render("~/cdn/_WizardAddSkillsScripts");
+}

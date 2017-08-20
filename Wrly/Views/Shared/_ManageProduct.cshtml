@@ -1,0 +1,70 @@
+﻿@model Wrly.Models.PublilcationViewModel
+
+@using (Html.BeginForm("ManageProduct", "Award", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "frmProduct", @onsubmit = "return manageProduct($(this))" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    @Html.HiddenFor(c => c.UserHash)
+    <div class="form-group">
+        <label class="control-label">Product name:</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Description:</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(c => c.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    if (!string.IsNullOrEmpty(Model.Hash))
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Save changes" />
+                <a class="link-alike" onclick="return removeFormAndShowSource($('#frmProduct'), $('.product-list .plus-add-profile-item'))" href="#">Back</a><div class="waiting-bg"></div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary btn-sm" value="Add product" />
+                <a class="link-alike" onclick="return removeFormAndShowSource($('#frmProduct'), $('.product-list .plus-add-profile-item'))" href="#">Back</a><div class="waiting-bg"></div>
+            </div>
+        </div>
+    }
+
+    <script>
+        function manageProduct($obj) {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            if ($obj.valid()) {
+                $.ajax({
+                    url: action,
+                    waitingSelector: $obj.find('.waiting-bg'),
+                    type: 'POST',
+                    data: ser,
+                    dataType: 'html',
+                    success: function (response) {
+                        $("#product-list").processTemplateURL("/award/products", null, { attachGlobalWait: true });
+                        $obj.remove();
+                        postEditAction();
+                    }
+                });
+            }
+            return false;
+        }
+        $("form").data("validator", null);
+        $.validator.unobtrusive.parse($("form"));
+    </script>
+
+}
+
+
+
+
+
+
+

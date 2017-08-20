@@ -1,0 +1,28 @@
+﻿@model Wrly.Models.Feeds.FeedDetailViewModel
+@{var id = Guid.NewGuid().ToString();}
+@using (Html.BeginForm("Report", "Press", FormMethod.Post, new { @onsubmit = "return reportFeed($(this))", id = "report_" + id }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(c => c.Hash)
+    <textarea name="description" class="form-control" placeholder="tell us what is wrong with this post" cols="4"></textarea>
+    <button class="btn-primary btn btn-sm">Report</button>
+    <button class="link-alike" onclick="$('#report-@id').remove()">Cancel</button>
+    <script>
+        function reportFeed($obj)
+        {
+            var ser = $obj.serialize();
+            var action = $obj.attr('action');
+            $.ajax({
+                url: action,
+                type: 'POST',
+                data: ser,
+                dataType: 'html',
+                success: function (response) {
+                    $obj.parent().prepend(response);
+                    $obj.remove();
+                }
+            });
+            return false;
+        }
+    </script>
+}
