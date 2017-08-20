@@ -1,0 +1,940 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestDbModelStoreContainer" CdmEntityContainer="TestDbEntities1">
+    <EntitySetMapping Name="AccomplishmentStates">
+      <EntityTypeMapping TypeName="TestDbModel.AccomplishmentState">
+        <MappingFragment StoreEntitySet="AccomplishmentStates">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AccomplishmentID" ColumnName="AccomplishmentID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="TestDbModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+          <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+          <ScalarProperty Name="AddressLine4" ColumnName="AddressLine4" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Long" ColumnName="Long" />
+          <ScalarProperty Name="Varified" ColumnName="Varified" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppreciationAndRecommendations">
+      <EntityTypeMapping TypeName="TestDbModel.AppreciationAndRecommendation">
+        <MappingFragment StoreEntitySet="AppreciationAndRecommendation">
+          <ScalarProperty Name="RecomedationRelation" ColumnName="RecomedationRelation" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+          <ScalarProperty Name="SourceEntityID" ColumnName="SourceEntityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppreciationAndRecommendationParticipants">
+      <EntityTypeMapping TypeName="TestDbModel.AppreciationAndRecommendationParticipant">
+        <MappingFragment StoreEntitySet="AppreciationAndRecommendationParticipant">
+          <ScalarProperty Name="AppreciationAndRecommendationID" ColumnName="AppreciationAndRecommendationID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppreciationAndRecommendationSkills">
+      <EntityTypeMapping TypeName="TestDbModel.AppreciationAndRecommendationSkill">
+        <MappingFragment StoreEntitySet="AppreciationAndRecommendationSkill">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="TestDbModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="TestDbModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="TestDbModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="TestDbModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Associations">
+      <EntityTypeMapping TypeName="TestDbModel.Association">
+        <MappingFragment StoreEntitySet="Association">
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="OppositeRowID" ColumnName="OppositeRowID" />
+          <ScalarProperty Name="AssociationID" ColumnName="AssociationID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="EntityID2" ColumnName="EntityID2" />
+          <ScalarProperty Name="AssociationType" ColumnName="AssociationType" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ObjectStatus" ColumnName="ObjectStatus" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AwardSkills">
+      <EntityTypeMapping TypeName="TestDbModel.AwardSkill">
+        <MappingFragment StoreEntitySet="AwardSkill">
+          <ScalarProperty Name="AwardSkillID" ColumnName="AwardSkillID" />
+          <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CareerHistories">
+      <EntityTypeMapping TypeName="TestDbModel.CareerHistory">
+        <MappingFragment StoreEntitySet="CareerHistory">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+          <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="StartFromMonth" ColumnName="StartFromMonth" />
+          <ScalarProperty Name="StartFromYear" ColumnName="StartFromYear" />
+          <ScalarProperty Name="StartFromDay" ColumnName="StartFromDay" />
+          <ScalarProperty Name="EndFromDay" ColumnName="EndFromDay" />
+          <ScalarProperty Name="EndFromMonth" ColumnName="EndFromMonth" />
+          <ScalarProperty Name="EndFromYear" ColumnName="EndFromYear" />
+          <ScalarProperty Name="About" ColumnName="About" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="PottentialStartDate" ColumnName="PottentialStartDate" />
+          <ScalarProperty Name="PottentialEndDate" ColumnName="PottentialEndDate" />
+          <ScalarProperty Name="PottentialCurrent" ColumnName="PottentialCurrent" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CareerHistorySkills">
+      <EntityTypeMapping TypeName="TestDbModel.CareerHistorySkill">
+        <MappingFragment StoreEntitySet="CareerHistorySkill">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryMasters">
+      <EntityTypeMapping TypeName="TestDbModel.CategoryMaster">
+        <MappingFragment StoreEntitySet="CategoryMaster">
+          <ScalarProperty Name="Categoryid" ColumnName="Categoryid" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatGroups">
+      <EntityTypeMapping TypeName="TestDbModel.ChatGroup">
+        <MappingFragment StoreEntitySet="ChatGroup">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="LoginRequired" ColumnName="LoginRequired" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatGroupMessages">
+      <EntityTypeMapping TypeName="TestDbModel.ChatGroupMessage">
+        <MappingFragment StoreEntitySet="ChatGroupMessage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatGroupMessageListeners">
+      <EntityTypeMapping TypeName="TestDbModel.ChatGroupMessageListener">
+        <MappingFragment StoreEntitySet="ChatGroupMessageListeners">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Listning" ColumnName="Listning" />
+          <ScalarProperty Name="MessageStatus" ColumnName="MessageStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatGroupUsers">
+      <EntityTypeMapping TypeName="TestDbModel.ChatGroupUser">
+        <MappingFragment StoreEntitySet="ChatGroupUser">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="LastOnline" ColumnName="LastOnline" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contents">
+      <EntityTypeMapping TypeName="TestDbModel.Content">
+        <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PostedOn" ColumnName="PostedOn" />
+          <ScalarProperty Name="PublishOn" ColumnName="PublishOn" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentComments">
+      <EntityTypeMapping TypeName="TestDbModel.ContentComment">
+        <MappingFragment StoreEntitySet="ContentComment">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="CommentType" ColumnName="CommentType" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="PostedOn" ColumnName="PostedOn" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ObjectStatus" ColumnName="ObjectStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="TestDbModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emails">
+      <EntityTypeMapping TypeName="TestDbModel.Email">
+        <MappingFragment StoreEntitySet="Email">
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Varified" ColumnName="Varified" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entities">
+      <EntityTypeMapping TypeName="TestDbModel.Entity">
+        <MappingFragment StoreEntitySet="Entity">
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="EntityType" ColumnName="EntityType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityAwardAndCompletions">
+      <EntityTypeMapping TypeName="TestDbModel.EntityAwardAndCompletion">
+        <MappingFragment StoreEntitySet="EntityAwardAndCompletion">
+          <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="StartFromYear" ColumnName="StartFromYear" />
+          <ScalarProperty Name="StartFromMonth" ColumnName="StartFromMonth" />
+          <ScalarProperty Name="StartFromDay" ColumnName="StartFromDay" />
+          <ScalarProperty Name="EndFromYear" ColumnName="EndFromYear" />
+          <ScalarProperty Name="EndFromMonth" ColumnName="EndFromMonth" />
+          <ScalarProperty Name="EndFromDay" ColumnName="EndFromDay" />
+          <ScalarProperty Name="PottentialCurrent" ColumnName="PottentialCurrent" />
+          <ScalarProperty Name="PottentialStartDate" ColumnName="PottentialStartDate" />
+          <ScalarProperty Name="PottentialEndDate" ColumnName="PottentialEndDate" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityAwardParticipants">
+      <EntityTypeMapping TypeName="TestDbModel.EntityAwardParticipant">
+        <MappingFragment StoreEntitySet="EntityAwardParticipant">
+          <ScalarProperty Name="EntityAwardID" ColumnName="EntityAwardID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RefrenceEntity" ColumnName="RefrenceEntity" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntitySkills">
+      <EntityTypeMapping TypeName="TestDbModel.EntitySkill">
+        <MappingFragment StoreEntitySet="EntitySkill">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="FromYear" ColumnName="FromYear" />
+          <ScalarProperty Name="FromMonth" ColumnName="FromMonth" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ExpertiseLevel" ColumnName="ExpertiseLevel" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntitySkillStates">
+      <EntityTypeMapping TypeName="TestDbModel.EntitySkillState">
+        <MappingFragment StoreEntitySet="EntitySkillStates">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityWidgets">
+      <EntityTypeMapping TypeName="TestDbModel.EntityWidget">
+        <MappingFragment StoreEntitySet="EntityWidget">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="WidgetID" ColumnName="WidgetID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneralSettings">
+      <EntityTypeMapping TypeName="TestDbModel.GeneralSetting">
+        <MappingFragment StoreEntitySet="GeneralSettings">
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntelligenceActions">
+      <EntityTypeMapping TypeName="TestDbModel.IntelligenceAction">
+        <MappingFragment StoreEntitySet="IntelligenceAction">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Stamp" ColumnName="Stamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobSearchSettings">
+      <EntityTypeMapping TypeName="TestDbModel.JobSearchSetting">
+        <MappingFragment StoreEntitySet="JobSearchSettings">
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="JobInterestLevel" ColumnName="JobInterestLevel" />
+          <ScalarProperty Name="AllowToRefer" ColumnName="AllowToRefer" />
+          <ScalarProperty Name="AllowOppurtunities" ColumnName="AllowOppurtunities" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="Editedate" ColumnName="Editedate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobTitles">
+      <EntityTypeMapping TypeName="TestDbModel.JobTitle">
+        <MappingFragment StoreEntitySet="JobTitle">
+          <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_AddressType">
+      <EntityTypeMapping TypeName="TestDbModel.Master_AddressType">
+        <MappingFragment StoreEntitySet="Master_AddressType">
+          <ScalarProperty Name="AddressTypeID" ColumnName="AddressTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_CommentType">
+      <EntityTypeMapping TypeName="TestDbModel.Master_CommentType">
+        <MappingFragment StoreEntitySet="Master_CommentType">
+          <ScalarProperty Name="CommentTypeID" ColumnName="CommentTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PublicName" ColumnName="PublicName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_ContentType">
+      <EntityTypeMapping TypeName="TestDbModel.Master_ContentType">
+        <MappingFragment StoreEntitySet="Master_ContentType">
+          <ScalarProperty Name="ContentTypeID" ColumnName="ContentTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PublicName" ColumnName="PublicName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_EmailType">
+      <EntityTypeMapping TypeName="TestDbModel.Master_EmailType">
+        <MappingFragment StoreEntitySet="Master_EmailType">
+          <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_PhoneType">
+      <EntityTypeMapping TypeName="TestDbModel.Master_PhoneType">
+        <MappingFragment StoreEntitySet="Master_PhoneType">
+          <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NetworkSettings">
+      <EntityTypeMapping TypeName="TestDbModel.NetworkSetting">
+        <MappingFragment StoreEntitySet="NetworkSettings">
+          <ScalarProperty Name="AllowIndividualToConnect" ColumnName="AllowIndividualToConnect" />
+          <ScalarProperty Name="IndustryID" ColumnName="IndustryID" />
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="NetworkCoverageLevel" ColumnName="NetworkCoverageLevel" />
+          <ScalarProperty Name="RequestCapability" ColumnName="RequestCapability" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notificactions">
+      <EntityTypeMapping TypeName="TestDbModel.Notificaction">
+        <MappingFragment StoreEntitySet="Notificactions">
+          <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+          <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Updatable" ColumnName="Updatable" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationSubscribers">
+      <EntityTypeMapping TypeName="TestDbModel.NotificationSubscriber">
+        <MappingFragment StoreEntitySet="NotificationSubscribers">
+          <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Subscribed" ColumnName="Subscribed" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectStatus">
+      <EntityTypeMapping TypeName="TestDbModel.ObjectStatu">
+        <MappingFragment StoreEntitySet="ObjectStatus">
+          <ScalarProperty Name="ObjectStatusID" ColumnName="ObjectStatusID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PublicName" ColumnName="PublicName" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organizations">
+      <EntityTypeMapping TypeName="TestDbModel.Organization">
+        <MappingFragment StoreEntitySet="Organization">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EstablishedYear" ColumnName="EstablishedYear" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="EmployeeStrength" ColumnName="EmployeeStrength" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrganizationProfiles">
+      <EntityTypeMapping TypeName="TestDbModel.OrganizationProfile">
+        <MappingFragment StoreEntitySet="OrganizationProfile">
+          <ScalarProperty Name="ProfileCoverPath" ColumnName="ProfileCoverPath" />
+          <ScalarProperty Name="OrganizationProfileID" ColumnName="OrganizationProfileID" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+          <ScalarProperty Name="TagLine" ColumnName="TagLine" />
+          <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="TestDbModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonProfiles">
+      <EntityTypeMapping TypeName="TestDbModel.PersonProfile">
+        <MappingFragment StoreEntitySet="PersonProfile">
+          <ScalarProperty Name="ForgotPasswordHash" ColumnName="ForgotPasswordHash" />
+          <ScalarProperty Name="ProfileCoverPath" ColumnName="ProfileCoverPath" />
+          <ScalarProperty Name="PersonProfileID" ColumnName="PersonProfileID" />
+          <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+          <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+          <ScalarProperty Name="ProfileSummary" ColumnName="ProfileSummary" />
+          <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="About" ColumnName="About" />
+          <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
+          <ScalarProperty Name="ProfileHeading" ColumnName="ProfileHeading" />
+          <ScalarProperty Name="NameFormat" ColumnName="NameFormat" />
+          <ScalarProperty Name="FormatedName" ColumnName="FormatedName" />
+          <ScalarProperty Name="FormatedAddress" ColumnName="FormatedAddress" />
+          <ScalarProperty Name="FormatedStudyTitle" ColumnName="FormatedStudyTitle" />
+          <ScalarProperty Name="FormatedJobTitle" ColumnName="FormatedJobTitle" />
+          <ScalarProperty Name="ProfileIndustry" ColumnName="ProfileIndustry" />
+          <ScalarProperty Name="ProfileLevel" ColumnName="ProfileLevel" />
+          <ScalarProperty Name="WizardFinished" ColumnName="WizardFinished" />
+          <ScalarProperty Name="WizardStep" ColumnName="WizardStep" />
+          <ScalarProperty Name="EmailVarified" ColumnName="EmailVarified" />
+          <ScalarProperty Name="LastVarificationSent" ColumnName="LastVarificationSent" />
+          <ScalarProperty Name="VarificationID" ColumnName="VarificationID" />
+          <ScalarProperty Name="PreviousJobTitle" ColumnName="PreviousJobTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phones">
+      <EntityTypeMapping TypeName="TestDbModel.Phone">
+        <MappingFragment StoreEntitySet="Phone">
+          <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Varified" ColumnName="Varified" />
+          <ScalarProperty Name="Phone1" ColumnName="Phone" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="TestDbModel.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="DraftID" ColumnName="DraftID" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Likes" ColumnName="Likes" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PostType" ColumnName="PostType" />
+          <ScalarProperty Name="SharingType" ColumnName="SharingType" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+          <ScalarProperty Name="Meta" ColumnName="Meta" />
+          <ScalarProperty Name="UrlSlug" ColumnName="UrlSlug" />
+          <ScalarProperty Name="Published" ColumnName="Published" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PublishOn" ColumnName="PublishOn" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="AllowPublic" ColumnName="AllowPublic" />
+          <ScalarProperty Name="WritterID" ColumnName="WritterID" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="PrivacyLevel" ColumnName="PrivacyLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostInteractions">
+      <EntityTypeMapping TypeName="TestDbModel.PostInteraction">
+        <MappingFragment StoreEntitySet="PostInteractions">
+          <ScalarProperty Name="EntityID2" ColumnName="EntityID2" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="InteractionType" ColumnName="InteractionType" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostReplies">
+      <EntityTypeMapping TypeName="TestDbModel.PostReply">
+        <MappingFragment StoreEntitySet="PostReplies">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Reply" ColumnName="Reply" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+          <ScalarProperty Name="ReplyType" ColumnName="ReplyType" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostReplyInteractions">
+      <EntityTypeMapping TypeName="TestDbModel.PostReplyInteraction">
+        <MappingFragment StoreEntitySet="PostReplyInteractions">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="InteractionType" ColumnName="InteractionType" />
+          <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostTags">
+      <EntityTypeMapping TypeName="TestDbModel.PostTag">
+        <MappingFragment StoreEntitySet="PostTags">
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrivacySettings">
+      <EntityTypeMapping TypeName="TestDbModel.PrivacySetting">
+        <MappingFragment StoreEntitySet="PrivacySettings">
+          <ScalarProperty Name="SearchEngineVisible" ColumnName="SearchEngineVisible" />
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Skills">
+      <EntityTypeMapping TypeName="TestDbModel.Skill">
+        <MappingFragment StoreEntitySet="Skill">
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubscriptionHistories">
+      <EntityTypeMapping TypeName="TestDbModel.SubscriptionHistory">
+        <MappingFragment StoreEntitySet="SubscriptionHistory">
+          <ScalarProperty Name="SubscriptionID" ColumnName="SubscriptionID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubscriptionPlans">
+      <EntityTypeMapping TypeName="TestDbModel.SubscriptionPlan">
+        <MappingFragment StoreEntitySet="SubscriptionPlan">
+          <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AvailableForIndividual" ColumnName="AvailableForIndividual" />
+          <ScalarProperty Name="AvailableForOrganization" ColumnName="AvailableForOrganization" />
+          <ScalarProperty Name="MaxValidityInMonths" ColumnName="MaxValidityInMonths" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Widgets">
+      <EntityTypeMapping TypeName="TestDbModel.Widget">
+        <MappingFragment StoreEntitySet="Widget">
+          <ScalarProperty Name="WidgetID" ColumnName="WidgetID" />
+          <ScalarProperty Name="WidgetName" ColumnName="WidgetName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Help" ColumnName="Help" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ReadOnly" ColumnName="ReadOnly" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="IsPrimium" ColumnName="IsPrimium" />
+          <ScalarProperty Name="ForIndividual" ColumnName="ForIndividual" />
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityMedias">
+      <EntityTypeMapping TypeName="TestDbModel.EntityMedia">
+        <MappingFragment StoreEntitySet="EntityMedia">
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="TestDbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="EntitySearches">
+      <EntityTypeMapping TypeName="TestDbModel.EntitySearch">
+        <MappingFragment StoreEntitySet="EntitySearches">
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="SourceEntity" ColumnName="SourceEntity" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityActions">
+      <EntityTypeMapping TypeName="TestDbModel.ActivityAction">
+        <MappingFragment StoreEntitySet="ActivityAction">
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NetworkActivities">
+      <EntityTypeMapping TypeName="TestDbModel.NetworkActivity">
+        <MappingFragment StoreEntitySet="NetworkActivities">
+          <ScalarProperty Name="Years" ColumnName="Years" />
+          <ScalarProperty Name="ForEntity" ColumnName="ForEntity" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="ActionTaken" ColumnName="ActionTaken" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+          <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityImports">
+      <EntityTypeMapping TypeName="TestDbModel.EntityImport">
+        <MappingFragment StoreEntitySet="EntityImport">
+          <ScalarProperty Name="ImportType" ColumnName="ImportType" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="ImportID" ColumnName="ImportID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityImportContacts">
+      <EntityTypeMapping TypeName="TestDbModel.EntityImportContact">
+        <MappingFragment StoreEntitySet="EntityImportContacts">
+          <ScalarProperty Name="EmailAddresses" ColumnName="EmailAddresses" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ImportID" ColumnName="ImportID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityImportInvites">
+      <EntityTypeMapping TypeName="TestDbModel.EntityImportInvite">
+        <MappingFragment StoreEntitySet="EntityImportInvites">
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="InviteType" ColumnName="InviteType" />
+          <ScalarProperty Name="EntityImportContactID" ColumnName="EntityImportContactID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityStates">
+      <EntityTypeMapping TypeName="TestDbModel.EntityState">
+        <MappingFragment StoreEntitySet="EntityStates">
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="EntityID2" ColumnName="EntityID2" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

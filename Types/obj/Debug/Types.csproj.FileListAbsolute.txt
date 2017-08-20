@@ -1,0 +1,5 @@
+D:\Banshi Docs\Wrly\Types\bin\Debug\Types.dll
+D:\Banshi Docs\Wrly\Types\bin\Debug\Types.pdb
+D:\Banshi Docs\Wrly\Types\obj\Debug\Types.csprojResolveAssemblyReference.cache
+D:\Banshi Docs\Wrly\Types\obj\Debug\Types.dll
+D:\Banshi Docs\Wrly\Types\obj\Debug\Types.pdb

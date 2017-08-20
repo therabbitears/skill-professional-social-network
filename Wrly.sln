@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly", "Wrly\Wrly.csproj", "{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Types", "Wrly.Types", "{62EB277D-C15C-4DBA-9FA0-06CE66F105F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Types", "Types\Types.csproj", "{792BFCC1-9998-4196-BBC5-8EC447CF073D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Data", "Wrly.Data", "{89924315-C248-4D38-9783-3A4A46ADE186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly.Data", "Wrly.Data\Wrly.Data.csproj", "{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Storage", "Wrly.Storage", "{8C847DE4-605D-49DB-AF86-0D5A1440E806}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly.Storage", "Wrly.Storage\Wrly.Storage.csproj", "{B63E5013-536B-4EF9-9664-E75501AAC1DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Notifications", "Wrly.Notifications", "{7DD60A54-B9A9-44A3-B31E-D83B005F1ACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly.Notifications", "Wrly.Notifications\Wrly.Notifications.csproj", "{A82DB498-BDB2-468A-93EA-5575FAE091CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.SeachEngine", "Wrly.SeachEngine", "{916E750A-3F71-4058-A025-19AFA281219C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{75CE6DED-83A3-4458-A3E0-022F16F0D975}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuceneSearch.Library", "Wrly.SearchEngine\LuceneSearch.Library.csproj", "{DA2F9D29-5731-4CFE-BB9E-C0FD08DCEA3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Models", "Wrly.Models", "{88F8E36E-1DBF-4A69-A1E9-7218E24D7BAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly.Models", "Wrly.Models\Wrly.Models.csproj", "{695432D3-2D7D-4F43-9760-A6D68203CCBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Core", "Wrly.Core", "{C2BA36B0-719C-41B8-A6EA-D886F8D88F05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly.Core", "Wrly.Core\Wrly.Core.csproj", "{76D4CBDB-D406-469B-AF2A-AA15421716BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82DB498-BDB2-468A-93EA-5575FAE091CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82DB498-BDB2-468A-93EA-5575FAE091CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82DB498-BDB2-468A-93EA-5575FAE091CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82DB498-BDB2-468A-93EA-5575FAE091CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA2F9D29-5731-4CFE-BB9E-C0FD08DCEA3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2F9D29-5731-4CFE-BB9E-C0FD08DCEA3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2F9D29-5731-4CFE-BB9E-C0FD08DCEA3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2F9D29-5731-4CFE-BB9E-C0FD08DCEA3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{695432D3-2D7D-4F43-9760-A6D68203CCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{695432D3-2D7D-4F43-9760-A6D68203CCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{695432D3-2D7D-4F43-9760-A6D68203CCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{695432D3-2D7D-4F43-9760-A6D68203CCBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D4CBDB-D406-469B-AF2A-AA15421716BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D4CBDB-D406-469B-AF2A-AA15421716BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D4CBDB-D406-469B-AF2A-AA15421716BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D4CBDB-D406-469B-AF2A-AA15421716BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D} = {62EB277D-C15C-4DBA-9FA0-06CE66F105F7}
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A} = {89924315-C248-4D38-9783-3A4A46ADE186}
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB} = {8C847DE4-605D-49DB-AF86-0D5A1440E806}
+		{A82DB498-BDB2-468A-93EA-5575FAE091CF} = {7DD60A54-B9A9-44A3-B31E-D83B005F1ACB}
+		{DA2F9D29-5731-4CFE-BB9E-C0FD08DCEA3C} = {916E750A-3F71-4058-A025-19AFA281219C}
+		{695432D3-2D7D-4F43-9760-A6D68203CCBD} = {88F8E36E-1DBF-4A69-A1E9-7218E24D7BAE}
+		{76D4CBDB-D406-469B-AF2A-AA15421716BB} = {C2BA36B0-719C-41B8-A6EA-D886F8D88F05}
+	EndGlobalSection
+EndGlobal

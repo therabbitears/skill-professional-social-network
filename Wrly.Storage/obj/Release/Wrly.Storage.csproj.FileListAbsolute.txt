@@ -1,0 +1,13 @@
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\Wrly.Storage.dll
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\Wrly.Storage.pdb
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\AWSSDK.Core.dll
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\AWSSDK.S3.dll
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\Types.dll
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\Types.pdb
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\AWSSDK.Core.pdb
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\AWSSDK.Core.xml
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\AWSSDK.S3.pdb
+D:\Banshi Docs\Wrly\Wrly.Storage\bin\Release\AWSSDK.S3.xml
+D:\Banshi Docs\Wrly\Wrly.Storage\obj\Release\Wrly.Storage.csprojResolveAssemblyReference.cache
+D:\Banshi Docs\Wrly\Wrly.Storage\obj\Release\Wrly.Storage.dll
+D:\Banshi Docs\Wrly\Wrly.Storage\obj\Release\Wrly.Storage.pdb

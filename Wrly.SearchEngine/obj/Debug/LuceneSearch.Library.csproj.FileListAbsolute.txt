@@ -1,0 +1,34 @@
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\bin\Debug\LuceneSearch.dll
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\bin\Debug\LuceneSearch.pdb
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\bin\Debug\Lucene.Net.dll
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\bin\Debug\LuceneSearch.Data.dll
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\bin\Debug\LuceneSearch.Data.pdb
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\bin\Debug\Lucene.Net.pdb
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\bin\Debug\Lucene.Net.xml
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\obj\Debug\LuceneSearch.Library.csprojResolveAssemblyReference.cache
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\obj\Debug\LuceneSearch.dll
+C:\Users\indu\Downloads\Lucene.Net-search-MVC-sample-site-master\Lucene.Net-search-MVC-sample-site-master\LuceneSearch.Library\obj\Debug\LuceneSearch.pdb
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\LuceneSearch.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\LuceneSearch.pdb
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Lucene.Net.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Wrly.Data.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\EntityFramework.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Types.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Biz2Dial.ExceptionManager.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Wrly.Data.pdb
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Lucene.Net.pdb
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Lucene.Net.xml
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\EntityFramework.xml
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.pdb
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Types.pdb
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Biz2Dial.ExceptionManager.pdb
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\obj\Debug\LuceneSearch.Library.csprojResolveAssemblyReference.cache
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\obj\Debug\LuceneSearch.dll
+D:\Banshi Docs\Wrly\Wrly.SearchEngine\obj\Debug\LuceneSearch.pdb

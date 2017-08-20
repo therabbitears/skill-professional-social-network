@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{695432D3-2D7D-4F43-9760-A6D68203CCBD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wrly.Models</RootNamespace>
+    <AssemblyName>Wrly.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutViewModel.cs" />
+    <Compile Include="AbuseViewModel.cs" />
+    <Compile Include="AccomplishmentReportViewModel.cs" />
+    <Compile Include="AccountViewModels.cs" />
+    <Compile Include="ApplyViewModel.cs" />
+    <Compile Include="AppreciationAndRecommendationViewModel.cs" />
+    <Compile Include="AskOpportunityViewModel.cs" />
+    <Compile Include="AssignmentOption.cs" />
+    <Compile Include="AssociationViewModel.cs" />
+    <Compile Include="AwardStatusForEntity.cs" />
+    <Compile Include="AwardViewModel.cs" />
+    <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Business\BusinessProfileViewModel.cs" />
+    <Compile Include="CareerHistoryForEntity.cs" />
+    <Compile Include="CareerHistoryOption.cs" />
+    <Compile Include="CareerHistoryWizardViewModel.cs" />
+    <Compile Include="Chat\GroupViewModel.cs" />
+    <Compile Include="Chat\Models.cs" />
+    <Compile Include="EmailConfigurationViewModel.cs" />
+    <Compile Include="EmailParserSetting.cs" />
+    <Compile Include="EntityInsightViewModel.cs" />
+    <Compile Include="EntitySearchViewModel.cs" />
+    <Compile Include="Extended\AuthorizeUser.cs" />
+    <Compile Include="Extended\Filters.cs" />
+    <Compile Include="Extended\Methods.cs" />
+    <Compile Include="External\LicenceFile.cs" />
+    <Compile Include="External\StringCiper.cs" />
+    <Compile Include="FeedbackViewModel.cs" />
+    <Compile Include="FeedOption.cs" />
+    <Compile Include="Feeds\FeedDetailViewModel.cs" />
+    <Compile Include="Feeds\FeedForEntity.cs" />
+    <Compile Include="Feeds\FeedInsightsViewModel.cs" />
+    <Compile Include="Feeds\HomeFeedViewModel.cs" />
+    <Compile Include="ForgotPasswordViewModel.cs" />
+    <Compile Include="GeneralSettingViewModel.cs" />
+    <Compile Include="HappeningsViewModel.cs" />
+    <Compile Include="Import\ContactViewModel.cs" />
+    <Compile Include="InsightDetailsViewModel.cs" />
+    <Compile Include="IntelligenceViewModel.cs" />
+    <Compile Include="Knowledge\CategoryViewModel.cs" />
+    <Compile Include="Listing\CareerHistoryViewModel.cs" />
+    <Compile Include="Listing\CareerLineViewModel.cs" />
+    <Compile Include="Listing\GeneralEntity.cs" />
+    <Compile Include="Listing\KeyValue.cs" />
+    <Compile Include="Listing\NotificationViewModel.cs" />
+    <Compile Include="Listing\OrganizationFaceViewModel.cs" />
+    <Compile Include="Listing\PendingRequestViewModel.cs" />
+    <Compile Include="Listing\PersonFacehead.cs" />
+    <Compile Include="Listing\SuggestionProfileViewModel.cs" />
+    <Compile Include="NameViewModel.cs" />
+    <Compile Include="NewOrganizationViewModel.cs" />
+    <Compile Include="NonLoggedInProfileViewModel.cs" />
+    <Compile Include="NotificationViewModel.cs" />
+    <Compile Include="OpportunityDataViewModel.cs" />
+    <Compile Include="Option.cs" />
+    <Compile Include="PersonEntityScopData.cs" />
+    <Compile Include="PostTagViewModel.cs" />
+    <Compile Include="PostViewModel.cs" />
+    <Compile Include="ProfileCompletetionSuggestionViewModel.cs" />
+    <Compile Include="ProfileFaceViewMode.cs" />
+    <Compile Include="ProfilePicViewModel.cs" />
+    <Compile Include="ProfileViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublilcationViewModel.cs" />
+    <Compile Include="ReplyViewModel.cs" />
+    <Compile Include="RerefOpportunityViewModel.cs" />
+    <Compile Include="SendAssociationViewModel.cs" />
+    <Compile Include="SettingViewModel.cs" />
+    <Compile Include="SharedBaseViewModel.cs" />
+    <Compile Include="ShareOpportunityViewModel.cs" />
+    <Compile Include="Share\NewsViewModel.cs" />
+    <Compile Include="SkillDetailViewModel.cs" />
+    <Compile Include="SkillViewModel.cs" />
+    <Compile Include="SnapShotViewModel.cs" />
+    <Compile Include="UserDatacachable.cs" />
+    <Compile Include="UserStatisticsViewModel.cs" />
+    <Compile Include="WizardViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Types\Types.csproj">
+      <Project>{792bfcc1-9998-4196-bbc5-8ec447cf073d}</Project>
+      <Name>Types</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrly.Core\Wrly.Core.csproj">
+      <Project>{76d4cbdb-d406-469b-af2a-aa15421716bb}</Project>
+      <Name>Wrly.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

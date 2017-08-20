@@ -1,0 +1,2418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccomplishmentStates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="tinyint" />
+    <Property Name="SubType" Type="tinyint" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="AccomplishmentID" Type="bigint" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="ActivityAction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActivityID" Type="bigint" Nullable="false" />
+    <Property Name="Action" Type="int" Nullable="false" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressType" Type="int" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="AddressLine1" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="AddressLine2" Type="varchar" MaxLength="250" />
+    <Property Name="AddressLine3" Type="varchar" MaxLength="250" />
+    <Property Name="AddressLine4" Type="varchar" MaxLength="250" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" />
+    <Property Name="EditedOn" Type="datetime" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="120" />
+    <Property Name="Lat" Type="varchar" MaxLength="100" />
+    <Property Name="Long" Type="varchar" MaxLength="100" />
+    <Property Name="Varified" Type="bit" />
+    <Property Name="Country" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="County" Type="varchar" MaxLength="100" />
+    <Property Name="State" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ZipCode" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppreciationAndRecommendation">
+    <Key>
+      <PropertyRef Name="ReferenceID" />
+    </Key>
+    <Property Name="ReferenceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="AwardID" Type="bigint" />
+    <Property Name="Type" Type="tinyint" Nullable="false" />
+    <Property Name="CareerHistoryID" Type="bigint" />
+    <Property Name="SourceEntityID" Type="bigint" />
+    <Property Name="RecomedationRelation" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="AppreciationAndRecommendationParticipant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="AppreciationAndRecommendationID" Type="bigint" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="AppreciationAndRecommendationSkill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntitySkillID" Type="bigint" Nullable="false" />
+    <Property Name="ReferenceID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="EmailAddress" Type="nvarchar(max)" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Type" Type="int" />
+  </EntityType>
+  <EntityType Name="Association">
+    <Key>
+      <PropertyRef Name="AssociationID" />
+    </Key>
+    <Property Name="AssociationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" />
+    <Property Name="EntityID2" Type="bigint" />
+    <Property Name="AssociationType" Type="tinyint" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" />
+    <Property Name="ObjectStatus" Type="tinyint" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" />
+    <Property Name="OppositeRowID" Type="bigint" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="150" />
+    <Property Name="EditedOn" Type="datetime" />
+    <Property Name="Score" Type="int" />
+  </EntityType>
+  <EntityType Name="AwardSkill">
+    <Key>
+      <PropertyRef Name="AwardSkillID" />
+    </Key>
+    <Property Name="AwardSkillID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AwardID" Type="bigint" Nullable="false" />
+    <Property Name="EntitySkillID" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="CareerHistory">
+    <Key>
+      <PropertyRef Name="CareerHistoryID" />
+    </Key>
+    <Property Name="CareerHistoryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="JobTitleID" Type="bigint" Nullable="false" />
+    <Property Name="OrganizationID" Type="bigint" />
+    <Property Name="OrganizationName" Type="varchar" MaxLength="200" />
+    <Property Name="StartFromMonth" Type="int" />
+    <Property Name="StartFromYear" Type="int" />
+    <Property Name="StartFromDay" Type="int" />
+    <Property Name="EndFromDay" Type="int" />
+    <Property Name="EndFromMonth" Type="int" />
+    <Property Name="EndFromYear" Type="int" />
+    <Property Name="About" Type="nvarchar(max)" />
+    <Property Name="Type" Type="tinyint" />
+    <Property Name="PottentialStartDate" Type="datetime" />
+    <Property Name="PottentialEndDate" Type="datetime" />
+    <Property Name="PottentialCurrent" Type="bit" />
+    <Property Name="SubType" Type="varchar" MaxLength="100" />
+    <Property Name="Confidential" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="EditedOn" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="CareerHistorySkill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntitySkillID" Type="bigint" Nullable="false" />
+    <Property Name="CareerHistoryID" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategoryMaster">
+    <Key>
+      <PropertyRef Name="Categoryid" />
+    </Key>
+    <Property Name="Categoryid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SubCategoryName" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ChatGroup">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="220" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="LoginRequired" Type="bit" />
+    <Property Name="Capacity" Type="int" />
+    <Property Name="ImagePath" Type="varchar" MaxLength="250" />
+    <Property Name="CreateOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="GroupType" Type="int" />
+    <Property Name="Url" Type="varchar" MaxLength="120" />
+  </EntityType>
+  <EntityType Name="ChatGroupMessage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Message" Type="varchar(max)" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="GroupID" Type="bigint" Nullable="false" />
+    <Property Name="MessageType" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChatGroupMessageListeners">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MessageID" Type="bigint" />
+    <Property Name="EntityID" Type="bigint" />
+    <Property Name="Listning" Type="bit" />
+    <Property Name="MessageStatus" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="ChatGroupUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupID" Type="bigint" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" />
+    <Property Name="LastOnline" Type="datetime" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Content">
+    <Key>
+      <PropertyRef Name="ContentID" />
+    </Key>
+    <Property Name="ContentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContentType" Type="int" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="250" />
+    <Property Name="Description" Type="varchar" MaxLength="250" />
+    <Property Name="PostedOn" Type="datetime" Nullable="false" />
+    <Property Name="PublishOn" Type="datetime" />
+    <Property Name="IPAddress" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentComment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommentType" Type="int" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+    <Property Name="PostedOn" Type="datetime" />
+    <Property Name="EntityID" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="ObjectStatus" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Region" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="EmailID" />
+    </Key>
+    <Property Name="EmailID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="EmailType" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Varified" Type="bit" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="120" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Entity">
+    <Key>
+      <PropertyRef Name="EntityID" />
+    </Key>
+    <Property Name="EntityID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EntityAwardAndCompletion">
+    <Key>
+      <PropertyRef Name="AwardID" />
+    </Key>
+    <Property Name="AwardID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="1000" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="CareerHistoryID" Type="bigint" />
+    <Property Name="Type" Type="tinyint" />
+    <Property Name="StartFromYear" Type="int" />
+    <Property Name="StartFromMonth" Type="int" />
+    <Property Name="StartFromDay" Type="int" />
+    <Property Name="EndFromYear" Type="int" />
+    <Property Name="EndFromMonth" Type="int" />
+    <Property Name="EndFromDay" Type="int" />
+    <Property Name="PottentialCurrent" Type="bit" />
+    <Property Name="PottentialStartDate" Type="datetime" />
+    <Property Name="PottentialEndDate" Type="datetime" />
+    <Property Name="Url" Type="varchar" MaxLength="255" />
+    <Property Name="SubType" Type="varchar" MaxLength="100" />
+    <Property Name="ParentID" Type="bigint" />
+    <Property Name="Role" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="EntityAwardParticipant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="EntityAwardID" Type="bigint" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="RefrenceEntity" Type="bigint" />
+    <Property Name="Role" Type="varchar" MaxLength="100" />
+    <Property Name="GroupID" Type="varchar" MaxLength="140" />
+  </EntityType>
+  <EntityType Name="EntityImport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImportID" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="ImportType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EntityImportContacts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImportID" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmailAddresses" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EntityImportInvites">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityImportContactID" Type="bigint" Nullable="false" />
+    <Property Name="InviteType" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="Content" Type="varchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Testdb.dbo.EntityMedia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EntityMedia">
+    <Key>
+      <PropertyRef Name="EntityID" />
+      <PropertyRef Name="Path" />
+      <PropertyRef Name="MediaType" />
+    </Key>
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="Path" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="MediaType" Type="tinyint" Nullable="false" />
+    <Property Name="Status" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="EntitySearches">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Keyword" Type="varchar" MaxLength="120" />
+    <Property Name="EntityID" Type="bigint" />
+    <Property Name="Url" Type="varchar" MaxLength="255" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+    <Property Name="SourceEntity" Type="bigint" Nullable="false" />
+    <Property Name="Score" Type="bigint" />
+  </EntityType>
+  <EntityType Name="EntitySkill">
+    <Key>
+      <PropertyRef Name="EntitySkillID" />
+    </Key>
+    <Property Name="EntitySkillID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SkillID" Type="int" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="FromYear" Type="int" />
+    <Property Name="FromMonth" Type="int" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="ExpertiseLevel" Type="tinyint" />
+    <Property Name="Score" Type="bigint" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="EntitySkillStates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntitySkillID" Type="bigint" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="SubType" Type="int" Nullable="false" />
+    <Property Name="Status" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="EntityStates">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="EntityID2" Type="bigint" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EntityWidget">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="WidgetID" Type="bigint" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="GeneralSettings">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" />
+    <Property Name="EditedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="IntelligenceAction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="Type" Type="tinyint" Nullable="false" />
+    <Property Name="Action" Type="tinyint" Nullable="false" />
+    <Property Name="Stamp" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobSearchSettings">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="JobInterestLevel" Type="tinyint" />
+    <Property Name="AllowToRefer" Type="bit" />
+    <Property Name="AllowOppurtunities" Type="bit" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" />
+    <Property Name="Editedate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="JobTitle">
+    <Key>
+      <PropertyRef Name="JobTitleID" />
+    </Key>
+    <Property Name="JobTitleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="300" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="Type" Type="int" />
+  </EntityType>
+  <EntityType Name="Master_AddressType">
+    <Key>
+      <PropertyRef Name="AddressTypeID" />
+    </Key>
+    <Property Name="AddressTypeID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Decription" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Master_CommentType">
+    <Key>
+      <PropertyRef Name="CommentTypeID" />
+    </Key>
+    <Property Name="CommentTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PublicName" Type="varbinary" MaxLength="50" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Master_ContentType">
+    <Key>
+      <PropertyRef Name="ContentTypeID" />
+    </Key>
+    <Property Name="ContentTypeID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="PublicName" Type="varchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Master_EmailType">
+    <Key>
+      <PropertyRef Name="EmailType" />
+    </Key>
+    <Property Name="EmailType" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Decription" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Master_PhoneType">
+    <Key>
+      <PropertyRef Name="PhoneType" />
+    </Key>
+    <Property Name="PhoneType" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Decription" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NetworkActivities">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="AwardID" Type="bigint" />
+    <Property Name="CareerHistoryID" Type="bigint" />
+    <Property Name="SkillID" Type="bigint" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" />
+    <Property Name="EditedOn" Type="datetime" />
+    <Property Name="ActionTaken" Type="bit" />
+    <Property Name="Action" Type="int" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="Identifier" Type="varchar" MaxLength="100" />
+    <Property Name="ForEntity" Type="bigint" />
+    <Property Name="Years" Type="bigint" />
+  </EntityType>
+  <EntityType Name="NetworkSettings">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="NetworkCoverageLevel" Type="tinyint" Nullable="false" />
+    <Property Name="RequestCapability" Type="int" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="IndustryID" Type="int" />
+    <Property Name="AllowIndividualToConnect" Type="bit" />
+  </EntityType>
+  <EntityType Name="Notificactions">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Text" Type="varchar" MaxLength="500" />
+    <Property Name="Url" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Updatable" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="ReferenceID" Type="bigint" />
+    <Property Name="NewsID" Type="bigint" />
+    <Property Name="EntitySkillID" Type="bigint" />
+    <Property Name="AwardID" Type="bigint" />
+    <Property Name="ActivityID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="NotificationSubscribers">
+    <Key>
+      <PropertyRef Name="SubscriberID" />
+    </Key>
+    <Property Name="SubscriberID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NotificationID" Type="bigint" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="Subscribed" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectStatus">
+    <Key>
+      <PropertyRef Name="ObjectStatusID" />
+    </Key>
+    <Property Name="ObjectStatusID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="PublicName" Type="varchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="OrganizationID" />
+    </Key>
+    <Property Name="OrganizationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EstablishedYear" Type="int" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="EmployeeStrength" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="tinyint" />
+    <Property Name="UserID" Type="varchar" MaxLength="120" />
+  </EntityType>
+  <EntityType Name="OrganizationProfile">
+    <Key>
+      <PropertyRef Name="OrganizationProfileID" />
+    </Key>
+    <Property Name="OrganizationProfileID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Website" Type="varchar" MaxLength="200" />
+    <Property Name="ProfileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="OrganizationID" Type="bigint" Nullable="false" />
+    <Property Name="TagLine" Type="varchar" MaxLength="100" />
+    <Property Name="ProfileImagePath" Type="varchar" MaxLength="200" />
+    <Property Name="ProfileCoverPath" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Gender" Type="tinyint" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="UserID" Type="varchar" MaxLength="120" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonProfile">
+    <Key>
+      <PropertyRef Name="PersonProfileID" />
+    </Key>
+    <Property Name="PersonProfileID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="bigint" />
+    <Property Name="ProfileName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProfileSummary" Type="nvarchar" MaxLength="500" />
+    <Property Name="LastModified" Type="datetime" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="50" />
+    <Property Name="About" Type="nvarchar" MaxLength="500" />
+    <Property Name="ProfileImagePath" Type="varchar" MaxLength="200" />
+    <Property Name="ProfileHeading" Type="nvarchar" MaxLength="200" />
+    <Property Name="NameFormat" Type="tinyint" />
+    <Property Name="FormatedName" Type="varchar" MaxLength="200" />
+    <Property Name="FormatedAddress" Type="varchar" MaxLength="300" />
+    <Property Name="FormatedStudyTitle" Type="varchar" MaxLength="300" />
+    <Property Name="FormatedJobTitle" Type="varchar" MaxLength="300" />
+    <Property Name="ProfileIndustry" Type="bigint" />
+    <Property Name="ProfileLevel" Type="tinyint" />
+    <Property Name="WizardFinished" Type="bit" />
+    <Property Name="WizardStep" Type="tinyint" />
+    <Property Name="EmailVarified" Type="bit" />
+    <Property Name="LastVarificationSent" Type="datetime" />
+    <Property Name="VarificationID" Type="varchar" MaxLength="120" />
+    <Property Name="PreviousJobTitle" Type="varchar" MaxLength="200" />
+    <Property Name="ProfileCoverPath" Type="varchar" MaxLength="200" />
+    <Property Name="ForgotPasswordHash" Type="varchar" MaxLength="120" />
+  </EntityType>
+  <EntityType Name="Phone">
+    <Key>
+      <PropertyRef Name="PhoneID" />
+    </Key>
+    <Property Name="PhoneID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="PhoneType" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Varified" Type="bit" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="EditedOn" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="120" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostType" Type="int" Nullable="false" />
+    <Property Name="SharingType" Type="tinyint" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="250" />
+    <Property Name="ShortDescription" Type="varchar" MaxLength="500" />
+    <Property Name="Meta" Type="varchar" MaxLength="100" />
+    <Property Name="UrlSlug" Type="varchar" MaxLength="500" />
+    <Property Name="Published" Type="bit" />
+    <Property Name="FilePath" Type="varchar" MaxLength="500" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="PublishOn" Type="datetime" />
+    <Property Name="IPAddress" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AllowPublic" Type="bit" />
+    <Property Name="WritterID" Type="bigint" />
+    <Property Name="PostID" Type="bigint" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="EditedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" />
+    <Property Name="PrivacyLevel" Type="tinyint" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Likes" Type="int" />
+    <Property Name="Comments" Type="int" />
+    <Property Name="DraftID" Type="varchar" MaxLength="120" />
+  </EntityType>
+  <EntityType Name="PostInteractions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InteractionType" Type="int" Nullable="false" />
+    <Property Name="PostID" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="EntityID" Type="bigint" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="EntityID2" Type="bigint" />
+  </EntityType>
+  <EntityType Name="PostReplies">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Reply" Type="varchar(max)" />
+    <Property Name="PostID" Type="bigint" />
+    <Property Name="ReplyID" Type="bigint" />
+    <Property Name="ReplyType" Type="tinyint" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="EntityID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="PostReplyInteractions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InteractionType" Type="int" Nullable="false" />
+    <Property Name="ReplyID" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="EntityID" Type="bigint" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PostTags">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostID" Type="bigint" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrivacySettings">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="SearchEngineVisible" Type="bit" />
+  </EntityType>
+  <EntityType Name="Skill">
+    <Key>
+      <PropertyRef Name="SkillID" />
+    </Key>
+    <Property Name="SkillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Decription" Type="varchar" MaxLength="100" />
+    <Property Name="IpAddress" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SubscriptionHistory">
+    <Key>
+      <PropertyRef Name="SubscriptionID" />
+    </Key>
+    <Property Name="SubscriptionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntityID" Type="bigint" Nullable="false" />
+    <Property Name="PlanID" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="EditedDate" Type="datetime" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SubscriptionPlan">
+    <Key>
+      <PropertyRef Name="PlanID" />
+    </Key>
+    <Property Name="PlanID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="120" Nullable="false" />
+    <Property Name="EditedDate" Type="datetime" Nullable="false" />
+    <Property Name="EditedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="AvailableForIndividual" Type="bit" Nullable="false" />
+    <Property Name="AvailableForOrganization" Type="bit" Nullable="false" />
+    <Property Name="MaxValidityInMonths" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Widget">
+    <Key>
+      <PropertyRef Name="WidgetID" />
+    </Key>
+    <Property Name="WidgetID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WidgetName" Type="varchar" MaxLength="100" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="100" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="Icon" Type="varchar" MaxLength="200" />
+    <Property Name="Help" Type="varchar" MaxLength="200" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="ReadOnly" Type="bit" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="IsPrimium" Type="bit" />
+    <Property Name="ForIndividual" Type="bit" />
+    <Property Name="Organization" Type="bit" />
+  </EntityType>
+  <Association Name="FK__PostInter__Entit__2354350C">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="PostInteractions" Type="Self.PostInteractions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="PostInteractions">
+        <PropertyRef Name="EntityID2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccomplishmentStates_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="AccomplishmentStates" Type="Self.AccomplishmentStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="AccomplishmentStates">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccomplishmentStates_EntityAward">
+    <End Role="EntityAwardAndCompletion" Type="Self.EntityAwardAndCompletion" Multiplicity="1" />
+    <End Role="AccomplishmentStates" Type="Self.AccomplishmentStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="AccomplishmentStates">
+        <PropertyRef Name="AccomplishmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityAction_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="ActivityAction" Type="Self.ActivityAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="ActivityAction">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityAction_NetworkActivities">
+    <End Role="NetworkActivities" Type="Self.NetworkActivities" Multiplicity="1" />
+    <End Role="ActivityAction" Type="Self.ActivityAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NetworkActivities">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ActivityAction">
+        <PropertyRef Name="ActivityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Entity1">
+    <End Role="Master_AddressType" Type="Self.Master_AddressType" Multiplicity="1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_AddressType">
+        <PropertyRef Name="AddressTypeID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="AddressType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation  ">
+    <End Role="AppreciationAndRecommendation" Type="Self.AppreciationAndRecommendation" Multiplicity="1" />
+    <End Role="AppreciationAndRecommendationParticipant" Type="Self.AppreciationAndRecommendationParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppreciationAndRecommendation">
+        <PropertyRef Name="ReferenceID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendationParticipant">
+        <PropertyRef Name="AppreciationAndRecommendationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppreciationAndRecommendationParticipant_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="AppreciationAndRecommendationParticipant" Type="Self.AppreciationAndRecommendationParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendationParticipant">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppreciationAndRecommendationSkill_EntityAward">
+    <End Role="AppreciationAndRecommendation" Type="Self.AppreciationAndRecommendation" Multiplicity="1" />
+    <End Role="AppreciationAndRecommendationSkill" Type="Self.AppreciationAndRecommendationSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppreciationAndRecommendation">
+        <PropertyRef Name="ReferenceID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendationSkill">
+        <PropertyRef Name="ReferenceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppreciationAndRecommendationSkill_EntitySkill">
+    <End Role="EntitySkill" Type="Self.EntitySkill" Multiplicity="1" />
+    <End Role="AppreciationAndRecommendationSkill" Type="Self.AppreciationAndRecommendationSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendationSkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppriciationRecommendation_EntityAward">
+    <End Role="EntityAwardAndCompletion" Type="Self.EntityAwardAndCompletion" Multiplicity="0..1" />
+    <End Role="AppreciationAndRecommendation" Type="Self.AppreciationAndRecommendation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendation">
+        <PropertyRef Name="AwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Association_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="Association" Type="Self.Association" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Association">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Association_Entity1">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="Association" Type="Self.Association" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Association">
+        <PropertyRef Name="EntityID2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AwardSkill_EntityAward">
+    <End Role="EntityAwardAndCompletion" Type="Self.EntityAwardAndCompletion" Multiplicity="1" />
+    <End Role="AwardSkill" Type="Self.AwardSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="AwardSkill">
+        <PropertyRef Name="AwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AwardSkill_EntitySkill">
+    <End Role="EntitySkill" Type="Self.EntitySkill" Multiplicity="1" />
+    <End Role="AwardSkill" Type="Self.AwardSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="AwardSkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistory_CareerHistory">
+    <End Role="JobTitle" Type="Self.JobTitle" Multiplicity="1" />
+    <End Role="CareerHistory" Type="Self.CareerHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobTitle">
+        <PropertyRef Name="JobTitleID" />
+      </Principal>
+      <Dependent Role="CareerHistory">
+        <PropertyRef Name="JobTitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistory_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="CareerHistory" Type="Self.CareerHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="CareerHistory">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistory_Organization">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+    <End Role="CareerHistory" Type="Self.CareerHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrganizationID" />
+      </Principal>
+      <Dependent Role="CareerHistory">
+        <PropertyRef Name="OrganizationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistorySkill_CareerHistory">
+    <End Role="CareerHistory" Type="Self.CareerHistory" Multiplicity="1" />
+    <End Role="CareerHistorySkill" Type="Self.CareerHistorySkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CareerHistory">
+        <PropertyRef Name="CareerHistoryID" />
+      </Principal>
+      <Dependent Role="CareerHistorySkill">
+        <PropertyRef Name="CareerHistoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistorySkill_EntitySkill">
+    <End Role="EntitySkill" Type="Self.EntitySkill" Multiplicity="1" />
+    <End Role="CareerHistorySkill" Type="Self.CareerHistorySkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="CareerHistorySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatGroupMessage_ChatGroup">
+    <End Role="ChatGroup" Type="Self.ChatGroup" Multiplicity="1" />
+    <End Role="ChatGroupMessage" Type="Self.ChatGroupMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChatGroup">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChatGroupMessage">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatGroupMessage_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="ChatGroupMessage" Type="Self.ChatGroupMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="ChatGroupMessage">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatGroupMessageListeners_ChatGroupMessage">
+    <End Role="ChatGroupMessage" Type="Self.ChatGroupMessage" Multiplicity="0..1" />
+    <End Role="ChatGroupMessageListeners" Type="Self.ChatGroupMessageListeners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChatGroupMessage">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChatGroupMessageListeners">
+        <PropertyRef Name="MessageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatGroupMessageListeners_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="ChatGroupMessageListeners" Type="Self.ChatGroupMessageListeners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="ChatGroupMessageListeners">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatGroupUser_ChatGroup">
+    <End Role="ChatGroup" Type="Self.ChatGroup" Multiplicity="1" />
+    <End Role="ChatGroupUser" Type="Self.ChatGroupUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChatGroup">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChatGroupUser">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChatGroupUser_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="ChatGroupUser" Type="Self.ChatGroupUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="ChatGroupUser">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Content_ContentType">
+    <End Role="Master_ContentType" Type="Self.Master_ContentType" Multiplicity="1" />
+    <End Role="Content" Type="Self.Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_ContentType">
+        <PropertyRef Name="ContentTypeID" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="ContentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Content_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="Content" Type="Self.Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentComment_Master_CommentType">
+    <End Role="Master_CommentType" Type="Self.Master_CommentType" Multiplicity="0..1" />
+    <End Role="ContentComment" Type="Self.ContentComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_CommentType">
+        <PropertyRef Name="CommentTypeID" />
+      </Principal>
+      <Dependent Role="ContentComment">
+        <PropertyRef Name="CommentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentComment_ObjectStatus">
+    <End Role="ObjectStatus" Type="Self.ObjectStatus" Multiplicity="1" />
+    <End Role="ContentComment" Type="Self.ContentComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectStatus">
+        <PropertyRef Name="ObjectStatusID" />
+      </Principal>
+      <Dependent Role="ContentComment">
+        <PropertyRef Name="ObjectStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Email_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="Email" Type="Self.Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Email_Master_EmailType">
+    <End Role="Master_EmailType" Type="Self.Master_EmailType" Multiplicity="1" />
+    <End Role="Email" Type="Self.Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_EmailType">
+        <PropertyRef Name="EmailType" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="EmailType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAward_CareerHistory">
+    <End Role="CareerHistory" Type="Self.CareerHistory" Multiplicity="0..1" />
+    <End Role="EntityAwardAndCompletion" Type="Self.EntityAwardAndCompletion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CareerHistory">
+        <PropertyRef Name="CareerHistoryID" />
+      </Principal>
+      <Dependent Role="EntityAwardAndCompletion">
+        <PropertyRef Name="CareerHistoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAward_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntityAwardAndCompletion" Type="Self.EntityAwardAndCompletion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityAwardAndCompletion">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAward_Entity1">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="EntityAwardParticipant" Type="Self.EntityAwardParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityAwardParticipant">
+        <PropertyRef Name="RefrenceEntity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAwardParticipant_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntityAwardParticipant" Type="Self.EntityAwardParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityAwardParticipant">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAwardParticipant_EntityAward">
+    <End Role="EntityAwardAndCompletion" Type="Self.EntityAwardAndCompletion" Multiplicity="1" />
+    <End Role="EntityAwardParticipant" Type="Self.EntityAwardParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="EntityAwardParticipant">
+        <PropertyRef Name="EntityAwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityImport_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntityImport" Type="Self.EntityImport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityImport">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityImportContacts_EntityImport">
+    <End Role="EntityImport" Type="Self.EntityImport" Multiplicity="1" />
+    <End Role="EntityImportContacts" Type="Self.EntityImportContacts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityImport">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EntityImportContacts">
+        <PropertyRef Name="ImportID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityImportInvites_EntityImportContacts">
+    <End Role="EntityImportContacts" Type="Self.EntityImportContacts" Multiplicity="1" />
+    <End Role="EntityImportInvites" Type="Self.EntityImportInvites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityImportContacts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EntityImportInvites">
+        <PropertyRef Name="EntityImportContactID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityMedia_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntityMedia" Type="Self.EntityMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityMedia">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySearches_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="EntitySearches" Type="Self.EntitySearches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntitySearches">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySearches_Entity1">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntitySearches" Type="Self.EntitySearches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntitySearches">
+        <PropertyRef Name="SourceEntity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySkill_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntitySkill" Type="Self.EntitySkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntitySkill">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySkill_Skill">
+    <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+    <End Role="EntitySkill" Type="Self.EntitySkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="SkillID" />
+      </Principal>
+      <Dependent Role="EntitySkill">
+        <PropertyRef Name="SkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySkillStates_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntitySkillStates" Type="Self.EntitySkillStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntitySkillStates">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySkillStates_EntitySkill">
+    <End Role="EntitySkill" Type="Self.EntitySkill" Multiplicity="1" />
+    <End Role="EntitySkillStates" Type="Self.EntitySkillStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="EntitySkillStates">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityStates_Entity1">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntityStates" Type="Self.EntityStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityStates">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityStates_Entity2">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntityStates" Type="Self.EntityStates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityStates">
+        <PropertyRef Name="EntityID2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityWidget_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="EntityWidget" Type="Self.EntityWidget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityWidget">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityWidget_Widget">
+    <End Role="Widget" Type="Self.Widget" Multiplicity="1" />
+    <End Role="EntityWidget" Type="Self.EntityWidget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Widget">
+        <PropertyRef Name="WidgetID" />
+      </Principal>
+      <Dependent Role="EntityWidget">
+        <PropertyRef Name="WidgetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GeneralSettings_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="GeneralSettings" Type="Self.GeneralSettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="GeneralSettings">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelligenceAction_EntityID">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="IntelligenceAction" Type="Self.IntelligenceAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="IntelligenceAction">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobSearchSettings_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="JobSearchSettings" Type="Self.JobSearchSettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="JobSearchSettings">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NetworkActivities_CareerHistory">
+    <End Role="CareerHistory" Type="Self.CareerHistory" Multiplicity="0..1" />
+    <End Role="NetworkActivities" Type="Self.NetworkActivities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CareerHistory">
+        <PropertyRef Name="CareerHistoryID" />
+      </Principal>
+      <Dependent Role="NetworkActivities">
+        <PropertyRef Name="CareerHistoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NetworkActivities_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="NetworkActivities" Type="Self.NetworkActivities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="NetworkActivities">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NetworkActivities_EntityAwardAndCompletion">
+    <End Role="EntityAwardAndCompletion" Type="Self.EntityAwardAndCompletion" Multiplicity="0..1" />
+    <End Role="NetworkActivities" Type="Self.NetworkActivities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="NetworkActivities">
+        <PropertyRef Name="AwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NetworkActivities_EntitySkill">
+    <End Role="EntitySkill" Type="Self.EntitySkill" Multiplicity="0..1" />
+    <End Role="NetworkActivities" Type="Self.NetworkActivities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="NetworkActivities">
+        <PropertyRef Name="SkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NetworkSettings_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="NetworkSettings" Type="Self.NetworkSettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="NetworkSettings">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificactions_AppreciationAndRecommendation">
+    <End Role="AppreciationAndRecommendation" Type="Self.AppreciationAndRecommendation" Multiplicity="0..1" />
+    <End Role="Notificactions" Type="Self.Notificactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppreciationAndRecommendation">
+        <PropertyRef Name="ReferenceID" />
+      </Principal>
+      <Dependent Role="Notificactions">
+        <PropertyRef Name="ReferenceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificactions_EntityAwardAndCompletion">
+    <End Role="EntityAwardAndCompletion" Type="Self.EntityAwardAndCompletion" Multiplicity="0..1" />
+    <End Role="Notificactions" Type="Self.Notificactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="Notificactions">
+        <PropertyRef Name="AwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificactions_EntitySkill">
+    <End Role="EntitySkill" Type="Self.EntitySkill" Multiplicity="0..1" />
+    <End Role="Notificactions" Type="Self.Notificactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="Notificactions">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificactions_NetworkActivities">
+    <End Role="NetworkActivities" Type="Self.NetworkActivities" Multiplicity="0..1" />
+    <End Role="Notificactions" Type="Self.Notificactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NetworkActivities">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Notificactions">
+        <PropertyRef Name="ActivityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificactions_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+    <End Role="Notificactions" Type="Self.Notificactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Notificactions">
+        <PropertyRef Name="NewsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotificationSubscribers_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="NotificationSubscribers" Type="Self.NotificationSubscribers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="NotificationSubscribers">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotificationSubscribers_Notifications">
+    <End Role="Notificactions" Type="Self.Notificactions" Multiplicity="1" />
+    <End Role="NotificationSubscribers" Type="Self.NotificationSubscribers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notificactions">
+        <PropertyRef Name="NotificationID" />
+      </Principal>
+      <Dependent Role="NotificationSubscribers">
+        <PropertyRef Name="NotificationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization_CategoryMaster">
+    <End Role="CategoryMaster" Type="Self.CategoryMaster" Multiplicity="1" />
+    <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryMaster">
+        <PropertyRef Name="Categoryid" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="Organization" Type="Self.Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationProfile_Organization">
+    <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+    <End Role="OrganizationProfile" Type="Self.OrganizationProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrganizationID" />
+      </Principal>
+      <Dependent Role="OrganizationProfile">
+        <PropertyRef Name="OrganizationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonProfile_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="PersonProfile" Type="Self.PersonProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="PersonProfile">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_Master_PhoneType">
+    <End Role="Master_PhoneType" Type="Self.Master_PhoneType" Multiplicity="1" />
+    <End Role="Phone" Type="Self.Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_PhoneType">
+        <PropertyRef Name="PhoneType" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="PhoneType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_ContentType">
+    <End Role="Master_ContentType" Type="Self.Master_ContentType" Multiplicity="1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_ContentType">
+        <PropertyRef Name="ContentTypeID" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="PostType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostInteractions_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="PostInteractions" Type="Self.PostInteractions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="PostInteractions">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostInteractions_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+    <End Role="PostInteractions" Type="Self.PostInteractions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostInteractions">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostInteractions_PostReplies">
+    <End Role="PostReplies" Type="Self.PostReplies" Multiplicity="0..1" />
+    <End Role="PostReplyInteractions" Type="Self.PostReplyInteractions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostReplies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostReplyInteractions">
+        <PropertyRef Name="ReplyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostReplies_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+    <End Role="PostReplies" Type="Self.PostReplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostReplies">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostReplies_PostReplies">
+    <End Role="PostReplies" Type="Self.PostReplies" Multiplicity="0..1" />
+    <End Role="PostReplies1" Type="Self.PostReplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostReplies">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostReplies1">
+        <PropertyRef Name="ReplyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostReplyInteractions_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="PostReplyInteractions" Type="Self.PostReplyInteractions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="PostReplyInteractions">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostTags_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="1" />
+    <End Role="PostTags" Type="Self.PostTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostTags">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostTags_Tags">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="PostTags" Type="Self.PostTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="PostTags">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrivacySettings_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="0..1" />
+    <End Role="PrivacySettings" Type="Self.PrivacySettings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="PrivacySettings">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PK_SubscriptionHistory_Entity">
+    <End Role="Entity" Type="Self.Entity" Multiplicity="1" />
+    <End Role="SubscriptionHistory" Type="Self.SubscriptionHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="SubscriptionHistory">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PK_SubscriptionHistory_SubscriptionPlan">
+    <End Role="SubscriptionPlan" Type="Self.SubscriptionPlan" Multiplicity="1" />
+    <End Role="SubscriptionHistory" Type="Self.SubscriptionHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubscriptionPlan">
+        <PropertyRef Name="PlanID" />
+      </Principal>
+      <Dependent Role="SubscriptionHistory">
+        <PropertyRef Name="PlanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestDbModelStoreContainer">
+    <EntitySet Name="AccomplishmentStates" EntityType="Self.AccomplishmentStates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActivityAction" EntityType="Self.ActivityAction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppreciationAndRecommendation" EntityType="Self.AppreciationAndRecommendation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppreciationAndRecommendationParticipant" EntityType="Self.AppreciationAndRecommendationParticipant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppreciationAndRecommendationSkill" EntityType="Self.AppreciationAndRecommendationSkill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Association" EntityType="Self.Association" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AwardSkill" EntityType="Self.AwardSkill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CareerHistory" EntityType="Self.CareerHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CareerHistorySkill" EntityType="Self.CareerHistorySkill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryMaster" EntityType="Self.CategoryMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChatGroup" EntityType="Self.ChatGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChatGroupMessage" EntityType="Self.ChatGroupMessage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChatGroupMessageListeners" EntityType="Self.ChatGroupMessageListeners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChatGroupUser" EntityType="Self.ChatGroupUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContentComment" EntityType="Self.ContentComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entity" EntityType="Self.Entity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntityAwardAndCompletion" EntityType="Self.EntityAwardAndCompletion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntityAwardParticipant" EntityType="Self.EntityAwardParticipant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntityImport" EntityType="Self.EntityImport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntityImportContacts" EntityType="Self.EntityImportContacts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntityImportInvites" EntityType="Self.EntityImportInvites" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntitySearches" EntityType="Self.EntitySearches" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntitySkill" EntityType="Self.EntitySkill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntitySkillStates" EntityType="Self.EntitySkillStates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntityStates" EntityType="Self.EntityStates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntityWidget" EntityType="Self.EntityWidget" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GeneralSettings" EntityType="Self.GeneralSettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IntelligenceAction" EntityType="Self.IntelligenceAction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobSearchSettings" EntityType="Self.JobSearchSettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobTitle" EntityType="Self.JobTitle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Master_AddressType" EntityType="Self.Master_AddressType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Master_CommentType" EntityType="Self.Master_CommentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Master_ContentType" EntityType="Self.Master_ContentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Master_EmailType" EntityType="Self.Master_EmailType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Master_PhoneType" EntityType="Self.Master_PhoneType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NetworkActivities" EntityType="Self.NetworkActivities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NetworkSettings" EntityType="Self.NetworkSettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notificactions" EntityType="Self.Notificactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotificationSubscribers" EntityType="Self.NotificationSubscribers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ObjectStatus" EntityType="Self.ObjectStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrganizationProfile" EntityType="Self.OrganizationProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonProfile" EntityType="Self.PersonProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Phone" EntityType="Self.Phone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostInteractions" EntityType="Self.PostInteractions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostReplies" EntityType="Self.PostReplies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostReplyInteractions" EntityType="Self.PostReplyInteractions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostTags" EntityType="Self.PostTags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrivacySettings" EntityType="Self.PrivacySettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubscriptionHistory" EntityType="Self.SubscriptionHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubscriptionPlan" EntityType="Self.SubscriptionPlan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Widget" EntityType="Self.Widget" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntityMedia" EntityType="Self.EntityMedia" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[EntityMedia].[EntityID] AS [EntityID], 
+[EntityMedia].[Path] AS [Path], 
+[EntityMedia].[MediaType] AS [MediaType], 
+[EntityMedia].[Status] AS [Status]
+FROM [dbo].[EntityMedia] AS [EntityMedia]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__PostInter__Entit__2354350C" Association="Self.FK__PostInter__Entit__2354350C">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="PostInteractions" EntitySet="PostInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccomplishmentStates_Entity" Association="Self.FK_AccomplishmentStates_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="AccomplishmentStates" EntitySet="AccomplishmentStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccomplishmentStates_EntityAward" Association="Self.FK_AccomplishmentStates_EntityAward">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletion" />
+      <End Role="AccomplishmentStates" EntitySet="AccomplishmentStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityAction_Entity" Association="Self.FK_ActivityAction_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="ActivityAction" EntitySet="ActivityAction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityAction_NetworkActivities" Association="Self.FK_ActivityAction_NetworkActivities">
+      <End Role="NetworkActivities" EntitySet="NetworkActivities" />
+      <End Role="ActivityAction" EntitySet="ActivityAction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Entity" Association="Self.FK_Address_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Entity1" Association="Self.FK_Address_Entity1">
+      <End Role="Master_AddressType" EntitySet="Master_AddressType" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation  " Association="Self.FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation  ">
+      <End Role="AppreciationAndRecommendation" EntitySet="AppreciationAndRecommendation" />
+      <End Role="AppreciationAndRecommendationParticipant" EntitySet="AppreciationAndRecommendationParticipant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppreciationAndRecommendationParticipant_Entity" Association="Self.FK_AppreciationAndRecommendationParticipant_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="AppreciationAndRecommendationParticipant" EntitySet="AppreciationAndRecommendationParticipant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppreciationAndRecommendationSkill_EntityAward" Association="Self.FK_AppreciationAndRecommendationSkill_EntityAward">
+      <End Role="AppreciationAndRecommendation" EntitySet="AppreciationAndRecommendation" />
+      <End Role="AppreciationAndRecommendationSkill" EntitySet="AppreciationAndRecommendationSkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppreciationAndRecommendationSkill_EntitySkill" Association="Self.FK_AppreciationAndRecommendationSkill_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkill" />
+      <End Role="AppreciationAndRecommendationSkill" EntitySet="AppreciationAndRecommendationSkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppriciationRecommendation_EntityAward" Association="Self.FK_AppriciationRecommendation_EntityAward">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletion" />
+      <End Role="AppreciationAndRecommendation" EntitySet="AppreciationAndRecommendation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Association_Entity" Association="Self.FK_Association_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Association" EntitySet="Association" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Association_Entity1" Association="Self.FK_Association_Entity1">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Association" EntitySet="Association" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AwardSkill_EntityAward" Association="Self.FK_AwardSkill_EntityAward">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletion" />
+      <End Role="AwardSkill" EntitySet="AwardSkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AwardSkill_EntitySkill" Association="Self.FK_AwardSkill_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkill" />
+      <End Role="AwardSkill" EntitySet="AwardSkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistory_CareerHistory" Association="Self.FK_CareerHistory_CareerHistory">
+      <End Role="JobTitle" EntitySet="JobTitle" />
+      <End Role="CareerHistory" EntitySet="CareerHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistory_Entity" Association="Self.FK_CareerHistory_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="CareerHistory" EntitySet="CareerHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistory_Organization" Association="Self.FK_CareerHistory_Organization">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="CareerHistory" EntitySet="CareerHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistorySkill_CareerHistory" Association="Self.FK_CareerHistorySkill_CareerHistory">
+      <End Role="CareerHistory" EntitySet="CareerHistory" />
+      <End Role="CareerHistorySkill" EntitySet="CareerHistorySkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistorySkill_EntitySkill" Association="Self.FK_CareerHistorySkill_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkill" />
+      <End Role="CareerHistorySkill" EntitySet="CareerHistorySkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatGroupMessage_ChatGroup" Association="Self.FK_ChatGroupMessage_ChatGroup">
+      <End Role="ChatGroup" EntitySet="ChatGroup" />
+      <End Role="ChatGroupMessage" EntitySet="ChatGroupMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatGroupMessage_Entity" Association="Self.FK_ChatGroupMessage_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="ChatGroupMessage" EntitySet="ChatGroupMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatGroupMessageListeners_ChatGroupMessage" Association="Self.FK_ChatGroupMessageListeners_ChatGroupMessage">
+      <End Role="ChatGroupMessage" EntitySet="ChatGroupMessage" />
+      <End Role="ChatGroupMessageListeners" EntitySet="ChatGroupMessageListeners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatGroupMessageListeners_Entity" Association="Self.FK_ChatGroupMessageListeners_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="ChatGroupMessageListeners" EntitySet="ChatGroupMessageListeners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatGroupUser_ChatGroup" Association="Self.FK_ChatGroupUser_ChatGroup">
+      <End Role="ChatGroup" EntitySet="ChatGroup" />
+      <End Role="ChatGroupUser" EntitySet="ChatGroupUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChatGroupUser_Entity" Association="Self.FK_ChatGroupUser_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="ChatGroupUser" EntitySet="ChatGroupUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Content_ContentType" Association="Self.FK_Content_ContentType">
+      <End Role="Master_ContentType" EntitySet="Master_ContentType" />
+      <End Role="Content" EntitySet="Content" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Content_Entity" Association="Self.FK_Content_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Content" EntitySet="Content" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentComment_Master_CommentType" Association="Self.FK_ContentComment_Master_CommentType">
+      <End Role="Master_CommentType" EntitySet="Master_CommentType" />
+      <End Role="ContentComment" EntitySet="ContentComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentComment_ObjectStatus" Association="Self.FK_ContentComment_ObjectStatus">
+      <End Role="ObjectStatus" EntitySet="ObjectStatus" />
+      <End Role="ContentComment" EntitySet="ContentComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Email_Entity" Association="Self.FK_Email_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Email" EntitySet="Email" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Email_Master_EmailType" Association="Self.FK_Email_Master_EmailType">
+      <End Role="Master_EmailType" EntitySet="Master_EmailType" />
+      <End Role="Email" EntitySet="Email" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAward_CareerHistory" Association="Self.FK_EntityAward_CareerHistory">
+      <End Role="CareerHistory" EntitySet="CareerHistory" />
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAward_Entity" Association="Self.FK_EntityAward_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAward_Entity1" Association="Self.FK_EntityAward_Entity1">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntityAwardParticipant" EntitySet="EntityAwardParticipant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAwardParticipant_Entity" Association="Self.FK_EntityAwardParticipant_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntityAwardParticipant" EntitySet="EntityAwardParticipant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAwardParticipant_EntityAward" Association="Self.FK_EntityAwardParticipant_EntityAward">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletion" />
+      <End Role="EntityAwardParticipant" EntitySet="EntityAwardParticipant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityImport_Entity" Association="Self.FK_EntityImport_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntityImport" EntitySet="EntityImport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityImportContacts_EntityImport" Association="Self.FK_EntityImportContacts_EntityImport">
+      <End Role="EntityImport" EntitySet="EntityImport" />
+      <End Role="EntityImportContacts" EntitySet="EntityImportContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityImportInvites_EntityImportContacts" Association="Self.FK_EntityImportInvites_EntityImportContacts">
+      <End Role="EntityImportContacts" EntitySet="EntityImportContacts" />
+      <End Role="EntityImportInvites" EntitySet="EntityImportInvites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityMedia_Entity" Association="Self.FK_EntityMedia_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntityMedia" EntitySet="EntityMedia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySearches_Entity" Association="Self.FK_EntitySearches_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntitySearches" EntitySet="EntitySearches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySearches_Entity1" Association="Self.FK_EntitySearches_Entity1">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntitySearches" EntitySet="EntitySearches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySkill_Entity" Association="Self.FK_EntitySkill_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntitySkill" EntitySet="EntitySkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySkill_Skill" Association="Self.FK_EntitySkill_Skill">
+      <End Role="Skill" EntitySet="Skill" />
+      <End Role="EntitySkill" EntitySet="EntitySkill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySkillStates_Entity" Association="Self.FK_EntitySkillStates_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntitySkillStates" EntitySet="EntitySkillStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySkillStates_EntitySkill" Association="Self.FK_EntitySkillStates_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkill" />
+      <End Role="EntitySkillStates" EntitySet="EntitySkillStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityStates_Entity1" Association="Self.FK_EntityStates_Entity1">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntityStates" EntitySet="EntityStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityStates_Entity2" Association="Self.FK_EntityStates_Entity2">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntityStates" EntitySet="EntityStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityWidget_Entity" Association="Self.FK_EntityWidget_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="EntityWidget" EntitySet="EntityWidget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityWidget_Widget" Association="Self.FK_EntityWidget_Widget">
+      <End Role="Widget" EntitySet="Widget" />
+      <End Role="EntityWidget" EntitySet="EntityWidget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GeneralSettings_Entity" Association="Self.FK_GeneralSettings_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="GeneralSettings" EntitySet="GeneralSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelligenceAction_EntityID" Association="Self.FK_IntelligenceAction_EntityID">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="IntelligenceAction" EntitySet="IntelligenceAction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobSearchSettings_Entity" Association="Self.FK_JobSearchSettings_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="JobSearchSettings" EntitySet="JobSearchSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NetworkActivities_CareerHistory" Association="Self.FK_NetworkActivities_CareerHistory">
+      <End Role="CareerHistory" EntitySet="CareerHistory" />
+      <End Role="NetworkActivities" EntitySet="NetworkActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NetworkActivities_Entity" Association="Self.FK_NetworkActivities_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="NetworkActivities" EntitySet="NetworkActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NetworkActivities_EntityAwardAndCompletion" Association="Self.FK_NetworkActivities_EntityAwardAndCompletion">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletion" />
+      <End Role="NetworkActivities" EntitySet="NetworkActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NetworkActivities_EntitySkill" Association="Self.FK_NetworkActivities_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkill" />
+      <End Role="NetworkActivities" EntitySet="NetworkActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NetworkSettings_Entity" Association="Self.FK_NetworkSettings_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="NetworkSettings" EntitySet="NetworkSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificactions_AppreciationAndRecommendation" Association="Self.FK_Notificactions_AppreciationAndRecommendation">
+      <End Role="AppreciationAndRecommendation" EntitySet="AppreciationAndRecommendation" />
+      <End Role="Notificactions" EntitySet="Notificactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificactions_EntityAwardAndCompletion" Association="Self.FK_Notificactions_EntityAwardAndCompletion">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletion" />
+      <End Role="Notificactions" EntitySet="Notificactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificactions_EntitySkill" Association="Self.FK_Notificactions_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkill" />
+      <End Role="Notificactions" EntitySet="Notificactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificactions_NetworkActivities" Association="Self.FK_Notificactions_NetworkActivities">
+      <End Role="NetworkActivities" EntitySet="NetworkActivities" />
+      <End Role="Notificactions" EntitySet="Notificactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificactions_Post" Association="Self.FK_Notificactions_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="Notificactions" EntitySet="Notificactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotificationSubscribers_Entity" Association="Self.FK_NotificationSubscribers_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="NotificationSubscribers" EntitySet="NotificationSubscribers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotificationSubscribers_Notifications" Association="Self.FK_NotificationSubscribers_Notifications">
+      <End Role="Notificactions" EntitySet="Notificactions" />
+      <End Role="NotificationSubscribers" EntitySet="NotificationSubscribers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization_CategoryMaster" Association="Self.FK_Organization_CategoryMaster">
+      <End Role="CategoryMaster" EntitySet="CategoryMaster" />
+      <End Role="Organization" EntitySet="Organization" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization_Entity" Association="Self.FK_Organization_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Organization" EntitySet="Organization" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationProfile_Organization" Association="Self.FK_OrganizationProfile_Organization">
+      <End Role="Organization" EntitySet="Organization" />
+      <End Role="OrganizationProfile" EntitySet="OrganizationProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Entity" Association="Self.FK_Person_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonProfile_Person" Association="Self.FK_PersonProfile_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="PersonProfile" EntitySet="PersonProfile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_Entity" Association="Self.FK_Phone_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Phone" EntitySet="Phone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_Master_PhoneType" Association="Self.FK_Phone_Master_PhoneType">
+      <End Role="Master_PhoneType" EntitySet="Master_PhoneType" />
+      <End Role="Phone" EntitySet="Phone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_ContentType" Association="Self.FK_Post_ContentType">
+      <End Role="Master_ContentType" EntitySet="Master_ContentType" />
+      <End Role="Post" EntitySet="Post" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_Entity" Association="Self.FK_Post_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="Post" EntitySet="Post" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostInteractions_Entity" Association="Self.FK_PostInteractions_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="PostInteractions" EntitySet="PostInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostInteractions_Post" Association="Self.FK_PostInteractions_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="PostInteractions" EntitySet="PostInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostInteractions_PostReplies" Association="Self.FK_PostInteractions_PostReplies">
+      <End Role="PostReplies" EntitySet="PostReplies" />
+      <End Role="PostReplyInteractions" EntitySet="PostReplyInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostReplies_Post" Association="Self.FK_PostReplies_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="PostReplies" EntitySet="PostReplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostReplies_PostReplies" Association="Self.FK_PostReplies_PostReplies">
+      <End Role="PostReplies" EntitySet="PostReplies" />
+      <End Role="PostReplies1" EntitySet="PostReplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostReplyInteractions_Entity" Association="Self.FK_PostReplyInteractions_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="PostReplyInteractions" EntitySet="PostReplyInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostTags_Post" Association="Self.FK_PostTags_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="PostTags" EntitySet="PostTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostTags_Tags" Association="Self.FK_PostTags_Tags">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="PostTags" EntitySet="PostTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrivacySettings_Entity" Association="Self.FK_PrivacySettings_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="PrivacySettings" EntitySet="PrivacySettings" />
+    </AssociationSet>
+    <AssociationSet Name="PK_SubscriptionHistory_Entity" Association="Self.PK_SubscriptionHistory_Entity">
+      <End Role="Entity" EntitySet="Entity" />
+      <End Role="SubscriptionHistory" EntitySet="SubscriptionHistory" />
+    </AssociationSet>
+    <AssociationSet Name="PK_SubscriptionHistory_SubscriptionPlan" Association="Self.PK_SubscriptionHistory_SubscriptionPlan">
+      <End Role="SubscriptionPlan" EntitySet="SubscriptionPlan" />
+      <End Role="SubscriptionHistory" EntitySet="SubscriptionHistory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

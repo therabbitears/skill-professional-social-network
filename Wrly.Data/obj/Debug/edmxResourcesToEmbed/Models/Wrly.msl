@@ -1,0 +1,751 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="wrlyModelStoreContainer" CdmEntityContainer="wrlyEntities">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="wrlyModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="County" ColumnName="County" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Varified" ColumnName="Varified" />
+          <ScalarProperty Name="Long" ColumnName="Long" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="AddressLine4" ColumnName="AddressLine4" />
+          <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppreciationAndRecommendations">
+      <EntityTypeMapping TypeName="wrlyModel.AppreciationAndRecommendation">
+        <MappingFragment StoreEntitySet="AppreciationAndRecommendation">
+          <ScalarProperty Name="SourceEntityID" ColumnName="SourceEntityID" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppreciationAndRecommendationParticipants">
+      <EntityTypeMapping TypeName="wrlyModel.AppreciationAndRecommendationParticipant">
+        <MappingFragment StoreEntitySet="AppreciationAndRecommendationParticipant">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="AppreciationAndRecommendationID" ColumnName="AppreciationAndRecommendationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="wrlyModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="wrlyModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="wrlyModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="wrlyModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Associations">
+      <EntityTypeMapping TypeName="wrlyModel.Association">
+        <MappingFragment StoreEntitySet="Association">
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="ObjectStatus" ColumnName="ObjectStatus" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="AssociationType" ColumnName="AssociationType" />
+          <ScalarProperty Name="EntityID2" ColumnName="EntityID2" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="AssociationID" ColumnName="AssociationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AwardSkills">
+      <EntityTypeMapping TypeName="wrlyModel.AwardSkill">
+        <MappingFragment StoreEntitySet="AwardSkill">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+          <ScalarProperty Name="AwardSkillID" ColumnName="AwardSkillID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CareerHistories">
+      <EntityTypeMapping TypeName="wrlyModel.CareerHistory">
+        <MappingFragment StoreEntitySet="CareerHistory">
+          <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="PottentialCurrent" ColumnName="PottentialCurrent" />
+          <ScalarProperty Name="PottentialEndDate" ColumnName="PottentialEndDate" />
+          <ScalarProperty Name="PottentialStartDate" ColumnName="PottentialStartDate" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="About" ColumnName="About" />
+          <ScalarProperty Name="EndFromYear" ColumnName="EndFromYear" />
+          <ScalarProperty Name="EndFromMonth" ColumnName="EndFromMonth" />
+          <ScalarProperty Name="EndFromDay" ColumnName="EndFromDay" />
+          <ScalarProperty Name="StartFromDay" ColumnName="StartFromDay" />
+          <ScalarProperty Name="StartFromYear" ColumnName="StartFromYear" />
+          <ScalarProperty Name="StartFromMonth" ColumnName="StartFromMonth" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+          <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryMasters">
+      <EntityTypeMapping TypeName="wrlyModel.CategoryMaster">
+        <MappingFragment StoreEntitySet="CategoryMaster">
+          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Categoryid" ColumnName="Categoryid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contents">
+      <EntityTypeMapping TypeName="wrlyModel.Content">
+        <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="PublishOn" ColumnName="PublishOn" />
+          <ScalarProperty Name="PostedOn" ColumnName="PostedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentComments">
+      <EntityTypeMapping TypeName="wrlyModel.ContentComment">
+        <MappingFragment StoreEntitySet="ContentComment">
+          <ScalarProperty Name="ObjectStatus" ColumnName="ObjectStatus" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="PostedOn" ColumnName="PostedOn" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="CommentType" ColumnName="CommentType" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="wrlyModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emails">
+      <EntityTypeMapping TypeName="wrlyModel.Email">
+        <MappingFragment StoreEntitySet="Email">
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Varified" ColumnName="Varified" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entities">
+      <EntityTypeMapping TypeName="wrlyModel.Entity">
+        <MappingFragment StoreEntitySet="Entity">
+          <ScalarProperty Name="EntityType" ColumnName="EntityType" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityAwardAndCompletions">
+      <EntityTypeMapping TypeName="wrlyModel.EntityAwardAndCompletion">
+        <MappingFragment StoreEntitySet="EntityAwardAndCompletion">
+          <ScalarProperty Name="Role1" ColumnName="Role" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="PottentialEndDate" ColumnName="PottentialEndDate" />
+          <ScalarProperty Name="PottentialStartDate" ColumnName="PottentialStartDate" />
+          <ScalarProperty Name="PottentialCurrent" ColumnName="PottentialCurrent" />
+          <ScalarProperty Name="EndFromDay" ColumnName="EndFromDay" />
+          <ScalarProperty Name="EndFromMonth" ColumnName="EndFromMonth" />
+          <ScalarProperty Name="EndFromYear" ColumnName="EndFromYear" />
+          <ScalarProperty Name="StartFromDay" ColumnName="StartFromDay" />
+          <ScalarProperty Name="StartFromMonth" ColumnName="StartFromMonth" />
+          <ScalarProperty Name="StartFromYear" ColumnName="StartFromYear" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AwardID" ColumnName="AwardID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityAwardParticipants">
+      <EntityTypeMapping TypeName="wrlyModel.EntityAwardParticipant">
+        <MappingFragment StoreEntitySet="EntityAwardParticipant">
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="RefrenceEntity" ColumnName="RefrenceEntity" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="EntityAwardID" ColumnName="EntityAwardID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntitySkills">
+      <EntityTypeMapping TypeName="wrlyModel.EntitySkill">
+        <MappingFragment StoreEntitySet="EntitySkill">
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="ExpertiseLevel" ColumnName="ExpertiseLevel" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="FromMonth" ColumnName="FromMonth" />
+          <ScalarProperty Name="FromYear" ColumnName="FromYear" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobTitles">
+      <EntityTypeMapping TypeName="wrlyModel.JobTitle">
+        <MappingFragment StoreEntitySet="JobTitle">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_AddressType">
+      <EntityTypeMapping TypeName="wrlyModel.Master_AddressType">
+        <MappingFragment StoreEntitySet="Master_AddressType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AddressTypeID" ColumnName="AddressTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_CommentType">
+      <EntityTypeMapping TypeName="wrlyModel.Master_CommentType">
+        <MappingFragment StoreEntitySet="Master_CommentType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PublicName" ColumnName="PublicName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CommentTypeID" ColumnName="CommentTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_ContentType">
+      <EntityTypeMapping TypeName="wrlyModel.Master_ContentType">
+        <MappingFragment StoreEntitySet="Master_ContentType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PublicName" ColumnName="PublicName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ContentTypeID" ColumnName="ContentTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_EmailType">
+      <EntityTypeMapping TypeName="wrlyModel.Master_EmailType">
+        <MappingFragment StoreEntitySet="Master_EmailType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmailType" ColumnName="EmailType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Master_PhoneType">
+      <EntityTypeMapping TypeName="wrlyModel.Master_PhoneType">
+        <MappingFragment StoreEntitySet="Master_PhoneType">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectStatus">
+      <EntityTypeMapping TypeName="wrlyModel.ObjectStatu">
+        <MappingFragment StoreEntitySet="ObjectStatus">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PublicName" ColumnName="PublicName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ObjectStatusID" ColumnName="ObjectStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organizations">
+      <EntityTypeMapping TypeName="wrlyModel.Organization">
+        <MappingFragment StoreEntitySet="Organization">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="EmployeeStrength" ColumnName="EmployeeStrength" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="EstablishedYear" ColumnName="EstablishedYear" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrganizationProfiles">
+      <EntityTypeMapping TypeName="wrlyModel.OrganizationProfile">
+        <MappingFragment StoreEntitySet="OrganizationProfile">
+          <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
+          <ScalarProperty Name="TagLine" ColumnName="TagLine" />
+          <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="OrganizationProfileID" ColumnName="OrganizationProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="wrlyModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonProfiles">
+      <EntityTypeMapping TypeName="wrlyModel.PersonProfile">
+        <MappingFragment StoreEntitySet="PersonProfile">
+          <ScalarProperty Name="PreviousJobTitle" ColumnName="PreviousJobTitle" />
+          <ScalarProperty Name="VarificationID" ColumnName="VarificationID" />
+          <ScalarProperty Name="LastVarificationSent" ColumnName="LastVarificationSent" />
+          <ScalarProperty Name="EmailVarified" ColumnName="EmailVarified" />
+          <ScalarProperty Name="WizardStep" ColumnName="WizardStep" />
+          <ScalarProperty Name="WizardFinished" ColumnName="WizardFinished" />
+          <ScalarProperty Name="ProfileLevel" ColumnName="ProfileLevel" />
+          <ScalarProperty Name="ProfileIndustry" ColumnName="ProfileIndustry" />
+          <ScalarProperty Name="FormatedJobTitle" ColumnName="FormatedJobTitle" />
+          <ScalarProperty Name="FormatedStudyTitle" ColumnName="FormatedStudyTitle" />
+          <ScalarProperty Name="FormatedAddress" ColumnName="FormatedAddress" />
+          <ScalarProperty Name="FormatedName" ColumnName="FormatedName" />
+          <ScalarProperty Name="NameFormat" ColumnName="NameFormat" />
+          <ScalarProperty Name="ProfileHeading" ColumnName="ProfileHeading" />
+          <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
+          <ScalarProperty Name="About" ColumnName="About" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+          <ScalarProperty Name="ProfileSummary" ColumnName="ProfileSummary" />
+          <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+          <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+          <ScalarProperty Name="PersonProfileID" ColumnName="PersonProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phones">
+      <EntityTypeMapping TypeName="wrlyModel.Phone">
+        <MappingFragment StoreEntitySet="Phone">
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Phone1" ColumnName="Phone" />
+          <ScalarProperty Name="Varified" ColumnName="Varified" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Skills">
+      <EntityTypeMapping TypeName="wrlyModel.Skill">
+        <MappingFragment StoreEntitySet="Skill">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityMedias">
+      <EntityTypeMapping TypeName="wrlyModel.EntityMedia">
+        <MappingFragment StoreEntitySet="EntityMedia">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="wrlyModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="CareerHistorySkills">
+      <EntityTypeMapping TypeName="wrlyModel.CareerHistorySkill">
+        <MappingFragment StoreEntitySet="CareerHistorySkill">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CareerHistoryID" ColumnName="CareerHistoryID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneralSettings">
+      <EntityTypeMapping TypeName="wrlyModel.GeneralSetting">
+        <MappingFragment StoreEntitySet="GeneralSettings">
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SearchEngineVisible" ColumnName="SearchEngineVisible" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobSearchSettings">
+      <EntityTypeMapping TypeName="wrlyModel.JobSearchSetting">
+        <MappingFragment StoreEntitySet="JobSearchSettings">
+          <ScalarProperty Name="Editedate" ColumnName="Editedate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="AllowOppurtunities" ColumnName="AllowOppurtunities" />
+          <ScalarProperty Name="AllowToRefer" ColumnName="AllowToRefer" />
+          <ScalarProperty Name="JobInterestLevel" ColumnName="JobInterestLevel" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NetworkSettings">
+      <EntityTypeMapping TypeName="wrlyModel.NetworkSetting">
+        <MappingFragment StoreEntitySet="NetworkSettings">
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RequestCapability" ColumnName="RequestCapability" />
+          <ScalarProperty Name="NetworkCoverageLevel" ColumnName="NetworkCoverageLevel" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrivacySettings">
+      <EntityTypeMapping TypeName="wrlyModel.PrivacySetting">
+        <MappingFragment StoreEntitySet="PrivacySettings">
+          <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="MessageRestrictionLevel" ColumnName="MessageRestrictionLevel" />
+          <ScalarProperty Name="EmailAddressVisibilityLevel" ColumnName="EmailAddressVisibilityLevel" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityWidgets">
+      <EntityTypeMapping TypeName="wrlyModel.EntityWidget">
+        <MappingFragment StoreEntitySet="EntityWidget">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="WidgetID" ColumnName="WidgetID" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Widgets">
+      <EntityTypeMapping TypeName="wrlyModel.Widget">
+        <MappingFragment StoreEntitySet="Widget">
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+          <ScalarProperty Name="ForIndividual" ColumnName="ForIndividual" />
+          <ScalarProperty Name="IsPrimium" ColumnName="IsPrimium" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ReadOnly" ColumnName="ReadOnly" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Help" ColumnName="Help" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="WidgetName" ColumnName="WidgetName" />
+          <ScalarProperty Name="WidgetID" ColumnName="WidgetID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntelligenceActions">
+      <EntityTypeMapping TypeName="wrlyModel.IntelligenceAction">
+        <MappingFragment StoreEntitySet="IntelligenceAction">
+          <ScalarProperty Name="Stamp" ColumnName="Stamp" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccomplishmentStates">
+      <EntityTypeMapping TypeName="wrlyModel.AccomplishmentState">
+        <MappingFragment StoreEntitySet="AccomplishmentStates">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AccomplishmentID" ColumnName="AccomplishmentID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppreciationAndRecommendationSkills">
+      <EntityTypeMapping TypeName="wrlyModel.AppreciationAndRecommendationSkill">
+        <MappingFragment StoreEntitySet="AppreciationAndRecommendationSkill">
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntitySkillStates">
+      <EntityTypeMapping TypeName="wrlyModel.EntitySkillState">
+        <MappingFragment StoreEntitySet="EntitySkillStates">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SubType" ColumnName="SubType" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="EntitySkillID" ColumnName="EntitySkillID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostReplies">
+      <EntityTypeMapping TypeName="wrlyModel.PostReply">
+        <MappingFragment StoreEntitySet="PostReplies">
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ReplyType" ColumnName="ReplyType" />
+          <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="Reply" ColumnName="Reply" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostTags">
+      <EntityTypeMapping TypeName="wrlyModel.PostTag">
+        <MappingFragment StoreEntitySet="PostTags">
+          <ScalarProperty Name="TagID" ColumnName="TagID" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="wrlyModel.Tag">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TagID" ColumnName="TagID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostInteractions">
+      <EntityTypeMapping TypeName="wrlyModel.PostInteraction">
+        <MappingFragment StoreEntitySet="PostInteractions">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="InteractionType" ColumnName="InteractionType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostReplyInteractions">
+      <EntityTypeMapping TypeName="wrlyModel.PostReplyInteraction">
+        <MappingFragment StoreEntitySet="PostReplyInteractions">
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+          <ScalarProperty Name="InteractionType" ColumnName="InteractionType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="wrlyModel.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="PrivacyLevel" ColumnName="PrivacyLevel" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="PostID" ColumnName="PostID" />
+          <ScalarProperty Name="WritterID" ColumnName="WritterID" />
+          <ScalarProperty Name="AllowPublic" ColumnName="AllowPublic" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="PublishOn" ColumnName="PublishOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="Published" ColumnName="Published" />
+          <ScalarProperty Name="UrlSlug" ColumnName="UrlSlug" />
+          <ScalarProperty Name="Meta" ColumnName="Meta" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="SharingType" ColumnName="SharingType" />
+          <ScalarProperty Name="PostType" ColumnName="PostType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notificactions">
+      <EntityTypeMapping TypeName="wrlyModel.Notificaction">
+        <MappingFragment StoreEntitySet="Notificactions">
+          <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+          <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Updatable" ColumnName="Updatable" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationSubscribers">
+      <EntityTypeMapping TypeName="wrlyModel.NotificationSubscriber">
+        <MappingFragment StoreEntitySet="NotificationSubscribers">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Subscribed" ColumnName="Subscribed" />
+          <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+          <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

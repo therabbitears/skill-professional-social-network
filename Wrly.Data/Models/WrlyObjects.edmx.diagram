@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b35a511f686404181d7c94d22090411" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="TestDbModel.AccomplishmentState" Width="1.5" PointX="6" PointY="56.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Address" Width="1.5" PointX="3" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.AppreciationAndRecommendation" Width="1.5" PointX="16.5" PointY="63.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.AppreciationAndRecommendationParticipant" Width="1.5" PointX="3" PointY="61.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.AppreciationAndRecommendationSkill" Width="1.5" PointX="18.75" PointY="65.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.AspNetUser" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Association" Width="1.5" PointX="3" PointY="57.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.AwardSkill" Width="1.5" PointX="19.5" PointY="62" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.CareerHistory" Width="1.5" PointX="9" PointY="56" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.CareerHistorySkill" Width="1.5" PointX="11.25" PointY="64.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.CategoryMaster" Width="1.5" PointX="3.75" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.ChatGroup" Width="1.5" PointX="3.75" PointY="43" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.ChatGroupMessage" Width="1.5" PointX="6" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.ChatGroupMessageListener" Width="1.5" PointX="11.25" PointY="61.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.ChatGroupUser" Width="1.5" PointX="6" PointY="61.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Content" Width="1.5" PointX="9" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.ContentComment" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Country" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Email" Width="1.5" PointX="9" PointY="63.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Entity" Width="1.5" PointX="0.75" PointY="55.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.EntityAwardAndCompletion" Width="1.5" PointX="14.25" PointY="59.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.EntityAwardParticipant" Width="1.5" PointX="19.5" PointY="53.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.EntitySkill" Width="1.5" PointX="3" PointY="64.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.EntitySkillState" Width="1.5" PointX="8.25" PointY="67.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.EntityWidget" Width="1.5" PointX="6" PointY="65.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.GeneralSetting" Width="1.5" PointX="3" PointY="90.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.IntelligenceAction" Width="1.5" PointX="3" PointY="94" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.JobSearchSetting" Width="1.5" PointX="3" PointY="97" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.JobTitle" Width="1.5" PointX="6.75" PointY="72.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Master_AddressType" Width="1.5" PointX="0.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Master_CommentType" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Master_ContentType" Width="1.5" PointX="9.75" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Master_EmailType" Width="1.5" PointX="6.75" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Master_PhoneType" Width="1.5" PointX="9.75" PointY="71.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.NetworkSetting" Width="1.5" PointX="3" PointY="100.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Notificaction" Width="1.5" PointX="19.75" PointY="57" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.NotificationSubscriber" Width="1.5" PointX="22" PointY="57.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.ObjectStatu" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Organization" Width="1.5" PointX="6" PointY="48.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.OrganizationProfile" Width="1.5" PointX="8.25" PointY="43" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Person" Width="1.5" PointX="3" PointY="109.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.PersonProfile" Width="1.5" PointX="5.25" PointY="108.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Phone" Width="1.5" PointX="12" PointY="57.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Post" Width="1.5" PointX="12" PointY="49.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.PostInteraction" Width="1.5" PointX="17.25" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.PostReply" Width="1.5" PointX="14.25" PointY="54.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.PostReplyInteraction" Width="1.5" PointX="16.5" PointY="59.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.PostTag" Width="1.5" PointX="14.25" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.PrivacySetting" Width="1.5" PointX="3" PointY="125.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Skill" Width="1.5" PointX="0.75" PointY="65.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.SubscriptionHistory" Width="1.5" PointX="9" PointY="48.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.SubscriptionPlan" Width="1.5" PointX="6.75" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Tag" Width="1.5" PointX="12" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.Widget" Width="1.5" PointX="3.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestDbModel.EntityMedia" Width="1.5" PointX="3" PointY="133.25" IsExpanded="true" />
+        <AssociationConnector Association="TestDbModel.FK_AccomplishmentStates_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_AccomplishmentStates_EntityAward" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Address_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Address_Entity1" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation__" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_AppreciationAndRecommendationSkill_EntityAward" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_AppriciationRecommendation_EntityAward" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Notificactions_AppreciationAndRecommendation" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_AppreciationAndRecommendationParticipant_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_AppreciationAndRecommendationSkill_EntitySkill" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Association_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Association_Entity1" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_AwardSkill_EntityAward" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_AwardSkill_EntitySkill" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_CareerHistory_CareerHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_CareerHistory_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_CareerHistory_Organization" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_CareerHistorySkill_CareerHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntityAward_CareerHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_CareerHistorySkill_EntitySkill" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Organization_CategoryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_ChatGroupMessage_ChatGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_ChatGroupUser_ChatGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_ChatGroupMessage_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_ChatGroupMessageListeners_ChatGroupMessage" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_ChatGroupMessageListeners_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_ChatGroupUser_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Content_ContentType" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Content_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_ContentComment_Master_CommentType" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_ContentComment_ObjectStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Email_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Email_Master_EmailType" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntityAward_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntityAward_Entity1" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntityAwardParticipant_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntityMedia_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntitySkill_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntitySkillStates_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntityWidget_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_GeneralSettings_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_IntelligenceAction_EntityID" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_JobSearchSettings_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_NetworkSettings_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_NotificationSubscribers_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Organization_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Person_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Phone_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Post_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PostInteractions_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PostReplyInteractions_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PrivacySettings_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.PK_SubscriptionHistory_Entity" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntityAwardParticipant_EntityAward" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntitySkill_Skill" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntitySkillStates_EntitySkill" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_EntityWidget_Widget" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Post_ContentType" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Phone_Master_PhoneType" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_Notificactions_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_NotificationSubscribers_Notifications" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_OrganizationProfile_Organization" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PersonProfile_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PostInteractions_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PostReplies_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PostTags_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PostInteractions_PostReplies" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PostReplies_PostReplies" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.FK_PostTags_Tags" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.PK_SubscriptionHistory_SubscriptionPlan" ManuallyRouted="false" />
+        <AssociationConnector Association="TestDbModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TestDbModel.EntitySearch" Width="1.5" PointX="3" PointY="75.5" />
+        <AssociationConnector Association="TestDbModel.FK_EntitySearches_Entity" />
+        <AssociationConnector Association="TestDbModel.FK_EntitySearches_Entity1" />
+        <AssociationConnector Association="TestDbModel.FK_PostTags_Tags1" />
+        <EntityTypeShape EntityType="TestDbModel.ActivityAction" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TestDbModel.NetworkActivity" Width="1.5" PointX="22.5" PointY="60.75" />
+        <AssociationConnector Association="TestDbModel.FK_ActivityAction_Entity" />
+        <AssociationConnector Association="TestDbModel.FK_ActivityAction_NetworkActivities" />
+        <AssociationConnector Association="TestDbModel.FK_NetworkActivities_CareerHistory" />
+        <AssociationConnector Association="TestDbModel.FK_NetworkActivities_Entity" />
+        <AssociationConnector Association="TestDbModel.FK_NetworkActivities_EntityAwardAndCompletion" />
+        <AssociationConnector Association="TestDbModel.FK_Notificactions_EntityAwardAndCompletion" />
+        <AssociationConnector Association="TestDbModel.FK_NetworkActivities_EntitySkill" />
+        <AssociationConnector Association="TestDbModel.FK_Notificactions_EntitySkill" />
+        <AssociationConnector Association="TestDbModel.FK_Notificactions_NetworkActivities" />
+        <EntityTypeShape EntityType="TestDbModel.EntityImport" Width="1.5" PointX="3" PointY="80.25" />
+        <EntityTypeShape EntityType="TestDbModel.EntityImportContact" Width="1.5" PointX="5.25" PointY="80.25" />
+        <EntityTypeShape EntityType="TestDbModel.EntityImportInvite" Width="1.5" PointX="7.5" PointY="80.25" />
+        <AssociationConnector Association="TestDbModel.FK_EntityImport_Entity" />
+        <AssociationConnector Association="TestDbModel.FK_EntityImportContacts_EntityImport" />
+        <AssociationConnector Association="TestDbModel.FK_EntityImportInvites_EntityImportContacts" />
+        <EntityTypeShape EntityType="TestDbModel.EntityState" Width="1.5" PointX="3" PointY="39.25" />
+        <AssociationConnector Association="TestDbModel.FK__PostInter__Entit__2354350C" />
+        <AssociationConnector Association="TestDbModel.FK_EntityStates_Entity1" />
+        <AssociationConnector Association="TestDbModel.FK_EntityStates_Entity2" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

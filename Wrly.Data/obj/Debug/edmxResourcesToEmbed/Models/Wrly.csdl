@@ -1,0 +1,1918 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="wrlyModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="wrlyEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+    <EntitySet Name="Addresses" EntityType="wrlyModel.Address" />
+    <EntitySet Name="AppreciationAndRecommendations" EntityType="wrlyModel.AppreciationAndRecommendation" />
+    <EntitySet Name="AppreciationAndRecommendationParticipants" EntityType="wrlyModel.AppreciationAndRecommendationParticipant" />
+    <EntitySet Name="AspNetRoles" EntityType="wrlyModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="wrlyModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="wrlyModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="wrlyModel.AspNetUser" />
+    <EntitySet Name="Associations" EntityType="wrlyModel.Association" />
+    <EntitySet Name="AwardSkills" EntityType="wrlyModel.AwardSkill" />
+    <EntitySet Name="CareerHistories" EntityType="wrlyModel.CareerHistory" />
+    <EntitySet Name="CategoryMasters" EntityType="wrlyModel.CategoryMaster" />
+    <EntitySet Name="Contents" EntityType="wrlyModel.Content" />
+    <EntitySet Name="ContentComments" EntityType="wrlyModel.ContentComment" />
+    <EntitySet Name="Countries" EntityType="wrlyModel.Country" />
+    <EntitySet Name="Emails" EntityType="wrlyModel.Email" />
+    <EntitySet Name="Entities" EntityType="wrlyModel.Entity" />
+    <EntitySet Name="EntityAwardAndCompletions" EntityType="wrlyModel.EntityAwardAndCompletion" />
+    <EntitySet Name="EntityAwardParticipants" EntityType="wrlyModel.EntityAwardParticipant" />
+    <EntitySet Name="EntitySkills" EntityType="wrlyModel.EntitySkill" />
+    <EntitySet Name="JobTitles" EntityType="wrlyModel.JobTitle" />
+    <EntitySet Name="Master_AddressType" EntityType="wrlyModel.Master_AddressType" />
+    <EntitySet Name="Master_CommentType" EntityType="wrlyModel.Master_CommentType" />
+    <EntitySet Name="Master_ContentType" EntityType="wrlyModel.Master_ContentType" />
+    <EntitySet Name="Master_EmailType" EntityType="wrlyModel.Master_EmailType" />
+    <EntitySet Name="Master_PhoneType" EntityType="wrlyModel.Master_PhoneType" />
+    <EntitySet Name="ObjectStatus" EntityType="wrlyModel.ObjectStatu" />
+    <EntitySet Name="Organizations" EntityType="wrlyModel.Organization" />
+    <EntitySet Name="OrganizationProfiles" EntityType="wrlyModel.OrganizationProfile" />
+    <EntitySet Name="People" EntityType="wrlyModel.Person" />
+    <EntitySet Name="PersonProfiles" EntityType="wrlyModel.PersonProfile" />
+    <EntitySet Name="Phones" EntityType="wrlyModel.Phone" />
+    <EntitySet Name="Skills" EntityType="wrlyModel.Skill" />
+    <EntitySet Name="EntityMedias" EntityType="wrlyModel.EntityMedia" />
+    <AssociationSet Name="FK_Address_Entity" Association="wrlyModel.FK_Address_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Address_Entity1" Association="wrlyModel.FK_Address_Entity1">
+      <End Role="Master_AddressType" EntitySet="Master_AddressType" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation__" Association="wrlyModel.FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation__">
+      <End Role="AppreciationAndRecommendation" EntitySet="AppreciationAndRecommendations" />
+      <End Role="AppreciationAndRecommendationParticipant" EntitySet="AppreciationAndRecommendationParticipants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppriciationRecommendation_EntityAward" Association="wrlyModel.FK_AppriciationRecommendation_EntityAward">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletions" />
+      <End Role="AppreciationAndRecommendation" EntitySet="AppreciationAndRecommendations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppreciationAndRecommendationParticipant_Entity" Association="wrlyModel.FK_AppreciationAndRecommendationParticipant_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="AppreciationAndRecommendationParticipant" EntitySet="AppreciationAndRecommendationParticipants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="wrlyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="wrlyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Association_Entity" Association="wrlyModel.FK_Association_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Association" EntitySet="Associations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Association_Entity1" Association="wrlyModel.FK_Association_Entity1">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Association" EntitySet="Associations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AwardSkill_EntityAward" Association="wrlyModel.FK_AwardSkill_EntityAward">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletions" />
+      <End Role="AwardSkill" EntitySet="AwardSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AwardSkill_EntitySkill" Association="wrlyModel.FK_AwardSkill_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkills" />
+      <End Role="AwardSkill" EntitySet="AwardSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistory_CareerHistory" Association="wrlyModel.FK_CareerHistory_CareerHistory">
+      <End Role="JobTitle" EntitySet="JobTitles" />
+      <End Role="CareerHistory" EntitySet="CareerHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistory_Entity" Association="wrlyModel.FK_CareerHistory_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="CareerHistory" EntitySet="CareerHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistory_Organization" Association="wrlyModel.FK_CareerHistory_Organization">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="CareerHistory" EntitySet="CareerHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAward_CareerHistory" Association="wrlyModel.FK_EntityAward_CareerHistory">
+      <End Role="CareerHistory" EntitySet="CareerHistories" />
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization_CategoryMaster" Association="wrlyModel.FK_Organization_CategoryMaster">
+      <End Role="CategoryMaster" EntitySet="CategoryMasters" />
+      <End Role="Organization" EntitySet="Organizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Content_ContentType" Association="wrlyModel.FK_Content_ContentType">
+      <End Role="Master_ContentType" EntitySet="Master_ContentType" />
+      <End Role="Content" EntitySet="Contents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Content_Entity" Association="wrlyModel.FK_Content_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Content" EntitySet="Contents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentComment_Master_CommentType" Association="wrlyModel.FK_ContentComment_Master_CommentType">
+      <End Role="Master_CommentType" EntitySet="Master_CommentType" />
+      <End Role="ContentComment" EntitySet="ContentComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContentComment_ObjectStatus" Association="wrlyModel.FK_ContentComment_ObjectStatus">
+      <End Role="ObjectStatu" EntitySet="ObjectStatus" />
+      <End Role="ContentComment" EntitySet="ContentComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Email_Entity" Association="wrlyModel.FK_Email_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Email" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Email_Master_EmailType" Association="wrlyModel.FK_Email_Master_EmailType">
+      <End Role="Master_EmailType" EntitySet="Master_EmailType" />
+      <End Role="Email" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAward_Entity" Association="wrlyModel.FK_EntityAward_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAwardParticipant_Entity" Association="wrlyModel.FK_EntityAwardParticipant_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="EntityAwardParticipant" EntitySet="EntityAwardParticipants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityMedia_Entity" Association="wrlyModel.FK_EntityMedia_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="EntityMedia" EntitySet="EntityMedias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySkill_Entity" Association="wrlyModel.FK_EntitySkill_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="EntitySkill" EntitySet="EntitySkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organization_Entity" Association="wrlyModel.FK_Organization_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Organization" EntitySet="Organizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Entity" Association="wrlyModel.FK_Person_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_Entity" Association="wrlyModel.FK_Phone_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Phone" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityAwardParticipant_EntityAward" Association="wrlyModel.FK_EntityAwardParticipant_EntityAward">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletions" />
+      <End Role="EntityAwardParticipant" EntitySet="EntityAwardParticipants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySkill_Skill" Association="wrlyModel.FK_EntitySkill_Skill">
+      <End Role="Skill" EntitySet="Skills" />
+      <End Role="EntitySkill" EntitySet="EntitySkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phone_Master_PhoneType" Association="wrlyModel.FK_Phone_Master_PhoneType">
+      <End Role="Master_PhoneType" EntitySet="Master_PhoneType" />
+      <End Role="Phone" EntitySet="Phones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationProfile_Organization" Association="wrlyModel.FK_OrganizationProfile_Organization">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="OrganizationProfile" EntitySet="OrganizationProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonProfile_Person" Association="wrlyModel.FK_PersonProfile_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonProfile" EntitySet="PersonProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="wrlyModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="CareerHistorySkills" EntityType="wrlyModel.CareerHistorySkill" />
+    <AssociationSet Name="FK_CareerHistorySkill_CareerHistory" Association="wrlyModel.FK_CareerHistorySkill_CareerHistory">
+      <End Role="CareerHistory" EntitySet="CareerHistories" />
+      <End Role="CareerHistorySkill" EntitySet="CareerHistorySkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CareerHistorySkill_EntitySkill" Association="wrlyModel.FK_CareerHistorySkill_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkills" />
+      <End Role="CareerHistorySkill" EntitySet="CareerHistorySkills" />
+    </AssociationSet>
+    <EntitySet Name="GeneralSettings" EntityType="wrlyModel.GeneralSetting" />
+    <EntitySet Name="JobSearchSettings" EntityType="wrlyModel.JobSearchSetting" />
+    <EntitySet Name="NetworkSettings" EntityType="wrlyModel.NetworkSetting" />
+    <EntitySet Name="PrivacySettings" EntityType="wrlyModel.PrivacySetting" />
+    <AssociationSet Name="FK_GeneralSettings_Entity" Association="wrlyModel.FK_GeneralSettings_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="GeneralSetting" EntitySet="GeneralSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobSearchSettings_Entity" Association="wrlyModel.FK_JobSearchSettings_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="JobSearchSetting" EntitySet="JobSearchSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NetworkSettings_Entity" Association="wrlyModel.FK_NetworkSettings_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="NetworkSetting" EntitySet="NetworkSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrivacySettings_Entity" Association="wrlyModel.FK_PrivacySettings_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="PrivacySetting" EntitySet="PrivacySettings" />
+    </AssociationSet>
+    <EntitySet Name="EntityWidgets" EntityType="wrlyModel.EntityWidget" />
+    <EntitySet Name="Widgets" EntityType="wrlyModel.Widget" />
+    <AssociationSet Name="FK_EntityWidget_Entity" Association="wrlyModel.FK_EntityWidget_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="EntityWidget" EntitySet="EntityWidgets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityWidget_Widget" Association="wrlyModel.FK_EntityWidget_Widget">
+      <End Role="Widget" EntitySet="Widgets" />
+      <End Role="EntityWidget" EntitySet="EntityWidgets" />
+    </AssociationSet>
+    <EntitySet Name="IntelligenceActions" EntityType="wrlyModel.IntelligenceAction" />
+    <AssociationSet Name="FK_EntityAward_Entity1" Association="wrlyModel.FK_EntityAward_Entity1">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="EntityAwardParticipant" EntitySet="EntityAwardParticipants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelligenceAction_EntityID" Association="wrlyModel.FK_IntelligenceAction_EntityID">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="IntelligenceAction" EntitySet="IntelligenceActions" />
+    </AssociationSet>
+    <EntitySet Name="AccomplishmentStates" EntityType="wrlyModel.AccomplishmentState" />
+    <AssociationSet Name="FK_AccomplishmentStates_Entity" Association="wrlyModel.FK_AccomplishmentStates_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="AccomplishmentState" EntitySet="AccomplishmentStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccomplishmentStates_EntityAward" Association="wrlyModel.FK_AccomplishmentStates_EntityAward">
+      <End Role="EntityAwardAndCompletion" EntitySet="EntityAwardAndCompletions" />
+      <End Role="AccomplishmentState" EntitySet="AccomplishmentStates" />
+    </AssociationSet>
+    <EntitySet Name="AppreciationAndRecommendationSkills" EntityType="wrlyModel.AppreciationAndRecommendationSkill" />
+    <EntitySet Name="EntitySkillStates" EntityType="wrlyModel.EntitySkillState" />
+    <AssociationSet Name="FK_AppreciationAndRecommendationSkill_EntityAward" Association="wrlyModel.FK_AppreciationAndRecommendationSkill_EntityAward">
+      <End Role="AppreciationAndRecommendation" EntitySet="AppreciationAndRecommendations" />
+      <End Role="AppreciationAndRecommendationSkill" EntitySet="AppreciationAndRecommendationSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AppreciationAndRecommendationSkill_EntitySkill" Association="wrlyModel.FK_AppreciationAndRecommendationSkill_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkills" />
+      <End Role="AppreciationAndRecommendationSkill" EntitySet="AppreciationAndRecommendationSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySkillStates_Entity" Association="wrlyModel.FK_EntitySkillStates_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="EntitySkillState" EntitySet="EntitySkillStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntitySkillStates_EntitySkill" Association="wrlyModel.FK_EntitySkillStates_EntitySkill">
+      <End Role="EntitySkill" EntitySet="EntitySkills" />
+      <End Role="EntitySkillState" EntitySet="EntitySkillStates" />
+    </AssociationSet>
+    <EntitySet Name="PostReplies" EntityType="wrlyModel.PostReply" />
+    <EntitySet Name="PostTags" EntityType="wrlyModel.PostTag" />
+    <EntitySet Name="Tags" EntityType="wrlyModel.Tag" />
+    <AssociationSet Name="FK_PostReplies_PostReplies" Association="wrlyModel.FK_PostReplies_PostReplies">
+      <End Role="PostReply" EntitySet="PostReplies" />
+      <End Role="PostReply1" EntitySet="PostReplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostTags_Tags" Association="wrlyModel.FK_PostTags_Tags">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="PostTag" EntitySet="PostTags" />
+    </AssociationSet>
+    <EntitySet Name="PostInteractions" EntityType="wrlyModel.PostInteraction" />
+    <EntitySet Name="PostReplyInteractions" EntityType="wrlyModel.PostReplyInteraction" />
+    <AssociationSet Name="FK_PostInteractions_PostReplies" Association="wrlyModel.FK_PostInteractions_PostReplies">
+      <End Role="PostReply" EntitySet="PostReplies" />
+      <End Role="PostReplyInteraction" EntitySet="PostReplyInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostInteractions_Entity" Association="wrlyModel.FK_PostInteractions_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="PostInteraction" EntitySet="PostInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostReplyInteractions_Entity" Association="wrlyModel.FK_PostReplyInteractions_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="PostReplyInteraction" EntitySet="PostReplyInteractions" />
+    </AssociationSet>
+    <EntitySet Name="Posts" EntityType="wrlyModel.Post" />
+    <AssociationSet Name="FK_Post_Entity" Association="wrlyModel.FK_Post_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_ContentType" Association="wrlyModel.FK_Post_ContentType">
+      <End Role="Master_ContentType" EntitySet="Master_ContentType" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostInteractions_Post" Association="wrlyModel.FK_PostInteractions_Post">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="PostInteraction" EntitySet="PostInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostReplies_Post" Association="wrlyModel.FK_PostReplies_Post">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="PostReply" EntitySet="PostReplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostTags_Post" Association="wrlyModel.FK_PostTags_Post">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="PostTag" EntitySet="PostTags" />
+    </AssociationSet>
+    <EntitySet Name="Notificactions" EntityType="wrlyModel.Notificaction" />
+    <EntitySet Name="NotificationSubscribers" EntityType="wrlyModel.NotificationSubscriber" />
+    <AssociationSet Name="FK_NotificationSubscribers_Entity" Association="wrlyModel.FK_NotificationSubscribers_Entity">
+      <End Role="Entity" EntitySet="Entities" />
+      <End Role="NotificationSubscriber" EntitySet="NotificationSubscribers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotificationSubscribers_Notifications" Association="wrlyModel.FK_NotificationSubscribers_Notifications">
+      <End Role="Notificaction" EntitySet="Notificactions" />
+      <End Role="NotificationSubscriber" EntitySet="NotificationSubscribers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificactions_AppreciationAndRecommendation" Association="wrlyModel.FK_Notificactions_AppreciationAndRecommendation">
+      <End Role="AppreciationAndRecommendation" EntitySet="AppreciationAndRecommendations" />
+      <End Role="Notificaction" EntitySet="Notificactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificactions_Post" Association="wrlyModel.FK_Notificactions_Post">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="Notificaction" EntitySet="Notificactions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressType" Type="Int32" Nullable="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AddressLine2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AddressLine3" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AddressLine4" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Precision="3" />
+    <Property Name="EditedBy" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="Lat" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Long" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Varified" Type="Boolean" />
+    <Property Name="Country" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="County" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_Address_Entity" FromRole="Address" ToRole="Entity" />
+    <NavigationProperty Name="Master_AddressType" Relationship="wrlyModel.FK_Address_Entity1" FromRole="Address" ToRole="Master_AddressType" />
+  </EntityType>
+  <EntityType Name="AppreciationAndRecommendation">
+    <Key>
+      <PropertyRef Name="ReferenceID" />
+    </Key>
+    <Property Name="ReferenceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Byte" />
+    <Property Name="AwardID" Type="Int64" />
+    <Property Name="Type" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="AppreciationAndRecommendationParticipants" Relationship="wrlyModel.FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation__" FromRole="AppreciationAndRecommendation" ToRole="AppreciationAndRecommendationParticipant" />
+    <NavigationProperty Name="EntityAwardAndCompletion" Relationship="wrlyModel.FK_AppriciationRecommendation_EntityAward" FromRole="AppreciationAndRecommendation" ToRole="EntityAwardAndCompletion" />
+    <Property Name="EntityAwardID" Type="Int64" />
+    <Property Name="EntitySkillID" Type="Int64" />
+    <Property Name="CareerHistoryID" Type="Int64" />
+    <NavigationProperty Name="AppreciationAndRecommendationSkills" Relationship="wrlyModel.FK_AppreciationAndRecommendationSkill_EntityAward" FromRole="AppreciationAndRecommendation" ToRole="AppreciationAndRecommendationSkill" />
+    <Property Name="SourceEntityID" Type="Int64" />
+    <NavigationProperty Name="Notificactions" Relationship="wrlyModel.FK_Notificactions_AppreciationAndRecommendation" FromRole="AppreciationAndRecommendation" ToRole="Notificaction" />
+  </EntityType>
+  <EntityType Name="AppreciationAndRecommendationParticipant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="AppreciationAndRecommendationID" Type="Int64" Nullable="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="Byte" />
+    <NavigationProperty Name="AppreciationAndRecommendation" Relationship="wrlyModel.FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation__" FromRole="AppreciationAndRecommendationParticipant" ToRole="AppreciationAndRecommendation" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_AppreciationAndRecommendationParticipant_Entity" FromRole="AppreciationAndRecommendationParticipant" ToRole="Entity" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="wrlyModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="wrlyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="wrlyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="wrlyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="wrlyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRoles" Relationship="wrlyModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="Association">
+    <Key>
+      <PropertyRef Name="AssociationID" />
+    </Key>
+    <Property Name="AssociationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" />
+    <Property Name="EntityID2" Type="Int64" />
+    <Property Name="AssociationType" Type="Byte" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="ObjectStatus" Type="Byte" />
+    <Property Name="IpAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_Association_Entity" FromRole="Association" ToRole="Entity" />
+    <NavigationProperty Name="Entity1" Relationship="wrlyModel.FK_Association_Entity1" FromRole="Association" ToRole="Entity" />
+  </EntityType>
+  <EntityType Name="AwardSkill">
+    <Key>
+      <PropertyRef Name="AwardSkillID" />
+    </Key>
+    <Property Name="AwardSkillID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AwardID" Type="Int64" Nullable="false" />
+    <Property Name="EntitySkillID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="EntityAwardAndCompletion" Relationship="wrlyModel.FK_AwardSkill_EntityAward" FromRole="AwardSkill" ToRole="EntityAwardAndCompletion" />
+    <NavigationProperty Name="EntitySkill" Relationship="wrlyModel.FK_AwardSkill_EntitySkill" FromRole="AwardSkill" ToRole="EntitySkill" />
+    <Property Name="Status" Type="Byte" />
+  </EntityType>
+  <EntityType Name="CareerHistory">
+    <Key>
+      <PropertyRef Name="CareerHistoryID" />
+    </Key>
+    <Property Name="CareerHistoryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="JobTitleID" Type="Int64" Nullable="false" />
+    <Property Name="OrganizationID" Type="Int64" />
+    <Property Name="OrganizationName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="StartFromMonth" Type="Int32" />
+    <Property Name="StartFromYear" Type="Int32" />
+    <Property Name="StartFromDay" Type="Int32" />
+    <Property Name="EndFromDay" Type="Int32" />
+    <Property Name="EndFromMonth" Type="Int32" />
+    <Property Name="EndFromYear" Type="Int32" />
+    <Property Name="About" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="Byte" />
+    <Property Name="PottentialStartDate" Type="DateTime" Precision="3" />
+    <Property Name="PottentialEndDate" Type="DateTime" Precision="3" />
+    <Property Name="PottentialCurrent" Type="Boolean" />
+    <NavigationProperty Name="JobTitle" Relationship="wrlyModel.FK_CareerHistory_CareerHistory" FromRole="CareerHistory" ToRole="JobTitle" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_CareerHistory_Entity" FromRole="CareerHistory" ToRole="Entity" />
+    <NavigationProperty Name="Organization" Relationship="wrlyModel.FK_CareerHistory_Organization" FromRole="CareerHistory" ToRole="Organization" />
+    <NavigationProperty Name="EntityAwardAndCompletions" Relationship="wrlyModel.FK_EntityAward_CareerHistory" FromRole="CareerHistory" ToRole="EntityAwardAndCompletion" />
+    <NavigationProperty Name="CareerHistorySkills" Relationship="wrlyModel.FK_CareerHistorySkill_CareerHistory" FromRole="CareerHistory" ToRole="CareerHistorySkill" />
+    <Property Name="SubType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Confidential" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CategoryMaster">
+    <Key>
+      <PropertyRef Name="Categoryid" />
+    </Key>
+    <Property Name="Categoryid" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SubCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Organizations" Relationship="wrlyModel.FK_Organization_CategoryMaster" FromRole="CategoryMaster" ToRole="Organization" />
+  </EntityType>
+  <EntityType Name="Content">
+    <Key>
+      <PropertyRef Name="ContentID" />
+    </Key>
+    <Property Name="ContentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContentType" Type="Int32" Nullable="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="PostedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PublishOn" Type="DateTime" Precision="3" />
+    <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Master_ContentType" Relationship="wrlyModel.FK_Content_ContentType" FromRole="Content" ToRole="Master_ContentType" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_Content_Entity" FromRole="Content" ToRole="Entity" />
+  </EntityType>
+  <EntityType Name="ContentComment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommentType" Type="Int32" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PostedOn" Type="DateTime" Precision="3" />
+    <Property Name="EntityID" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="ObjectStatus" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Master_CommentType" Relationship="wrlyModel.FK_ContentComment_Master_CommentType" FromRole="ContentComment" ToRole="Master_CommentType" />
+    <NavigationProperty Name="ObjectStatu" Relationship="wrlyModel.FK_ContentComment_ObjectStatus" FromRole="ContentComment" ToRole="ObjectStatu" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Email">
+    <Key>
+      <PropertyRef Name="EmailID" />
+    </Key>
+    <Property Name="EmailID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="EmailType" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Varified" Type="Boolean" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_Email_Entity" FromRole="Email" ToRole="Entity" />
+    <NavigationProperty Name="Master_EmailType" Relationship="wrlyModel.FK_Email_Master_EmailType" FromRole="Email" ToRole="Master_EmailType" />
+  </EntityType>
+  <EntityType Name="Entity">
+    <Key>
+      <PropertyRef Name="EntityID" />
+    </Key>
+    <Property Name="EntityID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="wrlyModel.FK_Address_Entity" FromRole="Entity" ToRole="Address" />
+    <NavigationProperty Name="AppreciationAndRecommendationParticipants" Relationship="wrlyModel.FK_AppreciationAndRecommendationParticipant_Entity" FromRole="Entity" ToRole="AppreciationAndRecommendationParticipant" />
+    <NavigationProperty Name="Associations" Relationship="wrlyModel.FK_Association_Entity" FromRole="Entity" ToRole="Association" />
+    <NavigationProperty Name="Associations1" Relationship="wrlyModel.FK_Association_Entity1" FromRole="Entity" ToRole="Association" />
+    <NavigationProperty Name="CareerHistories" Relationship="wrlyModel.FK_CareerHistory_Entity" FromRole="Entity" ToRole="CareerHistory" />
+    <NavigationProperty Name="Contents" Relationship="wrlyModel.FK_Content_Entity" FromRole="Entity" ToRole="Content" />
+    <NavigationProperty Name="Emails" Relationship="wrlyModel.FK_Email_Entity" FromRole="Entity" ToRole="Email" />
+    <NavigationProperty Name="EntityAwardAndCompletions" Relationship="wrlyModel.FK_EntityAward_Entity" FromRole="Entity" ToRole="EntityAwardAndCompletion" />
+    <NavigationProperty Name="EntityAwardParticipants" Relationship="wrlyModel.FK_EntityAwardParticipant_Entity" FromRole="Entity" ToRole="EntityAwardParticipant" />
+    <NavigationProperty Name="EntityMedias" Relationship="wrlyModel.FK_EntityMedia_Entity" FromRole="Entity" ToRole="EntityMedia" />
+    <NavigationProperty Name="EntitySkills" Relationship="wrlyModel.FK_EntitySkill_Entity" FromRole="Entity" ToRole="EntitySkill" />
+    <NavigationProperty Name="Organizations" Relationship="wrlyModel.FK_Organization_Entity" FromRole="Entity" ToRole="Organization" />
+    <NavigationProperty Name="People" Relationship="wrlyModel.FK_Person_Entity" FromRole="Entity" ToRole="Person" />
+    <NavigationProperty Name="Phones" Relationship="wrlyModel.FK_Phone_Entity" FromRole="Entity" ToRole="Phone" />
+    <NavigationProperty Name="GeneralSettings" Relationship="wrlyModel.FK_GeneralSettings_Entity" FromRole="Entity" ToRole="GeneralSetting" />
+    <NavigationProperty Name="JobSearchSettings" Relationship="wrlyModel.FK_JobSearchSettings_Entity" FromRole="Entity" ToRole="JobSearchSetting" />
+    <NavigationProperty Name="NetworkSettings" Relationship="wrlyModel.FK_NetworkSettings_Entity" FromRole="Entity" ToRole="NetworkSetting" />
+    <NavigationProperty Name="PrivacySettings" Relationship="wrlyModel.FK_PrivacySettings_Entity" FromRole="Entity" ToRole="PrivacySetting" />
+    <NavigationProperty Name="EntityWidgets" Relationship="wrlyModel.FK_EntityWidget_Entity" FromRole="Entity" ToRole="EntityWidget" />
+    <NavigationProperty Name="EntityAwardParticipants1" Relationship="wrlyModel.FK_EntityAward_Entity1" FromRole="Entity" ToRole="EntityAwardParticipant" />
+    <NavigationProperty Name="IntelligenceActions" Relationship="wrlyModel.FK_IntelligenceAction_EntityID" FromRole="Entity" ToRole="IntelligenceAction" />
+    <NavigationProperty Name="AccomplishmentStates" Relationship="wrlyModel.FK_AccomplishmentStates_Entity" FromRole="Entity" ToRole="AccomplishmentState" />
+    <NavigationProperty Name="EntitySkillStates" Relationship="wrlyModel.FK_EntitySkillStates_Entity" FromRole="Entity" ToRole="EntitySkillState" />
+    <NavigationProperty Name="PostInteractions" Relationship="wrlyModel.FK_PostInteractions_Entity" FromRole="Entity" ToRole="PostInteraction" />
+    <NavigationProperty Name="PostReplyInteractions" Relationship="wrlyModel.FK_PostReplyInteractions_Entity" FromRole="Entity" ToRole="PostReplyInteraction" />
+    <NavigationProperty Name="Posts" Relationship="wrlyModel.FK_Post_Entity" FromRole="Entity" ToRole="Post" />
+    <NavigationProperty Name="NotificationSubscribers" Relationship="wrlyModel.FK_NotificationSubscribers_Entity" FromRole="Entity" ToRole="NotificationSubscriber" />
+  </EntityType>
+  <EntityType Name="EntityAwardAndCompletion">
+    <Key>
+      <PropertyRef Name="AwardID" />
+    </Key>
+    <Property Name="AwardID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Byte" />
+    <Property Name="CareerHistoryID" Type="Int64" />
+    <Property Name="Type" Type="Byte" />
+    <Property Name="StartFromYear" Type="Int32" />
+    <Property Name="StartFromMonth" Type="Int32" />
+    <Property Name="StartFromDay" Type="Int32" />
+    <Property Name="EndFromYear" Type="Int32" />
+    <Property Name="EndFromMonth" Type="Int32" />
+    <Property Name="EndFromDay" Type="Int32" />
+    <Property Name="PottentialCurrent" Type="Boolean" />
+    <Property Name="PottentialStartDate" Type="DateTime" Precision="3" />
+    <Property Name="PottentialEndDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AppreciationAndRecommendations" Relationship="wrlyModel.FK_AppriciationRecommendation_EntityAward" FromRole="EntityAwardAndCompletion" ToRole="AppreciationAndRecommendation" />
+    <NavigationProperty Name="AwardSkills" Relationship="wrlyModel.FK_AwardSkill_EntityAward" FromRole="EntityAwardAndCompletion" ToRole="AwardSkill" />
+    <NavigationProperty Name="CareerHistory" Relationship="wrlyModel.FK_EntityAward_CareerHistory" FromRole="EntityAwardAndCompletion" ToRole="CareerHistory" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_EntityAward_Entity" FromRole="EntityAwardAndCompletion" ToRole="Entity" />
+    <NavigationProperty Name="EntityAwardParticipants" Relationship="wrlyModel.FK_EntityAwardParticipant_EntityAward" FromRole="EntityAwardAndCompletion" ToRole="EntityAwardParticipant" />
+    <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="SubType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ParentID" Type="Int64" />
+    <NavigationProperty Name="AccomplishmentStates" Relationship="wrlyModel.FK_AccomplishmentStates_EntityAward" FromRole="EntityAwardAndCompletion" ToRole="AccomplishmentState" />
+    <Property Name="Role1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="EntityAwardParticipant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="EntityAwardID" Type="Int64" Nullable="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="Byte" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_EntityAwardParticipant_Entity" FromRole="EntityAwardParticipant" ToRole="Entity" />
+    <NavigationProperty Name="EntityAwardAndCompletion" Relationship="wrlyModel.FK_EntityAwardParticipant_EntityAward" FromRole="EntityAwardParticipant" ToRole="EntityAwardAndCompletion" />
+    <Property Name="RefrenceEntity" Type="Int64" />
+    <NavigationProperty Name="Entity1" Relationship="wrlyModel.FK_EntityAward_Entity1" FromRole="EntityAwardParticipant" ToRole="Entity" />
+    <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="GroupID" Type="String" MaxLength="140" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="EntitySkill">
+    <Key>
+      <PropertyRef Name="EntitySkillID" />
+    </Key>
+    <Property Name="EntitySkillID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillID" Type="Int32" Nullable="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="FromYear" Type="Int32" />
+    <Property Name="FromMonth" Type="Int32" />
+    <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AwardSkills" Relationship="wrlyModel.FK_AwardSkill_EntitySkill" FromRole="EntitySkill" ToRole="AwardSkill" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_EntitySkill_Entity" FromRole="EntitySkill" ToRole="Entity" />
+    <NavigationProperty Name="Skill" Relationship="wrlyModel.FK_EntitySkill_Skill" FromRole="EntitySkill" ToRole="Skill" />
+    <Property Name="ExpertiseLevel" Type="Byte" />
+    <NavigationProperty Name="CareerHistorySkills" Relationship="wrlyModel.FK_CareerHistorySkill_EntitySkill" FromRole="EntitySkill" ToRole="CareerHistorySkill" />
+    <Property Name="Score" Type="Int64" />
+    <NavigationProperty Name="AppreciationAndRecommendationSkills" Relationship="wrlyModel.FK_AppreciationAndRecommendationSkill_EntitySkill" FromRole="EntitySkill" ToRole="AppreciationAndRecommendationSkill" />
+    <NavigationProperty Name="EntitySkillStates" Relationship="wrlyModel.FK_EntitySkillStates_EntitySkill" FromRole="EntitySkill" ToRole="EntitySkillState" />
+  </EntityType>
+  <EntityType Name="JobTitle">
+    <Key>
+      <PropertyRef Name="JobTitleID" />
+    </Key>
+    <Property Name="JobTitleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CareerHistories" Relationship="wrlyModel.FK_CareerHistory_CareerHistory" FromRole="JobTitle" ToRole="CareerHistory" />
+    <Property Name="Type" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Master_AddressType">
+    <Key>
+      <PropertyRef Name="AddressTypeID" />
+    </Key>
+    <Property Name="AddressTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Decription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Addresses" Relationship="wrlyModel.FK_Address_Entity1" FromRole="Master_AddressType" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Master_CommentType">
+    <Key>
+      <PropertyRef Name="CommentTypeID" />
+    </Key>
+    <Property Name="CommentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PublicName" Type="Binary" MaxLength="50" FixedLength="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ContentComments" Relationship="wrlyModel.FK_ContentComment_Master_CommentType" FromRole="Master_CommentType" ToRole="ContentComment" />
+  </EntityType>
+  <EntityType Name="Master_ContentType">
+    <Key>
+      <PropertyRef Name="ContentTypeID" />
+    </Key>
+    <Property Name="ContentTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PublicName" Type="Binary" MaxLength="100" FixedLength="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Contents" Relationship="wrlyModel.FK_Content_ContentType" FromRole="Master_ContentType" ToRole="Content" />
+    <NavigationProperty Name="Posts" Relationship="wrlyModel.FK_Post_ContentType" FromRole="Master_ContentType" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="Master_EmailType">
+    <Key>
+      <PropertyRef Name="EmailType" />
+    </Key>
+    <Property Name="EmailType" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Decription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Emails" Relationship="wrlyModel.FK_Email_Master_EmailType" FromRole="Master_EmailType" ToRole="Email" />
+  </EntityType>
+  <EntityType Name="Master_PhoneType">
+    <Key>
+      <PropertyRef Name="PhoneType" />
+    </Key>
+    <Property Name="PhoneType" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Decription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Phones" Relationship="wrlyModel.FK_Phone_Master_PhoneType" FromRole="Master_PhoneType" ToRole="Phone" />
+  </EntityType>
+  <EntityType Name="ObjectStatu">
+    <Key>
+      <PropertyRef Name="ObjectStatusID" />
+    </Key>
+    <Property Name="ObjectStatusID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PublicName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="ContentComments" Relationship="wrlyModel.FK_ContentComment_ObjectStatus" FromRole="ObjectStatu" ToRole="ContentComment" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="OrganizationID" />
+    </Key>
+    <Property Name="OrganizationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EstablishedYear" Type="Int32" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeStrength" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CareerHistories" Relationship="wrlyModel.FK_CareerHistory_Organization" FromRole="Organization" ToRole="CareerHistory" />
+    <NavigationProperty Name="CategoryMaster" Relationship="wrlyModel.FK_Organization_CategoryMaster" FromRole="Organization" ToRole="CategoryMaster" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_Organization_Entity" FromRole="Organization" ToRole="Entity" />
+    <NavigationProperty Name="OrganizationProfiles" Relationship="wrlyModel.FK_OrganizationProfile_Organization" FromRole="Organization" ToRole="OrganizationProfile" />
+    <Property Name="Type" Type="Byte" />
+  </EntityType>
+  <EntityType Name="OrganizationProfile">
+    <Key>
+      <PropertyRef Name="OrganizationProfileID" />
+    </Key>
+    <Property Name="OrganizationProfileID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Website" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ProfileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OrganizationID" Type="Int64" Nullable="false" />
+    <Property Name="TagLine" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Organization" Relationship="wrlyModel.FK_OrganizationProfile_Organization" FromRole="OrganizationProfile" ToRole="Organization" />
+    <Property Name="ProfileImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="Byte" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_Person_Entity" FromRole="Person" ToRole="Entity" />
+    <NavigationProperty Name="PersonProfiles" Relationship="wrlyModel.FK_PersonProfile_Person" FromRole="Person" ToRole="PersonProfile" />
+  </EntityType>
+  <EntityType Name="PersonProfile">
+    <Key>
+      <PropertyRef Name="PersonProfileID" />
+    </Key>
+    <Property Name="PersonProfileID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int64" />
+    <Property Name="ProfileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="LastModified" Type="DateTime" Precision="3" />
+    <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="About" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ProfileHeading" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Person" Relationship="wrlyModel.FK_PersonProfile_Person" FromRole="PersonProfile" ToRole="Person" />
+    <Property Name="NameFormat" Type="Byte" />
+    <Property Name="FormatedName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="FormatedAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="FormatedStudyTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="FormatedJobTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="ProfileIndustry" Type="Int64" />
+    <Property Name="ProfileLevel" Type="Byte" />
+    <Property Name="WizardFinished" Type="Boolean" />
+    <Property Name="WizardStep" Type="Byte" />
+    <Property Name="EmailVarified" Type="Boolean" />
+    <Property Name="LastVarificationSent" Type="DateTime" Precision="3" />
+    <Property Name="VarificationID" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="PreviousJobTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Phone">
+    <Key>
+      <PropertyRef Name="PhoneID" />
+    </Key>
+    <Property Name="PhoneID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="PhoneType" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Varified" Type="Boolean" Nullable="false" />
+    <Property Name="Phone1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_Phone_Entity" FromRole="Phone" ToRole="Entity" />
+    <NavigationProperty Name="Master_PhoneType" Relationship="wrlyModel.FK_Phone_Master_PhoneType" FromRole="Phone" ToRole="Master_PhoneType" />
+  </EntityType>
+  <EntityType Name="Skill">
+    <Key>
+      <PropertyRef Name="SkillID" />
+    </Key>
+    <Property Name="SkillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Decription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EntitySkills" Relationship="wrlyModel.FK_EntitySkill_Skill" FromRole="Skill" ToRole="EntitySkill" />
+  </EntityType>
+  <EntityType Name="EntityMedia">
+    <Key>
+      <PropertyRef Name="EntityID" />
+      <PropertyRef Name="Path" />
+      <PropertyRef Name="MediaType" />
+    </Key>
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="Path" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="MediaType" Type="Byte" Nullable="false" />
+    <Property Name="Status" Type="Byte" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_EntityMedia_Entity" FromRole="EntityMedia" ToRole="Entity" />
+  </EntityType>
+  <Association Name="FK_Address_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Address_Entity1">
+    <End Type="wrlyModel.Master_AddressType" Role="Master_AddressType" Multiplicity="1" />
+    <End Type="wrlyModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_AddressType">
+        <PropertyRef Name="AddressTypeID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="AddressType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppreciationAndRecommendationParticipant_AppreciationAndRecommendation__">
+    <End Type="wrlyModel.AppreciationAndRecommendation" Role="AppreciationAndRecommendation" Multiplicity="1" />
+    <End Type="wrlyModel.AppreciationAndRecommendationParticipant" Role="AppreciationAndRecommendationParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppreciationAndRecommendation">
+        <PropertyRef Name="ReferenceID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendationParticipant">
+        <PropertyRef Name="AppreciationAndRecommendationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppriciationRecommendation_EntityAward">
+    <End Type="wrlyModel.EntityAwardAndCompletion" Role="EntityAwardAndCompletion" Multiplicity="0..1" />
+    <End Type="wrlyModel.AppreciationAndRecommendation" Role="AppreciationAndRecommendation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendation">
+        <PropertyRef Name="AwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppreciationAndRecommendationParticipant_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.AppreciationAndRecommendationParticipant" Role="AppreciationAndRecommendationParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendationParticipant">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+    <End Type="wrlyModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="wrlyModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="wrlyModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="wrlyModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Association_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="0..1" />
+    <End Type="wrlyModel.Association" Role="Association" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Association">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Association_Entity1">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="0..1" />
+    <End Type="wrlyModel.Association" Role="Association" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Association">
+        <PropertyRef Name="EntityID2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AwardSkill_EntityAward">
+    <End Type="wrlyModel.EntityAwardAndCompletion" Role="EntityAwardAndCompletion" Multiplicity="1" />
+    <End Type="wrlyModel.AwardSkill" Role="AwardSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="AwardSkill">
+        <PropertyRef Name="AwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AwardSkill_EntitySkill">
+    <End Type="wrlyModel.EntitySkill" Role="EntitySkill" Multiplicity="1" />
+    <End Type="wrlyModel.AwardSkill" Role="AwardSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="AwardSkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistory_CareerHistory">
+    <End Type="wrlyModel.JobTitle" Role="JobTitle" Multiplicity="1" />
+    <End Type="wrlyModel.CareerHistory" Role="CareerHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobTitle">
+        <PropertyRef Name="JobTitleID" />
+      </Principal>
+      <Dependent Role="CareerHistory">
+        <PropertyRef Name="JobTitleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistory_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.CareerHistory" Role="CareerHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="CareerHistory">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistory_Organization">
+    <End Type="wrlyModel.Organization" Role="Organization" Multiplicity="0..1" />
+    <End Type="wrlyModel.CareerHistory" Role="CareerHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrganizationID" />
+      </Principal>
+      <Dependent Role="CareerHistory">
+        <PropertyRef Name="OrganizationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAward_CareerHistory">
+    <End Type="wrlyModel.CareerHistory" Role="CareerHistory" Multiplicity="0..1" />
+    <End Type="wrlyModel.EntityAwardAndCompletion" Role="EntityAwardAndCompletion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CareerHistory">
+        <PropertyRef Name="CareerHistoryID" />
+      </Principal>
+      <Dependent Role="EntityAwardAndCompletion">
+        <PropertyRef Name="CareerHistoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization_CategoryMaster">
+    <End Type="wrlyModel.CategoryMaster" Role="CategoryMaster" Multiplicity="1" />
+    <End Type="wrlyModel.Organization" Role="Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryMaster">
+        <PropertyRef Name="Categoryid" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Content_ContentType">
+    <End Type="wrlyModel.Master_ContentType" Role="Master_ContentType" Multiplicity="1" />
+    <End Type="wrlyModel.Content" Role="Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_ContentType">
+        <PropertyRef Name="ContentTypeID" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="ContentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Content_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.Content" Role="Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Content">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentComment_Master_CommentType">
+    <End Type="wrlyModel.Master_CommentType" Role="Master_CommentType" Multiplicity="0..1" />
+    <End Type="wrlyModel.ContentComment" Role="ContentComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_CommentType">
+        <PropertyRef Name="CommentTypeID" />
+      </Principal>
+      <Dependent Role="ContentComment">
+        <PropertyRef Name="CommentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContentComment_ObjectStatus">
+    <End Type="wrlyModel.ObjectStatu" Role="ObjectStatu" Multiplicity="1" />
+    <End Type="wrlyModel.ContentComment" Role="ContentComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectStatu">
+        <PropertyRef Name="ObjectStatusID" />
+      </Principal>
+      <Dependent Role="ContentComment">
+        <PropertyRef Name="ObjectStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Email_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.Email" Role="Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Email_Master_EmailType">
+    <End Type="wrlyModel.Master_EmailType" Role="Master_EmailType" Multiplicity="1" />
+    <End Type="wrlyModel.Email" Role="Email" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_EmailType">
+        <PropertyRef Name="EmailType" />
+      </Principal>
+      <Dependent Role="Email">
+        <PropertyRef Name="EmailType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAward_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.EntityAwardAndCompletion" Role="EntityAwardAndCompletion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityAwardAndCompletion">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAwardParticipant_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.EntityAwardParticipant" Role="EntityAwardParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityAwardParticipant">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityMedia_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.EntityMedia" Role="EntityMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityMedia">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySkill_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.EntitySkill" Role="EntitySkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntitySkill">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organization_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.Organization" Role="Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.Person" Role="Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.Phone" Role="Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityAwardParticipant_EntityAward">
+    <End Type="wrlyModel.EntityAwardAndCompletion" Role="EntityAwardAndCompletion" Multiplicity="1" />
+    <End Type="wrlyModel.EntityAwardParticipant" Role="EntityAwardParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="EntityAwardParticipant">
+        <PropertyRef Name="EntityAwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySkill_Skill">
+    <End Type="wrlyModel.Skill" Role="Skill" Multiplicity="1" />
+    <End Type="wrlyModel.EntitySkill" Role="EntitySkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="SkillID" />
+      </Principal>
+      <Dependent Role="EntitySkill">
+        <PropertyRef Name="SkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phone_Master_PhoneType">
+    <End Type="wrlyModel.Master_PhoneType" Role="Master_PhoneType" Multiplicity="1" />
+    <End Type="wrlyModel.Phone" Role="Phone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_PhoneType">
+        <PropertyRef Name="PhoneType" />
+      </Principal>
+      <Dependent Role="Phone">
+        <PropertyRef Name="PhoneType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationProfile_Organization">
+    <End Type="wrlyModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="wrlyModel.OrganizationProfile" Role="OrganizationProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="OrganizationID" />
+      </Principal>
+      <Dependent Role="OrganizationProfile">
+        <PropertyRef Name="OrganizationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonProfile_Person">
+    <End Type="wrlyModel.Person" Role="Person" Multiplicity="0..1" />
+    <End Type="wrlyModel.PersonProfile" Role="PersonProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="PersonProfile">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="wrlyModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="wrlyModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityType Name="CareerHistorySkill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntitySkillID" Type="Int64" Nullable="false" />
+    <Property Name="CareerHistoryID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="CareerHistory" Relationship="wrlyModel.FK_CareerHistorySkill_CareerHistory" FromRole="CareerHistorySkill" ToRole="CareerHistory" />
+    <NavigationProperty Name="EntitySkill" Relationship="wrlyModel.FK_CareerHistorySkill_EntitySkill" FromRole="CareerHistorySkill" ToRole="EntitySkill" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CareerHistorySkill_CareerHistory">
+    <End Type="wrlyModel.CareerHistory" Role="CareerHistory" Multiplicity="1" />
+    <End Type="wrlyModel.CareerHistorySkill" Role="CareerHistorySkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CareerHistory">
+        <PropertyRef Name="CareerHistoryID" />
+      </Principal>
+      <Dependent Role="CareerHistorySkill">
+        <PropertyRef Name="CareerHistoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CareerHistorySkill_EntitySkill">
+    <End Type="wrlyModel.EntitySkill" Role="EntitySkill" Multiplicity="1" />
+    <End Type="wrlyModel.CareerHistorySkill" Role="CareerHistorySkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="CareerHistorySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GeneralSetting">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="SearchEngineVisible" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_GeneralSettings_Entity" FromRole="GeneralSetting" ToRole="Entity" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="EditedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EditedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="JobSearchSetting">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="JobInterestLevel" Type="Byte" />
+    <Property Name="AllowToRefer" Type="Boolean" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_JobSearchSettings_Entity" FromRole="JobSearchSetting" ToRole="Entity" />
+    <Property Name="AllowOppurtunities" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="EditedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Editedate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="NetworkSetting">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="Int64" Nullable="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NetworkCoverageLevel" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_NetworkSettings_Entity" FromRole="NetworkSetting" ToRole="Entity" />
+    <Property Name="RequestCapability" Type="Int32" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="EditedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EditedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="PrivacySetting">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" />
+    <Property Name="EmailAddressVisibilityLevel" Type="Byte" />
+    <Property Name="MessageRestrictionLevel" Type="Byte" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_PrivacySettings_Entity" FromRole="PrivacySetting" ToRole="Entity" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="EditedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EditedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="FK_GeneralSettings_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.GeneralSetting" Role="GeneralSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="GeneralSetting">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobSearchSettings_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.JobSearchSetting" Role="JobSearchSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="JobSearchSetting">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NetworkSettings_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.NetworkSetting" Role="NetworkSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="NetworkSetting">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrivacySettings_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="0..1" />
+    <End Type="wrlyModel.PrivacySetting" Role="PrivacySetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="PrivacySetting">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EntityWidget">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="WidgetID" Type="Int64" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_EntityWidget_Entity" FromRole="EntityWidget" ToRole="Entity" />
+    <NavigationProperty Name="Widget" Relationship="wrlyModel.FK_EntityWidget_Widget" FromRole="EntityWidget" ToRole="Widget" />
+  </EntityType>
+  <EntityType Name="Widget">
+    <Key>
+      <PropertyRef Name="WidgetID" />
+    </Key>
+    <Property Name="WidgetID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WidgetName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="Icon" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Help" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EntityWidgets" Relationship="wrlyModel.FK_EntityWidget_Widget" FromRole="Widget" ToRole="EntityWidget" />
+    <Property Name="ReadOnly" Type="Boolean" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="IsPrimium" Type="Boolean" />
+    <Property Name="ForIndividual" Type="Boolean" />
+    <Property Name="Organization" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_EntityWidget_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.EntityWidget" Role="EntityWidget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityWidget">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityWidget_Widget">
+    <End Type="wrlyModel.Widget" Role="Widget" Multiplicity="1" />
+    <End Type="wrlyModel.EntityWidget" Role="EntityWidget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Widget">
+        <PropertyRef Name="WidgetID" />
+      </Principal>
+      <Dependent Role="EntityWidget">
+        <PropertyRef Name="WidgetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="IntelligenceAction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="Type" Type="Byte" Nullable="false" />
+    <Property Name="Action" Type="Byte" Nullable="false" />
+    <Property Name="Stamp" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_IntelligenceAction_EntityID" FromRole="IntelligenceAction" ToRole="Entity" />
+  </EntityType>
+  <Association Name="FK_EntityAward_Entity1">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="0..1" />
+    <End Type="wrlyModel.EntityAwardParticipant" Role="EntityAwardParticipant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntityAwardParticipant">
+        <PropertyRef Name="RefrenceEntity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelligenceAction_EntityID">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.IntelligenceAction" Role="IntelligenceAction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="IntelligenceAction">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AccomplishmentState">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Byte" />
+    <Property Name="SubType" Type="Byte" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="AccomplishmentID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_AccomplishmentStates_Entity" FromRole="AccomplishmentState" ToRole="Entity" />
+    <NavigationProperty Name="EntityAwardAndCompletion" Relationship="wrlyModel.FK_AccomplishmentStates_EntityAward" FromRole="AccomplishmentState" ToRole="EntityAwardAndCompletion" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_AccomplishmentStates_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.AccomplishmentState" Role="AccomplishmentState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="AccomplishmentState">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccomplishmentStates_EntityAward">
+    <End Type="wrlyModel.EntityAwardAndCompletion" Role="EntityAwardAndCompletion" Multiplicity="1" />
+    <End Type="wrlyModel.AccomplishmentState" Role="AccomplishmentState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntityAwardAndCompletion">
+        <PropertyRef Name="AwardID" />
+      </Principal>
+      <Dependent Role="AccomplishmentState">
+        <PropertyRef Name="AccomplishmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AppreciationAndRecommendationSkill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntitySkillID" Type="Int64" Nullable="false" />
+    <Property Name="ReferenceID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="AppreciationAndRecommendation" Relationship="wrlyModel.FK_AppreciationAndRecommendationSkill_EntityAward" FromRole="AppreciationAndRecommendationSkill" ToRole="AppreciationAndRecommendation" />
+    <NavigationProperty Name="EntitySkill" Relationship="wrlyModel.FK_AppreciationAndRecommendationSkill_EntitySkill" FromRole="AppreciationAndRecommendationSkill" ToRole="EntitySkill" />
+  </EntityType>
+  <EntityType Name="EntitySkillState">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntitySkillID" Type="Int64" Nullable="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="SubType" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Byte" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_EntitySkillStates_Entity" FromRole="EntitySkillState" ToRole="Entity" />
+    <NavigationProperty Name="EntitySkill" Relationship="wrlyModel.FK_EntitySkillStates_EntitySkill" FromRole="EntitySkillState" ToRole="EntitySkill" />
+  </EntityType>
+  <Association Name="FK_AppreciationAndRecommendationSkill_EntityAward">
+    <End Type="wrlyModel.AppreciationAndRecommendation" Role="AppreciationAndRecommendation" Multiplicity="1" />
+    <End Type="wrlyModel.AppreciationAndRecommendationSkill" Role="AppreciationAndRecommendationSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppreciationAndRecommendation">
+        <PropertyRef Name="ReferenceID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendationSkill">
+        <PropertyRef Name="ReferenceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AppreciationAndRecommendationSkill_EntitySkill">
+    <End Type="wrlyModel.EntitySkill" Role="EntitySkill" Multiplicity="1" />
+    <End Type="wrlyModel.AppreciationAndRecommendationSkill" Role="AppreciationAndRecommendationSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="AppreciationAndRecommendationSkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySkillStates_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.EntitySkillState" Role="EntitySkillState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="EntitySkillState">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntitySkillStates_EntitySkill">
+    <End Type="wrlyModel.EntitySkill" Role="EntitySkill" Multiplicity="1" />
+    <End Type="wrlyModel.EntitySkillState" Role="EntitySkillState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EntitySkill">
+        <PropertyRef Name="EntitySkillID" />
+      </Principal>
+      <Dependent Role="EntitySkillState">
+        <PropertyRef Name="EntitySkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PostReply">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reply" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PostedOn" Type="DateTime" Precision="3" />
+    <Property Name="PostID" Type="Int64" />
+    <Property Name="ReplyID" Type="Int64" />
+    <Property Name="ReplyType" Type="Byte" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="UserID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PostReplies1" Relationship="wrlyModel.FK_PostReplies_PostReplies" FromRole="PostReply" ToRole="PostReply1" />
+    <NavigationProperty Name="PostReply1" Relationship="wrlyModel.FK_PostReplies_PostReplies" FromRole="PostReply1" ToRole="PostReply" />
+    <NavigationProperty Name="PostReplyInteractions" Relationship="wrlyModel.FK_PostInteractions_PostReplies" FromRole="PostReply" ToRole="PostReplyInteraction" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EntityID" Type="Int64" />
+    <NavigationProperty Name="Post" Relationship="wrlyModel.FK_PostReplies_Post" FromRole="PostReply" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="PostTag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PostID" Type="Int64" Nullable="false" />
+    <Property Name="TagID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Tag" Relationship="wrlyModel.FK_PostTags_Tags" FromRole="PostTag" ToRole="Tag" />
+    <NavigationProperty Name="Post" Relationship="wrlyModel.FK_PostTags_Post" FromRole="PostTag" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagID" />
+    </Key>
+    <Property Name="TagID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IpAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PostTags" Relationship="wrlyModel.FK_PostTags_Tags" FromRole="Tag" ToRole="PostTag" />
+    <Property Name="EntityID" Type="Int64" />
+  </EntityType>
+  <Association Name="FK_PostReplies_PostReplies">
+    <End Type="wrlyModel.PostReply" Role="PostReply" Multiplicity="0..1" />
+    <End Type="wrlyModel.PostReply" Role="PostReply1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostReply">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostReply1">
+        <PropertyRef Name="ReplyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostTags_Tags">
+    <End Type="wrlyModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="wrlyModel.PostTag" Role="PostTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagID" />
+      </Principal>
+      <Dependent Role="PostTag">
+        <PropertyRef Name="TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PostInteraction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InteractionType" Type="Int32" Nullable="false" />
+    <Property Name="PostID" Type="Int64" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="EntityID" Type="Int64" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_PostInteractions_Entity" FromRole="PostInteraction" ToRole="Entity" />
+    <Property Name="IpAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Byte" />
+    <NavigationProperty Name="Post" Relationship="wrlyModel.FK_PostInteractions_Post" FromRole="PostInteraction" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="PostReplyInteraction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InteractionType" Type="Int32" Nullable="false" />
+    <Property Name="ReplyID" Type="Int64" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PostReply" Relationship="wrlyModel.FK_PostInteractions_PostReplies" FromRole="PostReplyInteraction" ToRole="PostReply" />
+    <Property Name="EntityID" Type="Int64" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_PostReplyInteractions_Entity" FromRole="PostReplyInteraction" ToRole="Entity" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="IpAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_PostInteractions_PostReplies">
+    <End Type="wrlyModel.PostReply" Role="PostReply" Multiplicity="0..1" />
+    <End Type="wrlyModel.PostReplyInteraction" Role="PostReplyInteraction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostReply">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostReplyInteraction">
+        <PropertyRef Name="ReplyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostInteractions_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="0..1" />
+    <End Type="wrlyModel.PostInteraction" Role="PostInteraction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="PostInteraction">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostReplyInteractions_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="0..1" />
+    <End Type="wrlyModel.PostReplyInteraction" Role="PostReplyInteraction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="PostReplyInteraction">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PostType" Type="Int32" Nullable="false" />
+    <Property Name="SharingType" Type="Byte" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ShortDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Meta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UrlSlug" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Published" Type="Boolean" />
+    <Property Name="FilePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="PublishOn" Type="DateTime" Precision="3" />
+    <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AllowPublic" Type="Boolean" />
+    <Property Name="WritterID" Type="Int64" />
+    <Property Name="PostID" Type="Int64" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="EditedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EditedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PrivacyLevel" Type="Byte" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_Post_Entity" FromRole="Post" ToRole="Entity" />
+    <NavigationProperty Name="Master_ContentType" Relationship="wrlyModel.FK_Post_ContentType" FromRole="Post" ToRole="Master_ContentType" />
+    <NavigationProperty Name="PostInteractions" Relationship="wrlyModel.FK_PostInteractions_Post" FromRole="Post" ToRole="PostInteraction" />
+    <NavigationProperty Name="PostReplies" Relationship="wrlyModel.FK_PostReplies_Post" FromRole="Post" ToRole="PostReply" />
+    <NavigationProperty Name="PostTags" Relationship="wrlyModel.FK_PostTags_Post" FromRole="Post" ToRole="PostTag" />
+    <NavigationProperty Name="Notificactions" Relationship="wrlyModel.FK_Notificactions_Post" FromRole="Post" ToRole="Notificaction" />
+  </EntityType>
+  <Association Name="FK_Post_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.Post" Role="Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_ContentType">
+    <End Type="wrlyModel.Master_ContentType" Role="Master_ContentType" Multiplicity="1" />
+    <End Type="wrlyModel.Post" Role="Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Master_ContentType">
+        <PropertyRef Name="ContentTypeID" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="PostType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostInteractions_Post">
+    <End Type="wrlyModel.Post" Role="Post" Multiplicity="0..1" />
+    <End Type="wrlyModel.PostInteraction" Role="PostInteraction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostInteraction">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostReplies_Post">
+    <End Type="wrlyModel.Post" Role="Post" Multiplicity="0..1" />
+    <End Type="wrlyModel.PostReply" Role="PostReply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostReply">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostTags_Post">
+    <End Type="wrlyModel.Post" Role="Post" Multiplicity="1" />
+    <End Type="wrlyModel.PostTag" Role="PostTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PostTag">
+        <PropertyRef Name="PostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Notificaction">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Updatable" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="EditedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EditedBy" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="ReferenceID" Type="String" />
+    <NavigationProperty Name="NotificationSubscribers" Relationship="wrlyModel.FK_NotificationSubscribers_Notifications" FromRole="Notificaction" ToRole="NotificationSubscriber" />
+    <Property Name="NewsID" Type="Int64" />
+    <NavigationProperty Name="AppreciationAndRecommendation" Relationship="wrlyModel.FK_Notificactions_AppreciationAndRecommendation" FromRole="Notificaction" ToRole="AppreciationAndRecommendation" />
+    <NavigationProperty Name="Post" Relationship="wrlyModel.FK_Notificactions_Post" FromRole="Notificaction" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="NotificationSubscriber">
+    <Key>
+      <PropertyRef Name="SubscriberID" />
+    </Key>
+    <Property Name="SubscriberID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NotificationID" Type="Int64" Nullable="false" />
+    <Property Name="EntityID" Type="Int64" Nullable="false" />
+    <Property Name="Subscribed" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Entity" Relationship="wrlyModel.FK_NotificationSubscribers_Entity" FromRole="NotificationSubscriber" ToRole="Entity" />
+    <NavigationProperty Name="Notificaction" Relationship="wrlyModel.FK_NotificationSubscribers_Notifications" FromRole="NotificationSubscriber" ToRole="Notificaction" />
+  </EntityType>
+  <Association Name="FK_NotificationSubscribers_Entity">
+    <End Type="wrlyModel.Entity" Role="Entity" Multiplicity="1" />
+    <End Type="wrlyModel.NotificationSubscriber" Role="NotificationSubscriber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity">
+        <PropertyRef Name="EntityID" />
+      </Principal>
+      <Dependent Role="NotificationSubscriber">
+        <PropertyRef Name="EntityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotificationSubscribers_Notifications">
+    <End Type="wrlyModel.Notificaction" Role="Notificaction" Multiplicity="1" />
+    <End Type="wrlyModel.NotificationSubscriber" Role="NotificationSubscriber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notificaction">
+        <PropertyRef Name="NotificationID" />
+      </Principal>
+      <Dependent Role="NotificationSubscriber">
+        <PropertyRef Name="NotificationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificactions_AppreciationAndRecommendation">
+    <End Type="wrlyModel.AppreciationAndRecommendation" Role="AppreciationAndRecommendation" Multiplicity="0..1" />
+    <End Type="wrlyModel.Notificaction" Role="Notificaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppreciationAndRecommendation">
+        <PropertyRef Name="ReferenceID" />
+      </Principal>
+      <Dependent Role="Notificaction">
+        <PropertyRef Name="ReferenceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificactions_Post">
+    <End Type="wrlyModel.Post" Role="Post" Multiplicity="0..1" />
+    <End Type="wrlyModel.Notificaction" Role="Notificaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Notificaction">
+        <PropertyRef Name="NewsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
