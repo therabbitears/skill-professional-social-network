@@ -1,0 +1,63 @@
+﻿{#template MAIN}
+{#if $T.length>0}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+{#else}
+				{#include EMPTYROW root=$T.Apr}
+{#/if}
+    {#/template MAIN}
+
+    {#template ROW}
+	<div class="career-history-item profile-item">
+			
+	<div class="item-container">
+	<span class="right more-option-container righ-on-small">
+			<span data-hash="{$T.Hash}" data-mode="career" class="no-style icon-remove-g icon-md icon action" onclick="____removeCareerHistory($(this))"></span>
+			</span>
+    {#if $T.ProfileName}
+    <a href="/fou/{$T.ProfileName}"><h3>{$T.OrganizationName}</h3></a>
+    {#/if}
+    {#if $T.ProfileName==null || $T.ProfileName==''}
+    <h3>{$T.OrganizationName}</h3>
+    {#/if}
+    <small class="child-headings">{$T.JobTitleName}</small>
+    {#if $T.StartFromMonth}
+    <small>From {$T.StartFromMonthName} {$T.StartFromYear}</small>
+    {#/if}
+    {#if $T.EndFromMonth}
+    {#if $T.EndFromMonth>0}
+    <small>To {$T.EndFromMonthName} {$T.EndFromYear}</small>
+    {#/if}
+    {#/if}
+    {#if $T.FormatedDescription}
+    <p class="history-about">{$T.FormatedDescription}</p>
+    {#/if}
+    {#if $T.SkillIncluded.length>0}
+    <div class="skills">
+        <span class="child-profile-item-heading">Skills worked upon</span>
+        {#foreach $T.SkillIncluded as Skill}
+        {#include SKILL root=$T.Skill}
+        {#/for}
+    </div>
+    {#/if}
+    {#if $T.AllowEdit}
+		<button onclick="getCareerHistory($(this))" class="link-alike" data-hash="{$T.Hash}">Edit <div class="waiting-bg"></div></button>
+    {#/if}
+</div>
+</div>
+    {#/template ROW}
+
+	{#template SKILL}
+<span class="skill-tag-editable">
+    {$T.Name}<span class="remove" hash="{$T.Hash}" onclick="removeEducationSkill($(this))">X</span>
+</span>
+	{#/template SKILL}
+
+			{#template EMPTYROW}
+<div class="empty-row">
+	Add your work history here and let people find you based on your work history, job title and expertise. Adding your work history also explores more opportunities to your career.
+	<p>Only you can see this section until you add work history here.</p>
+</div>
+
+	{#/template EMPTYROW}

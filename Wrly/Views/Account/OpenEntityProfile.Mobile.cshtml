@@ -1,0 +1,36 @@
+﻿@model Wrly.Models.ProfileViewModel
+@using Types
+@{
+    ViewBag.Title = string.Format("{0} ", Model.FormatedName);
+    
+    if (!string.IsNullOrEmpty(Model.FormatedJobTitle) || !string.IsNullOrEmpty(Model.FormatedStudyTitle))
+    {
+        ViewBag.Title += Model.FormatedJobTitle ?? Model.FormatedStudyTitle;
+    }
+
+    ViewBag.Description = string.Format("View {0}'s skills, connections, work history, accomplishments, education and certifications.", Model.FormatedName);
+    if (!string.IsNullOrEmpty(Model.ProfilePic))
+    {
+        ViewBag.OgImage = Html.ImagePath(Model.ProfilePic, 200);
+    }
+    else
+    {
+        ViewBag.OgImage = "https://www.sklative.com/content/images/no-image.png";
+    }
+}
+@section _HeadStyles
+{
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    @Styles.Render("~/cdn/_ProfilePublicStyles")
+<link href="~/Content/Views/profile/_mobile.css" rel="stylesheet" />
+}
+<div class="mobile-container">
+    @{Html.RenderPartial("_ProfileFace", Model);}
+    <div class="profile-contents">
+        <div class="section-floated">
+            <div class="profile-item empty-data">
+                <a class="btn btn-primary btn-sm v-middle" href="/account/login">Login</a> to connect or <a class="link-alike" href="/account/register">sign up</a> or explore your network
+            </div>
+        </div>
+    </div>
+</div>

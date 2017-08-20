@@ -1,0 +1,43 @@
+﻿{#template MAIN}
+        {#foreach $T as Skill}
+          {#include ROW root=$T.Skill}
+        {#/for}
+    {#/template MAIN}
+
+    {#template ROW}
+<div class="career-line-item advanced">
+	{#if $T.Type == 'Certification'}
+	<span class="career-line-hint-loc got-certified">{$T.AsTitle}</span>
+			<div class="certified">
+			</div>
+			<span class="career-line-hint get-certified">{$T.CareelineStartTimeText}</span>
+			
+    {#/if}
+
+    {#if $T.Type == 'Study'}
+	<span class="career-line-hint-loc study-start">{$T.AsTitle}</span>
+			<div class="study">
+			</div>
+			<span class="career-line-hint study-start">{$T.CareelineStartTimeText} - {$T.CareelineEndTimeText}</span>
+			
+    {#/if}
+    {#if $T.Type == 'Working'}
+			<span class="career-line-hint-loc work-start">{$T.WhereTitle}</span>
+			<div class="started-working">
+
+			</div>
+			<span class="career-line-hint work-start">{$T.CareelineStartTimeText} - {$T.CareelineEndTimeText}</span>
+			
+			{#/if}
+    {#if $T.Type  == 'Award'}
+			<span class="career-line-hint-loc work-end">{$T.AsTitle} at {$T.WhereTitle}</span>
+			<div class="won-award">
+			</div>
+			<span class="career-line-hint got-award">{$T.CareelineStartTimeText}</span>
+			{#if $T.AsTitle!=null}
+			
+	{#/if}
+    {#/if}
+</div>
+<div class="career-line-connector"></div>
+    {#/template ROW}

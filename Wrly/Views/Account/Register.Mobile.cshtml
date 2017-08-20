@@ -1,0 +1,18 @@
+﻿@model Wrly.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Sklative: Sign Up for new account";
+    ViewBag.Description = "Create an account to sklative and explore new opportunities, find updates from employers and find new business opportunities from your network.";
+}
+<div>
+    <div class="home-form-wrapper">
+        <div class="home-form-container">
+            <h1>Join the skills</h1>
+            @{Html.RenderPartial("_Register", Model);}
+        </div>
+    </div>
+</div>
+
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_AccountSharedStyles")
+    @Styles.Render("~/cdn/_HomeMobileSharedStyles")
+}

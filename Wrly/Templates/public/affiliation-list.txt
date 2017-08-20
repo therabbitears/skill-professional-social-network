@@ -1,0 +1,28 @@
+﻿{#template MAIN}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+    {#/template MAIN}
+    
+    {#template ROW}
+      <div class="career-history-item profile-item">
+	  {#if $T.ProfileName}
+				<a href="/fou/{$T.ProfileName}"><h3>{$T.OrganizationName}</h3></a>
+	  {#/if}
+	  {#if $T.ProfileName==null || $T.ProfileName==''}
+		<h3>{$T.OrganizationName}</h3>
+	  {#/if}
+		<small class="child-headings">{$T.JobTitleName}</small>
+		{#if $T.StartFromMonth}
+		<small>From {$T.StartFromMonthName} {$T.StartFromYear}</small>
+		{#/if}
+		{#if $T.EndFromMonth}
+		{#if $T.EndFromMonth>0}
+		<small>To {$T.EndFromMonthName} {$T.EndFromYear}</small>
+		{#/if}
+		{#/if}
+		{#if $T.About}
+			<p class="history-about">{$T.About}</p>
+		{#/if}
+      </div>
+{#/template ROW}

@@ -1,0 +1,32 @@
+﻿{#template MAIN}
+        {#foreach $T as Message}
+          {#include ROW root=$T.Message}
+        {#/for}
+    {#/template MAIN}
+
+    {#template ROW}
+<li class="{$T.HasRead.toString()=='true'?'feed-comment':'feed-comment pending'}" data-val-name="chat-face-{$T.UserID}">
+    <span class="pending-indicator"></span>
+    <a href="/conversations/{$T.UserID}">
+        <div class="clearfix" direction="left">
+            <div class="left">
+                <div class="comment-thumb-con">
+                    <img src="{$T.ProfilePhotoIconUrl}" class="comment-thumb-img" alt="{$T.AuthorName} chat avator" title="{$T.AuthorName} is Online" />
+                </div>
+            </div>
+            <div class="msg-right">
+                <div class="comment-action-con ofh">
+                    <div class="comment-input-con">
+                        <div>
+                            <span class="user-name">
+                                {$T.AuthorName}
+                            </span>
+                        </div>
+                        <small class="child-headings message">{$T.ShortMessage}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+{#/template ROW}

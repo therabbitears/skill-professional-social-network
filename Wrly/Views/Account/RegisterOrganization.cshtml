@@ -1,0 +1,103 @@
+﻿@model Wrly.Models.OrganizationSignupViewModel
+@{
+    ViewBag.Title = "Sklative for organizations";
+    ViewBag.Description = "Manage your brand on the professional network, build and engage with your employees, customers, vendors. Share opportunities and updates.";
+    ViewBag.ExtraPanelClass = "org";
+    ViewBag.IgnoreRegister = true;
+    ViewBag.AddLayer = true;
+}
+
+<div class="home-cover">
+    <div class="wrapper">
+        <div class="home-content">
+            <h3>
+                Connect with your potential customers, employees, partners and vendors
+            </h3>
+            <small class="child-headings">Take advantage of collaborative intelligence and quality referrals to take best out of your social network</small>
+            <div class="hero-image org"></div>
+        </div>
+        <div class="home-form">
+            <div class="home-form-wrapper">
+                <div class="home-reg-header">
+                    <a href="/"><i class="icon icon-user-b"></i></a>
+                    <a class="active"><i class="icon icon-company-b"></i></a>
+                </div>
+                <div class="home-form-container">
+                    @using (Html.BeginForm("RegisterOrganization", "Account", FormMethod.Post, new { @id = "frmStepSaveBusinessFull", @enctype = "multipart/form-data" }))
+                    {
+                         <h1>Register organization</h1>
+                        @Html.AntiForgeryToken()
+                         @Html.ValidationSummary()
+                        @Html.ValidationMessage("Error")
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label animated" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.IndustryID, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(c => c.IndustryID, Model.Industries, new { @maxlength = "30", @placeholder = "enter website here", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Website, new { @class = "col-md-2 control-label animated" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Website, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.EmailAddress, new { @class = "col-md-2 control-label animated" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label animated" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label animated" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Join!" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-h-p-search">
+        <input type="text" value="" placeholder="skill, individual or organization" maxlength="80" class="form-control">
+    </div>
+</div>
+
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_HomeSharedStyles")
+}
+
+@section _FooterScripts{
+    <script>
+        $(document).ready(function () {
+            $('.home-form-wrapper input').focus(function () {
+                me = $(this);
+                $("label[for='" + me.attr('id') + "']").addClass("animate-label");
+            });
+            $('.home-form-wrapper input').blur(function () {
+                me = $(this);
+                if (me.val() == "") {
+                    $("label[for='" + me.attr('id') + "']").removeClass("animate-label");
+                }
+            });
+        })
+
+    </script>
+}

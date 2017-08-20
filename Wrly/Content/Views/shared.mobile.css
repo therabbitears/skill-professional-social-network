@@ -1,0 +1,14 @@
+﻿.container {
+    width: 100% !important;
+}
+
+
+.footer-container {
+       padding:10px;
+}
+
+
+.panel-footer {
+    padding:0px;
+    line-height:25px;
+}

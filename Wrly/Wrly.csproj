@@ -1,0 +1,980 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wrly</RootNamespace>
+    <AssemblyName>Wrly</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\packages\AWSSDK.Core.3.3.7\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3">
+      <HintPath>..\packages\AWSSDK.S3.3.3.5.2\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+    <Reference Include="Biz2Dial.ExceptionManager">
+      <HintPath>..\LocalPackages\Biz2Dial.ExceptionManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Biz2Dial.Images.Resizer">
+      <HintPath>..\LocalPackages\Biz2Dial.Images.Resizer.dll</HintPath>
+    </Reference>
+    <Reference Include="Dialer.Mail">
+      <HintPath>..\LocalPackages\Dialer.Mail.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=04a59ca9b0273830, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\gData\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Contacts, Version=2.2.0.0, Culture=neutral, PublicKeyToken=7e065189dd4b982f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\gData\Google.GData.Contacts.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\gData\Google.GData.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\microsoft.owin.3.1.0-rc1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\microsoft.owin.security.3.1.0-rc1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.1.0-rc1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\LocalPackages\Microsoft Ent. Lib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\LocalPackages\Microsoft Ent. Lib\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGridMail">
+      <HintPath>..\packages\SenGrid\SendGridMail.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WrlyViewEngine.cs" />
+    <Compile Include="ChatHub.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AssociationController.cs" />
+    <Compile Include="Controllers\AwardController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\CareerHistoryController.cs" />
+    <Compile Include="Controllers\ChatGroupController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\GoogleController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
+    <Compile Include="Controllers\KnowledgeController.cs" />
+    <Compile Include="Controllers\LicenceController.cs" />
+    <Compile Include="Controllers\LookupController.cs" />
+    <Compile Include="Controllers\LuceneController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\PressController.cs" />
+    <Compile Include="Controllers\ProfileItemsController.cs" />
+    <Compile Include="Controllers\ReferenceController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SkillHistoryController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\WizardController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Filters\CompressFilter.cs" />
+    <Compile Include="Infrastructure\Filters\ManipulateWWW.cs" />
+    <Compile Include="Infrastructure\Filters\ManualAntiForgery.cs" />
+    <Compile Include="Infrastructure\Filters\RequireSecureConnection.cs" />
+    <Compile Include="Infrastructure\IdentityModels.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\AccountProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\AssociationProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\AssociationViewModel.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\AwardProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\BaseProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\BusinessProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\CareerHistoryProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\CommonProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\ContactProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\EmailServerSetting.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\GroupChatProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\KnowledgeProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\LookupProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\MessageProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\NotificationProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\PressProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\PushNotificationProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\ReferenceProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\SearchProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\SendGridController.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\SkillHistoryProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Implementations\WizardProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IAccountProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IAssociationProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IAwardProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IBusinessProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\ICareerHistoryProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\ICommonDataProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IContactProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IGroupChatProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IKnowledgeProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\ILookupProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IMessageProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IPressProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IPushNotificationProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IReferenceProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\ISearchProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\ISkillHistoryProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\IWizardProcessor.cs" />
+    <Compile Include="Infrastructure\Processors\Structures\QuestionOptionsViewModel.cs" />
+    <Compile Include="Infrastructure\Utils\CacheManager.cs" />
+    <Compile Include="Infrastructure\Utils\UserCacheManager.cs" />
+    <Compile Include="Infrastructure\Utils\AppConfig.cs" />
+    <Compile Include="Infrastructure\Utils\CommonFunctions.cs" />
+    <Compile Include="Infrastructure\ViewExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\assets\ContentTools\files\author-pic.jpg" />
+    <Content Include="Content\assets\ContentTools\build\content-tools.js" />
+    <Content Include="Content\assets\ContentTools\build\content-tools.min.css" />
+    <Content Include="Content\assets\ContentTools\build\content-tools.min.js" />
+    <Content Include="Content\assets\ContentTools\build\images\drop-horz.svg" />
+    <Content Include="Content\assets\ContentTools\build\images\drop-vert-above.svg" />
+    <Content Include="Content\assets\ContentTools\build\images\drop-vert-below.svg" />
+    <Content Include="Content\assets\ContentTools\build\images\video.svg" />
+    <Content Include="Content\assets\ContentTools\files\emptu-image.png" />
+    <Content Include="Content\assets\ContentTools\files\empty-image.png" />
+    <Content Include="Content\assets\ContentTools\files\image.png" />
+    <Content Include="Content\assets\ContentTools\files\index.html" />
+    <Content Include="Content\assets\ContentTools\files\sandbox-knowledge.js" />
+    <Content Include="Content\assets\ContentTools\files\sandbox.css" />
+    <Content Include="Content\assets\ContentTools\files\sandbox.js" />
+    <Content Include="Content\assets\Editor\Images\buttons.gif" />
+    <Content Include="Content\assets\Editor\Images\toolbar.gif" />
+    <Content Include="Content\assets\Editor\jquery.cleditor.css" />
+    <Content Include="Content\assets\Editor\jquery.cleditor.js" />
+    <Content Include="Content\assets\Editor\jquery.cleditor.min.js" />
+    <Content Include="Content\assets\hovercard-master\hovercard-master\jquery-ui.min.css" />
+    <Content Include="Content\assets\hovercard-master\hovercard-master\jquery.hovercard.js" />
+    <Content Include="Content\assets\hovercard-master\hovercard-master\jquery.hovercard.min.js" />
+    <Content Include="Content\assets\images\1conecting-world1.png" />
+    <Content Include="Content\assets\images\brd_bl_1.png" />
+    <Content Include="Content\assets\images\conecting-world11.png" />
+    <Content Include="Content\assets\images\Email.png" />
+    <Content Include="Content\assets\images\home-cover - Copy.jpg" />
+    <Content Include="Content\assets\images\home-cover-2.jpg" />
+    <Content Include="Content\assets\images\home-cover-2_1.jpg" />
+    <Content Include="Content\assets\images\home-cover.jpg" />
+    <Content Include="Content\assets\images\home-cover_!.jpg" />
+    <Content Include="Content\assets\images\ind-connection.png" />
+    <Content Include="Content\assets\images\mobile.png" />
+    <Content Include="Content\assets\images\org-connection.png" />
+    <Content Include="Content\assets\MobileLayout\side-menu.css" />
+    <Content Include="Content\assets\MobileLayout\ui.js" />
+    <Content Include="Content\CSS\ChatStyle.css" />
+    <Content Include="Content\CSS\Shared\main.css" />
+    <Content Include="Content\CSS\Shared\materialized.css" />
+    <Content Include="Content\CSS\Shared\mobile.css" />
+    <Content Include="Content\CSS\Shared\theme_base.css" />
+    <Content Include="Content\emailhelper\EmailTemplates\AbuseFeedback.htm" />
+    <Content Include="Content\emailhelper\EmailTemplates\Abuse.htm" />
+    <Content Include="Content\emailhelper\EmailTemplates\AppliedAnOpportunity.html" />
+    <Content Include="Content\emailhelper\EmailTemplates\askopportunity.html" />
+    <Content Include="Content\emailhelper\EmailTemplates\feedback.htm" />
+    <Content Include="Content\emailhelper\EmailTemplates\feedbackthank.htm" />
+    <Content Include="Content\emailhelper\EmailTemplates\Forgot_Password.htm" />
+    <Content Include="Content\emailhelper\EmailTemplates\invite.htm" />
+    <Content Include="Content\emailhelper\EmailTemplates\ReferedOnThierOpportunity.html" />
+    <Content Include="Content\emailhelper\EmailTemplates\verification.htm" />
+    <Content Include="Content\emailhelper\EmailTemplates\Welcome.htm" />
+    <Content Include="Content\emailhelper\XmlData\AppliedAnOpportunity.xml" />
+    <Content Include="Content\emailhelper\EmailTemplates\GroupInvitation.htm" />
+    <Content Include="Content\emailhelper\XmlData\GroupInvitation.xml" />
+    <Content Include="Content\emailhelper\XmlData\ReferedOnThierOpportunity.xml" />
+    <Content Include="Content\emailhelper\XmlData\AskOpportunity.xml" />
+    <Content Include="Content\emailhelper\XmlData\Verification.xml" />
+    <Content Include="Content\emailhelper\XmlData\Welcome.xml" />
+    <Content Include="Content\emailhelper\XmlData\Invite.xml" />
+    <Content Include="Content\emailhelper\XmlData\FeedbackThank.xml" />
+    <Content Include="Content\emailhelper\XmlData\Feedback.xml" />
+    <Content Include="Content\emailhelper\XmlData\Forgot_Password.xml" />
+    <Content Include="Content\emailhelper\XmlData\AbuseFeedback.xml" />
+    <Content Include="Content\emailhelper\XmlData\Abuse.xml" />
+    <Content Include="Content\extensions\featherlight\popupwindow.css" />
+    <Content Include="Content\extensions\featherlight\popupwindow.js" />
+    <Content Include="Content\extensions\rcrop\home-page-banner-new.jpg" />
+    <Content Include="Content\extensions\rcrop\Jcrop.gif" />
+    <Content Include="Content\extensions\rcrop\jquery.Jcrop.min.css" />
+    <Content Include="Content\extensions\rcrop\jquery.Jcrop.min.js" />
+    <Content Include="Content\images\brnd.png" />
+    <Content Include="Content\images\full-profile.jpg" />
+    <Content Include="Content\images\history-ico.png" />
+    <Content Include="Content\images\home-page-banner-new.jpg" />
+    <Content Include="Content\images\no-image-sm.png" />
+    <Content Include="Content\images\no-image.png" />
+    <Content Include="Content\images\o\no-image.png" />
+    <Content Include="Content\ViewResources\Scripts\News\news-feeds.js" />
+    <Content Include="Content\ViewResources\Scripts\Profile\businessprofile.js" />
+    <Content Include="Content\ViewResources\Scripts\Profile\common.js" />
+    <Content Include="Content\ViewResources\Scripts\Profile\manage.js" />
+    <Content Include="Content\ViewResources\Scripts\Profile\public.js" />
+    <Content Include="Content\Views\Account\configuration.css" />
+    <Content Include="Content\Views\Account\configuration.js" />
+    <Content Include="Content\Views\Account\shared.css" />
+    <Content Include="Content\Views\groups\group.css" />
+    <Content Include="Content\Views\Home\auth_home.css" />
+    <Content Include="Content\Views\Home\auth_home.js" />
+    <Content Include="Content\Views\Home\auth_home_mobile.css" />
+    <Content Include="Content\Views\Home\mobile.css" />
+    <Content Include="Content\Views\Home\_shared.css" />
+    <Content Include="Content\Views\import\import.css" />
+    <Content Include="Content\Views\import\import.js" />
+    <Content Include="Content\Views\network\activities.js" />
+    <Content Include="Content\Views\network\shared.js" />
+    <Content Include="Content\Views\network\_shared.css" />
+    <Content Include="Content\Views\Press\_Feeds.css" />
+    <Content Include="Content\Views\profile\manage.css" />
+    <Content Include="Content\Views\profile\manage_business.js" />
+    <Content Include="Content\Views\profile\public.css" />
+    <Content Include="Content\Views\profile\shared.css" />
+    <Content Include="Content\Views\profile\_feed.css" />
+    <Content Include="Content\Views\profile\_feeds.js" />
+    <Content Include="Content\Views\profile\_mobile.css" />
+    <Content Include="Content\Views\scripts\chatgroup\general.js" />
+    <Content Include="Content\Views\scripts\chatgroup\individual.js" />
+    <Content Include="Content\Views\shared.mobile.css" />
+    <Content Include="Content\Views\wizard\careerHistory.js" />
+    <Content Include="Content\Views\wizard\skills.js" />
+    <Content Include="Content\Views\wizard\_shared.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\add.svg" />
+    <Content Include="fonts\facebook.svg" />
+    <Content Include="fonts\flaticon.css" />
+    <Content Include="fonts\flaticon.html" />
+    <Content Include="fonts\Flaticon.svg" />
+    <Content Include="fonts\google-plus.svg" />
+    <Content Include="fonts\ico\add-b.png" />
+    <Content Include="fonts\ico\add.png" />
+    <Content Include="fonts\ico\article.svg" />
+    <Content Include="fonts\ico\award-c.png" />
+    <Content Include="fonts\ico\1certification-cs.png" />
+    <Content Include="fonts\ico\award-g.png" />
+    <Content Include="fonts\ico\award.png" />
+    <Content Include="fonts\ico\business-affiliate-network-g.png" />
+    <Content Include="fonts\ico\business-affiliate-network.png" />
+    <Content Include="fonts\ico\certification-c.png" />
+    <Content Include="fonts\ico\certification-g.png" />
+    <Content Include="fonts\ico\certification.png" />
+    <Content Include="fonts\ico\composition-g.png" />
+    <Content Include="fonts\ico\composition.png" />
+    <Content Include="fonts\ico\cross-g.png" />
+    <Content Include="fonts\ico\cross.png" />
+    <Content Include="fonts\ico\cup.png" />
+    <Content Include="fonts\ico\diploma.png" />
+    <Content Include="fonts\ico\edit-g.png" />
+    <Content Include="fonts\ico\edit.png" />
+    <Content Include="fonts\ico\education-end.png" />
+    <Content Include="fonts\ico\education-start.png" />
+    <Content Include="fonts\ico\ellipsis.png" />
+    <Content Include="fonts\ico\founded-g.png" />
+    <Content Include="fonts\ico\founded.png" />
+    <Content Include="fonts\ico\friend-request.png" />
+    <Content Include="fonts\ico\google-xl.png" />
+    <Content Include="fonts\ico\graduate.png" />
+    <Content Include="fonts\ico\graduation.png" />
+    <Content Include="fonts\ico\loud-speaker.svg" />
+    <Content Include="fonts\ico\mail-1.png" />
+    <Content Include="fonts\ico\certification-cs.png" />
+    <Content Include="fonts\ico\notification-g.png" />
+    <Content Include="fonts\ico\org.png" />
+    <Content Include="fonts\ico\history-g.png" />
+    <Content Include="fonts\ico\history.png" />
+    <Content Include="fonts\ico\id-card-g.png" />
+    <Content Include="fonts\ico\id-card.png" />
+    <Content Include="fonts\ico\like-g.png" />
+    <Content Include="fonts\ico\like.png" />
+    <Content Include="fonts\ico\mail-1-xl.png" />
+    <Content Include="fonts\ico\mail.png" />
+    <Content Include="fonts\ico\notification.png" />
+    <Content Include="fonts\ico\open-book-g.png" />
+    <Content Include="fonts\ico\open-book.png" />
+    <Content Include="fonts\ico\picture.svg" />
+    <Content Include="fonts\ico\product-b.png" />
+    <Content Include="fonts\ico\product-g.png" />
+    <Content Include="fonts\ico\product.png" />
+    <Content Include="fonts\ico\project-g.png" />
+    <Content Include="fonts\ico\project.png" />
+    <Content Include="fonts\ico\publishing-g.png" />
+    <Content Include="fonts\ico\publishing.png" />
+    <Content Include="fonts\ico\request.png" />
+    <Content Include="fonts\ico\research-g.png" />
+    <Content Include="fonts\ico\research.png" />
+    <Content Include="fonts\ico\search-w.png" />
+    <Content Include="fonts\ico\search.png" />
+    <Content Include="fonts\ico\service-g.png" />
+    <Content Include="fonts\ico\service.png" />
+    <Content Include="fonts\ico\skills-g.png" />
+    <Content Include="fonts\ico\skills.png" />
+    <Content Include="fonts\ico\stethoscope.png" />
+    <Content Include="fonts\ico\suitcase.png" />
+    <Content Include="fonts\ico\testimonial-g.png" />
+    <Content Include="fonts\ico\testimonial.png" />
+    <Content Include="fonts\ico\user-silhouette.png" />
+    <Content Include="fonts\ico\vacations.png" />
+    <Content Include="fonts\ico\work-end.png" />
+    <Content Include="fonts\ico\work-start.png" />
+    <Content Include="fonts\linkedin.svg" />
+    <Content Include="fonts\search.svg" />
+    <Content Include="fonts\twitter.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Licences\07bcf4bc-a58f-4f4d-90a1-4cbf985ad84b.xml" />
+    <Content Include="Logos\Brand.png" />
+    <Content Include="Logos\Brand_1.png" />
+    <Content Include="Logos\Brand_1_Inverted.png" />
+    <Content Include="Logos\Brand_Inverted.png" />
+    <Content Include="Logos\Help.png" />
+    <Content Include="Logos\Help_Inv.png" />
+    <Content Include="Logos\logo_1.png" />
+    <Content Include="Logos\Logo_1_Inv.jpg" />
+    <Content Include="Logos\logo_1_Inv.png" />
+    <Content Include="Logos\Logo_Inv.jpg" />
+    <Content Include="Logos\sklative_groups.png" />
+    <Content Include="Logos\sklative_groups_inv.png" />
+    <Content Include="Logos\sklative_talent.png" />
+    <Content Include="Logos\sklative_talent_inv.png" />
+    <Content Include="Logos\Talent_Brand.png" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\menu.js" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-jtemplates_uncompressed.js" />
+    <Content Include="Scripts\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min_1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\slideout.js" />
+    <Content Include="Templates\affiliation-list.txt" />
+    <Content Include="Templates\baward-list.txt" />
+    <Content Include="Templates\career-line-adv.txt" />
+    <Content Include="Templates\happenings.txt" />
+    <Content Include="Templates\public\affiliation-list.txt" />
+    <Content Include="Templates\public\business-award-list.txt" />
+    <Content Include="Templates\public\product-list.txt" />
+    <Content Include="Templates\public\services-list.txt" />
+    <Content Include="Templates\public\testimonials-list.txt" />
+    <Content Include="Templates\similar-company-list.txt" />
+    <Content Include="Templates\testimonials-list.txt" />
+    <Content Include="Templates\product-list.txt" />
+    <Content Include="Templates\services-list.txt" />
+    <Content Include="Templates\notifications.txt" />
+    <Content Include="Templates\appriciation-list.txt" />
+    <Content Include="Templates\award-list.txt" />
+    <Content Include="Templates\career-line-basic.txt" />
+    <Content Include="Templates\composition-list.txt" />
+    <Content Include="Templates\certification-list.txt" />
+    <Content Include="Templates\education-list.txt" />
+    <Content Include="Templates\company-list.txt" />
+    <Content Include="Templates\finding-list.txt" />
+    <Content Include="Templates\message-list.txt" />
+    <Content Include="Templates\project-list.txt" />
+    <Content Include="Templates\publication-list.txt" />
+    <Content Include="Templates\public\appriciation-list.txt" />
+    <Content Include="Templates\public\award-list.txt" />
+    <Content Include="Templates\public\certification-list.txt" />
+    <Content Include="Templates\public\common-companies.txt" />
+    <Content Include="Templates\public\common-skills.txt" />
+    <Content Include="Templates\public\company-list.txt" />
+    <Content Include="Templates\public\composition-list.txt" />
+    <Content Include="Templates\public\education-list.txt" />
+    <Content Include="Templates\public\finding-list.txt" />
+    <Content Include="Templates\public\message-list.txt" />
+    <Content Include="Templates\public\project-list.txt" />
+    <Content Include="Templates\public\publication-list.txt" />
+    <Content Include="Templates\public\recommendation-list.txt" />
+    <Content Include="Templates\public\request-list.txt" />
+    <Content Include="Templates\public\research-list.txt" />
+    <Content Include="Templates\public\skill-list.txt" />
+    <Content Include="Templates\recommendation-list.txt" />
+    <Content Include="Templates\request-list.txt" />
+    <Content Include="Templates\research-list.txt" />
+    <Content Include="Templates\skill-list.txt" />
+    <Content Include="Templates\suggestions.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="API\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="ImageStore\News\" />
+    <Folder Include="ImageStore\Organization\" />
+    <Folder Include="ImageStore\User\" />
+    <Folder Include="lucene_index\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Google\" />
+    <Folder Include="Views\Images\" />
+    <Folder Include="Views\Licence\" />
+    <Folder Include="Views\Lookup\" />
+    <Folder Include="Views\Messages\" />
+    <Folder Include="Views\ProfileItems\" />
+    <Folder Include="Views\Upload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="fonts\Flaticon.eot" />
+    <Content Include="fonts\Flaticon.ttf" />
+    <Content Include="fonts\Flaticon.woff" />
+    <Content Include="Content\assets\ContentTools\build\icons.woff" />
+    <Content Include="Content\assets\hovercard-master\hovercard-master\README" />
+    <Content Include="fonts\_flaticon.scss" />
+    <Content Include="Content\Views\wizard\wizard.mobile.css" />
+    <Content Include="Content\assets\ContentTools\build\BlockQuote.coffee" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Views\Shared\_StaticMetas.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Analytics.cshtml" />
+    <Content Include="Views\Shared\_Register.cshtml" />
+    <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\RegisterOrganization.cshtml" />
+    <Content Include="Views\Business\Success.cshtml" />
+    <Content Include="Views\Account\ConnectAccount.cshtml" />
+    <Content Include="Views\Shared\_ManageSkill.cshtml" />
+    <Content Include="Views\Shared\_ManageAwards.cshtml" />
+    <Content Include="Views\Shared\_ManageAssignment.cshtml" />
+    <Content Include="Views\Shared\_manageAppriciation.cshtml" />
+    <Content Include="Views\Account\_ManageAbout.cshtml" />
+    <Content Include="Views\Account\Configuration.cshtml" />
+    <Content Include="Views\Account\_NetworkSettings.cshtml" />
+    <Content Include="Views\Account\_PrivacySettings.cshtml" />
+    <Content Include="Views\Account\_WidgetSettings.cshtml" />
+    <Content Include="Views\Account\_JobSearchSettings.cshtml" />
+    <Content Include="Views\Account\_GeneralSettings.cshtml" />
+    <Content Include="Views\Account\_ProfileName.cshtml" />
+    <Content Include="Views\Account\_NetworkCoverage.cshtml" />
+    <Content Include="Views\Account\_OppurtunityLevel.cshtml" />
+    <Content Include="Views\Shared\_ManagePublication.cshtml" />
+    <Content Include="Views\Shared\_ManageComposition.cshtml" />
+    <Content Include="Views\Shared\_ManageCertificationHistory.cshtml" />
+    <Content Include="Views\Shared\_IntelligenceAddSkill.cshtml" />
+    <Content Include="Views\Shared\_IntelligenceAddCareerHistory.cshtml" />
+    <Content Include="Views\Shared\_IntelligenceAddEducation.cshtml" />
+    <Content Include="Views\Account\_IntelligenceAddAbout.cshtml" />
+    <Content Include="Views\Account\_IntelligenceAddCompanyName.cshtml" />
+    <Content Include="Views\Account\_IntelligenceAddTime.cshtml" />
+    <Content Include="Views\Account\_IntelligenceAddAward.cshtml" />
+    <Content Include="Views\Account\_IntelligenceAddTeamAward.cshtml" />
+    <Content Include="Views\Account\_IntelligenceAddTeamAssignment.cshtml" />
+    <Content Include="Views\Shared\_AssignmentMoreOptions.cshtml" />
+    <Content Include="Views\Shared\_manageAppriciationForAccomplishment.cshtml" />
+    <Content Include="Views\Shared\_ActionResultMessage.cshtml" />
+    <Content Include="Views\Shared\_CareerHistoryMoreOptions.cshtml" />
+    <Content Include="Views\Shared\_manageAppriciationForRole.cshtml" />
+    <Content Include="Views\Shared\_manageAppriciationForSkill.cshtml" />
+    <Content Include="Views\Account\Home.cshtml" />
+    <Content Include="Views\Account\_ManageProfileFace.cshtml" />
+    <Content Include="Views\Account\_Feeds.cshtml" />
+    <Content Include="Views\Shared\_FeedComment.cshtml" />
+    <Content Include="Views\Account\_ShareUpdate.cshtml" />
+    <Content Include="Views\Press\_CommentOnReply.cshtml" />
+    <Content Include="Views\Shared\_FeedReply.cshtml" />
+    <Content Include="Views\Shared\_FeedCommentReply.cshtml" />
+    <Content Include="Views\Shared\_FeedReplies.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_FeedMoreOptions.cshtml" />
+    <Content Include="Views\Press\_ReportFeed.cshtml" />
+    <Content Include="Views\Shared\_LayoutWizard.cshtml" />
+    <Content Include="Views\Shared\_ConnectionsTiles.cshtml" />
+    <Content Include="Views\Account\_UpdateName.cshtml" />
+    <Content Include="Views\Account\_UpdateHeading.cshtml" />
+    <Content Include="Views\Shared\_AskRecommendation.cshtml" />
+    <Content Include="Views\ChatGroup\Index.cshtml" />
+    <Content Include="Views\ChatGroup\_Messages.cshtml" />
+    <Content Include="Views\ChatGroup\_Sharer.cshtml" />
+    <Content Include="Views\ChatGroup\_SharerMedium.cshtml" />
+    <Content Include="Views\ChatGroup\_Users.cshtml" />
+    <Content Include="Views\ChatGroup\_ChatFaces.cshtml" />
+    <Content Include="Views\ChatGroup\_NewConversation.cshtml" />
+    <Content Include="Views\ChatGroup\_NewConversationFace.cshtml" />
+    <Content Include="Views\ChatGroup\_QuickChatSession.cshtml" />
+    <Content Include="Views\Account\EntityProfile.cshtml" />
+    <Content Include="Views\Account\_ProfileFace.cshtml" />
+    <Content Include="Views\Shared\_ChangeCoverPicture.cshtml" />
+    <Content Include="Views\Account\_LeanProfileFace.cshtml" />
+    <Content Include="Views\Association\Requests.cshtml" />
+    <Content Include="Views\Shared\_ConnectionRequestsTiles.cshtml" />
+    <Content Include="Views\Shared\_ConnectionExistingTiles.cshtml" />
+    <Content Include="Views\Shared\_ConnectionFollowingTiles.cshtml" />
+    <Content Include="Views\Shared\_ConnectionFollowerTiles.cshtml" />
+    <Content Include="Views\Notification\All.cshtml" />
+    <Content Include="Views\Press\WriteBig.cshtml" />
+    <Content Include="Views\Reference\Index.cshtml" />
+    <Content Include="Views\Press\_PartialDetailArticle.cshtml" />
+    <Content Include="Views\Account\_Hovercard.cshtml" />
+    <Content Include="Views\Search\_Searches.cshtml" />
+    <Content Include="Views\Search\Results.cshtml" />
+    <Content Include="Views\Search\_SearchResults.cshtml" />
+    <Content Include="Views\Business\BusinessProfile.cshtml" />
+    <Content Include="Views\Business\_ManageBusinessProfileFace.cshtml" />
+    <Content Include="Views\Business\_UpdateName.cshtml" />
+    <Content Include="Views\Business\_UpdateCategory.cshtml" />
+    <Content Include="Views\Business\BusinessHome.cshtml" />
+    <Content Include="Views\Business\_LeanBusinessProfileFace.cshtml" />
+    <Content Include="Views\Business\_ManageAbout.cshtml" />
+    <Content Include="Views\Shared\_ManageBusinessAwards.cshtml" />
+    <Content Include="Views\Shared\_ManageAffiliationHistory.cshtml" />
+    <Content Include="Views\Business\PublicProfile.cshtml" />
+    <Content Include="Views\Business\_BusinessProfileFace.cshtml" />
+    <Content Include="Views\Account\_manageBusinessRecommendation.cshtml" />
+    <Content Include="Views\Association\_NetworkActions.cshtml" />
+    <Content Include="Views\Association\Happenings.cshtml" />
+    <Content Include="Views\Press\Reshares.cshtml" />
+    <Content Include="Views\Account\_Reshares.cshtml" />
+    <Content Include="Views\Account\Forgot.cshtml" />
+    <Content Include="Views\Account\ForgottenPasswordMailSent.cshtml" />
+    <Content Include="Views\Account\InvalidLink.cshtml" />
+    <Content Include="Views\Account\Reset.cshtml" />
+    <Content Include="Views\Shared\_ManageCareerHistory.cshtml" />
+    <Content Include="Views\Account\_NetworkHoverCardActions.cshtml" />
+    <Content Include="Views\Account\OpenEntityProfile.cshtml" />
+    <Content Include="Views\Account\_OpenProfileFace.cshtml" />
+    <Content Include="Views\Account\Index.Mobile.cshtml" />
+    <Content Include="Views\Account\RegisterOrganization.Mobile.cshtml" />
+    <Content Include="Views\Account\Login.Mobile.cshtml" />
+    <Content Include="Views\Account\Register.Mobile.cshtml" />
+    <Content Include="Views\Account\Forgot.Mobile.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.Mobile.cshtml" />
+    <Content Include="Views\Account\_IntelligenceAddCertification.cshtml" />
+    <Content Include="Views\Account\Home.Mobile.cshtml" />
+    <Content Include="Views\Shared\_LayoutAuthenticated.Mobile.cshtml" />
+    <Content Include="Views\Account\_LeanProfileFace.Mobile.cshtml" />
+    <Content Include="Views\Association\Requests.Mobile.cshtml" />
+    <Content Include="Views\Account\EntityProfile.Mobile.cshtml" />
+    <Content Include="Views\Account\_ProfileFace.Mobile.cshtml" />
+    <Content Include="Views\Account\Profile.Mobile.cshtml" />
+    <Content Include="Views\Shared\_EntityConnectionFollowerTiles.cshtml" />
+    <Content Include="Views\Shared\_EntityConnectionsTiles.cshtml" />
+    <Content Include="Views\Shared\_LayoutAuthenticated.cshtml" />
+    <Content Include="Views\Lucene\Index.cshtml" />
+    <Content Include="Views\Import\Import.cshtml" />
+    <Content Include="Views\CareerHistory\_RemoveConfirmation.cshtml" />
+    <Content Include="Views\Award\_RemoveConfirmation.cshtml" />
+    <Content Include="Views\Account\_ImportContact.cshtml" />
+    <Content Include="Views\Import\_Invite.cshtml" />
+    <Content Include="Views\Business\_ManageBasic.cshtml" />
+    <Content Include="Views\Business\_ManageAddress.cshtml" />
+    <Content Include="Views\Business\_CompanyProfileConfiguration.cshtml" />
+    <Content Include="Views\Business\_ManagePhone.cshtml" />
+    <Content Include="Views\Account\BusinessConfiguration.cshtml" />
+    <Content Include="Views\Account\_BusinessGeneralSettings.cshtml" />
+    <Content Include="Views\Account\_BusinessNetworkSettings.cshtml" />
+    <Content Include="Views\Account\_Login.cshtml" />
+    <Content Include="Views\Shared\_ChangeProfilePicture.cshtml" />
+    <Content Include="Views\Business\OpenEntityProfile.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Reference\Requests.cshtml" />
+    <Content Include="Views\Reference\Requests.Mobile.cshtml" />
+    <Content Include="Views\Press\Posts.cshtml" />
+    <Content Include="Views\Association\MyHappenings.cshtml" />
+    <Content Include="Views\Account\_UserMenu.cshtml" />
+    <Content Include="Views\Account\_EntityProfileHeader.cshtml" />
+    <Content Include="Views\Account\_ManageProfileItems.cshtml" />
+    <Content Include="Views\Association\Suggestions.cshtml" />
+    <Content Include="Views\Account\_EntityCareer.cshtml" />
+    <Content Include="Views\Account\_ManagePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_BusinessProfileItems.cshtml" />
+    <None Include="Properties\PublishProfiles\LiveSklative.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalSklative.pubxml" />
+    <Content Include="Views\Account\_MobileUserMenu.cshtml" />
+    <Content Include="Views\Shared\_ItemPlaceholder.cshtml" />
+    <Content Include="Views\Account\_ManageProfileFace.Mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Account\OpenEntityProfile.Mobile.cshtml" />
+    <Content Include="Views\Business\OpenEntityProfile.Mobile.cshtml" />
+    <Content Include="Views\ChatGroup\Group.cshtml" />
+    <Content Include="Views\ChatGroup\Group.Mobile.cshtml" />
+    <Content Include="Views\Business\_BusinessProfileFace.Mobile.cshtml" />
+    <Content Include="Views\Business\PublicProfile.Mobile.cshtml" />
+    <Content Include="Views\Business\BusinessProfile.Mobile.cshtml" />
+    <Content Include="Views\Business\_ManageBusinessProfileFace.Mobile.cshtml" />
+    <Content Include="Views\Business\BusinessHome.Mobile.cshtml" />
+    <Content Include="Views\Business\_LeanBusinessProfileFace.Mobile.cshtml" />
+    <Content Include="Views\Shared\_Footer.Mobile.cshtml" />
+    <Content Include="Views\Shared\_InvalidData.cshtml" />
+    <Content Include="Views\Common\Privacy.cshtml" />
+    <Content Include="Views\Common\Cookie.cshtml" />
+    <Content Include="Views\Common\Terms.cshtml" />
+    <Content Include="Views\Common\Abuse.cshtml" />
+    <Content Include="Views\Common\Feedback.cshtml" />
+    <Content Include="Views\Common\Feedback.Mobile.cshtml" />
+    <Content Include="Views\Common\Abuse.Mobile.cshtml" />
+    <Content Include="Views\Common\_Abuse.cshtml" />
+    <Content Include="Views\Account\IncorrectProfile.cshtml" />
+    <Content Include="Views\Account\IncorrectProfile.Mobile.cshtml" />
+    <Content Include="Views\Shared\_ChangeCoverPicture.Mobile.cshtml" />
+    <Content Include="Views\Account\_LoginHome.Mobile.cshtml" />
+    <Content Include="Views\Account\_AskOpportunity.cshtml" />
+    <Content Include="Views\Account\_ShareOpportunity.cshtml" />
+    <Content Include="Views\Press\_Apply.cshtml" />
+    <Content Include="Views\Press\_Refer.cshtml" />
+    <Content Include="Views\Press\ReferOpportunity.cshtml" />
+    <Content Include="Views\Press\_Insights.cshtml" />
+    <Content Include="Views\Press\_InsightDetails.cshtml" />
+    <Content Include="Views\Account\Insights.cshtml" />
+    <Content Include="Views\Press\_InsightDetailsPopup.cshtml" />
+    <Content Include="Views\Account\Response.cshtml" />
+    <Content Include="Views\Account\_EmailPreferences.cshtml" />
+    <Content Include="Views\Groups\Groups.cshtml" />
+    <Content Include="Views\Groups\Group.cshtml" />
+    <Content Include="Views\Groups\_GroupSearchResults.cshtml" />
+    <Content Include="Views\Groups\New.cshtml" />
+    <Content Include="Views\Shared\_CropAndUpload.cshtml" />
+    <Content Include="Views\Groups\_GroupProfileFace.cshtml" />
+    <Content Include="Views\Groups\_ShareUpdateGroup.cshtml" />
+    <Content Include="Views\Association\_GroupActions.cshtml" />
+    <Content Include="Views\Groups\GroupManage.cshtml" />
+    <Content Include="Views\Groups\_PendingMembers.cshtml" />
+    <Content Include="Views\Groups\_Members.cshtml" />
+    <Content Include="Views\Groups\_ManageGroupProfileFace.cshtml" />
+    <Content Include="Views\Shared\_GroupLayoutAuthenticated.cshtml" />
+    <Content Include="Views\Shared\_GroupLayoutAuthenticated.Mobile.cshtml" />
+    <Content Include="Views\Association\_ConnectionToInvite.cshtml" />
+    <Content Include="Views\Shared\_TalentLayoutAuthenticated.cshtml" />
+    <Content Include="Views\Shared\_TalentLayoutAuthenticated.Mobile.cshtml" />
+    <Content Include="Views\Groups\Groups.Mobile.cshtml" />
+    <Content Include="Views\Groups\GroupManage.Mobile.cshtml" />
+    <Content Include="Views\Groups\Group.Mobile.cshtml" />
+    <Content Include="Views\Groups\New.Mobile.cshtml" />
+    <Content Include="Views\Groups\_GroupProfileFace.Mobile.cshtml" />
+    <Content Include="Views\Groups\_ManageGroupProfileFace.Mobile.cshtml" />
+    <Content Include="Views\Account\_Authentication.cshtml" />
+    <Content Include="Views\Account\_AuthenticationLogin.cshtml" />
+    <Content Include="Views\Account\_AuthenticationRegister.cshtml" />
+    <Content Include="Views\Account\_Improve.cshtml" />
+    <Content Include="Views\Account\_ImproveContent.cshtml" />
+    <Content Include="Views\Shared\_ChangeProfilePicturePartial.cshtml" />
+    <Content Include="Views\Shared\_ChangeCoverPicturePartial.cshtml" />
+    <Content Include="Views\Account\_ProfileScore.cshtml" />
+    <Content Include="Views\Account\_ProfileScore.Mobile.cshtml" />
+    <Content Include="Views\Shared\_LayoutKnowledge.cshtml" />
+    <Content Include="Views\Shared\_LayoutKnowledge.Mobile.cshtml" />
+    <Content Include="Views\Knowledge\Index.cshtml" />
+    <Content Include="Views\Knowledge\New.cshtml" />
+    <Content Include="Views\Press\Publishing.cshtml" />
+    <Content Include="Views\Press\_Blogs.cshtml" />
+    <Content Include="Views\Press\_Blogs.Mobile.cshtml" />
+    <None Include="Views\Shared\_ManageEducationHistory.cshtml" />
+    <Content Include="Views\Shared\_manageRecommendation.cshtml" />
+    <Content Include="Views\Wizard\SetSkills.cshtml" />
+    <Content Include="Views\Shared\_ManageResearch.cshtml" />
+    <Content Include="Views\Shared\_ManageFinding.cshtml" />
+    <Content Include="Views\Shared\_RequestToAddToAssignment.cshtml" />
+    <Content Include="Views\Shared\_ReportAccomplishment.cshtml" />
+    <Content Include="Views\Shared\_SkillHistoryMoreOptions.cshtml" />
+    <Content Include="Views\Shared\_ReshareFeed.cshtml" />
+    <Content Include="Views\Wizard\CareerHistoryWizard.cshtml" />
+    <Content Include="Views\Wizard\VarifyEmail.cshtml" />
+    <Content Include="Views\Wizard\AddConnections.cshtml" />
+    <Content Include="Views\Wizard\Feedback.cshtml" />
+    <Content Include="Views\Shared\_manageGeneralRecommendation.cshtml" />
+    <Content Include="Views\Wizard\SetAddress.cshtml" />
+    <Content Include="Views\Wizard\SetExtednedInformation.cshtml" />
+    <Content Include="Views\Shared\_ManageService.cshtml" />
+    <Content Include="Views\Shared\_ManageProduct.cshtml" />
+    <Content Include="Views\Shared\_manageBusinessAppriciation.cshtml" />
+    <Content Include="Views\Wizard\_CareerWizardEmployee.cshtml" />
+    <Content Include="Views\Wizard\_CareerWizardStudent.cshtml" />
+    <Content Include="Views\SkillHistory\_RevertSkillRemoval.cshtml" />
+    <Content Include="Views\____None.cshtml" />
+    <Content Include="Views\Wizard\_WizardSetCareer.cshtml" />
+    <Content Include="Views\Wizard\AddConnections.Mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Wizard\CareerHistoryWizard.Mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Wizard\Feedback.Mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Wizard\SetSkills.Mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Wizard\VarifyEmail.Mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Wizard\SetAddress.Mobile.cshtml" />
+    <Content Include="Views\Wizard\IncorrectData.cshtml" />
+    <Content Include="Views\Shared\_OpportunityData.cshtml" />
+    <Content Include="Views\Wizard\_SetSkills.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Types\Types.csproj">
+      <Project>{792bfcc1-9998-4196-bbc5-8ec447cf073d}</Project>
+      <Name>Types</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrly.Core\Wrly.Core.csproj">
+      <Project>{76d4cbdb-d406-469b-af2a-aa15421716bb}</Project>
+      <Name>Wrly.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrly.Data\Wrly.Data.csproj">
+      <Project>{bc78cbd6-52ef-4737-a09d-0e1545d99a0a}</Project>
+      <Name>Wrly.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrly.Models\Wrly.Models.csproj">
+      <Project>{695432d3-2d7d-4f43-9760-a6d68203ccbd}</Project>
+      <Name>Wrly.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrly.Notifications\Wrly.Notifications.csproj">
+      <Project>{a82db498-bdb2-468a-93ea-5575fae091cf}</Project>
+      <Name>Wrly.Notifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrly.SearchEngine\LuceneSearch.Library.csproj">
+      <Project>{da2f9d29-5731-4cfe-bb9e-c0fd08dcea3c}</Project>
+      <Name>LuceneSearch.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrly.Storage\Wrly.Storage.csproj">
+      <Project>{b63e5013-536b-4ef9-9664-e75501aac1db}</Project>
+      <Name>Wrly.Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1065</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1170</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

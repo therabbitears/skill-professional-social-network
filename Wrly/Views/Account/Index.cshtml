@@ -1,0 +1,66 @@
+﻿@{
+    //ViewBag.Title = "Sklative | The skilled Business professional network";
+    //ViewBag.Description = "Sklative is India&#39;s largest business professional network, join and build your professional identity, explore opportunities and find business partners";
+    //ViewBag.Keywords = "build professional network, B2B social network, Professional Online Business portfolio, business opportunities";
+
+    ViewBag.Title = "Skilled Business Professional Network | Job Recruitment | Employment";
+    ViewBag.Description = "Sklative is India's largest business professional network. Join and build your professional identity, explore best job opportunities from top Employers and find business partners.";
+    ViewBag.Keywords = "build professional network, B2B social network, Professional Online Business portfolio, business opportunities";
+    
+    ViewBag.ExtraPanelClass = "individual";
+    ViewBag.IgnoreRegister = true;
+    ViewBag.AddLayer = true;
+}
+
+<div class="home-cover">
+    <div class="wrapper">
+        <div class="home-content">
+            <h3>
+                Connect with your colleagues, classmates and companies
+            </h3>
+            <h2 class="child-headings">Explore opportunities and be more productive at workplace</h2>
+            <div class="hero-image individual"></div>
+        </div>
+        <div class="home-form">
+            <div class="home-form-wrapper">
+                <div class="home-reg-header">
+                    <a data-val-for="career-contents" class="active"><i class="icon icon-user-b"></i> </a>
+                    <a data-val-for="timeline-contents" href="/new-organization"><i class="icon icon-company-b"></i></a>
+                </div>
+                <div class="home-form-container">
+                    <h1 class="page-title">Join the professional network</h1>
+                    @{Html.RenderPartial("_Register", new Wrly.Models.RegisterViewModel());}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-h-p-search">
+        @using (Html.BeginForm("HomeSearch", "Search", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <i class="icon icon-search-g"></i>
+            <input type="text" value="" placeholder="group, individual or organization" maxlength="80" class="form-control" name="searchTerm">
+        }
+    </div>
+</div>
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_HomeSharedStyles")
+}
+
+@section _FooterScripts{
+    <script>
+        $(document).ready(function () {
+            $('input').focus(function () {
+                me = $(this);
+                $("label[for='" + me.attr('id') + "']").addClass("animate-label");
+            });
+            $('input').blur(function () {
+                me = $(this);
+                if (me.val() == "") {
+                    $("label[for='" + me.attr('id') + "']").removeClass("animate-label");
+                }
+            });
+        })
+
+    </script>
+}

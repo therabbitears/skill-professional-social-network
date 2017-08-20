@@ -1,0 +1,50 @@
+﻿    .container .content-container {
+        padding: 10px;
+    }
+
+        .container .content-container h1 {
+            margin: 10px 0px;
+            color: #1e68b9;
+            font-size: 22px;
+        }
+
+    .import-table {
+        width: 100%;
+        line-height: 25px;
+        border: 1px solid #e6e6e6;
+        margin-top:10px;
+    }
+
+        .import-table .header-row, .import-table .row {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .import-table .row {
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+            .import-table .row .check-container {
+                float: left;
+            }
+
+        .import-table .table-data {
+            display: inline-block;
+        }
+
+        .import-table .table-header {
+            width: 100%;
+            display: inline-block;
+            padding: 5px 0px;
+            background: #e6e6e6;
+        }
+
+    .import-name {
+        color: #1e68b9;
+        font-size: 16px;
+    }
+
+    .import-email {
+        color: #555;
+        font-size: 12px;
+    }

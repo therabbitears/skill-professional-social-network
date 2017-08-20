@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly", "Wrly\Wrly.csproj", "{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Types", "Wrly.Types", "{62EB277D-C15C-4DBA-9FA0-06CE66F105F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Types", "Types\Types.csproj", "{792BFCC1-9998-4196-BBC5-8EC447CF073D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Data", "Wrly.Data", "{89924315-C248-4D38-9783-3A4A46ADE186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly.Data", "Wrly.Data\Wrly.Data.csproj", "{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wrly.Storage", "Wrly.Storage", "{8C847DE4-605D-49DB-AF86-0D5A1440E806}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wrly.Storage", "Wrly.Storage\Wrly.Storage.csproj", "{B63E5013-536B-4EF9-9664-E75501AAC1DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAC04903-6C16-4AAC-B604-2EC4B5AE92E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{792BFCC1-9998-4196-BBC5-8EC447CF073D} = {62EB277D-C15C-4DBA-9FA0-06CE66F105F7}
+		{BC78CBD6-52EF-4737-A09D-0E1545D99A0A} = {89924315-C248-4D38-9783-3A4A46ADE186}
+		{B63E5013-536B-4EF9-9664-E75501AAC1DB} = {8C847DE4-605D-49DB-AF86-0D5A1440E806}
+	EndGlobalSection
+EndGlobal

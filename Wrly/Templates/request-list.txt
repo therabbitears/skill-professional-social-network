@@ -1,0 +1,60 @@
+﻿{#template MAIN}
+{#if $T.length>0}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+				{#else}
+				{#include EMPTYROW root=$T.Apr}
+{#/if}
+		{#/template MAIN}
+
+	 {#template ROW}
+<li class="feed-comment">
+    <div class="clearfix" direction="left">
+        <div class="left">
+            <div class="comment-thumb-con">
+                <img class="comment-thumb-img" src="{$T.ProfilePhotoIcon}" alt="User Image - {$T.FullName}" />
+            </div>
+        </div>
+        <div class="msg-right">
+            <div class="comment-action-con ofh">
+                <div class="comment-input-con">
+                    {#if $T.EntityType==1}
+                    <div>
+                        <a href="/{$T.ProfileName}" class="user-name">
+                            {$T.FormatedName}
+                        </a>
+                    </div>
+					{#if $T.ProfileHeading!=null }
+						{#if $T.ProfileHeading!=""}
+							<small class="child-headings">{$T.ProfileHeading}</small>
+						{#/if}
+					{#/if}
+                    {#else}
+                    <div>
+                        <a class="user-name" href="/fou/{$T.Url}">
+                            {$T.Name}
+                        </a>
+                    </div>
+                    <small class="child-headings">{$T.Category}</small>
+                    {#/if}
+                    <div>
+                        <form action="/association/action" method="post" onsubmit="return false">
+                            <input type="hidden" value="{$T.Token}" name="__RequestVerificationToken">
+                            <input type="hidden" value="{$T.Hash}" name="Hash" />
+                            <input class="link-alike" type="submit" name="actn" onclick="___doApprove($(this))" value="Approve" data-hash="{$T.Hash}" /><span class="verticle-divider">|</span>
+                            <input class="link-alike link-alike-default" type="submit" name="actn" onclick="___doDecline($(this))" value="Not now" data-hash="{$T.Hash}" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+{#/template ROW}
+
+{#template EMPTYROW}
+<div class="request-empty-row">
+   <span class="child-headings">No pending request, <a href="/suggestions" class="theme-color">Explore</a> suggestions to quickly grow your network.</span>
+</div>
+	{#/template EMPTYROW}

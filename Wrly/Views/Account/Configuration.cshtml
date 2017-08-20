@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Sklative | Configurations";
+    ViewBag.Description = "Profile Configurations";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+<div class="container">
+    <div class="page-container">
+        <div class="page-container-wrapper">
+            <div class="tabs">
+                <div class="tab"><a data-action="general" class="active" href="#general">General</a> </div>
+                <div class="tab"><a data-action="network" href="#network">Network</a> </div>
+                <div class="tab"><a data-action="privacy" href="#privacy">Privacy</a> </div>
+                <div class="tab"><a data-action="job-search" href="#job-search">Opportunity</a> </div>
+                <div class="tab"><a data-action="profile-widgets" href="#profile-widgets">Widgets</a> </div>
+            </div>
+            <div class="configuration" id="content"></div>
+        </div>
+    </div>
+</div>
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_ConfigurationStyles")
+}
+@section _FooterScripts{
+    @Scripts.Render("~/cdn/_ConfigurationScripts")
+}

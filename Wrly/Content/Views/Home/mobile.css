@@ -1,0 +1,39 @@
+﻿   .tabs {
+        position: relative;
+        clear: both;
+        width: 100%;
+        float: left;
+        margin-bottom: 14px;
+        padding-top: 3px;
+        padding-bottom: 10px;
+        background: #eee;
+    }
+
+    .tab {
+        float: left;
+        color: #333;
+    }
+
+        .tab a {
+            background: #eee;
+            padding: 10px;
+            margin-left: -1px;
+            position: relative;
+            left: 1px;
+        }
+
+            .tab a.active {
+                background: white;
+                border-bottom: 1px solid white;
+                z-index: 2;
+            }
+
+    i::before {
+        margin-left: auto !important;
+        padding: 15px;
+    }
+
+    .home-form-container {
+        background: #fff;
+        padding: 10px;
+    }

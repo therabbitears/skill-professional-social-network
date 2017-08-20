@@ -1,0 +1,245 @@
+﻿.chat-content {
+    clear: both;
+    vertical-align: top;
+    position: relative;
+}
+
+.chatRoom .content .chatWindow .message, .chatRoom .content .chatWindow .message-current-user {
+    border-radius: 5px;
+    margin: 18px;
+    padding: 11px !important;
+    position: relative;
+}
+
+.chatRoom .content .chatWindow .message {
+    background: #CDE2FC none repeat scroll 0 0;
+}
+
+.chatRoom .content .chatWindow .message-current-user {
+    background: #C2D7F1 none repeat scroll 0 0;
+}
+
+
+.chatRoom .content .chatWindow .message::after {
+    border-color: #CDE2FC rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    border-width: 17px 15px 17px 0;
+    bottom: -31px;
+    content: " ";
+    left: 10px;
+    margin-left: -10px;
+    position: absolute;
+}
+
+.chatRoom .content .chatWindow .message-current-user::after {
+    border-color: #C2D7F1 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    border-width: 17px 0px 17px 17px;
+    bottom: -31px;
+    content: " ";
+    right: 0px;
+    margin-left: -10px;
+    position: absolute;
+}
+
+.chatRoom .content {
+    height: 500px;
+    clear: both;
+    vertical-align: top;
+}
+
+.chat-content {
+    width: 74%;
+    display: inline-block;
+    border-left: 2px solid #e9e9e9;
+    height: 500px;
+}
+
+@media(max-width:768px) {
+    .chat-content {
+        width: 100%;
+        border: 0px;
+    }
+
+    .chatRoom {
+        padding: 0px;
+    }
+
+        .chatRoom .messageBar {
+            border: 0px !important;
+            padding: 0px !important;
+        }
+}
+
+.chatRoom .content .chatWindow {
+    width: 100%;
+    display: block;
+    height: 350px;
+    overflow-y: scroll;
+}
+
+    .chatRoom .content .chatWindow .message {
+        padding: 4px;
+        font-size: 15px;
+    }
+
+        .chatRoom .content .chatWindow .message .userName {
+            color: #333;
+        }
+
+        .chatWindow .userName {
+    font-size: 14px;
+padding: 0px;
+margin: 5px 0px;
+display: inline-block;
+font-weight:normal;
+}
+
+.chatWindow .message-header {
+    border-bottom: 1px dotted #7bc5f2;
+margin-bottom: 10px;
+}
+.chatRoom .content .users {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+    .chatRoom .content .users .user {
+        display: block;
+        cursor: pointer;
+        padding: 4px;
+        background-color: #f9f9f9;
+        border-bottom: solid 1px #3E2723;
+    }
+
+    .chatRoom .content .users .loginUser {
+        display: block;
+        color: #333;
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
+
+    .chatRoom .content .users .user:hover {
+        background-color: #e1e1e1;
+    }
+
+.chatRoom .messageBar {
+    border-top: solid 1px gray;
+    padding: 4px;
+    display: block;
+    width: 100%;
+    height: 100px;
+    display: table;
+}
+
+
+.message-send-container {
+    display: table-row;
+}
+
+    .message-send-container div {
+        display: table-cell;
+        padding: 0px 5px;
+        vertical-align: middle;
+    }
+
+        .message-send-container div:last-child {
+            width: 60px;
+        }
+
+.chatRoom .messageBar .textbox {
+    width: 100%;
+    border: 1px #e6e6e6 solid;
+    height: 60px;
+}
+
+.in-chat-image {
+    max-width: 100%;
+    max-height: 150px;
+    display: block;
+}
+
+    .in-chat-image.icon {
+        max-width: 50px;
+    }
+
+
+.loginUser img {
+    border: 1px solid #efefef;
+    border-radius: 50%;
+    max-height: 41px;
+    max-width: 40px;
+}
+
+.loginUser em {
+    margin-bottom: 15px;
+}
+
+.away, .online, .pending-indicator {
+    width: auto;
+    right: 0px;
+    bottom: 0px;
+    position: absolute;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #429422;
+    border-radius: 6px;
+}
+
+.online {
+    background: #429422;
+}
+
+.away {
+    background: #edcd74;
+}
+
+.pending-indicator {
+    background: #0d60a7;
+    right: 6px;
+    top: 6px;
+    display: none;
+}
+
+.user-name {
+    font-size: 15px;
+}
+
+.loginUser.active .user-name {
+    color: #fff;
+}
+
+.join-notification {
+    background: #00ecc2;
+    padding: 8px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 999;
+}
+
+    .join-notification.warning, .join-notification.success {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .join-notification.warning {
+        background: #f4de49 none repeat scroll 0 0;
+    }
+
+.success {
+    background: #d3f5d0 none repeat scroll 0 0;
+}
+
+.join-notification .child-headings {
+    color: #fff;
+    padding: 5px;
+}
+
+

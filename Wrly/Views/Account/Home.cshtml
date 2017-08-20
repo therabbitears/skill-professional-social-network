@@ -1,0 +1,89 @@
+﻿@model Wrly.Models.ProfileViewModel
+@{
+    ViewBag.Title = "Sklative | Business Feed";
+    ViewBag.Description = "Share business feeds";
+    ViewBag.Keywords = "build professional network, B2B social network, business opportunities, business social network";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+}
+
+@section _HeadStyles
+            {
+    @Styles.Render("~/cdn/_AuthHomeStyles")
+    @Styles.Render("~/cdn/_NewsFeedStyles")
+}
+
+@section _FooterScripts
+{
+    @Scripts.Render("~/cdn/_AuthHomeScripts")
+}
+
+<div class="home-container" data-val-time-loaded="@DateTime.UtcNow.Ticks">
+    <div class="feed-container two-three" id="main-section">
+        <div id="face">
+            <div class="section-floated">
+                <div class="lean-container">
+                    @{Html.RenderPartial("_LeanProfileFace", Model);}
+                </div>
+            </div>
+        </div>
+        <div class="career-history-list section-floated" data-hash-share="update" id="share-feed-update-profile">
+            @{Html.RenderPartial("_ShareUpdate");}
+        </div>
+        <div class="feed-preferences">
+            @using (Html.BeginForm("Updates", "Press", FormMethod.Post, new { @onsubmit = "return ____loadFeedPreference($(this))" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("Ticks", Model.Feed.LoadedOn)
+                @Html.Hidden("Type", 0)
+                <button class="link-alike added" type="submit" value="0">Default</button>
+            }
+            <span class="verticle-divider">|</span>
+            @using (Html.BeginForm("Updates", "Press", FormMethod.Post, new { @onsubmit = "return ____loadFeedPreference($(this))" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("Ticks", Model.Feed.LoadedOn)
+                @Html.Hidden("Type", 2)
+                <button class="link-alike" type="submit" value="2">Saved</button>
+            }
+            <span class="verticle-divider">|</span>
+            @using (Html.BeginForm("Updates", "Press", FormMethod.Post, new { @onsubmit = "return ____loadFeedPreference($(this))" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("Ticks", Model.Feed.LoadedOn)
+                @Html.Hidden("Type", 1)
+                <button class="link-alike" type="submit" value="1">My updates</button>
+            }
+        </div>
+        <div class="feeds" id="feeds">
+            @{Html.RenderPartial("_Feeds", Model.Feed.Feeds);}
+        </div>
+        <div class="load-more"><button onclick="loadFeeds($(this))" class="link-alike">Load more <div class="waiting-bg"></div></button></div>
+    </div>
+    <div class="one-three">
+        @Html.Partial("_ProfileScore", Model)
+        <div class="section-floated" id="happening-container" style="display:none;">
+            <div class="section-floated-container">
+                <div class="contents">
+                    <h1>What's on</h1>
+                    <div class="content" id="network-happenings">
+                    </div>
+                    <div class="show-all"><a href="/network/activities?ref=hp">See all</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="section-floated">
+            <div class="section-floated-container">
+                <div id="suggestions-container" class="contents">
+                    <h1>Professionals you might know</h1>
+                    <div class="content" id="people-you-may-know">
+
+                    </div>
+                    <div class="show-all"><a href="/suggestions?dir=wr">See all</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

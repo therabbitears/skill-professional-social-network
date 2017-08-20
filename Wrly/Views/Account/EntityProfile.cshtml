@@ -1,0 +1,359 @@
+﻿@model Wrly.Models.ProfileViewModel
+@using Types
+@{
+    ViewBag.Title = string.Format("{0} ", Model.FormatedName);
+    if (!string.IsNullOrEmpty(Model.FormatedJobTitle) || !string.IsNullOrEmpty(Model.FormatedStudyTitle))
+    {
+        ViewBag.Title += Model.FormatedJobTitle ?? Model.FormatedStudyTitle;
+    }
+
+    ViewBag.Description = string.Format("View {0}'s skills, connections, work history, accomplishments, education and certifications.", Model.FormatedName);
+    if (!string.IsNullOrEmpty(Model.ProfilePic))
+    {
+        ViewBag.OgImage = Html.ImagePath(Model.ProfilePic, 200);
+    }
+    else
+    {
+        ViewBag.OgImage = "https://www.sklative.com/content/images/no-image.png";
+    }
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    var projectEnabled = Model.Statistics.ProjectsCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Projects"));
+    var publicationEnabled = Model.Statistics.PublicationsCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Publishings"));
+    var compositionEnabled = Model.Statistics.CompositionsCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Compositions"));
+    var researchEnabled = Model.Statistics.ResearchCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Research"));
+    var findingEnabled = Model.Statistics.FindingsCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Establishments"));
+    var awardEnabled = Model.Statistics.AwardCount > 0 && Model.Widgets.Any(c => c.WidgetName.Equals("Awards"));
+    string profileClass = Model.ProfileLevel == (int)Types.Enums.CareerStage.Retired ? "profile-ex" : Model.ProfileLevel == (int)Types.Enums.CareerStage.Student ? "profile-student" : "profile-general";
+    string wrapperClass = string.Empty;
+}
+
+
+@section _HeadStyles
+{
+    @Styles.Render("~/cdn/_ProfileSharedStyles")
+    @Styles.Render("~/cdn/_ProfilePublicStyles")
+    @if (Model.ProfileMode == Enums.ProfileMode.Feeds)
+    {
+        @Styles.Render("~/cdn/_NewsFeedStyles");
+    }
+}
+
+
+@if (Model.ProfileMode == Types.Enums.ProfileMode.Default)
+{
+    @section _FooterScripts{
+
+        <script type="text/javascript">
+            var profileHash = '@Model.ProfileHash';
+            $(document).ready(function () {
+                @if (awardEnabled)
+	    {
+        <text>$("#award-history").setTemplateURL("/Templates/public/award-list.txt");
+                $("#award-history").processTemplateURL("/profileitems/awards?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#award-history")) });
+                </text>
+        }
+                @if (projectEnabled)
+         {
+            <text>$("#project-history").setTemplateURL("/Templates/public/project-list.txt");
+                $("#project-history").processTemplateURL("/profileitems/listprojects?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#project-history")) });</text>
+        }
+                @if (publicationEnabled)
+           {
+            <text>$("#publication-history").setTemplateURL("/Templates/public/publication-list.txt");
+                $("#publication-history").processTemplateURL("/profileitems/publications?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#publication-history")) });</text>
+        }
+                @if (compositionEnabled)
+           {
+            <text>$("#composition-history").setTemplateURL("/Templates/public/composition-list.txt");
+                $("#composition-history").processTemplateURL("/profileitems/compositions?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#composition-history")) });
+                </text>
+
+        }
+                @if (researchEnabled)
+           {
+            <text>$("#researches-list").setTemplateURL("/Templates/public/research-list.txt");
+                $("#researches-list").processTemplateURL("/profileitems/researches?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#researches-list")) });</text>
+        }
+                @if (findingEnabled)
+           {
+           <text>$("#findings-list").setTemplateURL("/Templates/public/finding-list.txt");
+                $("#findings-list").processTemplateURL("/profileitems/findings?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#findings-list")) });</text>
+        }
+
+                @if (Model.Statistics.CareerHistoryCount > 0)
+         {
+            <text>$("#career-history").setTemplateURL("/Templates/public/company-list.txt", null, { filter_data: false });
+                $("#career-history").processTemplateURL("/profileitems/career?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#career-history")) });</text>
+        }
+
+                @if (Model.Statistics.SkillCount > 0)
+        {
+           <text> $("#skill-history").setTemplateURL("/Templates/public/skill-list.txt");
+                $("#skill-history").processTemplateURL("/profileitems/skill?q=@Model.ProfileHash");</text>
+        }
+
+                @if (Model.Statistics.EducationCount > 0)
+        {
+            <text>$("#education-history").setTemplateURL("/Templates/public/education-list.txt", null, { filter_data: false });
+                $("#education-history").processTemplateURL("/profileitems/education?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#education-history")) });</text>
+        }
+
+                @if (Model.Statistics.RecommendationCount > 0)
+          {
+        <text> $("#recommendation-list").setTemplateURL("/Templates/public/recommendation-list.txt");
+                $("#recommendation-list").processTemplateURL("/profileitems/recommendation?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#recommendation-list")) });</text>
+          }
+
+                @if (Model.Statistics.AppriciationCount > 0)
+        {
+        <text>$("#appriciation-list").setTemplateURL("/Templates/public/appriciation-list.txt");
+                $("#appriciation-list").processTemplateURL("/profileitems/appriciations?q=@Model.ProfileHash", null, { ___callback: ____bindGlobalEvents('tooltip,dropdown', $("#appriciation-list")) });</text>
+        }
+                @if (Model.Statistics.CertificationCount > 0)
+        {
+        <text> $("#certification-history").setTemplateURL("/Templates/public/certification-list.txt", null, { filter_data: false });
+                $("#certification-history").processTemplateURL("/profileitems/certification?q=@Model.ProfileHash"); </text>
+        }
+                $("#connectionStatus").load('/association/actionable?q=' + profileHash, function () { ____bindMenu(); });
+            });
+              @if (Model.EntityID!=Html.EntityID()) 
+              {
+                <text>  $.post('/account/track?trackType=profileview&q=' + profileHash);</text>
+              }
+        </script>
+        @Scripts.Render("~/cdn/_ProfilePublic")
+    }
+    <div id="nav">
+        <div class="nav-wrapper">
+            <div id="nav-icons">
+                <ul>
+                    <li data-val-action="navigator" class="fact first"><a href="#" class="card"> <i class="icon icon-more-g"></i> </a> <span class="line"></span> </li>
+                    <li data-val-action="action" class="fact"><a href="#" class="card active" data-val-pointing="face"> <i class="icon icon-l icon-profile-face-g"></i><label>Card</label> </a> <span class="line"></span> </li>
+                    @if (Model.Statistics.CareerHistoryCount > 0)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="career-history-section"> <i class="icon icon-l icon-career-g"></i><label>History</label> </a> </li>
+                    }
+                    @if (Model.Statistics.EducationCount > 0)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="education-section"> <i class="icon icon-l icon-education-g"></i><label>Education</label></a>  </li>
+                    }
+                    @if (Model.Statistics.CertificationCount > 0)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="certification-section"> <i class="icon icon-l icon-certification-g"></i><label>Certification</label></a>  </li>
+                    }
+                    @if (awardEnabled)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="award-section"> <i class="icon icon-l icon-award-g"></i><label>Awards</label></a> </li>
+                    }
+                    @if (Model.Statistics.SkillCount > 0)
+                    {
+                        <li data-val-action="action" class="fact visible"><a href="#" data-val-pointing="skill-section" class="card"> <i class="icon icon-l icon-skills-g"></i><label>Skills</label> </a> </li>
+                    }
+                    @if (projectEnabled)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="project-section"> <i class="icon icon-l icon-projects-g"></i><label>Projects</label> </a> </li>
+                    }
+                    @if (publicationEnabled)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="publication-section"> <i class="icon icon-l icon-publication-g"></i><label>Publications</label></a> </li>
+                    }
+                    @if (compositionEnabled)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="composition-section"> <i class="icon icon-l icon-composition-g"></i><label>Compositions</label> </a></li>
+                    }
+                    @if (researchEnabled)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="researches-section"> <i class="icon icon-l icon-reference-g"></i><label>Researches</label> </a> </li>
+                    }
+                    @if (findingEnabled)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="findings-section"> <i class="icon icon-l icon-finding-g"></i><label>Findings</label></a> </li>
+                    }
+                    @if (Model.Statistics.AppriciationCount > 0 || Model.Statistics.RecommendationCount > 0)
+                    {
+                        <li data-val-action="action" class="fact"><a href="#" class="card" data-val-pointing="references"> <i class="icon icon-l icon-reference-g"></i><label>References</label></a> </li>
+                    }
+                    <li data-val-action="navigator" class="fact last"><a href="#" class="card"> <i class="icon icon-more-g"></i> </a> <span class="line"></span> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+@if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+{
+    wrapperClass = "has-cover";
+    <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+
+    </div>
+}
+<div id="grand-wrapper">
+   
+    <div id="profile-wrapper" class="@wrapperClass">
+        <div class="two-three">
+            <div id="face">
+                <div class="section-floated @profileClass">
+                    <div class="section-floated-container">
+                        @{Html.RenderPartial("_ProfileFace", Model);}
+                    </div>
+                </div>
+            </div>
+            <div class="tabs">
+                @if (Model.ProfileMode == Types.Enums.ProfileMode.Default)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" class="active" href="/@Model.ProfileName">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Connections)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/@Model.ProfileName">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/@Model.ProfileName/profile-items/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Followers || Model.ProfileMode == Types.Enums.ProfileMode.Following)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/@Model.ProfileName">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/@Model.ProfileName/profile-items/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/@Model.ProfileName">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/@Model.ProfileName/profile-items/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/@Model.ProfileName/profile-items/timeline">Updates</a>
+                    </div>
+                }
+            </div>
+            @if (Model.ProfileMode == Types.Enums.ProfileMode.Default)
+            {
+                Html.RenderPartial("_EntityCareer", Model);
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Connections)
+            {
+                @section _FooterScripts{
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+                        $("#career-line-basic").setTemplateURL("/Templates/career-line-basic.txt");
+                        $(document).ready(function () {
+                            $("#connectionStatus").load('/association/actionable?q=' + profileHash, function () { ____bindMenu(); });
+                        });
+                    </script>
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                }
+                <div class="career-history-list section-floated">
+                    <div class="section-floated-container">
+                        <h1>@Model.FormatedName's connections</h1>
+                        @{Html.RenderPartial("_EntityConnectionsTiles", Model.Connections);}
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Followers)
+            {
+                @section _FooterScripts{
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+                        $("#career-line-basic").setTemplateURL("/Templates/career-line-basic.txt");
+                        $(document).ready(function () {
+                            $("#connectionStatus").load('/association/actionable?q=' + profileHash, function () { ____bindMenu(); });
+                        });
+                    </script>
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                }
+
+                <div class="career-history-list section-floated">
+                    <div class="section-floated-container">
+                        <h1>@Model.FormatedName's followers</h1>
+                        @{Html.RenderPartial("_EntityConnectionFollowerTiles", Model.Followers);}
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+            {
+                @section _FooterScripts{
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+                        $("#career-line-basic").setTemplateURL("/Templates/career-line-basic.txt");
+                        $(document).ready(function () {
+                            $("#connectionStatus").load('/association/actionable?q=' + profileHash, function () { ____bindMenu(); });
+                        })
+                        var profileHash = '@Model.ProfileHash';
+                        var pageNumber = 0;
+                        function loadTimeLineFeeds() {
+                            $(this).attr('disabled', 'disabled');
+                            pageNumber = pageNumber + 1;
+                            $.get('/account/timeline?q=' + profileHash + '&pageNumber=' + pageNumber.toString(), function (res) {
+                                if (res.toString().trim() == '') {
+                                    $('.load-more').remove();
+                                } else {
+                                    $('.load-more').removeAttr('disabled');
+                                    $('.load-more').hide();
+                                    $('.feeds').append(res);
+                                    tooltip($('.feeds'));
+                                }
+                            });
+                        }
+                    </script>
+                    @Scripts.Render("~/cdn/_NewsFeeds")
+                }
+
+                <div class="career-history-list section-floated">
+                    <div class="profile-item">
+                        @{Html.RenderPartial("_Feeds", Model.Feed.Feeds);}
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="one-three">
+            <div class="career-history-list section-floated">
+                <div class="section-floated-container">
+                    <h1>@Model.FormatedName's Career</h1>
+                    <div class="career-line-actions">
+                        <input type="checkbox" id="includeStudy" /><label for="includeStudy">Study</label>
+                        <input type="checkbox" id="includeAward" checked /><label for="includeAward">Award</label>
+                    </div>
+                    <div id="career-line-basic">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

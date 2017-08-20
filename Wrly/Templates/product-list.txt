@@ -1,0 +1,61 @@
+﻿{#template MAIN}
+{#if $T.length>0}
+        {#foreach $T as Award}
+          {#include ROW root=$T.Award}
+        {#/for}
+			{#else}
+				{#include EMPTYROW root=$T.Apr}
+{#/if}
+    {#/template MAIN}
+    {#template ROW}
+<div class="finding-item profile-item">
+<div class="item-container">
+	<span class="eclipse right more-option-container more-nav question-more-options righ-on-small">
+			<span data-hash="{$T.Hash}" data-mode="products" class="no-style icon-remove-g icon-md icon action" onclick="____removeAssignmentHistory($(this))"></span>
+			</span>
+    {#if $T.SubType !=null}
+    <div class="finding-type">({$T.SubType})</div>
+    {#/if}
+    <h3>
+        {$T.Name}
+        {#if $T.Role !=null}
+        <small>({$T.Role})</small>
+        {#/if}
+
+    </h3>
+    {#if $T.StartFromMonth>0}
+    {#if $T.EndFromMonth>0}
+    <small>From {$T.StartFromMonthName} {$T.StartFromYear} To {$T.EndFromMonthName} {$T.EndFromYear}</small>
+    {#else}
+    <small>Founded in {$T.StartFromMonthName} {$T.StartFromYear}</small>
+    {#/if}
+    {#/if}
+    {#if $T.TotalAppriciations>0}
+    {#if $T.TotalAppriciations==1}
+    <span class="assignment-appriciation-text"> <span class="appriciation-count">{$T.TotalAppriciations}</span> Appriciation</span>
+    {#/if}
+    {#if $T.TotalAppriciations>1}
+    <span class="assignment-appriciation-text"> <span class="appriciation-count">{$T.TotalAppriciations}</span> Appriciations</span>
+    {#/if}
+    {#/if}
+    <p>{$T.Description}</p>
+    {#if $T.Url}
+    <div>
+        <a href="{$T.Url}">{$T.Url}</a>
+    </div>
+    {#/if}
+    {#if $T.AllowEdit}
+    <button onclick="getProducts($(this))" class="link-alike" data-hash="{$T.Hash}">Edit <div class="waiting-bg"></div></button>
+    {#/if}
+</div>
+</div>
+    {#/template ROW}
+
+
+
+	{#template EMPTYROW}
+<div class="empty-row">
+   [Products] allowes you to add your products here(if any), it help your brand to grow in your industry and also help your business to engage your pottential customers.
+	<p>Only you can see this section until you add at least one products here.</p>
+</div>
+	{#/template EMPTYROW}

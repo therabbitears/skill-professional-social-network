@@ -1,0 +1,72 @@
+﻿{#template MAIN}
+			{#if $T.length>0}
+				{#foreach $T as Apr}
+				  {#include ROW root=$T.Apr}
+				{#/for}
+			{#else}
+				{#include EMPTYROW root=$T.Apr}
+			{#/if}
+    {#/template MAIN}
+
+    {#template ROW}
+<section class="group-item viduara-bCard card-sm">
+    <div class="container">
+		{#if $T.RecomedationRelation!=null}
+			<div class="publication-type">({$T.RecomedationRelation})</div>
+	    {#/if}
+        {#if $T.AwardID}
+        <div class="appriciation-project">
+            <p class="project-name">{$T.ProjectName}</p>
+            <p>{$T.ProjectDescription} </p>
+        </div>
+        {#/if}
+        {#if $T.AuthorIcon!=null}
+        <img class="thumbnail-notification left" src="{$T.AuthorIcon}" alt="User Image - {$T.AuthorName}" />
+        {#else}
+        <img alt="no image {$T.AuthorName}" src="/content/images/no-image-sm.png" class="thumbnail-notification" />
+        {#/if}
+        <div>
+            <div class="heading">
+                <a href="/{$T.AuthorProfilePath}" title="{$T.AuthorName}" data-hover-card="true" data-entity-id="{$T.EntityID}"><h3 class="page-title">{$T.AuthorName}<small>({$T.AuthorHeading})</small></h3></a>
+            </div>
+        </div>
+
+        <div>
+            {#if $T.CareerHistoryID>0}
+            <label>For role {$T.JobTitleName} at {$T.OrganizationName}</label>
+            {#/if}
+            {#if $T.SkillID>0}
+            <label>For skill {$T.SkillName}</label>
+            {#/if}
+        </div>
+        <div class="render-area">
+            <blockquote>{$T.Description}</blockquote>
+        </div>
+		<div class="buttons">
+            {#if $T.Status==3}
+            <form action="/reference/action" method="post" onsubmit="return ____referenceAction($(this,'app'))">
+                <input type="hidden" name="hash" value="{$T.Hash}" />
+                <input type="hidden" name="actn" value="remove" />
+                <button class="link-alike">Remove</button>
+            </form>
+            {#/if}
+            {#if $T.Status==null}
+            <form action="/reference/action" method="post" onsubmit="return ____referenceAction($(this),'app')">
+                <input type="hidden" name="hash" value="{$T.Hash}" />
+                <input type="hidden" id="actn" name="actn" value="approve" />
+                <button class="link-alike">Approve</button>
+                <button type="button" class="link-alike" value="remove" onclick="return ____secondaryAssociationAction($(this));">Remove</button>
+            </form>
+
+            {#/if}
+        </div>
+    </div>
+</section>
+
+    {#/template ROW}
+	{#template EMPTYROW}
+<div class="empty-row">
+	Appreciation shows your greatness and dedication in some accomplishment, appreciation from your clients, managers and heads is recommended to add here, you can ask them manually.
+    <p>Only you can see this section until you have one.</p>
+</div>
+	{#/template EMPTYROW}

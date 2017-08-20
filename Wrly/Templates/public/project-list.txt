@@ -1,0 +1,75 @@
+﻿	{#template MAIN}
+        {#foreach $T as Award}
+          {#include ROW root=$T.Award}
+        {#/for}
+    {#/template MAIN}
+    {#template ROW}
+      <div class="project-item profile-item">
+	  {#if $T.TotalAppriciations>0}
+			{#if $T.TotalAppriciations==1}
+					<span class="assignment-appriciation-text"> <span class="appriciation-count">{$T.TotalAppriciations}</span> Appriciation</span>
+				{#/if}
+				{#if $T.TotalAppriciations>1}
+					<span class="assignment-appriciation-text"> <span class="appriciation-count">{$T.TotalAppriciations}</span> Appriciations</span>
+				{#/if}
+			{#/if}
+        <h3>{$T.Name}
+		<span class="eclipse right more-option-container more-nav question-more-options righ-on-small" onclick="____assignmentMoreOptions($(this),event)" data-hash="{$T.Hash}">
+                                <span>
+                                    <span class=" three-dot">&#x22EE;</span>
+                                </span>
+                                <ul class="dropdown-menu profile">
+                                    
+                                </ul>
+                            </span>	
+			{#if $T.Role !=null}
+				<small>({$T.Role})</small>
+			{#/if}
+			</h3>
+		
+		<p>{$T.Description}</p>
+		{#if $T.DisplayJobTitleText!=null && $T.DisplayJobTitleText!=''}
+			<small class="child-headings">{$T.DisplayJobTitleText}</small>
+		{#/if}
+		{#if $T.SkillIncluded.length>0}
+		<div class="skills">
+			<span class="child-profile-item-heading">Skills</span>
+			{#foreach $T.SkillIncluded as Skill}
+			  {#include SKILL root=$T.Skill}
+			{#/for}
+		</div>
+		{#/if}
+
+		{#if $T.ParticipantIncluded.length>0}
+		<div class="participants">
+			<span class="child-profile-item-heading">With</span>
+			{#foreach $T.ParticipantIncluded as Participant}
+			  {#include PARTICIPANT root=$T.Participant}
+			{#/for}
+		</div>
+		{#/if}
+		
+      </div>
+    {#/template ROW}
+
+	{#template SKILL}
+		<span class="skill-tag-editable">
+			{$T.Name}
+		</span>
+	{#/template SKILL}
+
+	{#template PARTICIPANT}
+	<div class="participant">
+		<div class="thumbnail-notification-con">
+			{#if $T.ProfileIconPath!=null}
+						<img alt="no image {$T.FullName}" src="{$T.ProfileIconPath}" class="thumbnail-notification">
+				{#else}
+						<img alt="no image {$T.FullName}" src="/content/images/no-image-sm.png" class="thumbnail-notification">
+				{#/if}
+         </div>
+         <div class="side-thumbnail">
+			 <a href="/{$T.ProfileName}" title="{$T.FormatedName}" data-hover-card="true" data-entity-id="{$T.EntityID}"><h3 class="page-title">{$T.FormatedName}</h3></a>
+             <span class="child-headings">{$T.ProfileHeading}</span>
+         </div>
+      </div>
+	{#/template PARTICIPANT}

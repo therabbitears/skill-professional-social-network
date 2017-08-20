@@ -1,0 +1,40 @@
+﻿{#template MAIN}
+        {#foreach $T as Award}
+          {#include ROW root=$T.Award}
+        {#/for}
+    {#/template MAIN}
+    {#template ROW}
+      <div class="finding-item profile-item">
+	  {#if $T.SubType !=null}
+			<div class="finding-type">({$T.SubType})</div>
+			{#/if}
+        <h3>{$T.Name}
+		{#if $T.Role !=null}
+			<small>({$T.Role})</small>
+			{#/if}
+			
+			</h3>
+			{#if $T.StartFromMonth>0}
+				{#if $T.EndFromMonth>0}
+						<small>From {$T.StartFromMonthName} {$T.StartFromYear} To {$T.EndFromMonthName} {$T.EndFromYear}</small>
+				{#else}
+						<small>Founded in {$T.StartFromMonthName} {$T.StartFromYear}</small>
+				{#/if}
+			{#/if}
+			{#if $T.TotalAppriciations>0}
+			{#if $T.TotalAppriciations==1}
+					<span class="assignment-appriciation-text"> <span class="appriciation-count">{$T.TotalAppriciations}</span> Appriciation</span>
+				{#/if}
+				{#if $T.TotalAppriciations>1}
+					<span class="assignment-appriciation-text"> <span class="appriciation-count">{$T.TotalAppriciations}</span> Appriciations</span>
+				{#/if}
+			{#/if}
+		<p>{$T.Description}</p>
+		{#if $T.Url}
+		<div>
+			<a href="{$T.Url}">{$T.Url}</a>
+		</div>
+		{#/if}
+      </div>
+    {#/template ROW}
+

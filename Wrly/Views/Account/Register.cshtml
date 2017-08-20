@@ -1,0 +1,24 @@
+﻿@model Wrly.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Sklative: Sign Up for new account";
+    ViewBag.Description = "Create an account to sklative and explore new opportunities, find updates from employers and find new business opportunities from your network.";
+    ViewBag.IgnoreRegister = true;
+}
+
+<div class="string join-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper">
+                        <h1>Join the skills</h1>
+                        @{Html.RenderPartial("_Register", Model);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_AccountSharedStyles")
+}

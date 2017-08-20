@@ -1,0 +1,35 @@
+﻿{#template MAIN}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+    {#/template MAIN}
+    
+    {#template ROW}
+      <div class="career-history-item profile-item">
+        <h3>{$T.JobTitleName}</h3>
+		<small class="child-headings">{$T.OrganizationName}</small>
+		{#if $T.StartFromMonth}
+		<small>From {$T.StartFromMonthName} {$T.StartFromYear}</small>
+		{#/if}
+		{#if $T.EndFromMonth}
+		<small>To {$T.EndFromMonthName} {$T.EndFromYear}</small>
+		{#/if}
+		{#if $T.About}
+			<p class="history-about">{$T.FormatedDescription}</p>
+		{#/if}
+						{#if $T.SkillIncluded.length>0}
+		<div class="skills">
+			<span class="child-profile-item-heading">Studied</span>
+			{#foreach $T.SkillIncluded as Skill}
+			  {#include SKILL root=$T.Skill}
+			{#/for}
+		</div>
+		{#/if}	
+      </div>
+    {#/template ROW}
+
+		{#template SKILL}
+		<span class="skill-tag-editable">
+			{$T.Name}
+		</span>
+	{#/template SKILL}

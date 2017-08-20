@@ -1,0 +1,132 @@
+﻿.btn-google {
+    border: 1px solid #f63d26 !important;
+}
+
+.btn-facebook {
+    border: 1px solid #3b5a9b !important;
+}
+
+.search-container .big-search {
+    height: 25px;
+    width: 100%;
+    color: #333333;
+    margin-top: 15px;
+}
+
+.title {
+    float: left;
+}
+
+#main-search {
+    display: none;
+    position: fixed;
+    top: 35px;
+    z-index: 999999;
+}
+
+
+.search-container {
+    display: inline-block;
+}
+
+.close-search {
+    display: none;
+}
+
+.panel-footer {
+    padding: 0px;
+    line-height: 25px;
+}
+
+.footer-container {
+    padding: 10px;
+}
+
+.statistics-container .statistic-launcher {
+    margin: 5px 5px 0px 5px;
+}
+
+.title-brand {
+    margin-left: 5px;
+}
+
+
+    .title-brand.extended {
+        margin-left: 5px;
+        margin-right: 5px;
+        max-height: 40px;
+    }
+
+
+.widget-to-choose {
+    width: 100%;
+}
+
+.tabs {
+    margin: 10px 0;
+}
+
+@media (width:1024px) {
+    input.materialzed.header-input {
+        width: 865px !important;
+    }
+}
+
+@media (width:768px) {
+    input.materialzed.header-input {
+        width: 610px;
+    }
+}
+
+@media (max-width:420px) {
+    input.materialzed.header-input {
+        width: 250px;
+    }
+}
+
+@media (width:375px) {
+    input.materialzed.header-input {
+        width: 220px;
+    }
+}
+
+@media (width:360px) {
+    input.materialzed.header-input {
+        width: 200px;
+    }
+}
+
+@media (width:320px) {
+    input.materialzed.header-input {
+        width: 160px;
+    }
+}
+
+.search-container .big-search {
+    background: #fff;
+    padding-left: 5px;
+}
+
+@media (max-width:768px) {
+    .buttons-container {
+        float: none !important;
+        margin-left: 60px;
+    }
+}
+
+.pop-up-main-content .tabs .tab a {
+    font-size: 14px;
+}
+
+.pop-up-main-content .tabs .tab a {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+    .pop-up-main-content .tabs .tab a:first-child {
+        margin-right: 0px;
+    }
+.pop-up-background {
+    opacity: .8 !important;
+    background: #000 !important;
+}

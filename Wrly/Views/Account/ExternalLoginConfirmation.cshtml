@@ -1,0 +1,22 @@
+﻿@model Wrly.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="string join-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper">
+                        @{Html.RenderPartial("_ExternalLoginConfirmation", Model);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_AccountSharedStyles")
+}

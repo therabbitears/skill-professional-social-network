@@ -1,0 +1,124 @@
+﻿@media (min-width:769px) and (max-width:1024px) {
+    #grand-wrapper {
+        max-width: 70%;
+    }
+
+    #wrapper {
+        max-width: 100%;
+        left: 0px !important;
+    }
+
+        #wrapper #main-section {
+            width: 73% !important;
+        }
+
+    #alter-section {
+        width: 25% !important;
+    }
+}
+
+@media (min-device-width:769px) and (max-device-width:1024px) {
+}
+
+
+.fact {
+    display: none;
+}
+
+    .fact.visible {
+        display: block;
+    }
+
+.profile-item .section-floated {
+    margin: 0px !important;
+}
+
+
+
+
+.section-floated p {
+    color: #333;
+    font-size:14px;
+    line-height:22px;
+}
+
+#nav {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 5000;
+}
+
+    #nav .nav-wrapper {
+        position: relative;
+        top: 20%;
+        left: 20px;
+    }
+
+    #nav #nav-icons ul {
+        list-style: outside none none;
+        padding: 0;
+    }
+
+        #nav #nav-icons ul li {
+            height: auto;
+            perspective: 800px;
+            position: relative;
+        }
+
+            #nav #nav-icons ul li a {
+                transform-style: preserve-3d;
+                transition: transform 0.5s ease 0s;
+            }
+
+            #nav #nav-icons ul li.fact span.line {
+                position: absolute;
+                height: 50px;
+                left: 50px;
+            }
+
+            #nav #nav-icons ul li span {
+                backface-visibility: hidden;
+                left: 0;
+                top: 0;
+            }
+
+            #nav #nav-icons ul li a {
+                background-repeat: no-repeat;
+                display: block;
+                height: 60px;
+                text-decoration: none;
+            }
+
+#nav i {
+   border: 2px solid #838383;
+border-radius: 50%;
+color: #838383;
+font-size: 22px !important;
+padding: 3px 3px;
+width: 36px;
+height: 36px;
+    
+}
+
+#nav #nav-icons ul li a.active i {
+    border: 2px solid #1e68b9;
+    background-color: #1e68b9 !important;
+}
+
+#nav #nav-icons ul li a.active label {
+    color: #1e68b9;
+    border-bottom: 2px solid #1e68b9;
+}
+
+#nav #nav-icons ul li a label {
+    color: #838383;
+    margin-left: 3px;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 1px 0px;
+    top: 13px !important;
+    position: absolute;
+    left: 50px;
+}

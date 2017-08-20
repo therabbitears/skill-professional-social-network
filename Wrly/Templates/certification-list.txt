@@ -1,0 +1,55 @@
+﻿{#template MAIN}
+       {#if $T.length>0}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+{#else}
+				{#include EMPTYROW root=$T.Apr}
+{#/if}
+    {#/template MAIN}
+
+    {#template ROW}
+<div class="career-history-item profile-item">
+<div class="item-container">
+	<span class="eclipse right more-option-container more-nav question-more-options righ-on-small">
+			<span data-hash="{$T.Hash}" data-mode="certification" class="no-style icon-remove-g icon-md icon action" onclick="____removeCareerHistory($(this))"></span>
+			</span>
+    <h3>{$T.JobTitleName}</h3>
+    <small class="child-headings">From {$T.OrganizationName}</small>
+    {#if $T.StartFromMonth>0}
+    <small>Certified in {$T.StartFromMonthName} {$T.StartFromYear}</small>
+    {#/if}
+    {#if $T.EndFromMonth >0}
+    <small>Expiring {$T.EndFromMonthName} {$T.EndFromYear}</small>
+    {#/if}
+    {#if $T.About}
+    <p class="history-about">{$T.FormatedDescription}</p>
+    {#/if}
+    {#if $T.SkillIncluded.length>0}
+    <div class="skills">
+        <span class="child-profile-item-heading">Studied</span>
+        {#foreach $T.SkillIncluded as Skill}
+        {#include SKILL root=$T.Skill}
+        {#/for}
+    </div>
+    {#/if}
+    {#if $T.AllowEdit}
+    <button onclick="getCertificationHistory($(this))" class="link-alike" data-hash="{$T.Hash}">Edit <div class="waiting-bg"></div></button>
+    {#/if}
+</div>
+</div>
+    {#/template ROW}
+
+		{#template SKILL}
+<span class="skill-tag-editable">
+    {$T.Name}<span class="remove" hash="{$T.Hash}" onclick="removeEducationSkill($(this))">X</span>
+</span>
+	{#/template SKILL}
+
+		{#template EMPTYROW}
+
+<div class="empty-row">
+	Certification are great way to increase opportunities for you, add your certification and specify skill you certified for.
+	<p>Only you can see this section until you add a certification detail here.</p>
+</div>
+	{#/template EMPTYROW}

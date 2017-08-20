@@ -1,0 +1,317 @@
+﻿@model Wrly.Models.ProfileViewModel
+@{
+    ViewBag.Title = string.Format("Sklative | {0} ", Model.FormatedName);
+    if (!string.IsNullOrEmpty(Model.FormatedJobTitle) || !string.IsNullOrEmpty(Model.FormatedStudyTitle))
+    {
+        ViewBag.Title += Model.FormatedJobTitle ?? Model.FormatedStudyTitle;
+    }
+
+    ViewBag.Description = string.Format("View {0}'s skills, connections, work history, accomplishments, education and certifications.", Model.FormatedName);
+    ViewBag.Keywords = "build professional network, network for business, Business profiles";
+    if (!string.IsNullOrEmpty(Model.ProfilePic))
+    {
+        ViewBag.OgImage = Html.ImagePath(Model.ProfilePic, 200);
+    }
+    else
+    {
+        ViewBag.OgImage = "https://www.sklative.com/content/images/no-image.png";
+    }
+
+    var nearest20 = 20 * (int)Math.Round(Model.ProfileScore / Convert.ToDecimal(20));
+    var classCircle = nearest20 == 20 ? "red" : nearest20 < 60 ? "orange" : "green";
+    //var step = nearest20 == 20 ? "Beginner" : nearest20 < 60 ? "Intermediate" : nearest20 == 80 ? "Advanced" : "Completed";
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    var projectEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Projects"));
+    var publicationEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Publishings"));
+    var compositionEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Compositions"));
+    var researchEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Researches"));
+    var findingEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Establishments"));
+    var awardEnabled = Model.Widgets.Any(c => c.WidgetName.Equals("Awards"));
+    string profileClass = Model.ProfileLevel == (int)Types.Enums.CareerStage.Retired ? "profile-ex" : Model.ProfileLevel == (int)Types.Enums.CareerStage.Student ? "profile-student" : "profile-general";
+    bool isDefaultMode = Model.ProfileMode == Types.Enums.ProfileMode.Default;
+    string wrapperClass = string.Empty;
+}
+@if (!string.IsNullOrEmpty(Model.ProfileCoverPath))
+{
+    <div id="grand-cover" style="background-image:url(@Html.ImagePath(Model.ProfileCoverPath,900));">
+        @if (isDefaultMode)
+        {
+            <button class="link-alike change-cover">Change cover</button>
+        }
+    </div>
+}
+else if (isDefaultMode)
+{
+    <div id="grand-cover">
+        <button class="link-alike change-cover">Add cover</button>
+    </div>
+}
+<div id="grand-wrapper">
+    <div id="profile-wrapper" class="has-cover">
+        <div class="two-three">
+            <div class="section-floated" id="intelligence-wrapper" style="display:none;">
+                <div class="section-floated-container">
+                    <h1>Improve profile <a class="help right action" title="The auto intelligence makes sure your profile seems complete and all the information is at least matches the minimum data requirement, it automatically finds and suggests you the improvements./fixes to take action.">?</a></h1>
+                    <div id="intelligence-container"></div>
+                </div>
+            </div>
+            <div class="section-floated @profileClass">
+                <div class="section-floated-container">
+                    <div class="text-right"><a href="/@Model.ProfileName">View public</a></div>
+                    @{ViewBag.DefaultTab = isDefaultMode; Html.RenderPartial("_ManageProfileFace", Model);}
+                </div>
+            </div>
+            <div class="tabs">
+                @if (isDefaultMode)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" class="active" href="/profile">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Connections)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/profile">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/profile/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/profile">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/profile/timeline">Updates</a>
+                    </div>
+                }
+                else if (Model.ProfileMode == Types.Enums.ProfileMode.Followers || Model.ProfileMode == Types.Enums.ProfileMode.Following)
+                {
+                    <div class="tab">
+                        <a data-val-for="career-contents" href="/profile">Career</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/connections">Connections</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" class="active" href="/profile/followers">Followers</a>
+                    </div>
+                    <div class="tab">
+                        <a data-val-for="timeline-contents" href="/profile/timeline">Updates</a>
+                    </div>
+                }
+            </div>
+
+            @if (isDefaultMode)
+            {
+                @section _HeadStyles
+            {
+                    @Styles.Render("~/cdn/_ProfileSharedStyles")
+                    @Styles.Render("~/cdn/_ProfileManageStyles")
+                }
+
+                @section _FooterScripts{
+
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                            profileHash = '@Model.ProfileHash';
+                        $(document).ready(function () {
+
+                            @if (awardEnabled)
+                            {
+                <text>$("#award-history").setTemplateURL("/Templates/award-list.txt");
+                            $("#award-history").processTemplateURL("/award/index", null, { ___callback: tooltip($("#award-history")) });</text>
+                            }
+                            @if (projectEnabled)
+                            {
+            <text>$("#project-history").setTemplateURL("/Templates/project-list.txt");
+                            $("#project-history").processTemplateURL("/award/assignments", null, { ___callback: tooltip($("#project-history")) });</text>
+                            }
+                            @if (publicationEnabled)
+                            {
+        <text>$("#publication-history").setTemplateURL("/Templates/publication-list.txt");
+                            $("#publication-history").processTemplateURL("/award/publications", null, { ___callback: tooltip($("#publication-history")) });</text>
+                            }
+                            @if (compositionEnabled)
+                            {
+               <text>$("#composition-history").setTemplateURL("/Templates/composition-list.txt");
+                            $("#composition-history").processTemplateURL("/award/compositions", null, { ___callback: tooltip($("#composition-history")) });</text>
+                            }
+                            @if (researchEnabled)
+                            {
+               <text>$("#researches-list").setTemplateURL("/Templates/research-list.txt");
+                            $("#researches-list").processTemplateURL("/award/researches", null, { ___callback: tooltip($("#researches-list")) });</text>
+                            }
+
+                            @if (findingEnabled)
+                            {
+                            <text>$("#findings-list").setTemplateURL("/Templates/finding-list.txt")
+                            $("#findings-list").processTemplateURL("/award/findings", null, { ___callback: tooltip($("#findings-list")) });</text>
+                            }
+
+                            $("#career-history").setTemplateURL("/Templates/company-list.txt", null, { filter_data: false });
+                            $("#skill-history").setTemplateURL("/Templates/skill-list.txt");
+                            $("#education-history").setTemplateURL("/Templates/education-list.txt", null, { filter_data: false });
+                            $("#recommendation-list").setTemplateURL("/Templates/recommendation-list.txt");
+                            $("#appriciation-list").setTemplateURL("/Templates/appriciation-list.txt");
+                            $("#people-you-may-know").setTemplateURL("/Templates/suggestions.txt");
+                            $("#career-line-basic").setTemplateURL("/Templates/career-line-basic.txt");
+                            $("#certification-history").setTemplateURL("/Templates/certification-list.txt", null, { filter_data: false });
+
+
+                            $("#career-history").processTemplateURL("/careerhistory/career");
+                            $("#education-history").processTemplateURL("/careerhistory/education");
+                            $("#certification-history").processTemplateURL("/careerhistory/certification");
+                            $("#skill-history").processTemplateURL("/skillhistory/skill");
+                            $("#recommendation-list").processTemplateURL("/reference/recommendation", null, { ___callback: tooltip($("#recommendation-list")) });
+                            $("#appriciation-list").processTemplateURL("/reference/appriciations", null, { ___callback: tooltip($("#appriciation-list")) });
+                            $("#people-you-may-know").processTemplateURL("/association/suggestions", null, { ___callback: tooltip($("#people-you-may-know")) });
+                        });
+                    </script>
+                    @Scripts.Render("~/cdn/_ProfileManage")
+                }
+                if (Model.TotalConnections <= 50)
+                {
+                    <div class="section-floated">
+                        <div class="section-floated-container" id="contact-import-container" style="display:none;">
+                        </div>
+                    </div>
+                }
+                Html.RenderPartial("_ManageProfileItems", Model);
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Connections)
+            {
+                @section _HeadStyles
+            {
+                    @Styles.Render("~/cdn/_ProfileSharedStyles")
+                }
+                @section _FooterScripts{
+
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+                        $("#people-you-may-know").setTemplateURL("/Templates/suggestions.txt");
+                        $("#people-you-may-know").processTemplateURL("/association/suggestions", null, { ___callback: tooltip($("#people-you-may-know")) });
+
+                        $("#career-line-basic").setTemplateURL("/Templates/career-line-basic.txt");
+                    </script>
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                    @Scripts.Render("~/cdn/_NetworkSharedScripts")
+                }
+                <div class="career-history-list section-floated">
+                    <div class="section-floated-container">
+                        <h1>Your connections</h1>
+                        @{Html.RenderPartial("_ConnectionExistingTiles", Model.Connections);}
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Followers || Model.ProfileMode == Types.Enums.ProfileMode.Following)
+            {
+                @section _HeadStyles
+            {
+                    @Styles.Render("~/cdn/_ProfileSharedStyles")
+                }
+                @section _FooterScripts{
+
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+                        $("#people-you-may-know").setTemplateURL("/Templates/suggestions.txt");
+                        $("#people-you-may-know").processTemplateURL("/association/suggestions", null, { ___callback: tooltip($("#people-you-may-know")) });
+
+                        $("#career-line-basic").setTemplateURL("/Templates/career-line-basic.txt");
+                    </script>
+                    @Scripts.Render("~/cdn/_NetworkSharedScripts")
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                }
+                <div class="career-history-list section-floated">
+                    <div class="section-floated-container">
+                        @if (Model.ProfileMode == Types.Enums.ProfileMode.Followers)
+                        {
+                            <h1>Your followers</h1>
+                            <div class="text-right"><a href="/profile/following">Follow list</a></div>
+                            Html.RenderPartial("_ConnectionFollowerTiles", Model.Followers);
+                        }
+                        else
+                        {
+                            <h1>Your follow list</h1>
+                            <div class="text-right"><a href="/profile/followers">Followers</a></div>
+                            Html.RenderPartial("_ConnectionFollowingTiles", Model.Followers);
+                        }
+                    </div>
+                </div>
+            }
+            else if (Model.ProfileMode == Types.Enums.ProfileMode.Feeds)
+            {
+                @section _HeadStyles
+            {
+                    @Styles.Render("~/cdn/_ProfileSharedStyles")
+                    @Styles.Render("~/cdn/_NewsFeedStyles")
+                }
+                @section _FooterScripts{
+
+                    <script type="text/javascript">
+                        totalConnections = @(Model.TotalConnections)
+                        profileHash = '@Model.ProfileHash';
+                        $("#people-you-may-know").setTemplateURL("/Templates/suggestions.txt");
+                        $("#people-you-may-know").processTemplateURL("/association/suggestions", null, { ___callback: tooltip($("#people-you-may-know")) });
+
+                        $("#career-line-basic").setTemplateURL("/Templates/career-line-basic.txt");
+                    </script>
+                    @Scripts.Render("~/cdn/_ProfileCommon")
+                    @Scripts.Render("~/cdn/_NewsFeeds")
+                }
+                <div class="feeds">
+                    @{Html.RenderPartial("_Feeds", Model.Feed.Feeds);}
+                </div>
+            }
+        </div>
+        <div class="one-three">
+            @if (isDefaultMode)
+            {
+                @Html.Partial("_ProfileScore", Model)
+            }
+            <div class="career-history-list section-floated">
+                <div class="section-floated-container">
+                    <h1>Professionals you might know</h1>
+                    <div id="people-you-may-know">
+                    </div>
+                    <div class="show-all"><a href="/suggestions?dir=wr">See all</a></div>
+                </div>
+            </div>
+            <div class="career-history-list section-floated">
+                <div class="section-floated-container">
+                    <h1>Your career line</h1>
+                    <div class="career-line-actions">
+                        <input type="checkbox" id="includeStudy" /><label for="includeStudy">Study</label>
+                        <input type="checkbox" id="includeAward" checked /><label for="includeAward">Award</label>
+                    </div>
+                    <div id="career-line-basic">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

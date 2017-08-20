@@ -1,0 +1,221 @@
+﻿
+.feed-container .section-floated {
+    box-shadow: none;
+    margin: 0px;
+}
+
+#share-feed-update-profile h3 {
+    margin-left: 15px;
+    margin-top: 0px;
+}
+
+.feed.article .article-body {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feed-title h6 {
+    font-size: 20px;
+}
+
+.sharer h3 {
+    font-size: 18px;
+}
+
+.home-general-list-item span {
+    color: #666;
+}
+
+.home-general-list-item a {
+    font-weight: 600;
+}
+
+.feeds .thumbnail-notification-con {
+    float: left;
+}
+
+.____m8r {
+    margin-right: 8px;
+}
+
+.no-margin.author-name > span {
+    display: block;
+}
+
+.no-margin.author-name small {
+    vertical-align: middle;
+}
+
+.child-headings.right.timestamp {
+    float: right;
+    font-size: 10px;
+    margin-top: 5px;
+    vertical-align: bottom;
+}
+
+.____au {
+    min-height: 55px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.answer-small.user-content {
+    margin-bottom: 8px;
+}
+
+.share-type {
+    font-size: 12px;
+    color: #808080;
+}
+
+
+.article.feed p {
+    color: #444;
+    font-size: 14px !important;
+    line-height: 22px;
+}
+
+#network-happenings .home-general-list-item form {
+    display: block;
+    padding: 5px 0 3px;
+    width: 100%;
+}
+
+#network-happenings .home-general-list-item button {
+    padding: 2px 10px;
+}
+
+.media-body .content {
+    padding: 10px;
+}
+
+.thumbnail-notification-con {
+    float: left;
+}
+
+
+
+.feed.article {
+}
+
+    .feed-media-image img {
+        max-width: 100%;
+    }
+
+.feed-body {
+    color: #333;
+    font-size: 14px;
+}
+
+    .feed-body.max-height {
+        max-height: 200px !important;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .feed-body.max-height .action {
+            background: #fff none repeat scroll 0 0;
+            bottom: 0;
+            padding: 10px;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+        }
+
+.feed.article h1, .feed.article h2, .feed.article h3, .feed.article h4, .feed.article h5, .feed.article h6 {
+    color: #444;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+.cover .feed-media-image, .cover.feed-media-image {
+    background-size: cover;
+    background-position: 0% 0%;
+    background-color: #e9ebee;
+    background-size: cover;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 7px 7px 0 0;
+    padding-bottom: 37%;
+}
+
+.original-user-content {
+    color: #ccc;
+    margin-left: 15px;
+    border-left: 2px solid #ccc;
+    padding-left: 10px;
+    opacity: .7;
+}
+
+    .original-user-content:hover {
+        opacity: 1;
+    }
+
+.____actor {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    /*border-bottom: 1px solid #ccc;*/
+}
+
+.insight-popup .connection-figures {
+    display:inline-block;
+    text-align:center;padding:10px;
+    cursor:pointer;
+}
+
+.insight-popup .connection-figures .insight-label {
+    display:block;
+}
+blockquote {
+    border-left: 5px solid #666;
+    color: #666;
+    display: inline-block;
+    font-size: 14px;
+    margin: 10px 0;
+    padding: 10px 20px;
+    width: 100% !important;
+}
+
+.having-title h5 {
+    color: #666;
+    font-size: 18px;
+    margin: 5px 0;
+    font-weight:500;
+}
+
+.feed.job h3 {
+     margin: 5px 0;
+   color: #666;
+    padding: 0px;
+    font-weight:500;
+    font-size: 14px;
+}
+
+.feed.blog .image {
+    display: inline-block;
+    width: 24%;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.feed.blog .content {
+        display: inline-block;
+    width: 75%;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.feed.blog h6 {
+    padding:0px !important;
+    margin:2px 0px;
+}
+
+.feeds .feed.blog {
+    border:0px;
+}
+
+.feed.blog h2 {
+    font-size:18px;
+    font-weight:normal;
+}

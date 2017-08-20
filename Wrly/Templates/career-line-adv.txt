@@ -1,0 +1,56 @@
+﻿{#template MAIN}
+        {#foreach $T as Skill}
+          {#include ROW root=$T.Skill}
+        {#/for}
+    {#/template MAIN}
+
+    {#template ROW}
+<div class="career-line-item">
+	{#if $T.Type == 'Certification'}
+    <div class="certified">
+    </div>
+    <span class="career-line-hint get-certified">{$T.CareelineTimeText}</span>
+    <span class="career-line-hint-loc got-certified">{$T.AsTitle}</span>
+    {#/if}
+
+    {#if $T.Type == 'Study'}
+    {#if $T.Mode == 'Start'}
+    <div class="started-study">
+    </div>
+    <span class="career-line-hint study-start">{$T.CareelineTimeText}</span>
+    <span class="career-line-hint-loc study-start">{$T.AsTitle}</span>
+    {#/if}
+    {#if $T.Mode == 'End'}
+    <div class="ended-study">
+
+    </div>
+    <span class="career-line-hint study-end">{$T.CareelineTimeText}</span>
+    <span class="career-line-hint-loc study-end">{$T.AsTitle}</span>
+    {#/if}
+    {#/if}
+    {#if $T.Type == 'Working'}
+    {#if $T.Mode == 'Start'}
+    <div class="started-working">
+
+    </div>
+    <span class="career-line-hint work-start">{$T.CareelineTimeText}</span>
+    <span class="career-line-hint-loc work-start">{$T.WhereTitle}</span>
+    {#/if}
+    {#if $T.Mode == 'End'}
+    <div class="ended-working">
+    </div>
+    <span class="career-line-hint work-end">{$T.CareelineTimeText}</span>
+    <span class="career-line-hint-loc work-end">{$T.WhereTitle}</span>
+    {#/if}
+    {#/if}
+    {#if $T.Type  == 'Award'}
+    <div class="won-award">
+    </div>
+	<span class="career-line-hint got-award">{$T.CareelineTimeText}</span>
+	{#if $T.AsTitle!=null}
+    <span class="career-line-hint-loc work-end">{$T.AsTitle} at {$T.WhereTitle}</span>
+	{#/if}
+    {#/if}
+</div>
+<div class="career-line-connector"></div>
+    {#/template ROW}

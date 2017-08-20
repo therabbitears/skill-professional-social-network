@@ -1,0 +1,22 @@
+﻿
+
+    .content-container {
+        display: inline-block;
+        vertical-align: top;
+        width: 765px;
+    }
+    .container .pavilion {
+        display: inline-block;
+        margin-left: 10px;
+        width: 140px;
+    }
+
+    .wizard-form-wrapper h1 {
+        color: #333;
+        font-size: 20px;
+    }
+
+.reuqest-item {
+    width:100%;
+}
+

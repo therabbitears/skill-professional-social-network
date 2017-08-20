@@ -1,0 +1,44 @@
+﻿{#template MAIN}
+<ul class="table-row-container">
+{#if $T.length>0}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+		{#else}
+				{#include EMPTYROW root=$T.Apr}
+{#/if}
+		</ul>
+    {#/template MAIN}
+    {#template ROW}
+	<li>
+<div class="people-you-may-know-item">
+    <div class="thumbnail-notification-con">
+        <img alt="no image {$T.FullName}" src="{$T.ProfilePhotoIconUrl}" class="thumbnail-notification">
+    </div>
+    <div class="side-thumbnail">
+        <a href="/{$T.ProfileUrl}" title="{$T.AuthorName}" data-hover-card="true" data-entity-id="{$T.EntityID}"><h3 class="page-title">{$T.AuthorName}</h3></a>
+        {#if $T.ProfileHeadline!=null}
+        <span class="child-headings">{$T.ProfileHeadline}</span>
+        {#/if}
+        {#if $T.CommonSkillText!=null}
+        <span class="child-headings">{$T.CommonSkillText}</span>
+        {#/if}
+        <span>
+            <form action="/association/connect" method="post" onsubmit="return connect($(this))">
+                <input type="hidden" value="{$T.Token}" name="__RequestVerificationToken">
+                <input type="hidden" value="{$T.Hash}" name="Hash">
+                <button class="btn link-alike" data-hash="{$T.Hash}">Connect</button><span class="verticle-divider">|</span>
+                <button class="btn link-alike link-alike-default" data-hash="{$T.Hash}">Skip</button><div class="waiting-bg"></div>
+            </form>
+        </span>
+    </div>
+</div>
+</li>
+{#/template ROW}
+	{#template EMPTYROW}
+<li class="empty-row">
+		Start follow people and interact in feeds, discussions to get more suggestions to grow your network. 
+   
+</div>
+</li>
+	{#/template EMPTYROW}

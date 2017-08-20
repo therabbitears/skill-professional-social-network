@@ -1,0 +1,20 @@
+﻿{#template MAIN}
+        {#foreach $T as Message}
+          {#include ROW root=$T.Message}
+        {#/for}
+    {#/template MAIN}
+    
+    {#template ROW}
+      <li class="message-item">
+        <div class="thumbnail-notification-con">
+             <img alt="no image {$T.FullName}" src="/content/images/no-image-sm.png" class="thumbnail-notification">
+         </div>
+         <div class="side-thumbnail">
+             <h3>{$T.SenderName}</h3>
+             <span class="child-headings">{$T.Message}</span>
+             <span class="child-headings">Sent at{$T.SentAt}</span>
+             <span>
+			 </span>
+         </div>
+      </li>
+{#/template ROW}

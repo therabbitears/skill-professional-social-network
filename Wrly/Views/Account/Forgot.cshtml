@@ -1,0 +1,44 @@
+﻿@model Wrly.Models.ForgotPasswordViewModel
+@{
+    ViewBag.Title = "Sklative: Forgotten password";
+    ViewBag.Description = "Recover account password on sklative, find the account by your email address and set a new password.";
+}
+
+<div class="string join-container">
+    <div class="string-wrapper">
+        <div class="content-container">
+            <div class="reg-content-wrapper">
+                <div class="wizard-form-container form-container">
+                    <div class="wizard-form-wrapper">
+                        <section>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Your email address:</label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.EmailAddress)
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Generate link" class="btn btn-primary" />@Html.ActionLink("Back to login?", "Login", null, new { @class = "second-link" })
+                                    </div>
+                                </div>
+                            }
+
+                        </section>
+                        <section id="socialLoginForm">
+                            @{ViewBag.SocialLoginMessage = "Or, use your existing social media account to get log into your acocunt and then reset it."; }
+                            @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_AccountSharedStyles")
+}

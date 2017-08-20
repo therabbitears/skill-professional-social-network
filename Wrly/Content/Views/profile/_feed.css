@@ -1,0 +1,16 @@
+﻿.clearfix {
+        zoom: 1;
+    }
+
+    .comment-input-con {
+        position: relative;
+    }
+
+    ._ohe {
+        float: left;
+    }
+
+    .load-more
+    {
+        display:none;
+    }

@@ -1,0 +1,51 @@
+﻿{#template MAIN}
+   {#if $T.length>0}
+<div>
+    {#foreach $T as Skill}
+    {#include ROW root=$T.Skill}
+    {#/for}
+</div>
+{#else}
+				{#include EMPTYROW root=$T.Apr}
+{#/if}
+
+    {#/template MAIN}
+
+    {#template ROW}
+
+<section class="group-item viduara-bCard card-sm">
+    {#if $T.TotalEndorsements>0}
+    {#if $T.Endorsed==true}
+    <span class="skill-figures added">{$T.TotalEndorsements} Endorsements</span>
+    {#else}
+    <span class="skill-figures">{$T.TotalEndorsements} Endorsements</span>
+    {#/if}
+    {#/if}
+
+    {#if $T.TotalRecommendations>0}
+    {#if $T.Recommended==true}
+    <span class="skill-figures added">{$T.TotalRecommendations} Recommended</span>
+    {#else}
+    <span class="skill-figures">{$T.TotalRecommendations} Recommended</span>
+    {#/if}
+    {#/if}
+    <div class="heading">
+        <h3>{$T.Name}</h3>
+        {#if $T.ExpertiseLevelText !=null}
+        <span class="child-headings">{$T.ExpertiseLevelText}</span>
+        {#/if}
+        <div class="buttons">
+            <button class="btn btn-outlined btn-sm" onclick="getSkillHistory($(this))" class="link-alike" data-hash="{$T.Hash}">Edit</button>
+            <button class="link-alike" data-type="skill" data-action="remove" onclick="____skillHistoryAction($(this))" class="link-alike" data-hash="{$T.Hash}">Remove</button><div class="waiting-bg"></div>
+        </div>
+
+    </div>
+</section>
+    {#/template ROW}
+	{#template EMPTYROW}
+
+<div class="empty-row">
+    Add a list of skills here and let people connect to you based on common skills, score and certification matching. Skill are core part of your network.
+	<p>Only you can see this section until you add at least one skill here.</p>
+</div>
+	{#/template EMPTYROW}

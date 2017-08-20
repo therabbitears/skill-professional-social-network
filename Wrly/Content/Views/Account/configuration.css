@@ -1,0 +1,153 @@
+﻿ .configuration .page-title {
+        padding: 0px;
+    }
+
+    .configuration .page-sub-title {
+        color: #333;
+        font-size: 14px;
+        font-weight: normal;
+        padding: 0px;
+    }
+
+    .explanation {
+        font-size: 12px;
+        margin: 0px;
+        color: #333;
+    }
+
+        .explanation div {
+            text-decoration: none;
+        }   
+
+    .inline-form {
+        display: inline;
+    }
+
+    
+.widget-to-choose {
+    width: 33%;
+    display: inline-block;
+    padding: 5px;
+    height: 150px;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.176);
+    margin-bottom: 15px;
+    text-align: center;
+    vertical-align: top;
+    position: relative;
+    box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     -moz-box-sizing: border-box;
+}
+
+.widget-description {
+    font-size: 12px;
+    color: #808080;
+}
+
+.widget-name {
+    color: #808080;
+    font-size: 21px;
+}
+
+.widget-image {
+    width: 65px;
+    height: 65px;
+    background-color: #e6e6e6 !important;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.widget-to-choose.active .widget-image {
+    background-color: #1e68b9 !important;
+}
+
+.wrly-check {
+    border-radius: 50% !important;
+    padding: 0px 8px !important;
+    position: absolute !important;
+    cursor: pointer;
+    right: 0px;
+    background: #ccc;
+}
+
+    .wrly-check.checked {
+        background: #1e68b9;
+    }
+
+    .wrly-check:before {
+        content: "✓";
+        display: block;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 0 0 0.0714em #fff;
+        color: #e6e6e6;
+    }
+
+    .wrly-check.checked:before {
+        color: #ffffff;
+    }
+
+.wrly-check-source {
+    display: none;
+    visibility: hidden;
+}
+
+.icon-xl {
+    background-size: 40px 40px !important;
+    width: 64px !important;
+    height: 64px !important;
+}
+
+.icon-award-g {
+    background: url(/fonts/ico/award.png);
+}
+
+.icon-profile-face-g {
+    background: url(/fonts/ico/id-card.png);
+}
+
+.icon-career-g {
+    background: url(/fonts/ico/history.png);
+}
+
+.icon-education-g {
+    background: url(/fonts/ico/open-book.png);
+}
+
+.icon-certification-g {
+    background: url(/fonts/ico/certification.png);
+}
+
+.icon-skills-g {
+    background: url(/fonts/ico/skills.png);
+}
+
+.icon-projects-g {
+    background: url(/fonts/ico/project.png);
+}
+
+.icon-publication-g {
+    background: url(/fonts/ico/publishing.png);
+}
+
+.icon-composition-g {
+    background: url(/fonts/ico/composition.png);
+}
+
+.icon-research-g {
+    background: url(/fonts/ico/research.png);
+}
+
+.icon-finding-g {
+    background: url(/fonts/ico/founded.png);
+}
+
+.icon-reference-g {
+    background: url(/fonts/ico/like.png);
+}
+.child-tabs {
+    margin:30px 0px;
+}

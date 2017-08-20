@@ -1,0 +1,44 @@
+﻿{#template MAIN}
+        {#foreach $T as Skill}
+          {#include ROW root=$T.Skill}
+        {#/for}
+    {#/template MAIN}
+
+    {#template ROW}
+<section class="group-item viduara-bCard card-sm">
+    {#if $T.TotalEndorsements>0}
+    {#if $T.Endorsed==true}
+    <span class="skill-figures added">{$T.TotalEndorsements} Endorsements</span>
+    {#else}
+    <span class="skill-figures">{$T.TotalEndorsements} Endorsements</span>
+    {#/if}
+    {#/if}
+
+    {#if $T.TotalRecommendations>0}
+    {#if $T.Recommended==true}
+    <span class="skill-figures added">{$T.TotalRecommendations} Recommended</span>
+    {#else}
+    <span class="skill-figures">{$T.TotalRecommendations} Recommended</span>
+    {#/if}
+    {#/if}
+    <div class="heading">
+        <h3>{$T.Name}</h3>
+        {#if $T.ExpertiseLevelText !=null}
+        <span class="child-headings">{$T.ExpertiseLevelText}</span>
+        {#/if}
+        <div class="buttons">
+            {#if $T.Recommended==true}
+            <button class="btn btn-primary btn-sm" class="link-alike" data-hash="{$T.Hash}">Recommended</button>
+            {#else}
+            <button data-action="recommend" data-type="skill" onclick="____skillHistoryAction($(this))" class="btn btn-outlined btn-sm" data-hash="{$T.Hash}">Recommend</button>
+            {#/if}
+            {#if $T.Endorsed==true}
+            <button data-type="skill" onclick="____skillHistoryAction($(this))" data-action="remove-endorse" class="btn btn-primary btn-sm" data-hash="{$T.Hash}">Endoresed</button>
+            {#else}
+            <button data-type="skill" onclick="____skillHistoryAction($(this))" data-action="endorse" class="btn btn-outlined btn-sm" data-hash="{$T.Hash}">Endores</button>
+            {#/if}
+			<div class="waiting-bg"></div>
+        </div>
+    </div>
+</section>
+    {#/template ROW}

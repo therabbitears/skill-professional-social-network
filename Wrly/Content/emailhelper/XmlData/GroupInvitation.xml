@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<EmailParserSetting>
+      <Subject>You are invited to "**GroupName**"</Subject>
+      <FilePath>~/Content/emailhelper/EmailTemplates/GroupInvitation.htm</FilePath>
+      <FromName>Sklative groups</FromName>
+      <FromEmail>interaction@sklative.com</FromEmail>
+</EmailParserSetting>

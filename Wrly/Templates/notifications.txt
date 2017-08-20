@@ -1,0 +1,34 @@
+﻿{#template MAIN}
+        {#foreach $T as Message}
+          {#include ROW root=$T.Message}
+        {#/for}
+    {#/template MAIN}
+
+    {#template ROW}
+
+<li class="{$T.Status.toString()=='2'?'feed-comment':'feed-comment pending'}">
+    <a href="{$T.Url}">
+        <div class="clearfix" direction="left">
+            <div class="left">
+                <div class="comment-thumb-con">
+                    <img src="{$T.ProfileIcon}" class="comment-thumb-img" alt="Online" title="is Online">
+                </div>
+            </div>
+            <div class="">
+                <div class="comment-action-con ofh">
+                    <div class="comment-input-con">
+                        <div>
+                            <div>
+                                {$T.Text}
+                            </div>
+                            <div>
+								<small class="child-headings">{$T.CreatedOnText}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+    {#/template ROW}

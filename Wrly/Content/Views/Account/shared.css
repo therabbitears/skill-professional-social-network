@@ -1,0 +1,71 @@
+﻿.static-mode .main .join-container {
+    margin: 20px auto;
+    height: auto;
+}
+
+.box .string {
+    width: 350px !important;
+}
+
+.string {
+    display: table;
+    margin: auto;
+    height: 100%;
+}
+
+.box .string .string-wrapper {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.box .string-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.reg-content-wrapper {
+    background: #fff;
+    position: relative;
+}
+
+.box .reg-content-wrapper .form-container {
+    width: 100%;
+    position: relative;
+}
+
+.box .reg-content-wrapper .form-container {
+    width: 100%;
+    position: relative;
+}
+
+.reg-content-wrapper .form-container {
+    background: #fff;
+}
+
+    
+
+.wizard-form-wrapper h1 {
+    font-size: 22px !important;
+    color: #1e68b9 !important;
+    font-weight: bold !important;
+}
+
+.wizard-content-section {
+    margin: 5px 0px;
+    color: #333;
+    font-size: 12px;
+}
+
+.forgot-container a {
+     padding: 10px 15px;
+    text-transform: uppercase;
+}
+
+.wizard-form-wrapper.forgot-container {
+    color:#555;
+}
+    .forgot-container a:hover {
+        background:#e6e6e6;
+    }

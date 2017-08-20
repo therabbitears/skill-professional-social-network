@@ -1,0 +1,21 @@
+﻿@{
+    //ViewBag.Title = "Sklative | The skilled Business professional network";
+    //ViewBag.Description = "Sklative is India&#39;s largest business professional network, join and build your professional identity, explore opportunities and find business partners";
+    ViewBag.Title = "Skilled Business Professional Network | Job Recruitment | Employment";
+    ViewBag.Description = "Sklative is India's largest business professional network. Join and build your professional identity, explore best job opportunities from top Employers and find business partners.";
+    ViewBag.Keywords = "build professional network, B2B social network, Professional Online Business portfolio, business opportunities";
+}
+
+<div>
+    <div class="home-form-wrapper">
+        <div class="home-form-container">
+            <strong>Having an account ? login here</strong>
+            @{Html.RenderPartial("_LoginHome.Mobile", new Wrly.Models.LoginViewModel());}
+            <hr />
+
+        </div>
+    </div>
+</div>
+@section _HeadStyles{
+    @Styles.Render("~/cdn/_HomeMobileSharedStyles")
+}

@@ -1,0 +1,121 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 01/02/2017 16:55
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-applause:before { content: "\f100"; }
+.flaticon-badge:before { content: "\f101"; }
+.flaticon-bell:before { content: "\f102"; }
+.flaticon-bell-ring:before { content: "\f103"; }
+.flaticon-business-affiliate-network:before { content: "\f104"; }
+.flaticon-business-cards:before { content: "\f105"; }
+.flaticon-businessmen:before { content: "\f106"; }
+.flaticon-businessmen-1:before { content: "\f107"; }
+.flaticon-businessmen-meeting:before { content: "\f108"; }
+.flaticon-clinic-history:before { content: "\f109"; }
+.flaticon-close-envelope:before { content: "\f10a"; }
+.flaticon-columns-building:before { content: "\f10b"; }
+.flaticon-customer:before { content: "\f10c"; }
+.flaticon-customer-1:before { content: "\f10d"; }
+.flaticon-diploma:before { content: "\f10e"; }
+.flaticon-diploma-paper-roll:before { content: "\f10f"; }
+.flaticon-employee:before { content: "\f110"; }
+.flaticon-eye-on-magnifying-glass:before { content: "\f111"; }
+.flaticon-favorites:before { content: "\f112"; }
+.flaticon-find-location:before { content: "\f113"; }
+.flaticon-graduate-cap:before { content: "\f114"; }
+.flaticon-historical-building-outline-with-columns:before { content: "\f115"; }
+.flaticon-holding-hands-in-a-circle:before { content: "\f116"; }
+.flaticon-idea:before { content: "\f117"; }
+.flaticon-mail:before { content: "\f118"; }
+.flaticon-management:before { content: "\f119"; }
+.flaticon-manager:before { content: "\f11a"; }
+.flaticon-marketing:before { content: "\f11b"; }
+.flaticon-medal:before { content: "\f11c"; }
+.flaticon-more:before { content: "\f11d"; }
+.flaticon-open-book:before { content: "\f11e"; }
+.flaticon-open-book-1:before { content: "\f11f"; }
+.flaticon-person-learning-by-reading:before { content: "\f120"; }
+.flaticon-rocket:before { content: "\f121"; }
+.flaticon-search-in-folder:before { content: "\f122"; }
+.flaticon-skills:before { content: "\f123"; }
+.flaticon-skills-1:before { content: "\f124"; }
+.flaticon-thumb-up-with-star:before { content: "\f125"; }
+.flaticon-treble-clef:before { content: "\f126"; }
+.flaticon-trophy:before { content: "\f127"; }
+.flaticon-volunteer:before { content: "\f128"; }
+    
+    $font-Flaticon-applause: "\f100";
+    $font-Flaticon-badge: "\f101";
+    $font-Flaticon-bell: "\f102";
+    $font-Flaticon-bell-ring: "\f103";
+    $font-Flaticon-business-affiliate-network: "\f104";
+    $font-Flaticon-business-cards: "\f105";
+    $font-Flaticon-businessmen: "\f106";
+    $font-Flaticon-businessmen-1: "\f107";
+    $font-Flaticon-businessmen-meeting: "\f108";
+    $font-Flaticon-clinic-history: "\f109";
+    $font-Flaticon-close-envelope: "\f10a";
+    $font-Flaticon-columns-building: "\f10b";
+    $font-Flaticon-customer: "\f10c";
+    $font-Flaticon-customer-1: "\f10d";
+    $font-Flaticon-diploma: "\f10e";
+    $font-Flaticon-diploma-paper-roll: "\f10f";
+    $font-Flaticon-employee: "\f110";
+    $font-Flaticon-eye-on-magnifying-glass: "\f111";
+    $font-Flaticon-favorites: "\f112";
+    $font-Flaticon-find-location: "\f113";
+    $font-Flaticon-graduate-cap: "\f114";
+    $font-Flaticon-historical-building-outline-with-columns: "\f115";
+    $font-Flaticon-holding-hands-in-a-circle: "\f116";
+    $font-Flaticon-idea: "\f117";
+    $font-Flaticon-mail: "\f118";
+    $font-Flaticon-management: "\f119";
+    $font-Flaticon-manager: "\f11a";
+    $font-Flaticon-marketing: "\f11b";
+    $font-Flaticon-medal: "\f11c";
+    $font-Flaticon-more: "\f11d";
+    $font-Flaticon-open-book: "\f11e";
+    $font-Flaticon-open-book-1: "\f11f";
+    $font-Flaticon-person-learning-by-reading: "\f120";
+    $font-Flaticon-rocket: "\f121";
+    $font-Flaticon-search-in-folder: "\f122";
+    $font-Flaticon-skills: "\f123";
+    $font-Flaticon-skills-1: "\f124";
+    $font-Flaticon-thumb-up-with-star: "\f125";
+    $font-Flaticon-treble-clef: "\f126";
+    $font-Flaticon-trophy: "\f127";
+    $font-Flaticon-volunteer: "\f128";

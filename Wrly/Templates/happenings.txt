@@ -1,0 +1,51 @@
+﻿{#template MAIN}
+<ul class="table-row-container">
+        {#foreach $T as Activiy}
+          {#include ROW root=$T.Activiy}
+        {#/for}
+				</ul>
+    {#/template MAIN}
+    {#template ROW}
+	<li>
+<div class="home-general-list-item">
+    <div class="thumbnail-notification-con">
+        <img alt="no image {$T.AuthorName}" src="{$T.ProfilePhotoIconUrl}" class="thumbnail-notification">
+    </div>
+    <div class="side-thumbnail">
+        <span class="activity-text">
+            <a href="/{$T.ProfileUrl}" title="{$T.AuthorName}" data-hover-card="true" data-entity-id="{$T.EntityID}">{$T.AuthorName}</a>
+            <span class="inline">{$T.Text}</span>
+        </span>
+		<div>
+        <form action="/association/activityaction" method="post" onsubmit="return false">
+            <input type="hidden" value="{$T.Token}" name="__RequestVerificationToken">
+            <input type="hidden" value="{$T.Hash}" name="hash">
+            {#if $T.Type==1}
+            <button onclick="____executeActivityAction($(this))" data-action="welcome" class="btn btn-outlined" data-hash="{$T.Hash}">Greet</button>
+            <button onclick="____executeActivityAction($(this))" data-action="like" class="btn btn-outlined" data-hash="{$T.Hash}">Like</button>
+            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default" data-hash="{$T.Hash}">Skip</button>
+            {#/if}
+            {#if $T.Type==2}
+            <button onclick="____executeActivityAction($(this))" data-action="goodluck" class="btn btn-outlined" data-hash="{$T.Hash}">Greet</button>
+            <button onclick="____executeActivityAction($(this))" data-action="like" class="btn btn-outlined" data-hash="{$T.Hash}">Like</button>
+            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default" data-hash="{$T.Hash}">Skip</button>
+            {#/if}
+            {#if $T.Type==3 || $T.Type==4}
+            <button onclick="____executeActivityAction($(this))" data-action="congratulate" class="btn btn-outlined" data-hash="{$T.Hash}">Congratulate</button>
+            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default" data-hash="{$T.Hash}">Skip</button>
+            {#/if}
+            {#if $T.Type==5}
+            <button onclick="____executeActivityAction($(this))" data-action="congratulate" class="btn btn-outlined" data-hash="{$T.Hash}">Congratulate</button>
+            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default" data-hash="{$T.Hash}">Skip</button>
+            {#/if}
+            {#if $T.Type==6}
+            <button onclick="____executeActivityAction($(this))" data-action="endorse" class="btn btn-outlined" data-hash="{$T.Hash}">Endorse</button>
+            <button onclick="____executeActivityAction($(this))" data-action="next" class="btn btn-outlined default" data-hash="{$T.Hash}">Skip</button>
+            {#/if}
+        </form>
+    </div>
+    </div>
+    
+</div>
+</li>
+	{#/template ROW}

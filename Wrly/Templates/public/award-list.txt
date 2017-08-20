@@ -1,0 +1,64 @@
+﻿{#template MAIN}
+        {#foreach $T as Award}
+          {#include ROW root=$T.Award}
+        {#/for}
+    {#/template MAIN}
+    
+    {#template ROW}
+      <div class="award-item profile-item">
+        <h3>{$T.Name}</h3>
+		{#if $T.StartFromMonth>0}
+		<small>In {$T.StartFromMonthName} {$T.StartFromYear}</small>
+		{#/if}
+		{#if $T.Description!=null}
+		<p>{$T.Description}</p>
+		{#/if}
+		{#if $T.DisplayJobTitleText!=null && $T.DisplayJobTitleText!=''}
+			<small class="child-headings">While {$T.DisplayJobTitleText}</small>
+		{#/if}
+		{#if $T.SkillIncluded.length>0}
+		<div class="skills">
+			<span class="child-profile-item-heading">Skills</span>
+			{#foreach $T.SkillIncluded as Skill}
+			  {#include SKILL root=$T.Skill}
+			{#/for}
+		</div>
+		{#/if}
+
+		{#if $T.ParticipantIncluded.length>0}
+		<div class="participants">
+			<span class="child-profile-item-heading">With</span>
+			{#foreach $T.ParticipantIncluded as Participant}
+			  {#include PARTICIPANT root=$T.Participant}
+			{#/for}
+		</div>
+		{#/if}
+		{#if $T.Congratulated==true}
+			<button type="button" class="link-alike added" data-action="congratulate" data-hash="{$T.Hash}">Congratulated</button>
+		{#else}
+			<button onclick="____awardAction($(this))" class="link-alike" data-action="congratulate" data-hash="{$T.Hash}">Congratulate</button>
+		{#/if}
+      </div>
+    {#/template ROW}
+
+	{#template SKILL}
+		<span class="skill-tag-editable">
+			{$T.Name}
+		</span>
+	{#/template SKILL}
+
+	{#template PARTICIPANT}
+	<div class="participant">
+		<div class="thumbnail-notification-con">
+			{#if $T.ProfileIconPath!=null}
+						<img alt="no image {$T.FullName}" src="{$T.ProfileIconPath}" class="thumbnail-notification">
+				{#else}
+						<img alt="no image {$T.FullName}" src="/content/images/no-image-sm.png" class="thumbnail-notification">
+				{#/if}
+         </div>
+         <div class="side-thumbnail">
+			 <a href="/{$T.ProfileName}" title="{$T.FormatedName}" data-hover-card="true" data-entity-id="{$T.EntityID}"><h3 class="page-title">{$T.FormatedName}</h3></a>
+             <span class="child-headings">{$T.ProfileHeading}</span>
+         </div>
+      </div>
+	{#/template PARTICIPANT}

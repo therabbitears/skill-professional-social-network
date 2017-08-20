@@ -1,0 +1,46 @@
+﻿{#template MAIN}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+    {#/template MAIN}
+    {#template ROW}
+<div class="people-you-may-know-item">
+    <div class="thumbnail-notification-con">
+        <img alt="no image {$T.FullName}" src="/content/images/no-image-sm.png" class="thumbnail-notification">
+    </div>
+    <div class="side-thumbnail">
+        {#if $T.EntityType==1}
+                    <div>
+                        <a href="/{$T.ProfileName}">
+                            {$T.FormatedName}
+                        </a>
+                    </div>
+                   {#if $T.ProfileHeading!=null }
+						{#if $T.ProfileHeading!=""}
+							<small class="child-headings">{$T.ProfileHeading}</small>
+						{#/if}
+					{#/if}
+                    {#else}
+                    <div>
+                        <a class="user-name" {$T.ProfileUrl}>
+                            {$T.Name}
+                        </a>
+                    </div>
+                    <small class="child-headings">{$T.Category}</small>
+                    {#/if}
+        <span>
+            <form action="/association/action" method="post" onsubmit="return false">
+                <input type="hidden" value="{$T.Token}" name="__RequestVerificationToken">
+                <input type="hidden" value="{$T.Hash}" name="Hash" />
+                <input class="link-alike" type="submit" name="actn" onclick="___doApprove($(this))" value="Approve" data-hash="{$T.Hash}" />
+                <input class="link-alike link-alike-default" type="submit" name="actn" onclick="___doDecline($(this))" value="Not now" data-hash="{$T.Hash}" />
+            </form>
+        </span>
+    </div>
+</div>
+{#/template ROW}
+{#template EMPTYROW}
+<div class="empty-row request-empty-row">
+    No pending request
+</div>
+	{#/template EMPTYROW}

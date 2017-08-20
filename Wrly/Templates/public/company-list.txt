@@ -1,0 +1,52 @@
+﻿{#template MAIN}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+    {#/template MAIN}
+    
+    {#template ROW}
+      <div class="career-history-item profile-item">
+	  {#if $T.ProfileName}
+				<a href="/fou/{$T.ProfileName}"><h3>{$T.OrganizationName}</h3></a>
+	  {#/if}
+	  {#if $T.ProfileName==null || $T.ProfileName==''}
+		<h3>{$T.OrganizationName}</h3>
+	  {#/if}
+		<span class="eclipse right more-option-container more-nav question-more-options righ-on-small" onclick="____careerhistoryMoreOptions($(this),event	)" data-hash="{$T.Hash}">
+			<span>
+				<span class=" three-dot">&#x22EE;</span>
+			</span>
+			<ul class="dropdown-menu profile">
+                                    
+			</ul>
+		</span>	
+		<small class="child-headings">{$T.JobTitleName}</small>
+		{#if $T.StartFromMonth}
+		{#if $T.StartFromMonth>0}
+		<small>From {$T.StartFromMonthName} {$T.StartFromYear}</small>
+		{#/if}
+		{#/if}
+		{#if $T.EndFromMonth}
+		{#if $T.EndFromMonth>0}
+		<small>To {$T.EndFromMonthName} {$T.EndFromYear}</small>
+		{#/if}
+		{#/if}
+		{#if $T.FormatedDescription}
+			<p class="history-about">{$T.FormatedDescription}</p>
+		{#/if}
+				{#if $T.SkillIncluded.length>0}
+		<div class="skills">
+			<span class="child-profile-item-heading">Skills worked upon</span>
+			{#foreach $T.SkillIncluded as Skill}
+			  {#include SKILL root=$T.Skill}
+			{#/for}
+		</div>
+		{#/if}	
+      </div>
+    {#/template ROW}
+
+	{#template SKILL}
+		<span class="skill-tag-editable">
+			{$T.Name}
+		</span>
+	{#/template SKILL}

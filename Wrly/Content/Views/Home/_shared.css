@@ -1,0 +1,212 @@
+﻿.home-content h3, .home-content small {
+    color: #fff;
+    font-size:22px;
+}
+
+
+.home-content small {
+    font-size:16px;
+}
+h3 {
+    margin: 0px;
+}
+
+.bottom-h-p-search {
+    display: inline-block;
+    width: 100%;
+    color: #fff;
+    text-align: right;
+    border-top: 1px dashed #e9e5e5;
+    margin: 15px 0px;
+    padding: 10px 0px;
+    position:relative;
+}
+
+.bottom-h-p-search i{
+    left: 8px;
+    position: absolute;
+    top: 26px;
+}
+
+.hero-image {
+    float: left;
+    height: 400px;
+    width: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: inline-block;
+    margin-left: -15px;
+    margin-top: 30px;
+}
+
+    .hero-image.individual {
+        background: url(/Content/assets/images/ind-connection.png);
+    }
+
+    .hero-image.org {
+        background: url(/Content/assets/images/org-connection.png);
+    }
+
+.panel {        
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+    display: inline-block !important;
+    width: 100%;
+}
+
+    .panel.individual {
+        background: url(/Content/assets/images/home-cover.jpg)  no-repeat center center fixed;
+        background-color:#808080;
+    }
+
+    .panel.org {
+        background: url(/Content/assets/images/home-cover-2.jpg)  no-repeat center center fixed; 
+        background-color:#808080;
+    }
+
+.box-container {
+    z-index: 999997;
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+}
+
+.home-content {
+    float: left;
+    max-width: 70%;
+    width: 70%;
+    margin-top: 20px;
+}
+
+.home-form {
+    float: right;
+    max-width: 30%;
+    width: 30%;
+}
+
+.home-form-wrapper {
+    background: #fff;
+    margin-top: 20px;
+}
+
+.home-form-container {
+    padding: 15px;
+}
+
+    .home-form-container h1:first-child {
+        margin:0px;
+        padding:0px;
+    }
+
+
+
+.wrapper; {
+    margin-bottom: 20px;
+    float: left;
+    width: 100%;
+}
+
+
+.home-form-wrapper h3 {
+    color: #444;
+}
+
+.bottom-h-p-search input[type="text"] {
+    border-radius: 2px;
+    font-size: 18px;
+    min-width: 350px;
+    padding: 10px 40px;
+    height:45px;
+}
+
+.tabs {
+    position: relative;
+    clear: both;
+    width: 100%;
+    float: left;
+    margin-bottom: 14px;
+    padding-top: 3px;
+    padding-bottom: 10px;
+    background: #eee;
+}
+
+.tab {
+    color: #333;
+    display: inline-block;
+}
+
+    .tab a {
+        background: #eee;
+        padding: 10px;
+        margin-left: -1px;
+        position: relative;
+        left: 1px;
+    }
+
+        .tab a.active {
+            background: white;
+            border-bottom: 1px solid white;
+            z-index: 2;
+        }
+
+i::before {
+    margin-left: auto !important;
+    padding: 15px;
+}
+
+
+
+
+    .home-reg-header a {
+      box-sizing: border-box;
+    color: #333;
+    display: inline-block;
+    margin: 0;
+    padding: 5px 0;
+    text-align: center;
+    width: 49%;
+    background:#e6e6e6 ;
+    }
+
+        .home-reg-header a.active {
+            background: #fff;
+        }
+
+        .home-form-wrapper input[type="text"], .home-form-wrapper input[type="password"], .home-form-wrapper input[type="email"], .home-form-wrapper select {
+        outline: none;
+        margin-top: 20px !important;
+    }
+
+    .home-form-wrapper label {
+        color: #999;
+        cursor: text;
+        font-size: 14px;
+        padding-left: 5px;
+        position: absolute;
+        top: 15px;
+        pointer-events:none;
+    }
+
+    .home-form-wrapper label.animated {
+        transform: scale(1) translateY(120%);
+        transition: transform 0.2s linear;
+    }
+        
+         .home-form-wrapper label.animate-label {
+            transform: scale(1) translateY(0px);
+            transition: transform 0.2s linear;
+        }
+
+    .home-form-wrapper .form-group {
+        padding-top: 10px;
+    }
+
+.form-group {
+    position:relative;
+}

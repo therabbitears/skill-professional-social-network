@@ -1,0 +1,28 @@
+﻿{#template MAIN}
+<ul class="table-row-container">
+
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+		</ul>
+    {#/template MAIN}
+    {#template ROW}
+	<li>
+<div class="people-you-may-know-item">
+    <div class="thumbnail-notification-con">
+	{#if $T.LogoIconPath!=null}
+        <img alt="no image {$T.Name}" src="{$T.LogoIconPath}" class="thumbnail-notification">
+		{#else}
+		<img alt="no image {$T.Name}" src="/Content/images/o/no-image.png" class="thumbnail-notification">
+	{#/if}
+    </div>
+    <div class="side-thumbnail">
+        <a href="/fou/{$T.Url}" title="{$T.Name}" data-hover-card="true" data-entity-id="{$T.EntityID}"><h3 class="page-title">{$T.Name}</h3></a>
+        {#if $T.Category!=null}
+			<span class="child-headings">{$T.Category}</span>
+        {#/if}
+		<div>{$T.City}</div>
+    </div>
+</div>
+</li>
+{#/template ROW}

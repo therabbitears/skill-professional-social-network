@@ -1,0 +1,48 @@
+﻿{#template MAIN}
+{#if $T.length>0}
+        {#foreach $T as History}
+          {#include ROW root=$T.History}
+        {#/for}
+		{#else}
+				{#include EMPTYROW root=$T.Apr}
+{#/if}
+    {#/template MAIN}
+
+    {#template ROW}
+<div class="career-history-item profile-item">
+<div class="item-container">
+	<span class="eclipse right more-option-container more-nav question-more-options righ-on-small">
+			<span data-hash="{$T.Hash}" data-mode="affiliation" class="no-style icon-remove-g icon-md icon action" onclick="____removeCareerHistory($(this))"></span>
+			</span>
+    {#if $T.ProfileName}
+    <a href="/fou/{$T.ProfileName}"><h3>{$T.OrganizationName}</h3></a>
+    {#/if}
+    {#if $T.ProfileName==null || $T.ProfileName==''}
+    <h3>{$T.OrganizationName}</h3>
+    {#/if}
+    <small class="child-headings">{$T.JobTitleName}</small>
+    {#if $T.StartFromMonth}
+    <small>From {$T.StartFromMonthName} {$T.StartFromYear}</small>
+    {#/if}
+    {#if $T.EndFromMonth}
+    {#if $T.EndFromMonth>0}
+    <small>To {$T.EndFromMonthName} {$T.EndFromYear}</small>
+    {#/if}
+    {#/if}
+    {#if $T.About}
+    <p class="history-about">{$T.About}</p>
+    {#/if}
+    {#if $T.AllowEdit}
+    <button onclick="getAffiliationHistory($(this))" class="link-alike" data-hash="{$T.Hash}">Edit</button>
+    {#/if}
+</div>
+</div>
+{#/template ROW}
+
+
+	{#template EMPTYROW}
+<div class="empty-row">
+   Add your affiliations and certifications here to grow your organization rank in network and also engage companies having similar affialets, it also increases your company profile rank in network.
+	<p>Only you can see this section until you add at least one affiliations/certifications/acredit here.</p>
+</div>
+	{#/template EMPTYROW}
